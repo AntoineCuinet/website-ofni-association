@@ -30,6 +30,7 @@ Le site web de l'association OFNI est une plateforme centralisée pour les étud
 - Gestion des événements avec un calendrier interactif.
 - Espace membre avec des cours et des ressources pédagogiques en ligne.
 - Adhésion en ligne via un formulaire simple.
+- Réalisation de sondages pour un évenement.
 - Une boutique en lignes pour des goodies et des places à des événements.
 - Partenariats et opportunités de stages pour aider les étudiants à entrer en contact avec des entreprises.
 
@@ -37,7 +38,7 @@ Le site web de l'association OFNI est une plateforme centralisée pour les étud
 
 - Accueil : Présentation de l'association, actualités, événements à venir.
 - À propos : Histoire de l'association, équipe du bureau, objectifs, status.
-- Événements : Calendrier des événements, inscription, détails.
+- Événements : Calendrier des événements, inscription, sondages, détails.
 - Boutique : Formulaire d'inscription pour rejoindre l'association, goodies.
 - Espace membre : Cours, tutoriels, annales, ressources pédagogiques
 
@@ -46,6 +47,7 @@ Le site web de l'association OFNI est une plateforme centralisée pour les étud
 - Frontend : HTML5, CSS3 (SASS), JavaScript
 - Backend : PHP
 - Base de Données : MySQL
+- Framework : Symfony
 - Versionnage : GitHub
 
 ## 🛠️ Installation et Lancement
@@ -53,19 +55,22 @@ Le site web de l'association OFNI est une plateforme centralisée pour les étud
 ### Prérequis
 
 - npm
+- Symfony
+- Composer
 
 ### Installation
 
 1. Tout d'abord, assurez-vous de bien avoir `node.js` d'installé sur votre machine (au moins v20.6.1).
+2. Ensuite, avoir `PHP` d'installé sur votre machine (au moins v8.3.12).
 
-2. Clonez le dépôt du projet :
+3. Clonez le dépôt du projet :
 
     ```bash
     git clone https://github.com/AntoineCuinet/ofni-website.git
     cd ofni-website
     ```
 
-3. Afin d'installer les dépendances du projet, ouvrez votre terminal à la racine du projet puis entrez cela :
+4. Afin d'installer les dépendances du projet, ouvrez votre terminal à la racine du projet puis entrez cela :
 
     ```bash
     npm install
@@ -79,16 +84,21 @@ Afin de lancer le projet, il suffit d'entrez cette ligne de commande dans le ter
 npm start
 ```
 
-Une fois cela fait, vous pouvez commencer à coder !
+Rendez-vous sur l'url `http://localhost:8000/` pour voir en temps réel votre projet.
 
-Pour cela, il vous suffit de modifier les fichiers `.php` présent dans le dossier `public` ainsi que les fichiers présent dans le dossier `assets` en respectant l'arborescence des fichiers déjà créer.
+Une fois tout cela fait, vous pouvez commencer à coder !
 
-NE PAS MODIFIER LE CODE DANS LES FICHIERS `style.css`, cela n'aura aucun impact car nous utilisons le pré-processeur SASS (fichiers `.scss`) !
+Pour cela, il vous suffit de modifier les fichiers `.php` présent dans les dossiers `public` et `src`, ainsi que les fichiers présent dans le dossier `assets/styles`, pour le styles de vos pages, en respectant l'arborescence des fichiers déjà créer.
+
+Vous pouvez modifier/ajouter/consulter tous les documents utiles à la conception de votre site (maquettes, feuille de route `mockups/globals.md`...) dans le dossier `conception`.
+
+**NE PAS MODIFIER LE CODE DANS LES FICHIERS** `style.css` et `style.css.map` présent dans le dossier `public`, cela n'aura aucun impact car nous utilisons le pré-processeur SASS (fichiers `.scss` présents dans le dossier `assets/styles`) !
 
 ### Build pour la production
 
 ```bash
 npm run build-sass
+npm run build
 ```
 
 ## 👥 Auteur et Contact
