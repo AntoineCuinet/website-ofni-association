@@ -62,15 +62,16 @@ Le site web de l'association OFNI est une plateforme centralisée pour les étud
 
 1. Tout d'abord, assurez-vous de bien avoir `node.js` d'installé sur votre machine (au moins v20.6.1).
 2. Ensuite, avoir `PHP` d'installé sur votre machine (au moins v8.3.12).
+3. Vérifier d'avoir `composer` (au moins v2.6.6).
 
-3. Clonez le dépôt du projet :
+4. Clonez le dépôt du projet :
 
     ```bash
     git clone https://github.com/AntoineCuinet/ofni-website.git
     cd ofni-website
     ```
 
-4. Afin d'installer les dépendances du projet, ouvrez votre terminal à la racine du projet puis entrez cela :
+5. Afin d'installer les dépendances du projet, ouvrez votre terminal à la racine du projet puis entrez cela :
 
     ```bash
     npm install
