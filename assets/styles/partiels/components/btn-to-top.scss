@@ -1,3 +1,5 @@
+@use '../../mixins/filter' as *;
+
 #to-top-btn {
     display: flex;
     justify-content: center;

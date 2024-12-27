@@ -8,7 +8,7 @@ $color-quaternary: rgb(228, 188, 86) !default; // hover color (>1%)
 $color-white: rgb(255, 255, 240) !default;
 $color-black: rgb(7,7,7) !default;
 
-$color-font-title: $color-white !default;
+$color-font-title: $color-black !default;
 $color-font-p: rgb(200, 200, 200) !default;
 $color-danger: rgb(249, 56, 56) !default;
 $color-danger-hover: rgb(255, 97, 97) !default;
@@ -28,6 +28,7 @@ $letter-spacing: 0.17em !default;
 $line-height: 1.5 !default;
 
 $font-size-global: 100%;
+$font-size-xs: 0.5rem !default;
 $font-size-s: 1rem !default;
 $font-size-m: 1.125rem !default;
 $font-size-l: 1.5rem !default;

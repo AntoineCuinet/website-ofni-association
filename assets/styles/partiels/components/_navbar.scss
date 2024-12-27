@@ -1,7 +1,9 @@
+@use '../global/variables' as *;
+
 nav {
     position: fixed;
     z-index: 5;
     top: 0;
     width: 100%;
-    padding: rem(25) rem(35);
+    padding: 25px 35px;
 }

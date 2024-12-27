@@ -8,44 +8,29 @@
 ======================================================================== */
 
 // ========================================================================
-// Import of mixins
+// Imports for variables, mixins, functions, partials, and extensions
 // ========================================================================
-@import 'partiels/global/variables';
-@import 'mixins/transform';
-@import 'mixins/triangle';
-@import 'mixins/select';
-@import 'mixins/filter';
+@use 'partiels/global/variables';
+@use 'mixins/transform';
+@use 'mixins/triangle';
+@use 'mixins/select';
+@use 'mixins/filter'; 
 
+@use 'functions/rem';
+@use 'functions/lightness';
 
-// ========================================================================
-// Import of functions
-// ========================================================================
-@import 'functions/rem';
-@import 'functions/lightness';
+@use 'partiels/global/resets';
+@use 'partiels/global/body';
+@use 'partiels/global/header';
+@use 'partiels/global/main';
+@use 'partiels/global/footer';
+@use 'partiels/global/section';
+@use 'partiels/global/article';
 
-
-// ========================================================================
-// Import of partiels
-// ========================================================================
-@import 'partiels/global/resets';
-@import 'partiels/global/body';
-@import 'partiels/global/header';
-@import 'partiels/global/main';
-@import 'partiels/global/footer';
-@import 'partiels/global/section';
-@import 'partiels/global/article';
-
-@import 'partiels/components/text';
-@import 'partiels/components/fixed-top-box';
-@import 'partiels/components/navbar';
-@import 'partiels/components/btn-to-top';
-@import 'partiels/components/link';
-@import 'partiels/components/iframe';
-@import 'partiels/components/button';
-@import 'partiels/components/form';
-
-
-// ========================================================================
-// Import of extensions
-// ========================================================================
-@import 'extensions/policeSpan';
+@use 'partiels/components/text';
+@use 'partiels/components/navbar';
+@use 'partiels/components/btn-to-top';
+@use 'partiels/components/link';
+@use 'partiels/components/iframe';
+@use 'partiels/components/button';
+@use 'partiels/components/form';

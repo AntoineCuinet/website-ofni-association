@@ -1,13 +1,17 @@
+@use '../partiels/global/variables' as *;
+
 @mixin triangle($color: $color-white, $size: $font-size-global) {
     &::after {
         content: '';
         position: absolute;
         width: 0;
         height: 0;
-        border-top: $size solid $color;
+        border-top: $size solid transparent;
         border-left: $size solid transparent;
-        border-right: $size solid transparent;
-        bottom: $size * -1;
-        left: calc(50% - #{$size});
+        border-right: $size solid;
+        border-bottom: $size solid;
+        bottom: $size * -0.2;
+        left: $size * -2;
+        transform: translateX(-6px);
     }
 }

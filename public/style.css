@@ -60,8 +60,8 @@ html {
   font-weight: 400;
   font-style: normal;
   font-size: 100%;
-  background: rgb(16, 29, 46);
-  color: rgb(200, 200, 200);
+  background: rgb(255, 255, 240);
+  color: linear-gradient(233deg, rgba(28, 30, 108, 0.7) 0%, rgba(17, 23, 80, 0.5) 100%);
   line-height: 1.5;
   letter-spacing: 0.17em;
 }
@@ -161,14 +161,14 @@ section {
 }
 
 h1 {
-  color: rgb(255, 255, 240);
+  color: rgb(7, 7, 7);
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 2rem;
   padding: 30px 30px;
 }
 
 h2 {
-  color: rgb(255, 255, 240);
+  color: rgb(7, 7, 7);
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 1.5rem;
   margin: 20px 40px;
@@ -186,7 +186,7 @@ h2::after {
 }
 
 h3 {
-  color: rgb(255, 255, 240);
+  color: rgb(7, 7, 7);
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 1.125rem;
   margin: 15px 50px;
@@ -221,22 +221,12 @@ p {
   font-weight: bold;
 }
 
-.fixed-top-box {
-  position: fixed;
-  top: 0;
-  left: 0;
-  margin: 1px;
-  width: 100vw;
-  box-shadow: 0px 10px 20px 35px rgba(8, 16, 44, 0.9);
-  z-index: 9;
-}
-
 nav {
   position: fixed;
   z-index: 5;
   top: 0;
   width: 100%;
-  padding: 1.5625rem 2.1875rem;
+  padding: 25px 35px;
 }
 
 #to-top-btn {
@@ -321,6 +311,8 @@ iframe {
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .btn {
@@ -345,34 +337,117 @@ iframe {
   border-color: rgb(255, 97, 97);
 }
 
-.form-newsletter {
-  padding-bottom: 15px;
-  display: flex;
-  justify-content: space-between;
+.form-field {
+  width: 80%;
+  max-width: 1200px;
+  display: block;
+  justify-content: center;
   align-items: center;
-  border-bottom: 1px solid rgb(200, 151, 28);
-  margin-bottom: 30px;
+  padding: 30px;
+  margin: 0 auto;
 }
-.form-newsletter svg:first-child {
-  margin-right: 10px;
-  fill: rgb(200, 151, 28);
+@media screen and (max-width: 720px) {
+  .form-field {
+    width: 100vw;
+  }
 }
-.form-newsletter input {
+.form-field .button-group {
+  padding-top: 30px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+@media screen and (max-width: 720px) {
+  .form-field .button-group {
+    flex-direction: column;
+    padding-top: 30px;
+    gap: 0px;
+  }
+}
+.form-field .input-text {
+  position: relative;
+  z-index: 1;
+  padding-top: 20px;
+  font-family: "Noto Sans", Arial, Courier, monospace;
+  font-size: 22px;
+  width: 550px;
+  background: transparent;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media screen and (max-width: 720px) {
+  .form-field .input-text {
+    padding-top: 15px;
+    font-size: 1.125rem;
+    width: 250px;
+  }
+}
+.form-field .input-text input[type=text] {
   width: 100%;
+  height: 50px;
+  padding: 15px;
+  font-family: "Noto Sans", Arial, Courier, monospace;
   background: transparent;
-  border: none;
-  color: rgb(200, 200, 200);
+  border-radius: 12px;
+  -webkit-backdrop-filter: blur(15px);
+  -moz-backdrop-filter: blur(15px);
+  -o-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
   outline: none;
+  font-size: 1em;
+  color: linear-gradient(233deg, rgba(28, 30, 108, 0.7) 0%, rgba(17, 23, 80, 0.5) 100%);
 }
-.form-newsletter button {
-  background: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
+.form-field .input-text input[type=text]:focus {
+  border: 3px solid rgb(228, 188, 86);
 }
-.form-newsletter button svg {
-  fill: rgb(200, 151, 28);
-  transform: translateX(15px);
+.form-field .input-text input[type=text]:invalid {
+  border: 3px dashed rgb(228, 188, 86);
+}
+.form-field .input-text input[type=text]:valid {
+  border: 3px solid rgb(200, 151, 28);
+}
+.form-field .input-text input[type=text]:focus ~ label {
+  transform: translateX(15px) translateY(-10px);
+  font-size: 0.65em;
+  padding: 0 10px;
+  background: rgb(255, 255, 240);
+  color: rgb(228, 188, 86);
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+@media screen and (max-width: 720px) {
+  .form-field .input-text input[type=text]:focus ~ label {
+    transform: translateX(15px) translateY(-7px);
+  }
+}
+.form-field .input-text input[type=text]:valid ~ label {
+  transform: translateX(15px) translateY(-10px);
+  font-size: 0.65em;
+  padding: 0 10px;
+  background: rgb(255, 255, 240);
+  color: rgb(200, 151, 28);
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+@media screen and (max-width: 720px) {
+  .form-field .input-text input[type=text]:valid ~ label {
+    transform: translateX(15px) translateY(-7px);
+  }
+}
+.form-field .input-text label {
+  position: absolute;
+  left: 0;
+  padding: 8px 15px;
+  pointer-events: none;
+  font-size: 1em;
+  color: rgb(228, 188, 86);
+  transition: 0.5s;
+}
+@media screen and (max-width: 720px) {
+  .form-field .input-text label {
+    padding: 12px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

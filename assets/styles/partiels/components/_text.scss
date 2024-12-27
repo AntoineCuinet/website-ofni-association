@@ -1,3 +1,5 @@
+@use '../global/variables' as *;
+
 h1 {
     color: $color-font-title;
     font-family: $font-family-title;

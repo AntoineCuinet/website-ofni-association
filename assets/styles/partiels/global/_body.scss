@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 html {
     scroll-behavior: smooth;
 
@@ -7,8 +9,8 @@ html {
         style: normal;
         size: $font-size-global;
     }
-    background: $color-primary;
-    color: $color-font-p;
+    background: $color-white;
+    color: $color-secondary;
     line-height: $line-height;
     letter-spacing: $letter-spacing;
 }
