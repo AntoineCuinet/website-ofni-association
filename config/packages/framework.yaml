@@ -9,6 +9,9 @@ framework:
     #esi: true
     #fragments: true
 
+
+    error_controller: 'App\Controller\ErrorController::handleError'
+
 when@test:
     framework:
         test: true

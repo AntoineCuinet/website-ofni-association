@@ -8,7 +8,7 @@
     cursor: pointer;
 }
 
-a {
+.link {
     @extend %link;
     color: $color-tertiary;
     position: relative;

@@ -1,0 +1,14 @@
+@mixin box-shadow($x: 0px, $y: 2px, $blur: 6px, $color: rgba(0, 0, 0, 0.3), $inset: false) {
+    -webkit-box-shadow: $x $y $blur $color;
+    -moz-box-shadow: $x $y $blur $color;
+    box-shadow: $x $y $blur $color;
+    
+    // Si $inset est vrai, applique une ombre interne
+    @if $inset {
+        -webkit-box-shadow: inset $x $y $blur $color;
+        -moz-box-shadow: inset $x $y $blur $color;
+        box-shadow: inset $x $y $blur $color;
+    }
+
+    @content;
+}

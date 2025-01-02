@@ -5,6 +5,7 @@ h1 {
     font-family: $font-family-title;
     font-size: $font-size-xl;
     padding: 30px 30px;
+    text-align: center;
 }
 
 h2 {
@@ -13,7 +14,8 @@ h2 {
     font-size: $font-size-l;
     margin: 20px 40px;
     position: relative;
-    display: inline-block;
+    display: block;
+    width: fit-content;
 
     &::after {
         content: '';
@@ -33,11 +35,13 @@ h3 {
     margin: 15px 50px;
     padding-bottom: 10px;
     position: relative;
-    display: inline-block;
+    display: block;
+    width: fit-content;
 
     &::after {
         content: '';
         position: absolute;
+        display: inline-block;
         left: 0;
         bottom: 3px;
         width: 75%;
@@ -56,10 +60,5 @@ h4 {
 
 p {
     padding: 10px 5px;
-}
-
-.or {
-    color: $color-tertiary;
-    font-family: $font-family-title;
-    font-weight: $font-weight-b;
+    text-align: center;
 }

@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OFNI | Erreur {{ code }}{% endblock %}
+{% block main %}
+        <h1>{{ message }} ({{ code }})</h1>
+        <p>Oupsss... Une abeille est passée par là ! &#128029;</p>
+        <a class="btn" href="{{ path('home') }}">Retour à l'accueil</a>
+{% endblock %}

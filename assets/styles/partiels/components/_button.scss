@@ -1,12 +1,15 @@
 @use '../global/variables' as *;
 @use '../../mixins/filter' as *;
+@use '../../mixins/box-shadow' as *;
 
 %btn {
     // Reset //
+    display: inline-block;
     appearance: none;
     color: inherit;
     font: inherit; // Use parent font //
     cursor: pointer;
+    text-decoration: none;
 
     // Style //
     padding: 10px 20px;
@@ -17,11 +20,12 @@
     text-align: center;
     position: relative;
     z-index: 1;
+    @include box-shadow();
 }
 
 .btn {
     @extend %btn;
-    background: $color-primary;
+    background: transparent;
     color: $color-tertiary;
     border: 3px solid $color-tertiary;
     transition: color $transition, border-color $transition;
@@ -34,7 +38,7 @@
 
 .btn-danger {
     @extend %btn;
-    background: $color-primary;
+    background: transparent;
     color: $color-danger;
     border: 3px solid $color-danger;
     transition: color $transition, border-color $transition;
