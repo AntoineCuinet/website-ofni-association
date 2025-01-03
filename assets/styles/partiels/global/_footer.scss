@@ -1,69 +1,77 @@
 @use 'variables' as *;
+@use '../../functions/rem' as *;
+@use '../../functions/lightness' as *;
+@use '../../mixins/select' as *;
 
 footer {
+    // margin-top: 50px;
     flex-shrink: 0;
-    width: 100vw;
-    margin: 50px auto 0 auto;
-    padding-top: 20px;
-    background: $color-secondary;
-    border-top-left-radius: $border-rad * 4;
-    border-top-right-radius: $border-rad * 4;
-    border-top: 1px solid $color-tertiary;
+    width: 100%;
+    border-top: 1px dashed $color-black;
+    background: $color-primary;
+    color: $color-font-p;
 
-    .footer-row {
+    .footer-container {
         max-width: $breakpoint-large;
-        width: 90vw;
-        margin: auto;
+        margin: 0 auto;
         display: flex;
-        flex-wrap: wrap;
+        justify-content: center;
         align-items: flex-start;
-        justify-content: space-between;
+        font-size: $font-size-m;
+        padding: 15px 0 10px;
 
-        .footer-col {
-            flex-basis: 25%;
-            padding: 10px;
+        @media #{$max-width-s} {
+            flex-wrap: wrap;
+            padding: rem(15) 0 rem(5);
+            font-size: $font-size-s;
+        }
+
+        .bloc {
+            width: 30%;
+            margin: 0 rem(30);
+            text-align: center;
 
             @media #{$max-width-s} {
-                flex-basis: 100%;
-                padding: 30px;
+                width: 80%;
+                margin: rem(30);
             }
 
-            button {
-                // Reset //
-                appearance: none;
-                color: inherit;
-                cursor: pointer;
-                border: none;
-                outline: none;
-                
-                text-align: center;
-                background: transparent;
-                margin-right: 15px;
+            &:nth-child(1),
+            &:nth-child(2) {
+                margin-bottom: rem(20);
 
-                svg {
-                    fill: $color-tertiary;
+                @media #{$max-width-s} {
+                    margin-bottom: rem(10);
                 }
             }
-        }
 
-        .footer-col:nth-child(2) {
-            flex-basis: 15%;
+            h3 {
+                font-size: $size-logo-text-mq;
+                padding-bottom: rem(20);
+                @include select();
+                color: light($color-primary, $color-font-title, $color-white);
 
-            @media #{$max-width-s} {
-                flex-basis: 100%;
-                padding: 30px;
+                @media #{$max-width-s} {
+                    padding-bottom: rem(5);
+                }
             }
-        }
+
+            ul {
+                list-style-type: none;
+
+                li {
+                    margin: rem(2) 0;
+
+                    span {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }   
     }
 
-
-
-    .footer-copyright {
+    .footer-legal {
+        margin: 0 auto 10px auto;
         text-align: center;
-        width: 80vw;
-        max-width: $breakpoint-large;
-        margin: 25px auto 0 auto;
-        padding: 10px;
-        border-top: 1px dashed $color-tertiary;
     }
 }

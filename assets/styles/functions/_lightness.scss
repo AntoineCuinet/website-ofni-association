@@ -1,4 +1,4 @@
-@function light($color: $color-bg, $color1: $color-black, $color2: $color-white) {
+@function light($color: $color-primary, $color1: $color-secondary, $color2: $color-white) {
     @if (lightness($color) > 50%) {
         @return $color1;
     } @else {

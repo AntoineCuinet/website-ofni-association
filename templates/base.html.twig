@@ -8,6 +8,9 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
         {% block stylesheets %}<link rel="stylesheet" href="{{ asset('style.css') }}">{% endblock %}
 
+        {# <meta name="description" content="', $description, '"> #}
+        {# <meta name="keywords" content="', $keywords, '"> #}
+
         {% block javascripts %}
             <script src="{{ asset('js/main.js') }}" async></script>
             {% block importmap %}{{ importmap('app') }}{% endblock %}
@@ -15,15 +18,81 @@
     </head>
     <body>
         <header>
-            {% block header %}{% endblock %}
-        </header>
+            <nav id="navbar">
+            <div class="first-container">
+                <a href="{{ url('home') }}" class="nav-icon" aria-label="Visit homepage" aria-current="page">
+                    {# <img src="./assets/favicon/favicon.jpeg" alt="Web site icon" width="40" loading="lazy"> #}
+                    <span>Accueil</span>
+                </a>
+
+                {# <div class="main-navlinks">
+                    <button class="hamburger" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div> #}
+
+                <div class="navlinks-container">
+                    <a href="{{ url('home') }}">L'OFNI</a>
+                    <a href="{{ url('home') }}">Événements</a>
+                    <a href="{{ url('home') }}">Boutique</a>
+                    <a href="{{ url('home') }}">Connexion</a>
+                </div>
+            </div>
+        </nav>
+            {# {% block header %}{% endblock %} #}
+        </header><br><br><br><br><br>
+
+
 
         <main>
             {% block main %}{% endblock %}
         </main>
 
+
+
         <footer>
-            {% block footer %}{% endblock %}
+            <div class="footer-container">
+                <div class="bloc">
+                    <h3>Informations</h3>
+                    <ul>
+                        <li>
+                            <p><span>Lieu: </span><a class="link footer-links" href="https://maps.app.goo.gl/7PTnyfxAVZgDdQ8a8" target="_blank" rel="noopener">25000 Besançon</a></p>
+                        </li>
+                        <li>
+                            <p><span>E-mail: </span><a class="link footer-links" href="mailto:contact@ofni.fr?subject=Demande%20de%20création%20de%20site%20web&body=Bonjour%2C%20%0D%0A%0D%0AJe%20vous%20contacte%20pour...">contact@ofni.fr</a></p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bloc">
+                    <h3>Nos réseaux</h3>
+                    <ul>
+                        <li><a class="link footer-links" href="https://www.helloasso.com/associations/ofni-besancon" target="_blank" rel="noopener">HelloAsso</a></li>
+                        <li><a class="link footer-links" href="https://discord.com/invite/KT6N2Q9cU5" target="_blank" rel="noopener">Discord</a></li>
+                        <li><a class="link footer-links" href="https://www.instagram.com/ofni_off" target="_blank" rel="noopener">Instagram</a></li>
+                        <li><a class="link footer-links" href="https://moodle.univ-fcomte.fr/course/view.php?id=9926" target="_blank" rel="noopener">Moodle</a></li>
+                    </ul>
+                </div>
+
+                <div class="bloc">
+                    <h3>Liens pratiques</h3>
+                    <ul>
+                        <li><a class="link footer-links" href="{{ url('home') }}">Accueil</a></li>
+                        <li><a class="link footer-links" href="{{ url('home') }}">L'OFNI</a></li>
+                        <li><a class="link footer-links" href="{{ url('home') }}">Événements</a></li>
+                        <li><a class="link footer-links" href="{{ url('home') }}">Boutique</a></li>
+                        <li><a class="link footer-links" href="{{ url('home') }}">Connexion</a></li>
+                        <li><a class="link footer-links" href="{{ url('home') }}">Mentions légales</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-legal">
+                <p>&copy; 2024 - OFNI - Tous droits réservés</p>
+            </div>
+            {# {% block footer %}{% endblock %} #}
         </footer>
     </body>
 </html>
