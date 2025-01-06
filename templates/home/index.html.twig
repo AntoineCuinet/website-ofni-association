@@ -2,5 +2,25 @@
 
 {% block main %}
     <h1>OFNI</h1>
-    <p>Le site des étudiants en infos !</p>
+    <p>Bienvenue sur le site des étudiants en Informatique de l'Université de Franche-Comté !</p>
+
+    <section>
+        <h2>Les dernières actualités</h2>
+        <p>Retrouvez ici les dernières actualités de l'OFNI.</p>
+        <ul>
+            <li><a class="link" href="">actualite 1</a></li> <!-- TODO: faire dynamiquement -->
+            {# <li><a href="{{ path('actualite_show', {slug: 'actualite-1'}) }}">actualite 1</a></li>
+            <li><a href="{{ path('actualite_show', {slug: 'actualite-2'}) }}">actualite 2</a></li>
+            <li><a href="{{ path('actualite_show', {slug: 'actualite-3'}) }}">actualite 3</a></li> #}
+        </ul>
+    </section>
+
+    <section>
+        <h2>Nos événements</h2>
+        <p>Retrouvez ici nos événements !</p>
+        <ul>
+            <li><a class="link" href="">événement 1</a></li> <!-- TODO: faire dynamiquement -->
+            {# <li><a href="{{ path('evenement_show', {slug: 'evenement-1'}) }}">événement 1</a></li> #}
+        </ul>
+    </section>
 {% endblock %}

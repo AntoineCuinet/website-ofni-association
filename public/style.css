@@ -161,8 +161,8 @@ footer .footer-legal {
 }
 
 section {
-  margin: 20px auto;
-  width: 80%;
+  margin: 80px auto;
+  width: 90%;
   max-width: 1200px;
   padding: 20px;
   border-radius: 24px;
@@ -170,6 +170,13 @@ section {
   border-left: 1px solid rgb(200, 151, 28);
   background: linear-gradient(233deg, rgba(28, 30, 108, 0.7) 0%, rgba(17, 23, 80, 0.5) 100%);
   backdrop-filter: blur-filter(20px);
+}
+section h2 {
+  margin-bottom: 20px;
+}
+section p {
+  margin: 10px auto;
+  text-align: justify;
 }
 
 h1 {
