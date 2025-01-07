@@ -20,7 +20,7 @@
         <header>
             <nav id="navbar">
             <div class="first-container">
-                <a href="{{ url('home') }}" class="nav-icon" aria-label="Visit homepage" aria-current="page">
+                <a href="{{ path('home') }}" class="nav-icon {{ app.current_route == 'home' ? 'active' : ''}}" aria-label="Visit homepage" aria-current="page">
                     {# <img src="./assets/favicon/favicon.jpeg" alt="Web site icon" width="40" loading="lazy"> #}
                     <span>Accueil</span>
                 </a>
@@ -34,10 +34,10 @@
                 </div> #}
 
                 <div class="navlinks-container">
-                    <a href="{{ url('home') }}">L'OFNI</a>
-                    <a href="{{ url('home') }}">Événements</a>
-                    <a href="{{ url('home') }}">Boutique</a>
-                    <a href="{{ url('home') }}">Connexion</a>
+                    <a href="{{ path('home') }}">L'OFNI</a>
+                    <a href="{{ path('home') }}">Événements</a>
+                    <a href="{{ path('home') }}">Boutique</a>
+                    <a href="{{ path('home') }}">Connexion</a>
                 </div>
             </div>
         </nav>
