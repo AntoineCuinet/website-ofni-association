@@ -31,29 +31,29 @@ nav {
         align-items: center;
 
         .nav-icon { //logo
-            display: flex;
-            align-items: center;
+            // display: flex;
+            // align-items: center;
             text-decoration: none;
             margin-right: rem(20);
 
-            @media #{$max-width-s} {
-                margin: auto;
-                order: 2;
-            }
+            // @media #{$max-width-s} {
+            //     margin: auto;
+            //     order: 2;
+            // }
 
-            span {
+            // span {
                 font-family: sans-serif;
                 transform: translateY(1px);
                 font-size: $font-size-l;
                 margin-left: 10px;
                 font-weight: $font-weight-ber;
                 color: light($color-primary, $color-font-title, $color-white);
-                mix-blend-mode: difference;
+                // mix-blend-mode: difference;
 
                 @media #{$max-width-s} {
                     font-size: $size-logo-text-mq;
                 }
-            }
+            // }
         }
 
         .main-navlinks { //hamburger
@@ -187,5 +187,10 @@ nav {
                 }
             }  
         }
+    }
+
+
+    .active {
+        color: $color-active !important;
     }
 }

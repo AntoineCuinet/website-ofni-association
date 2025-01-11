@@ -1,0 +1,86 @@
+@use '../global/variables' as *;
+
+.letter {
+    font-size: 100px;
+    font-weight: 800;
+    position: relative;
+    animation: slide-in 7s infinite ease-in-out;
+    display: inline-block;
+    font-family: 'Figtree', Arial, sans-serif;
+    color: inherit;
+}
+
+.letter::before {
+    content: attr(data-initial); /* Start with the initial letter */
+    animation: swap-letters 7s infinite ease-in-out;
+}
+
+// /* Animation for sliding effect */
+// @keyframes slide-in {
+//     0% {
+//         transform: translateY(-50%);
+//         opacity: 0;
+//     }
+//     25%, 75% {
+//         transform: translateY(0);
+//         opacity: 1;
+//     }
+//     99% {
+//         transform: translateY(50%);
+//         opacity: 0;
+//     }
+// }
+
+/* Animation for sliding effect */
+@keyframes slide-in {
+    0% {
+        transform: translateY(-50%);
+        opacity: 0; /* Invisible */
+    }
+    15%, 35% {
+        transform: translateY(0);
+        opacity: 1; /* Visible */
+    }
+    48% {
+        transform: translateY(50%);
+        opacity: 0; /* Invisible */
+    }
+    52% {
+        transform: translateY(-50%);
+        opacity: 0; /* Invisible (ready for text change) */
+    }
+    65%, 85% {
+        transform: translateY(0);
+        opacity: 1; /* Visible with new text */
+    }
+    97% {
+        transform: translateY(50%);
+        opacity: 0; /* Invisible */
+    }
+    100% {
+        transform: translateY(-50%);
+        opacity: 0; /* Invisible */
+    }
+}
+
+
+/* Animation for swapping letters */
+@keyframes swap-letters {
+    0%, 50% {
+        content: attr(data-initial); /* Garder la lettre initiale */
+    }
+    51% {
+        content: attr(data-final); /* Changer la lettre pendant qu'elle est invisible */
+    }
+    52%, 100% {
+        content: attr(data-final); /* Garder la nouvelle lettre */
+    }
+}
+
+
+
+/* Letter-specific styles */
+.o { color: $color-logo-o; animation-delay: 0.3s; } /* Pink */
+.f { color: $color-logo-f; animation-delay: 0.2s; } /* Blue */
+.n { color: $color-logo-n; animation-delay: 0.1s; } /* Orange */
+.i { color: $color-logo-i; animation-delay: 0s; } /* Green */

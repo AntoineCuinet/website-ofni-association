@@ -15,6 +15,10 @@
             <script src="{{ asset('js/main.js') }}" async></script>
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&family=Faculty+Glyphic&family=Figtree:ital,wght@0,300..900;1,300..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Josefin+Sans&display=swap" rel="stylesheet">
     </head>
     <body>
         <header>
@@ -34,10 +38,10 @@
                 </div> #}
 
                 <div class="navlinks-container">
-                    <a href="{{ path('home') }}">L'OFNI</a>
-                    <a href="{{ path('home') }}">Événements</a>
-                    <a href="{{ path('home') }}">Boutique</a>
-                    <a href="{{ path('home') }}">Connexion</a>
+                    <a class="{{ app.current_route == 'ofni' ? 'active' : ''}}" href="{{ path('home') }}">L'OFNI</a>
+                    <a class="{{ app.current_route == 'event' ? 'active' : ''}}" href="{{ path('home') }}">Événements</a>
+                    <a class="{{ app.current_route == 'shop' ? 'active' : ''}}" href="{{ path('home') }}">Boutique</a>
+                    <a class="{{ app.current_route == 'connection' ? 'active' : ''}}" href="{{ path('home') }}">Connexion</a>
                 </div>
             </div>
         </nav>

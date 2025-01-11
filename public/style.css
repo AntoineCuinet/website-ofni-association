@@ -6,6 +6,23 @@
  *
  * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
 ======================================================================== */
+/* Specific Colors For OFNI */
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
 *, ::before, ::after {
   box-sizing: border-box;
   margin: 0;
@@ -54,6 +71,14 @@ h1 {
   background: rgb(255, 255, 240);
 }
 
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
 html {
   scroll-behavior: smooth;
   font-family: "Noto Sans", Arial, Courier, monospace;
@@ -75,12 +100,28 @@ body {
   width: 100vw;
 }
 
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
 header {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
 main {
   flex: 1 0 auto;
   width: 100%;
@@ -89,6 +130,14 @@ main {
   max-width: 1200px;
 }
 
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
 footer {
   flex-shrink: 0;
   width: 100%;
@@ -160,6 +209,14 @@ footer .footer-legal {
   text-align: center;
 }
 
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
 section {
   margin: 80px auto;
   width: 90%;
@@ -179,6 +236,22 @@ section p {
   text-align: justify;
 }
 
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
 h1 {
   color: rgb(7, 7, 7);
   font-family: "Josefin Sans", Arial, Courier, monospace;
@@ -239,6 +312,14 @@ p {
   text-align: center;
 }
 
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
 nav {
   position: fixed;
   z-index: 5;
@@ -269,28 +350,17 @@ nav .first-container {
   align-items: center;
 }
 nav .first-container .nav-icon {
-  display: flex;
-  align-items: center;
   text-decoration: none;
   margin-right: 1.25rem;
-}
-@media screen and (max-width: 720px) {
-  nav .first-container .nav-icon {
-    margin: auto;
-    order: 2;
-  }
-}
-nav .first-container .nav-icon span {
   font-family: sans-serif;
   transform: translateY(1px);
   font-size: 1.5rem;
   margin-left: 10px;
   font-weight: bolder;
   color: rgb(255, 255, 240);
-  mix-blend-mode: difference;
 }
 @media screen and (max-width: 720px) {
-  nav .first-container .nav-icon span {
+  nav .first-container .nav-icon {
     font-size: 1.375rem;
   }
 }
@@ -420,6 +490,9 @@ nav .first-container .navlinks-container a::after {
 nav .first-container .navlinks-container a:hover::after {
   transform: scaleX(1);
 }
+nav .active {
+  color: rgb(228, 188, 86) !important;
+}
 
 #to-top-btn {
   display: flex;
@@ -448,6 +521,14 @@ nav .first-container .navlinks-container a:hover::after {
   z-index: 4;
 }
 
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
 .link {
   text-decoration: none;
   color: inherit;
@@ -476,6 +557,14 @@ nav .first-container .navlinks-container a:hover::after {
   transform-origin: left;
 }
 
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
 iframe {
   display: block;
   margin-top: 50px;
@@ -492,6 +581,14 @@ iframe {
   }
 }
 
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
 .btn-danger, .btn {
   display: inline-block;
   appearance: none;
@@ -534,6 +631,14 @@ iframe {
   border-color: rgb(255, 97, 97);
 }
 
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
 .form-field {
   width: 80%;
   max-width: 1200px;
@@ -646,5 +751,89 @@ iframe {
     padding: 12px;
   }
 }
+
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
+.letter {
+  font-size: 100px;
+  font-weight: 800;
+  position: relative;
+  animation: slide-in 7s infinite ease-in-out;
+  display: inline-block;
+  font-family: "Figtree", Arial, sans-serif;
+  color: inherit;
+}
+
+.letter::before {
+  content: attr(data-initial); /* Start with the initial letter */
+  animation: swap-letters 7s infinite ease-in-out;
+}
+
+/* Animation for sliding effect */
+@keyframes slide-in {
+  0% {
+    transform: translateY(-50%);
+    opacity: 0; /* Invisible */
+  }
+  15%, 35% {
+    transform: translateY(0);
+    opacity: 1; /* Visible */
+  }
+  48% {
+    transform: translateY(50%);
+    opacity: 0; /* Invisible */
+  }
+  52% {
+    transform: translateY(-50%);
+    opacity: 0; /* Invisible (ready for text change) */
+  }
+  65%, 85% {
+    transform: translateY(0);
+    opacity: 1; /* Visible with new text */
+  }
+  97% {
+    transform: translateY(50%);
+    opacity: 0; /* Invisible */
+  }
+  100% {
+    transform: translateY(-50%);
+    opacity: 0; /* Invisible */
+  }
+}
+/* Animation for swapping letters */
+@keyframes swap-letters {
+  0%, 50% {
+    content: attr(data-initial); /* Garder la lettre initiale */
+  }
+  51% {
+    content: attr(data-final); /* Changer la lettre pendant qu'elle est invisible */
+  }
+  52%, 100% {
+    content: attr(data-final); /* Garder la nouvelle lettre */
+  }
+}
+/* Letter-specific styles */
+.o {
+  color: #ff3399;
+  animation-delay: 0.3s;
+} /* Pink */
+.f {
+  color: #3399ff;
+  animation-delay: 0.2s;
+} /* Blue */
+.n {
+  color: #ff9900;
+  animation-delay: 0.1s;
+} /* Orange */
+.i {
+  color: #33cc33;
+  animation-delay: 0s;
+} /* Green */
 
 /*# sourceMappingURL=style.css.map */
