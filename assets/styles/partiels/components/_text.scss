@@ -1,7 +1,7 @@
 @use '../global/variables' as *;
 
 h1 {
-    color: $color-font-title;
+    color: light($color-primary, $color-font-title, $color-font-title-dark);
     font-family: $font-family-title;
     font-size: $font-size-xl;
     padding: 30px 30px;
@@ -9,7 +9,7 @@ h1 {
 }
 
 h2 {
-    color: $color-font-title;
+    color: light($color-primary, $color-font-title, $color-font-title-dark);
     font-family: $font-family-title;
     font-size: $font-size-l;
     margin: 20px 40px;
@@ -29,7 +29,7 @@ h2 {
 }
 
 h3 {
-    color: $color-font-title;
+    color: light($color-primary, $color-font-title, $color-font-title-dark);
     font-family: $font-family-title;
     font-size: $font-size-m;
     margin: 15px 50px;
@@ -50,9 +50,8 @@ h3 {
     }
 }
 
-
 h4 {
-    color: $color-font-p;
+    color: light($color-primary, $color-font-p, $color-font-p-dark);
     font-family: $font-family-title;
     font-size: $font-size-m;
     padding: 10px 60px;

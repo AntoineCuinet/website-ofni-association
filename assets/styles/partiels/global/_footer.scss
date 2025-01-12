@@ -8,7 +8,7 @@ footer {
     flex-shrink: 0;
     width: 100%;
     border-top: 1px dashed $color-black;
-    background: $color-primary;
+    background: $color-secondary;
     color: $color-font-p;
 
     .footer-container {
@@ -49,7 +49,7 @@ footer {
                 font-size: $size-logo-text-mq;
                 padding-bottom: rem(20);
                 @include select();
-                color: light($color-primary, $color-font-title, $color-white);
+                color: light($color-primary, $color-font-title, $color-font-title-dark);
 
                 @media #{$max-width-s} {
                     padding-bottom: rem(5);

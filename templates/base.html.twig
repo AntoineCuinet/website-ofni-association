@@ -31,7 +31,8 @@
                     <a class="navlinks {{ app.current_route == 'ofni' ? 'active' : ''}}" href="{{ path('home') }}">L'OFNI</a>
                     <a class="navlinks {{ app.current_route == 'event' ? 'active' : ''}}" href="{{ path('home') }}">Événements</a>
                     <a class="navlinks {{ app.current_route == 'shop' ? 'active' : ''}}" href="{{ path('home') }}">Boutique</a>
-                    <a class="navlinks {{ app.current_route == 'connection' ? 'active' : ''}}" href="{{ path('home') }}">Connexion</a>
+                    <a class="navlinks {{ app.current_route == 'game' ? 'active' : ''}}" href="{{ path('home') }}">Jeu</a>
+                    <a class="navlinks btn {{ app.current_route == 'connection' ? 'active' : ''}}" href="{{ path('home') }}">Connexion</a>
                 </div>
 
                 <div class="main-navlinks">
@@ -44,7 +45,8 @@
             </div>
         </nav>
             {# {% block header %}{% endblock %} #}
-        </header><br><br><br><br>
+        </header>
+        {# {% block header-space %}<br><br><br><br>{% endblock %} #}
 
 
 

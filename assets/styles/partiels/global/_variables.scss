@@ -1,17 +1,21 @@
 // ========================================================================
 // Colors
 // ========================================================================
-$color-primary: rgb(16, 29, 46) !default; // background color (60%)
-$color-secondary: linear-gradient(233deg, rgba(28,30,108,0.9) 0%, rgba(17,23,80,0.8) 100%) !default; // (30%)
-$color-tertiary: rgb(200, 151, 28) !default; // (10%)
-$color-quaternary: rgb(228, 188, 86) !default; // hover color (>1%)
-$color-white: rgb(255, 255, 240) !default;
+$color-primary: rgb(240, 249, 255) !default; // background color (60%)
+$color-secondary: rgb(52, 153, 254) !default; // (30%)
+$color-tertiary: #ff9900 !default; // (10%)
+$color-quaternary: rgb(17, 17, 41) !default; // hover color (>1%)
+
+$color-white: rgb(240, 249, 255) !default;
 $color-black: rgb(7,7,7) !default;
 
 $color-font-title: $color-black !default;
-$color-font-p: rgb(200, 200, 200) !default;
-$color-active: $color-quaternary !default;
-$color-danger: rgb(249, 56, 56) !default;
+$color-font-p: rgb(17, 17, 41) !default;
+$color-font-title-dark: $color-white !default;
+$color-font-p-dark: rgb(200, 200, 200) !default;
+$color-active: $color-secondary !default;
+
+$color-danger: rgb(255, 51, 153) !default;
 $color-danger-hover: rgb(255, 97, 97) !default;
 
 /* Specific Colors For OFNI */
@@ -20,10 +24,10 @@ $color-logo-f: #3399ff;
 $color-logo-n: #ff9900;
 $color-logo-i: #33cc33;
 
-$box-shadow-black: 0 2px 6px rgba(0, 0, 0, 0.3);
+$box-shadow-black: 0 4px 6px rgba(0, 0, 0, 0.3);
 $box-shadow-white: 0 2px 6px rgba(255, 255, 255, 0.3);
 $box-shadow-blue: 0px 10px 20px 35px rgba(8, 16, 44, 0.9);
-$box-shadow-right: 4px 0px 6px -2px rgba(0, 0, 0, 0.1);
+$box-shadow-right: 2px 4px 6px rgb(123, 123, 123);
 
 
 // ========================================================================
@@ -45,7 +49,7 @@ $font-weight-n: 200;
 $font-weight-b: bold;
 $font-weight-ber: bolder;
 
-$size-logo-text: 1.25rem;
+$size-logo-text: 1.1rem;
 $size-logo-text-mq: 1.375rem;
 $size-hamburger: 1.56rem;
 $size-hamburger-mq: 1.25rem;
@@ -55,7 +59,7 @@ $size-hamburger-mq: 1.25rem;
 // Breakpoints - Layout
 // ========================================================================
 $breakpoint-small: 720px !default;
-$breakpoint-medium: 960px !default;
+$breakpoint-medium: 990px !default;
 $breakpoint-large: 1200px !default;
 $breakpoint-xlarge: 1600px !default;
 
@@ -69,7 +73,7 @@ $max-width-xl: "screen and (max-width: #{$breakpoint-xlarge})";
 // Border - border-radius
 // ========================================================================
 $border: 1px solid $color-black !default;
-$border-rad: 12px !default;
+$border-rad: 15px !default;
 
 // ========================================================================
 // Animations

@@ -20,3 +20,90 @@ section {
         text-align: justify;
     }
 }
+
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px;
+    gap: 20px;
+    min-height: 100vh;
+
+    @media #{$max-width-m} {
+        flex-direction: column;
+        justify-content:space-around;
+        text-align: center;
+    }
+
+    .logo {
+        flex-shrink: 0;
+        text-align: center;
+
+        span {  
+            font-size: 170px !important;
+        }
+
+        @media #{$max-width-m} {
+            order: -1; // Place "OFNI" en haut
+            margin-top: 80px;
+
+            span {  
+                font-size: 80px !important;
+            }
+        }
+    }
+
+    
+    .hero-text {
+        max-width: 500px;
+        text-align: left;
+
+        h1 {
+            padding: 0;
+            text-align: left;
+            font-size: 70px;
+            font-weight: bold;
+            line-height: 1;
+            margin-top: 40px;
+
+            span {
+                font-weight: bolder;
+                font-size: 75px;
+            }
+        }
+
+        p {
+            padding: 0;
+            text-align: left;
+            font-size: 16px;
+            margin-top: 15px;
+            color: #444;
+        }
+
+        a {
+            margin-left: 0;
+            margin-right: 20px;
+            margin-top: 30px;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        @media #{$max-width-m} {
+            h1 {
+                font-size: 2rem;
+
+                span {
+                    font-size: 2rem;
+                }
+            }
+            p {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+
+            a {
+                margin-top: 0px;
+            }
+        }
+    }
+}

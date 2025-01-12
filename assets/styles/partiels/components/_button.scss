@@ -12,27 +12,44 @@
     text-decoration: none;
 
     // Style //
-    padding: 10px 20px;
+    padding: 10px 25px;
     margin: 20px 10px;
     border-radius: $border-rad;
     font-weight: $font-weight-b;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     text-align: center;
     position: relative;
     z-index: 1;
-    @include box-shadow();
+
+    -webkit-box-shadow: $box-shadow-right;
+    -moz-box-shadow: $box-shadow-right;
+    box-shadow: $box-shadow-right;
 }
 
 .btn {
     @extend %btn;
     background: transparent;
-    color: $color-tertiary;
-    border: 3px solid $color-tertiary;
+    color: $color-secondary;
+    border: 3px solid $color-secondary;
     transition: color $transition, border-color $transition;
 
     &:hover {
-        color: $color-quaternary;
-        border-color: $color-quaternary;
+        color: $color-tertiary;
+        border-color: $color-tertiary;
+    }
+}
+
+.btn-full {
+    @extend %btn;
+    background: $color-secondary;
+    color: $color-white;
+    border: 3px solid $color-secondary;
+    transition: color $transition, border-color $transition, background $transition;
+
+    &:hover {
+        color: $color-tertiary;
+        border-color: $color-tertiary;
+        background: transparent;
     }
 }
 
