@@ -24,29 +24,27 @@
         <header>
             <nav id="navbar">
             <div class="first-container">
-                <a href="{{ path('home') }}" class="nav-icon {{ app.current_route == 'home' ? 'active' : ''}}" aria-label="Visit homepage" aria-current="page">
-                    {# <img src="./assets/favicon/favicon.jpeg" alt="Web site icon" width="40" loading="lazy"> #}
-                    <span>Accueil</span>
-                </a>
 
-                {# <div class="main-navlinks">
+                <a href="{{ path('home') }}" class="first-navlink navlinks {{ app.current_route == 'home' ? 'active' : ''}}" aria-label="Visit homepage" aria-current="page">Accueil</a>
+
+                <div class="navlinks-container">
+                    <a class="navlinks {{ app.current_route == 'ofni' ? 'active' : ''}}" href="{{ path('home') }}">L'OFNI</a>
+                    <a class="navlinks {{ app.current_route == 'event' ? 'active' : ''}}" href="{{ path('home') }}">Événements</a>
+                    <a class="navlinks {{ app.current_route == 'shop' ? 'active' : ''}}" href="{{ path('home') }}">Boutique</a>
+                    <a class="navlinks {{ app.current_route == 'connection' ? 'active' : ''}}" href="{{ path('home') }}">Connexion</a>
+                </div>
+
+                <div class="main-navlinks">
                     <button class="hamburger" type="button" aria-label="Toggle navigation" aria-expanded="false">
                         <span></span>
                         <span></span>
                         <span></span>
                     </button>
-                </div> #}
-
-                <div class="navlinks-container">
-                    <a class="{{ app.current_route == 'ofni' ? 'active' : ''}}" href="{{ path('home') }}">L'OFNI</a>
-                    <a class="{{ app.current_route == 'event' ? 'active' : ''}}" href="{{ path('home') }}">Événements</a>
-                    <a class="{{ app.current_route == 'shop' ? 'active' : ''}}" href="{{ path('home') }}">Boutique</a>
-                    <a class="{{ app.current_route == 'connection' ? 'active' : ''}}" href="{{ path('home') }}">Connexion</a>
                 </div>
             </div>
         </nav>
             {# {% block header %}{% endblock %} #}
-        </header><br><br><br><br><br>
+        </header><br><br><br><br>
 
 
 
@@ -95,9 +93,12 @@
             </div>
 
             <div class="footer-legal">
-                <p>&copy; 2024 - OFNI - Tous droits réservés</p>
+                <p>&copy; 2025 - OFNI - Tous droits réservés</p>
             </div>
             {# {% block footer %}{% endblock %} #}
+
+            <script src="{{ asset('js/app.js') }}" ></script>
+            {# {% block javascripts %}<script src="{{ asset('js/app.js') }}" ></script>{% endblock %} #}
         </footer>
     </body>
 </html>

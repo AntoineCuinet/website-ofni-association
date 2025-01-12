@@ -57,18 +57,18 @@ h1 {
 }
 
 ::selection {
-  color: rgb(7, 7, 7);
-  background: rgb(255, 255, 240);
+  color: rgb(255, 255, 240);
+  background: rgb(7, 7, 7);
 }
 
 ::-moz-selection {
-  color: rgb(7, 7, 7);
-  background: rgb(255, 255, 240);
+  color: rgb(255, 255, 240);
+  background: rgb(7, 7, 7);
 }
 
 ::-webkit-selection {
-  color: rgb(7, 7, 7);
-  background: rgb(255, 255, 240);
+  color: rgb(255, 255, 240);
+  background: rgb(7, 7, 7);
 }
 
 /* ========================================================================
@@ -86,7 +86,7 @@ html {
   font-style: normal;
   font-size: 100%;
   background: rgb(255, 255, 240);
-  color: linear-gradient(233deg, rgba(28, 30, 108, 0.7) 0%, rgba(17, 23, 80, 0.5) 100%);
+  color: linear-gradient(233deg, rgba(28, 30, 108, 0.9) 0%, rgba(17, 23, 80, 0.8) 100%);
   line-height: 1.5;
   letter-spacing: 0.17em;
 }
@@ -225,7 +225,7 @@ section {
   border-radius: 24px;
   border-top: 1px solid rgb(200, 151, 28);
   border-left: 1px solid rgb(200, 151, 28);
-  background: linear-gradient(233deg, rgba(28, 30, 108, 0.7) 0%, rgba(17, 23, 80, 0.5) 100%);
+  background: linear-gradient(233deg, rgba(28, 30, 108, 0.9) 0%, rgba(17, 23, 80, 0.8) 100%);
   backdrop-filter: blur-filter(20px);
 }
 section h2 {
@@ -308,7 +308,7 @@ h4 {
 }
 
 p {
-  padding: 10px 5px;
+  padding: 10px 15px;
   text-align: center;
 }
 
@@ -322,10 +322,11 @@ p {
 ======================================================================== */
 nav {
   position: fixed;
-  z-index: 5;
+  z-index: 100;
   width: 100vw;
   padding: 1.5625rem 2.1875rem;
   background-color: rgb(16, 29, 46);
+  transition: padding 0.4s ease-out, background-color 0.4s ease-out, box-shadow 0.4s ease-out;
 }
 @media screen and (max-width: 720px) {
   nav {
@@ -335,13 +336,20 @@ nav {
   }
 }
 nav.sticky {
-  padding: 0.9375rem 2.1875rem;
-  background: rgb(16, 29, 46);
+  padding: 1.25rem 2.1875rem;
+  background-color: rgba(16, 29, 46, 0.9);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   -webkit-backdrop-filter: blur(10px);
   -moz-backdrop-filter: blur(10px);
   -o-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+}
+@media screen and (max-width: 720px) {
+  nav.sticky {
+    padding: 0 0.9375rem;
+    position: fixed;
+    top: 0;
+  }
 }
 nav .first-container {
   max-width: 1200px;
@@ -349,19 +357,99 @@ nav .first-container {
   display: flex;
   align-items: center;
 }
-nav .first-container .nav-icon {
-  text-decoration: none;
-  margin-right: 1.25rem;
-  font-family: sans-serif;
+nav .first-container .navlinks-container {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  transition: transform 0.4s ease-out;
+}
+@media screen and (max-width: 720px) {
+  nav .first-container .navlinks-container.open {
+    transform: translate(0%);
+  }
+}
+@media screen and (max-width: 720px) {
+  nav .first-container .navlinks-container {
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    height: 100vh;
+    padding: 3.125rem;
+    background: linear-gradient(233deg, rgba(28, 30, 108, 0.9) 0%, rgba(17, 23, 80, 0.8) 100%);
+    color: rgb(200, 200, 200);
+    -webkit-backdrop-filter: blur(10px);
+    -moz-backdrop-filter: blur(10px);
+    -o-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 4px 0px 6px -2px rgba(0, 0, 0, 0.1);
+    transform: translate(-101%);
+  }
+}
+nav .first-container .navlinks {
   transform: translateY(1px);
-  font-size: 1.5rem;
-  margin-left: 10px;
+  display: inline-block;
+  position: relative;
+  margin: 0 0.9375rem;
+  font-size: 1.25rem;
   font-weight: bolder;
+  text-decoration: none;
   color: rgb(255, 255, 240);
 }
 @media screen and (max-width: 720px) {
-  nav .first-container .nav-icon {
-    font-size: 1.375rem;
+  nav .first-container .navlinks {
+    font-size: 1.56rem;
+    margin: 1.25rem 0;
+    margin-left: 0;
+  }
+}
+nav .first-container .navlinks::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -0.1875rem;
+  width: 100%;
+  height: 0.1875rem;
+  transform: scale(0);
+  transform-origin: left;
+  background: rgb(255, 255, 240);
+  transition: transform 0.4s ease-out;
+}
+@media screen and (max-width: 720px) {
+  nav .first-container .navlinks::after {
+    background: transparent;
+  }
+}
+nav .first-container .navlinks:hover::after {
+  transform: scaleX(1);
+}
+nav .first-container .active {
+  color: rgb(228, 188, 86) !important;
+}
+nav .first-container .active::after {
+  background: rgb(228, 188, 86);
+}
+@media screen and (max-width: 720px) {
+  nav .first-container .first-navlink {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    padding: 0;
+    width: 3.125rem;
+    height: 100%;
+    color: transparent;
+    text-indent: -9999px;
+    white-space: nowrap;
+    overflow: hidden;
+    background-image: url("favicon.ico");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 }
 @media screen and (max-width: 720px) {
@@ -376,13 +464,14 @@ nav .first-container .main-navlinks .hamburger {
   nav .first-container .main-navlinks .hamburger {
     display: flex;
     align-items: center;
+    justify-content: left;
     position: relative;
     width: 1.25rem;
     height: 1.25rem;
     background: transparent;
     border: none;
     cursor: pointer;
-    margin-left: 0.625rem;
+    margin: 1.25rem 0 1.25rem 1.25rem;
   }
 }
 @media screen and (max-width: 720px) {
@@ -393,7 +482,7 @@ nav .first-container .main-navlinks .hamburger {
 @media screen and (max-width: 720px) {
   nav .first-container .main-navlinks .hamburger.open span:nth-child(2) {
     opacity: 0;
-    transition: 0.4s ease-out;
+    transition: opacity 0.4s ease-out;
   }
 }
 @media screen and (max-width: 720px) {
@@ -421,77 +510,6 @@ nav .first-container .main-navlinks .hamburger {
   nav .first-container .main-navlinks .hamburger span:nth-child(1), nav .first-container .main-navlinks .hamburger span:nth-child(3) {
     transition: 0.4s ease-out;
   }
-}
-nav .first-container .navlinks-container {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-}
-@media screen and (max-width: 720px) {
-  nav .first-container .navlinks-container.open {
-    transform: translate(0%);
-  }
-}
-@media screen and (max-width: 720px) {
-  nav .first-container .navlinks-container {
-    max-width: 70%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    height: 100vh;
-    padding: 3.125rem;
-    background: linear-gradient(233deg, rgba(28, 30, 108, 0.7) 0%, rgba(17, 23, 80, 0.5) 100%);
-    color: rgb(200, 200, 200);
-    -webkit-backdrop-filter: blur(10px);
-    -moz-backdrop-filter: blur(10px);
-    -o-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    box-shadow: 4px 0px 6px -2px rgba(0, 0, 0, 0.1);
-    transform: translate(-101%);
-  }
-}
-nav .first-container .navlinks-container a {
-  transform: translateY(1px);
-  display: inline-block;
-  position: relative;
-  margin: 0 0.9375rem;
-  font-size: 1.25rem;
-  font-weight: bolder;
-  text-decoration: none;
-  color: rgb(255, 255, 240);
-}
-@media screen and (max-width: 720px) {
-  nav .first-container .navlinks-container a {
-    font-size: 1.56rem;
-    margin: 1.25rem 0;
-    margin-left: 0;
-  }
-}
-nav .first-container .navlinks-container a::after {
-  content: "";
-  display: block;
-  position: absolute;
-  bottom: -0.1875rem;
-  width: 100%;
-  height: 0.1875rem;
-  transform: scale(0);
-  transform-origin: left;
-  background: rgb(255, 255, 240);
-  transition: transform 0.3s ease-out;
-}
-@media screen and (max-width: 720px) {
-  nav .first-container .navlinks-container a::after {
-    background: transparent;
-  }
-}
-nav .first-container .navlinks-container a:hover::after {
-  transform: scaleX(1);
-}
-nav .active {
-  color: rgb(228, 188, 86) !important;
 }
 
 #to-top-btn {
@@ -698,7 +716,7 @@ iframe {
   backdrop-filter: blur(15px);
   outline: none;
   font-size: 1em;
-  color: linear-gradient(233deg, rgba(28, 30, 108, 0.7) 0%, rgba(17, 23, 80, 0.5) 100%);
+  color: linear-gradient(233deg, rgba(28, 30, 108, 0.9) 0%, rgba(17, 23, 80, 0.8) 100%);
 }
 .form-field .input-text input[type=text]:focus {
   border: 3px solid rgb(228, 188, 86);
