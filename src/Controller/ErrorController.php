@@ -7,9 +7,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Psr\Log\LoggerInterface;
+use Throwable;
 
 class ErrorController extends AbstractController
 {
+    private LoggerInterface $logger;
+
+    public function __construct(LoggerInterface $logger) {
+        $this->logger = $logger;
+    }
+
+
     #[Route('/error/{code}', name: 'error_handler')]
     public function showError(int $code): Response
     {
@@ -32,9 +41,14 @@ class ErrorController extends AbstractController
     /**
      * Cette méthode est utilisée pour attraper toutes les erreurs non gérées.
      */
-    public function handleError(HttpExceptionInterface $exception): Response
+    public function handleError(Throwable $exception): Response
     {
-        $code = $exception->getStatusCode();
+        $code = 500;
+        if ($exception instanceof HttpExceptionInterface) {
+            $code = $exception->getStatusCode();
+        } else {
+            $this->logger->error($exception->getMessage());
+        }
         return $this->showError($code);
     }
 }

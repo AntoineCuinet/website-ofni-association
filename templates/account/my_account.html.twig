@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EditUserController!{% endblock %}
+
+{% block main %}
+
+{% for flash_success in app.flashes('success') %}
+    <div class="alert alert-success" role="alert">{{ flash_success }}</div>
+{% endfor %}
+
+
+<div class="mb-3">
+Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+</div>
+
+<h2>Changer mes informations personnelles</h2>
+
+<p>Vous pouvez changer votre pseudo et/ou votre mot de passe.</p>
+
+{{ form_errors(pseudoForm) }}
+
+{{ form_start(pseudoForm) }}
+    {{ form_row(pseudoForm.pseudo, {
+        label: 'Nouveau pseudo'
+    }) }}
+    <button type="submit" name="pseudo_submit" class="btn">Changer mon pseudo</button>
+{{ form_end(pseudoForm) }}
+
+
+{{ form_errors(passwordForm) }}
+
+{{ form_start(passwordForm) }}
+    {{ form_row(passwordForm.plainPassword.first, {
+        label: 'Nouveau mot de passe'
+    }) }}
+    {{ form_row(passwordForm.plainPassword.second, {
+        label: 'Répétez le nouveau mot de passe'
+    }) }}
+    <button type="submit" name="password_submit" class="btn">Changer mon mot de passe</button>
+{{ form_end(passwordForm) }}
+
+
+<h2>Zone dangereuse</h2>
+
+<p>Vous pouvez ici supprimer votre compte. Attention ! Cette action est <em>irréversible.</em></p>
+
+{{ form_errors(deleteAccountForm) }}
+
+{{ form_start(deleteAccountForm) }}
+    {{ form_row(deleteAccountForm.delete) }}
+{{ form_end(deleteAccountForm) }}
+
+<script>
+document.getElementById('deleteAccountForm_delete').addEventListener('click', (e) => {
+    if (!confirm('Voulez vous vraiment supprimer votre compte ? \n Vous ne pourrez pas revenir en arrière')) {
+        e.preventDefault();
+    }
+});
+</script>
+
+{% endblock %}
