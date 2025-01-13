@@ -88,7 +88,6 @@ De la programmation, de l’entraide, du fun
 
 ### Le logo
 
-Un logo doré, représentant une abeille/frelon danas un cercle => référence au bug en info
 Un logo qui se transforme (info/ofni)
 
 ### Les couleurs
@@ -99,11 +98,15 @@ Gris: rgb(200, 200, 200)
 Primaire: bleu nuit: rgb(16, 29, 46)
 Secondaire: bleu clair: rgb(31, 78, 121)
 Tertière: jaune: rgb(200, 151, 28)
+Quaternaire: or: rgb(228, 188, 86)
+
 Couleurs du logo :
-    rose #ec008c
-    bleu #0f75bc
-    orange #f7941e
-    vert #39b54a
+    rose #ff3399
+    bleu #3399ff
+    orange #ff9900
+    vert #33cc33
+Font du logo :
+    Figtree
 
 #### Enciènes couleurs
 

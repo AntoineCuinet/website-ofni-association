@@ -15,39 +15,40 @@
             <script src="{{ asset('js/main.js') }}" async></script>
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&family=Faculty+Glyphic&family=Figtree:ital,wght@0,300..900;1,300..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Josefin+Sans&display=swap" rel="stylesheet">
     </head>
     <body>
         <header>
             <nav id="navbar">
             <div class="first-container">
-                <a href="{{ path('home') }}" class="nav-icon {{ app.current_route == 'home' ? 'active' : ''}}" aria-label="Visit homepage" aria-current="page">
-                    {# <img src="./assets/favicon/favicon.jpeg" alt="Web site icon" width="40" loading="lazy"> #}
-                    <span>Accueil</span>
-                </a>
 
-                {# <div class="main-navlinks">
+                <a href="{{ path('home') }}" class="first-navlink navlinks {{ app.current_route == 'home' ? 'active' : ''}}" aria-label="Visit homepage" aria-current="page">Accueil</a>
+
+                <div class="navlinks-container">
+                    <a class="navlinks {{ app.current_route == 'ofni' ? 'active' : ''}}" href="{{ path('home') }}">L'OFNI</a>
+                    <a class="navlinks {{ app.current_route == 'event' ? 'active' : ''}}" href="{{ path('home') }}">Événements</a>
+                    <a class="navlinks {{ app.current_route == 'shop' ? 'active' : ''}}" href="{{ path('home') }}">Boutique</a>
+                    {% if app.user %}
+                      <a class="navlinks {{ app.current_route == 'account' ? 'active' : ''}}" href="{{ path('app_account') }}">{{ app.user.pseudo }}</a>
+                    {% else %}
+                      <a class="navlinks {{ app.current_route == 'login' ? 'active' : ''}}" href="{{ path('app_login') }}">Connexion</a>
+                    {% endif %}
+                </div>
+
+                <div class="main-navlinks">
                     <button class="hamburger" type="button" aria-label="Toggle navigation" aria-expanded="false">
                         <span></span>
                         <span></span>
                         <span></span>
                     </button>
-                </div> #}
-
-                <div class="navlinks-container">
-                    <a href="{{ path('home') }}">L'OFNI</a>
-                    <a href="{{ path('home') }}">Événements</a>
-                    <a href="{{ path('home') }}">Boutique</a>
-
-                    {% if app.user %}
-                        <a href="{{ path('app_login') }}">{{ app.user.pseudo }}</a> {# TODO: peut être changer la redirection #}
-                    {% else %}
-                        <a href="{{ path('app_login') }}">Connexion</a>
-                    {% endif %}
                 </div>
             </div>
         </nav>
             {# {% block header %}{% endblock %} #}
-        </header><br><br><br><br><br>
+        </header><br><br><br><br>
 
 
 
@@ -96,9 +97,12 @@
             </div>
 
             <div class="footer-legal">
-                <p>&copy; 2024 - OFNI - Tous droits réservés</p>
+                <p>&copy; 2025 - OFNI - Tous droits réservés</p>
             </div>
             {# {% block footer %}{% endblock %} #}
+
+            <script src="{{ asset('js/app.js') }}" ></script>
+            {# {% block javascripts %}<script src="{{ asset('js/app.js') }}" ></script>{% endblock %} #}
         </footer>
     </body>
 </html>
