@@ -38,15 +38,17 @@ class RegistrationController extends AbstractController
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
+            $user->setRoles(['ROLE_ETUDIANT']);
+
             $entityManager->persist($user);
             $entityManager->flush();
 
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('no-reply@ofni.asso.fr', 'OFNI No-Reply'))
+                    ->from(new Address('no-reply@ofni.asso.fr', 'Ne pas répondre - OFNI'))
                     ->to((string) $user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('S\'il vous plaît, confirmez votre adresse mail.')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 

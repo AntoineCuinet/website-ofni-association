@@ -37,7 +37,12 @@
                     <a href="{{ path('home') }}">L'OFNI</a>
                     <a href="{{ path('home') }}">Événements</a>
                     <a href="{{ path('home') }}">Boutique</a>
-                    <a href="{{ path('app_login') }}">Connexion</a>
+
+                    {% if app.user %}
+                        <a href="{{ path('app_login') }}">{{ app.user.pseudo }}</a> {# TODO: peut être changer la redirection #}
+                    {% else %}
+                        <a href="{{ path('app_login') }}">Connexion</a>
+                    {% endif %}
                 </div>
             </div>
         </nav>

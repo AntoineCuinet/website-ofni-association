@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\EqualTo;
@@ -30,9 +31,15 @@ class RegistrationFormType extends AbstractType
                     ])
                 ],
             ])
-            ->add('pseudo')
+            ->add('pseudo', TextType::class, [
+                'constraints' => [
+                    new Length(['min' => 6, 'minMessage' => 'Le pseudo doit contenir au moins 6 caractères']),
+                ]
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
+                'label_html' => true,
+                'label' => 'J\'accepte les <a href="/">conditions générales d\'utilisation</a>', // TODO: change path
                 'constraints' => [
                     new IsTrue([
                         'message' => "Vous devez accepter les conditions d'utilisation",
