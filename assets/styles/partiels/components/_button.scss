@@ -29,6 +29,7 @@
 .btn {
     @extend %btn;
     background: transparent;
+    @include blur-filter(10px);
     color: $color-secondary;
     border: 3px solid $color-secondary;
     transition: color $transition, border-color $transition;
@@ -50,12 +51,14 @@
         color: $color-tertiary;
         border-color: $color-tertiary;
         background: transparent;
+        @include blur-filter(10px);
     }
 }
 
 .btn-danger {
     @extend %btn;
     background: transparent;
+    @include blur-filter(10px);
     color: $color-danger;
     border: 3px solid $color-danger;
     transition: color $transition, border-color $transition;

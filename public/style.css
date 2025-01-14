@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ========================================================================
  * File Name: style.css
  * Author: CUINET Antoine
@@ -144,8 +145,6 @@ main {
 footer {
   flex-shrink: 0;
   width: 100%;
-  border-top: 1px dashed rgb(7, 7, 7);
-  background: rgb(52, 153, 254);
   color: rgb(17, 17, 41);
 }
 footer .footer-container {
@@ -155,7 +154,7 @@ footer .footer-container {
   justify-content: center;
   align-items: flex-start;
   font-size: 1.125rem;
-  padding: 15px 0 10px;
+  padding: 0px 0 10px;
 }
 @media screen and (max-width: 720px) {
   footer .footer-container {
@@ -212,6 +211,24 @@ footer .footer-legal {
   text-align: center;
 }
 
+svg {
+  width: 100%; /* Largeur sur toute la page */
+  height: 150px; /* Hauteur définie pour le séparateur */
+  pointer-events: none;
+}
+@media screen and (max-width: 990px) {
+  svg {
+    height: 50px;
+  }
+}
+
+.line {
+  fill: none;
+  stroke: black;
+  stroke-width: 3;
+  border-radius: 10px solid black;
+}
+
 /* ========================================================================
  * File Name: style.css
  * Author: CUINET Antoine
@@ -226,8 +243,8 @@ section {
   max-width: 1200px;
   padding: 20px;
   border-radius: 30px;
-  border-top: 1px solid #ff9900;
-  border-left: 1px solid #ff9900;
+  border-top: 1px solid rgb(255, 153, 0);
+  border-left: 1px solid rgb(255, 153, 0);
   background: rgb(52, 153, 254);
   backdrop-filter: blur-filter(20px);
 }
@@ -281,6 +298,7 @@ section p {
   font-weight: bold;
   line-height: 1;
   margin-top: 40px;
+  text-shadow: 2px 4px 4px rgba(123, 123, 123, 0.3);
 }
 .hero-section .hero-text h1 span {
   font-weight: bolder;
@@ -356,7 +374,7 @@ h2::after {
   bottom: -10px;
   width: 75%;
   height: 3px;
-  background-color: #ff9900;
+  background-color: rgb(255, 153, 0);
 }
 
 h3 {
@@ -377,7 +395,7 @@ h3::after {
   bottom: 3px;
   width: 75%;
   height: 3px;
-  background-color: #ff9900;
+  background-color: rgb(255, 153, 0);
 }
 
 h4 {
@@ -513,6 +531,10 @@ nav .first-container .navlinks:last-child {
   margin: 0 0 0 10px;
   font-size: 1rem;
   color: rgb(52, 153, 254);
+  -webkit-backdrop-filter: none !important;
+  -moz-backdrop-filter: none !important;
+  -o-backdrop-filter: none !important;
+  backdrop-filter: none !important;
 }
 @media screen and (max-width: 990px) {
   nav .first-container .navlinks:last-child {
@@ -525,7 +547,7 @@ nav .first-container .navlinks:last-child {
   }
 }
 nav .first-container .navlinks:last-child:hover {
-  color: #ff9900;
+  color: rgb(255, 153, 0);
 }
 @media screen and (max-width: 990px) {
   nav .first-container .navlinks:last-child:hover {
@@ -617,6 +639,9 @@ nav .first-container .main-navlinks .hamburger {
   nav .first-container .main-navlinks .hamburger span:nth-child(1) {
     transform: translateY(0.4375rem);
   }
+  nav .first-container .main-navlinks .hamburger span:nth-child(2) {
+    width: 70%;
+  }
   nav .first-container .main-navlinks .hamburger span:nth-child(3) {
     transform: translateY(-0.4375rem);
   }
@@ -668,7 +693,7 @@ nav .first-container .main-navlinks .hamburger {
 }
 
 .link {
-  color: #ff9900;
+  color: rgb(255, 153, 0);
   position: relative;
 }
 .link::after {
@@ -741,13 +766,17 @@ iframe {
 
 .btn {
   background: transparent;
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   color: rgb(52, 153, 254);
   border: 3px solid rgb(52, 153, 254);
   transition: color 0.4s ease-out, border-color 0.4s ease-out;
 }
 .btn:hover {
-  color: #ff9900;
-  border-color: #ff9900;
+  color: rgb(255, 153, 0);
+  border-color: rgb(255, 153, 0);
 }
 
 .btn-full {
@@ -757,13 +786,21 @@ iframe {
   transition: color 0.4s ease-out, border-color 0.4s ease-out, background 0.4s ease-out;
 }
 .btn-full:hover {
-  color: #ff9900;
-  border-color: #ff9900;
+  color: rgb(255, 153, 0);
+  border-color: rgb(255, 153, 0);
   background: transparent;
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 .btn-danger {
   background: transparent;
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   color: rgb(255, 51, 153);
   border: 3px solid rgb(255, 51, 153);
   transition: color 0.4s ease-out, border-color 0.4s ease-out;
@@ -849,7 +886,7 @@ iframe {
   border: 3px dashed rgb(17, 17, 41);
 }
 .form-field .input-text input[type=text]:valid {
-  border: 3px solid #ff9900;
+  border: 3px solid rgb(255, 153, 0);
 }
 .form-field .input-text input[type=text]:focus ~ label {
   transform: translateX(15px) translateY(-10px);
@@ -870,7 +907,7 @@ iframe {
   font-size: 0.65em;
   padding: 0 10px;
   background: rgb(240, 249, 255);
-  color: #ff9900;
+  color: rgb(255, 153, 0);
   border-radius: 4px;
   letter-spacing: 1px;
 }

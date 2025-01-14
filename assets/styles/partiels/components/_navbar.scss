@@ -116,6 +116,10 @@ nav {
                 margin: 0 0 0 10px;
                 font-size: 1rem;
                 color: $color-secondary;
+                -webkit-backdrop-filter: none !important;
+                -moz-backdrop-filter: none !important;
+                -o-backdrop-filter: none !important;
+                backdrop-filter: none !important;
 
                 @media #{$max-width-m} {
                     font-size: $size-hamburger;
@@ -234,6 +238,9 @@ nav {
 
                         &:nth-child(1) {
                             transform: translateY(rem(7));
+                        }
+                        &:nth-child(2) {
+                            width: 70%;
                         }
                         &:nth-child(3) {
                             transform: translateY(rem(-7));

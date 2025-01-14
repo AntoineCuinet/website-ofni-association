@@ -45,8 +45,8 @@
             </div>
         </nav>
             {# {% block header %}{% endblock %} #}
+            {% block headerspace %}<br><br><br><br><br><br><br><br>{% endblock %}
         </header>
-        {# {% block header-space %}<br><br><br><br>{% endblock %} #}
 
 
 
@@ -58,6 +58,11 @@
 
         <br><br><br>
         <footer>
+
+            <svg xmlns="http://www.w3.org/2000/svg">
+                <path class="line" />
+            </svg>
+
             <div class="footer-container">
                 <div class="bloc">
                     <h3>Informations</h3>
@@ -100,6 +105,7 @@
             {# {% block footer %}{% endblock %} #}
 
             <script src="{{ asset('js/app.js') }}" ></script>
+            <script src="{{ asset('js/line.js') }}" ></script>
             {# {% block javascripts %}<script src="{{ asset('js/app.js') }}" ></script>{% endblock %} #}
         </footer>
     </body>

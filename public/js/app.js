@@ -40,11 +40,18 @@ document.addEventListener("DOMContentLoaded", function() {
     /* Navbar (Supprimer la class boutton lors du redimensionnement de la fenêtre) */
     const lastLink = document.querySelector(".navlinks-container a:last-child");
 
-    window.addEventListener("resize", () => {
+    function updateLastLink() {
         if (window.innerWidth < 990) {
             lastLink.classList.remove("btn"); // Supprimer la classe 'btn'
         } else {
             lastLink.classList.add("btn"); // Réajouter la classe 'btn' si besoin
         }
-    });
+    }
+    
+    // Appliquer la logique au chargement de la page
+    updateLastLink();
+    
+    // Appliquer la logique au redimensionnement de la fenêtre
+    window.addEventListener("resize", updateLastLink);
+
 });
