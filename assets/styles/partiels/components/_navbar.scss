@@ -7,11 +7,11 @@ nav {
     position: fixed;
     z-index: 100;
     width: 100vw;
-    padding: rem(25) rem(35);
-    background-color: $color-primary;
-    transition: padding $transition, background-color $transition, box-shadow $transition;
+    padding: rem(40) rem(35);
+    background-color: transparent;
+    transition: padding $transition, background-color $transition, color $transition, box-shadow $transition;
 
-    @media #{$max-width-s} {
+    @media #{$max-width-m} {
         padding: rem(7) rem(15);
         position: fixed;
         top: 0;
@@ -19,11 +19,19 @@ nav {
 
     &.sticky {
         padding: rem(20) rem(35);
-        background-color: rgba(16, 29, 46, 0.9);
+        background-color: rgba(52, 153, 254, 0.3);
+
+        -webkit-box-shadow: $box-shadow-black;
+        -moz-box-shadow: $box-shadow-black;
         box-shadow: $box-shadow-black;
+        color: $color-white;
         @include blur-filter();
 
-        @media #{$max-width-s} {
+        // .first-container .navlinks {
+        //     color: light($color-primary, $color-font-title, $color-white);
+        // }
+
+        @media #{$max-width-m} {
             padding: 0 rem(15);
             position: fixed;
             top: 0;
@@ -44,12 +52,12 @@ nav {
             transition: transform $transition;
 
             &.open {
-                @media #{$max-width-s} {
+                @media #{$max-width-m} {
                     transform: translate(0%);
                 }
             }
             
-            @media #{$max-width-s} {
+            @media #{$max-width-m} {
                 max-width: 70%;
                 display: flex;
                 flex-direction: column;
@@ -59,7 +67,7 @@ nav {
                 left: 0;
                 height: 100vh;
                 padding: rem(50);
-                background: $color-secondary;
+                background: rgba(52, 153, 254, 0.9);
                 color: $color-font-p;
                 @include blur-filter();
                 box-shadow: $box-shadow-right;
@@ -76,8 +84,9 @@ nav {
             font-weight: $font-weight-ber;
             text-decoration: none;
             color: light($color-primary, $color-font-title, $color-white);
+            // color: $color-font-title;
 
-            @media #{$max-width-s} {
+            @media #{$max-width-m} {
                 font-size: $size-hamburger;
                 margin: rem(20) 0;
                 margin-left: 0;
@@ -95,12 +104,43 @@ nav {
                 background: light($color-primary, $color-font-title, $color-white);
                 transition: transform $transition;
 
-                @media #{$max-width-s} {
+                @media #{$max-width-m} {
                     background: transparent;
                 }
             }
             &:hover::after {
                 transform: scaleX(1);
+            }
+
+            &:last-child {
+                margin: 0 0 0 10px;
+                font-size: 1rem;
+                color: $color-secondary;
+                -webkit-backdrop-filter: none !important;
+                -moz-backdrop-filter: none !important;
+                -o-backdrop-filter: none !important;
+                backdrop-filter: none !important;
+
+                @media #{$max-width-m} {
+                    font-size: $size-hamburger;
+                    margin: rem(20) 0;
+                    margin-left: 0;
+                    font-weight: $font-weight-ber;
+                    text-decoration: none;
+                    color: light($color-primary, $color-font-title, $color-white);
+                }
+
+                &:hover {
+                    color: $color-tertiary;
+
+                    @media #{$max-width-m} {
+                        color: light($color-primary, $color-font-title, $color-white);
+                    }
+                }
+
+                &:hover::after {
+                    transform: scaleX(0);
+                }
             }
         }
 
@@ -113,7 +153,10 @@ nav {
         }
 
         .first-navlink {
-            @media #{$max-width-s} {
+            font-size: 1.25rem;
+            font-weight: $font-weight-ber;
+
+            @media #{$max-width-m} {
                 position: absolute;
                 top: 0;
                 left: 50%;
@@ -142,14 +185,14 @@ nav {
 
 
         .main-navlinks { //hamburger
-            @media #{$max-width-s} {
+            @media #{$max-width-m} {
                 order: 1;
             }
 
             .hamburger {
                 display: none;
 
-                @media #{$max-width-s} {
+                @media #{$max-width-m} {
                     display: flex;
                     align-items: center;
                     justify-content: left;
@@ -164,17 +207,17 @@ nav {
 
                 &.open {
                     span:nth-child(1){
-                        @media #{$max-width-s} {
+                        @media #{$max-width-m} {
                             transform: translate(0) rotate($rotated);
                         }
                     }
                     span:nth-child(2){
-                        @media #{$max-width-s} {
+                        @media #{$max-width-m} {
                             opacity: 0;
                             transition: opacity $transition;
                         }
                     }span:nth-child(3){
-                        @media #{$max-width-s} {
+                        @media #{$max-width-m} {
                             transform: translate(0) rotate(-$rotated);
                         }
                     }
@@ -182,7 +225,7 @@ nav {
 
                 span {
 
-                    @media #{$max-width-s} {
+                    @media #{$max-width-m} {
                         display: block;
                         width: 100%;
                         height: rem(2);
@@ -195,6 +238,9 @@ nav {
 
                         &:nth-child(1) {
                             transform: translateY(rem(7));
+                        }
+                        &:nth-child(2) {
+                            width: 70%;
                         }
                         &:nth-child(3) {
                             transform: translateY(rem(-7));

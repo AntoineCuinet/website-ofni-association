@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ========================================================================
  * File Name: style.css
  * Author: CUINET Antoine
@@ -57,17 +58,17 @@ h1 {
 }
 
 ::selection {
-  color: rgb(255, 255, 240);
+  color: rgb(240, 249, 255);
   background: rgb(7, 7, 7);
 }
 
 ::-moz-selection {
-  color: rgb(255, 255, 240);
+  color: rgb(240, 249, 255);
   background: rgb(7, 7, 7);
 }
 
 ::-webkit-selection {
-  color: rgb(255, 255, 240);
+  color: rgb(240, 249, 255);
   background: rgb(7, 7, 7);
 }
 
@@ -85,8 +86,8 @@ html {
   font-weight: 400;
   font-style: normal;
   font-size: 100%;
-  background: rgb(255, 255, 240);
-  color: linear-gradient(233deg, rgba(28, 30, 108, 0.9) 0%, rgba(17, 23, 80, 0.8) 100%);
+  background: rgb(240, 249, 255);
+  color: rgb(17, 17, 41);
   line-height: 1.5;
   letter-spacing: 0.17em;
 }
@@ -98,6 +99,9 @@ body {
   margin: auto;
   min-height: 100vh;
   width: 100vw;
+  background-image: url("./pictures/noise-pattern.svg");
+  background-size: contain;
+  background-repeat: repeat;
 }
 
 /* ========================================================================
@@ -141,9 +145,7 @@ main {
 footer {
   flex-shrink: 0;
   width: 100%;
-  border-top: 1px dashed rgb(7, 7, 7);
-  background: rgb(16, 29, 46);
-  color: rgb(200, 200, 200);
+  color: rgb(17, 17, 41);
 }
 footer .footer-container {
   max-width: 1200px;
@@ -152,7 +154,7 @@ footer .footer-container {
   justify-content: center;
   align-items: flex-start;
   font-size: 1.125rem;
-  padding: 15px 0 10px;
+  padding: 0px 0 10px;
 }
 @media screen and (max-width: 720px) {
   footer .footer-container {
@@ -188,7 +190,7 @@ footer .footer-container .bloc h3 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  color: rgb(255, 255, 240);
+  color: rgb(7, 7, 7);
 }
 @media screen and (max-width: 720px) {
   footer .footer-container .bloc h3 {
@@ -209,6 +211,24 @@ footer .footer-legal {
   text-align: center;
 }
 
+svg {
+  width: 100%; /* Largeur sur toute la page */
+  height: 150px; /* Hauteur définie pour le séparateur */
+  pointer-events: none;
+}
+@media screen and (max-width: 990px) {
+  svg {
+    height: 50px;
+  }
+}
+
+.line {
+  fill: none;
+  stroke: black;
+  stroke-width: 3;
+  border-radius: 10px solid black;
+}
+
 /* ========================================================================
  * File Name: style.css
  * Author: CUINET Antoine
@@ -222,10 +242,10 @@ section {
   width: 90%;
   max-width: 1200px;
   padding: 20px;
-  border-radius: 24px;
-  border-top: 1px solid rgb(200, 151, 28);
-  border-left: 1px solid rgb(200, 151, 28);
-  background: linear-gradient(233deg, rgba(28, 30, 108, 0.9) 0%, rgba(17, 23, 80, 0.8) 100%);
+  border-radius: 30px;
+  border-top: 1px solid rgb(255, 153, 0);
+  border-left: 1px solid rgb(255, 153, 0);
+  background: rgb(52, 153, 254);
   backdrop-filter: blur-filter(20px);
 }
 section h2 {
@@ -234,6 +254,84 @@ section h2 {
 section p {
   margin: 10px auto;
   text-align: justify;
+}
+
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px;
+  gap: 20px;
+  min-height: 100vh;
+}
+@media screen and (max-width: 990px) {
+  .hero-section {
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+  }
+}
+.hero-section .logo {
+  flex-shrink: 0;
+  text-align: center;
+}
+.hero-section .logo span {
+  font-size: 170px !important;
+}
+@media screen and (max-width: 990px) {
+  .hero-section .logo {
+    order: -1;
+    margin-top: 80px;
+  }
+  .hero-section .logo span {
+    font-size: 80px !important;
+  }
+}
+.hero-section .hero-text {
+  max-width: 500px;
+  text-align: left;
+}
+.hero-section .hero-text h1 {
+  padding: 0;
+  text-align: left;
+  font-size: 70px;
+  font-weight: bold;
+  line-height: 1;
+  margin-top: 40px;
+  text-shadow: 2px 4px 4px rgba(123, 123, 123, 0.3);
+}
+.hero-section .hero-text h1 span {
+  font-weight: bolder;
+  font-size: 75px;
+}
+.hero-section .hero-text p {
+  padding: 0;
+  text-align: left;
+  font-size: 16px;
+  margin-top: 15px;
+  color: #444;
+}
+.hero-section .hero-text a {
+  margin-left: 0;
+  margin-right: 20px;
+  margin-top: 30px;
+  display: inline-block;
+  font-size: 14px;
+}
+@media screen and (max-width: 990px) {
+  .hero-section .hero-text h1 {
+    font-size: 2rem;
+  }
+  .hero-section .hero-text h1 span {
+    font-size: 2rem;
+  }
+  .hero-section .hero-text p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  .hero-section .hero-text a {
+    margin-top: 0px;
+  }
 }
 
 /* ========================================================================
@@ -253,7 +351,7 @@ section p {
  * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
 ======================================================================== */
 h1 {
-  color: rgb(7, 7, 7);
+  color: light(rgb(240, 249, 255), rgb(7, 7, 7), rgb(240, 249, 255));
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 2rem;
   padding: 30px 30px;
@@ -261,7 +359,7 @@ h1 {
 }
 
 h2 {
-  color: rgb(7, 7, 7);
+  color: light(rgb(240, 249, 255), rgb(7, 7, 7), rgb(240, 249, 255));
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 1.5rem;
   margin: 20px 40px;
@@ -276,11 +374,11 @@ h2::after {
   bottom: -10px;
   width: 75%;
   height: 3px;
-  background-color: rgb(200, 151, 28);
+  background-color: rgb(255, 153, 0);
 }
 
 h3 {
-  color: rgb(7, 7, 7);
+  color: light(rgb(240, 249, 255), rgb(7, 7, 7), rgb(240, 249, 255));
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 1.125rem;
   margin: 15px 50px;
@@ -297,11 +395,11 @@ h3::after {
   bottom: 3px;
   width: 75%;
   height: 3px;
-  background-color: rgb(200, 151, 28);
+  background-color: rgb(255, 153, 0);
 }
 
 h4 {
-  color: rgb(200, 200, 200);
+  color: light(rgb(240, 249, 255), rgb(17, 17, 41), rgb(200, 200, 200));
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 1.125rem;
   padding: 10px 60px;
@@ -324,11 +422,11 @@ nav {
   position: fixed;
   z-index: 100;
   width: 100vw;
-  padding: 1.5625rem 2.1875rem;
-  background-color: rgb(16, 29, 46);
-  transition: padding 0.4s ease-out, background-color 0.4s ease-out, box-shadow 0.4s ease-out;
+  padding: 2.5rem 2.1875rem;
+  background-color: transparent;
+  transition: padding 0.4s ease-out, background-color 0.4s ease-out, color 0.4s ease-out, box-shadow 0.4s ease-out;
 }
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 990px) {
   nav {
     padding: 0.4375rem 0.9375rem;
     position: fixed;
@@ -337,14 +435,17 @@ nav {
 }
 nav.sticky {
   padding: 1.25rem 2.1875rem;
-  background-color: rgba(16, 29, 46, 0.9);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: rgba(52, 153, 254, 0.3);
+  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  color: rgb(240, 249, 255);
   -webkit-backdrop-filter: blur(10px);
   -moz-backdrop-filter: blur(10px);
   -o-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 990px) {
   nav.sticky {
     padding: 0 0.9375rem;
     position: fixed;
@@ -363,12 +464,12 @@ nav .first-container .navlinks-container {
   align-items: center;
   transition: transform 0.4s ease-out;
 }
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 990px) {
   nav .first-container .navlinks-container.open {
     transform: translate(0%);
   }
 }
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 990px) {
   nav .first-container .navlinks-container {
     max-width: 70%;
     display: flex;
@@ -379,13 +480,13 @@ nav .first-container .navlinks-container {
     left: 0;
     height: 100vh;
     padding: 3.125rem;
-    background: linear-gradient(233deg, rgba(28, 30, 108, 0.9) 0%, rgba(17, 23, 80, 0.8) 100%);
-    color: rgb(200, 200, 200);
+    background: rgba(52, 153, 254, 0.9);
+    color: rgb(17, 17, 41);
     -webkit-backdrop-filter: blur(10px);
     -moz-backdrop-filter: blur(10px);
     -o-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    box-shadow: 4px 0px 6px -2px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 4px 6px rgb(123, 123, 123);
     transform: translate(-101%);
   }
 }
@@ -394,12 +495,12 @@ nav .first-container .navlinks {
   display: inline-block;
   position: relative;
   margin: 0 0.9375rem;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: bolder;
   text-decoration: none;
-  color: rgb(255, 255, 240);
+  color: rgb(7, 7, 7);
 }
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 990px) {
   nav .first-container .navlinks {
     font-size: 1.56rem;
     margin: 1.25rem 0;
@@ -415,10 +516,10 @@ nav .first-container .navlinks::after {
   height: 0.1875rem;
   transform: scale(0);
   transform-origin: left;
-  background: rgb(255, 255, 240);
+  background: rgb(7, 7, 7);
   transition: transform 0.4s ease-out;
 }
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 990px) {
   nav .first-container .navlinks::after {
     background: transparent;
   }
@@ -426,13 +527,47 @@ nav .first-container .navlinks::after {
 nav .first-container .navlinks:hover::after {
   transform: scaleX(1);
 }
+nav .first-container .navlinks:last-child {
+  margin: 0 0 0 10px;
+  font-size: 1rem;
+  color: rgb(52, 153, 254);
+  -webkit-backdrop-filter: none !important;
+  -moz-backdrop-filter: none !important;
+  -o-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+@media screen and (max-width: 990px) {
+  nav .first-container .navlinks:last-child {
+    font-size: 1.56rem;
+    margin: 1.25rem 0;
+    margin-left: 0;
+    font-weight: bolder;
+    text-decoration: none;
+    color: rgb(7, 7, 7);
+  }
+}
+nav .first-container .navlinks:last-child:hover {
+  color: rgb(255, 153, 0);
+}
+@media screen and (max-width: 990px) {
+  nav .first-container .navlinks:last-child:hover {
+    color: rgb(7, 7, 7);
+  }
+}
+nav .first-container .navlinks:last-child:hover::after {
+  transform: scaleX(0);
+}
 nav .first-container .active {
-  color: rgb(228, 188, 86) !important;
+  color: rgb(52, 153, 254) !important;
 }
 nav .first-container .active::after {
-  background: rgb(228, 188, 86);
+  background: rgb(52, 153, 254);
 }
-@media screen and (max-width: 720px) {
+nav .first-container .first-navlink {
+  font-size: 1.25rem;
+  font-weight: bolder;
+}
+@media screen and (max-width: 990px) {
   nav .first-container .first-navlink {
     position: absolute;
     top: 0;
@@ -452,7 +587,7 @@ nav .first-container .active::after {
     background-position: center;
   }
 }
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 990px) {
   nav .first-container .main-navlinks {
     order: 1;
   }
@@ -460,7 +595,7 @@ nav .first-container .active::after {
 nav .first-container .main-navlinks .hamburger {
   display: none;
 }
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 990px) {
   nav .first-container .main-navlinks .hamburger {
     display: flex;
     align-items: center;
@@ -474,23 +609,23 @@ nav .first-container .main-navlinks .hamburger {
     margin: 1.25rem 0 1.25rem 1.25rem;
   }
 }
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 990px) {
   nav .first-container .main-navlinks .hamburger.open span:nth-child(1) {
     transform: translate(0) rotate(135deg);
   }
 }
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 990px) {
   nav .first-container .main-navlinks .hamburger.open span:nth-child(2) {
     opacity: 0;
     transition: opacity 0.4s ease-out;
   }
 }
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 990px) {
   nav .first-container .main-navlinks .hamburger.open span:nth-child(3) {
     transform: translate(0) rotate(-135deg);
   }
 }
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 990px) {
   nav .first-container .main-navlinks .hamburger span {
     display: block;
     width: 100%;
@@ -498,11 +633,14 @@ nav .first-container .main-navlinks .hamburger {
     position: absolute;
     pointer-events: none;
     transition: opacity 0.3s 0.15s;
-    background-color: rgb(255, 255, 240);
+    background-color: rgb(7, 7, 7);
     mix-blend-mode: difference;
   }
   nav .first-container .main-navlinks .hamburger span:nth-child(1) {
     transform: translateY(0.4375rem);
+  }
+  nav .first-container .main-navlinks .hamburger span:nth-child(2) {
+    width: 70%;
   }
   nav .first-container .main-navlinks .hamburger span:nth-child(3) {
     transform: translateY(-0.4375rem);
@@ -555,7 +693,7 @@ nav .first-container .main-navlinks .hamburger {
 }
 
 .link {
-  color: rgb(200, 151, 28);
+  color: rgb(255, 153, 0);
   position: relative;
 }
 .link::after {
@@ -589,9 +727,9 @@ iframe {
   max-width: 50%;
   width: 500px !important;
   height: 700px !important;
-  border: 3px solid rgb(16, 29, 46);
+  border: 3px solid rgb(240, 249, 255);
   border-radius: 15px;
-  background: rgb(16, 29, 46);
+  background: rgb(240, 249, 255);
 }
 @media screen and (max-width: 720px) {
   iframe {
@@ -607,41 +745,64 @@ iframe {
  *
  * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
 ======================================================================== */
-.btn-danger, .btn {
+.btn-danger, .btn-full, .btn {
   display: inline-block;
   appearance: none;
   color: inherit;
   font: inherit;
   cursor: pointer;
   text-decoration: none;
-  padding: 10px 20px;
+  padding: 10px 25px;
   margin: 20px 10px;
-  border-radius: 12px;
+  border-radius: 15px;
   font-weight: bold;
-  text-transform: uppercase;
   text-align: center;
   position: relative;
   z-index: 1;
-  -webkit-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  -moz-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  box-shadow: 2px 4px 6px rgb(123, 123, 123);
 }
 
 .btn {
   background: transparent;
-  color: rgb(200, 151, 28);
-  border: 3px solid rgb(200, 151, 28);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: rgb(52, 153, 254);
+  border: 3px solid rgb(52, 153, 254);
   transition: color 0.4s ease-out, border-color 0.4s ease-out;
 }
 .btn:hover {
-  color: rgb(228, 188, 86);
-  border-color: rgb(228, 188, 86);
+  color: rgb(255, 153, 0);
+  border-color: rgb(255, 153, 0);
+}
+
+.btn-full {
+  background: rgb(52, 153, 254);
+  color: rgb(240, 249, 255);
+  border: 3px solid rgb(52, 153, 254);
+  transition: color 0.4s ease-out, border-color 0.4s ease-out, background 0.4s ease-out;
+}
+.btn-full:hover {
+  color: rgb(255, 153, 0);
+  border-color: rgb(255, 153, 0);
+  background: transparent;
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 .btn-danger {
   background: transparent;
-  color: rgb(249, 56, 56);
-  border: 3px solid rgb(249, 56, 56);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: rgb(255, 51, 153);
+  border: 3px solid rgb(255, 51, 153);
   transition: color 0.4s ease-out, border-color 0.4s ease-out;
 }
 .btn-danger:hover {
@@ -709,30 +870,30 @@ iframe {
   padding: 15px;
   font-family: "Noto Sans", Arial, Courier, monospace;
   background: transparent;
-  border-radius: 12px;
+  border-radius: 15px;
   -webkit-backdrop-filter: blur(15px);
   -moz-backdrop-filter: blur(15px);
   -o-backdrop-filter: blur(15px);
   backdrop-filter: blur(15px);
   outline: none;
   font-size: 1em;
-  color: linear-gradient(233deg, rgba(28, 30, 108, 0.9) 0%, rgba(17, 23, 80, 0.8) 100%);
+  color: rgb(52, 153, 254);
 }
 .form-field .input-text input[type=text]:focus {
-  border: 3px solid rgb(228, 188, 86);
+  border: 3px solid rgb(17, 17, 41);
 }
 .form-field .input-text input[type=text]:invalid {
-  border: 3px dashed rgb(228, 188, 86);
+  border: 3px dashed rgb(17, 17, 41);
 }
 .form-field .input-text input[type=text]:valid {
-  border: 3px solid rgb(200, 151, 28);
+  border: 3px solid rgb(255, 153, 0);
 }
 .form-field .input-text input[type=text]:focus ~ label {
   transform: translateX(15px) translateY(-10px);
   font-size: 0.65em;
   padding: 0 10px;
-  background: rgb(255, 255, 240);
-  color: rgb(228, 188, 86);
+  background: rgb(240, 249, 255);
+  color: rgb(17, 17, 41);
   border-radius: 4px;
   letter-spacing: 1px;
 }
@@ -745,8 +906,8 @@ iframe {
   transform: translateX(15px) translateY(-10px);
   font-size: 0.65em;
   padding: 0 10px;
-  background: rgb(255, 255, 240);
-  color: rgb(200, 151, 28);
+  background: rgb(240, 249, 255);
+  color: rgb(255, 153, 0);
   border-radius: 4px;
   letter-spacing: 1px;
 }
@@ -761,7 +922,7 @@ iframe {
   padding: 8px 15px;
   pointer-events: none;
   font-size: 1em;
-  color: rgb(228, 188, 86);
+  color: rgb(17, 17, 41);
   transition: 0.5s;
 }
 @media screen and (max-width: 720px) {
