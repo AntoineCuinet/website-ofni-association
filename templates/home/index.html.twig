@@ -40,4 +40,8 @@
             {# <li><a href="{{ path('evenement_show', {slug: 'evenement-1'}) }}">événement 1</a></li> #}
         </ul>
     </section>
+
+    {% embed 'contact/form.html.twig' %}
+         {% set form = contact_form %} 
+    {% endembed %}
 {% endblock %}
