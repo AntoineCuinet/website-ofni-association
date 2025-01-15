@@ -32,7 +32,12 @@
                     <a class="navlinks {{ app.current_route == 'event' ? 'active' : ''}}" href="{{ path('home') }}">Événements</a>
                     <a class="navlinks {{ app.current_route == 'shop' ? 'active' : ''}}" href="{{ path('home') }}">Boutique</a>
                     <a class="navlinks {{ app.current_route == 'game' ? 'active' : ''}}" href="{{ path('home') }}">Jeu</a>
-                    <a class="navlinks btn {{ app.current_route == 'connection' ? 'active' : ''}}" href="{{ path('home') }}">Connexion</a>
+
+                    {% if app.user %}
+                      <a class="navlinks {{ app.current_route == 'account' ? 'active' : ''}}" href="{{ path('app_account') }}">{{ app.user.pseudo }}</a>
+                    {% else %}
+                      <a class="navlinks {{ app.current_route == 'login' ? 'active' : ''}}" href="{{ path('app_login') }}">Connexion</a>
+                    {% endif %}
                 </div>
 
                 <div class="main-navlinks">
