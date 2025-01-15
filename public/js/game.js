@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const gameInfoContainer = document.getElementsByClassName("game-info-container")[0];
     const btnStart = document.getElementById("btn-start-game");
     const scoreElement = document.getElementById("score-text");
+    const levelElement = document.getElementById("level-text");
+    const livesElement = document.getElementById("lives-text");
     const scoreFinal = document.getElementById("score");
 
     btnStart.addEventListener("click", function() {
@@ -30,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
             this.setupControls();
             this.lastTime = 0;
             this.shootFrequencyIncrease = 1.01;
+            this.level = 1;
         }
       
         /**
@@ -77,6 +80,40 @@ document.addEventListener("DOMContentLoaded", function() {
                     this.bullets.splice(index, 1);
                 }
 
+                // Check for collisions with the player
+                if (!bullet.isPlayerBullet && isColliding(bullet, this.player)) {
+                    this.bullets.splice(index, 1); // Remove the bullet
+                    this.player.lives--; // Decrease player's lives
+                    this.updateLivesDisplay();
+
+                    // Reset player position
+                    this.player.x = this.canvas.width / 2 - this.player.width / 2;
+
+                    // Make the player invincible for 2 seconds
+                    this.player.isInvincible = true;
+                    setTimeout(() => {
+                        this.player.isInvincible = false;
+                    }, 2000);
+
+                    // Check if game over
+                    if (this.player.lives <= 0) {
+                        this.isRunning = false; // Stop the game
+                        alert(`💀 Game Over! Your score is ${this.score} 💀`);
+                        scoreFinal.textContent = this.score;
+
+                        // Reset the game
+                        this.player.lives = 3;
+                        this.score = 0;
+                        this.level = 1;
+                        scoreElement.textContent = this.score;
+                        levelElement.textContent = this.level;
+                        livesElement.textContent = this.player.lives;
+
+                        gameInfoContainer.style.display = "none";
+                        gameContainer.style.display = "flex";
+                    }
+                }
+
                 // Check for collisions with aliens
                 if (bullet.isPlayerBullet) {
                     this.aliens.forEach((alien, alienIndex) => {
@@ -91,6 +128,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
 
+            // If no aliens are left, go to the next level
+            if (this.aliens.length === 0) {
+                this.nextLevel();
+            }
+
             // Move aliens
             this.aliens.forEach((alien) => alien.move(this.canvas.width));
 
@@ -99,9 +141,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (alien.y + alien.height >= this.canvas.height - 10) {
                     this.isRunning = false; // End the game
                     alert("💀 Game Over ! Your score is " + this.score + " 💀");
+                    scoreFinal.textContent = this.score;
+
+                    // Reset the game
+                    this.player.lives = 3;
+                    this.score = 0;
+                    this.level = 1;
+                    scoreElement.textContent = this.score;
+                    levelElement.textContent = this.level;
+                    livesElement.textContent = this.player.lives;
 
                     gameInfoContainer.style.display = "none";
-                    scoreFinal.textContent = this.score;
                     gameContainer.style.display = "flex";
                 }
                 alien.shoot(this.bullets, currentTime);
@@ -114,6 +164,14 @@ document.addEventListener("DOMContentLoaded", function() {
         updateScore() {
             scoreElement.textContent = this.score; // Update the score text
         }
+
+        updateLevel() {
+            levelElement.textContent = this.level; // Update the level text
+        }
+
+        updateLivesDisplay() {
+            livesElement.textContent = this.player.lives;
+        }
       
         /**
          * Draws all elements on the canvas.
@@ -125,6 +183,32 @@ document.addEventListener("DOMContentLoaded", function() {
             this.bullets.forEach((bullet) => bullet.draw(this.ctx)); // Draw bullets
             this.aliens.forEach((alien) => alien.draw(this.ctx)); // Draw aliens
         }
+
+        nextLevel() {
+            this.level++;
+            this.updateLevel();
+            this.aliens = []; // Clear current aliens
+            
+            // Increase alien speed
+            const alienSpeed = 1 + this.level * 0.05;
+        
+            // Reinitialize aliens with increased speed
+            const rows = 5; 
+            const cols = 10; 
+            const alienSpacing = 2; 
+            const alienWidth = 6;
+            const alienHeight = 4;
+        
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    const x = col * (alienWidth + alienSpacing) + alienSpacing;
+                    const y = row * (alienHeight + alienSpacing) + alienSpacing;
+                    const alien = new Alien(x, y);
+                    alien.speed = alienSpeed; // Set increased speed
+                    this.aliens.push(alien);
+                }
+            }
+        }        
       
 
         /**
@@ -155,6 +239,8 @@ document.addEventListener("DOMContentLoaded", function() {
             this.image.src = "/js/sprites/Alien1.jpg";
             this.lastShootTime = 0;
             this.shootCooldown = 300;
+            this.lives = 3;
+            this.isInvincible = false;
         }
       
         /**
@@ -189,6 +275,11 @@ document.addEventListener("DOMContentLoaded", function() {
          * @param {CanvasRenderingContext2D} ctx - The drawing context of the canvas
          */
         draw(ctx) {
+            if (this.isInvincible) {
+                ctx.globalAlpha = 0.5; // Make the player semi-transparent
+            } else {
+                ctx.globalAlpha = 1.0; // Restore normal opacity
+            }
             ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
     }

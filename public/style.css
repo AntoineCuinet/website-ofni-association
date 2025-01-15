@@ -1076,11 +1076,14 @@ iframe {
 .game-info-container {
   display: none;
   position: absolute;
-  top: 5%;
-  left: 5%;
+  top: 3%;
+  left: 2%;
 }
 .game-info-container p {
   color: rgb(240, 249, 255);
+  text-align: left;
+  padding: 0;
+  margin: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */

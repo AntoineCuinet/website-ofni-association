@@ -56,10 +56,13 @@
 .game-info-container {
     display: none;
     position: absolute;
-    top: 5%;
-    left: 5%;
+    top: 3%;
+    left: 2%;
 
     p {
         color: $color-white;
+        text-align: left;
+        padding: 0;
+        margin: 10px;
     }
 }

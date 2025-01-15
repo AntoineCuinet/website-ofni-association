@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>OFNI | Bee-nva-duck</title>
+        <title>OFNI | OFNIvaders &#128126;</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
         <link rel="stylesheet" href="{{ asset('style.css') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,15 +18,17 @@
         <canvas id="canvasId"></canvas>
 
         <div class="game-container">
-            <h1>Bee-nva-duck</h1>
-            <p>Ton score: <span id="score">?</span>pts</p>
+            <h1>&#128126; Space OFNIvaders &#128126;</h1>
+            <p>Ton score: <span id="score">0</span>pts</p>
 
             <btn id="btn-start-game" class="btn">Lancer la partie</btn>
             <a class="btn-danger" href="{{ path('game') }}">Retour</a>
         </div>
 
         <div class="game-info-container">
-            <p>Score: <span id="score-text"></span>pts</p>
+            <p>Score: <span id="score-text">0</span>pts</p>
+            <p>Level: <span id="level-text">1</span>&#128640;</p>
+            <p>Vie: <span id="lives-text">3</span>&#129505;</p>
         </div>
 
         <script src="{{ asset('js/game.js') }}"></script>
