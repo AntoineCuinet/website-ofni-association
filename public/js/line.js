@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Configuration
     const config = {
-      totalPoints: 15,         // Nombre de points
+      totalPoints: 25,         // Nombre de points
       viscosity: 10,           // Rigidité (plus faible = plus souple)
       damping: 0.18,            // Amortissement
       waveHeight: 65,          // Hauteur maximale de l'ondulation
