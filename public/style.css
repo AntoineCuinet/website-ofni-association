@@ -132,6 +132,7 @@ main {
   margin: auto;
   text-align: center;
   max-width: 1200px;
+  padding-top: 200px;
 }
 
 /* ========================================================================
@@ -263,6 +264,7 @@ section p {
   padding: 50px;
   gap: 20px;
   min-height: 100vh;
+  transform: translateY(-200px);
 }
 @media screen and (max-width: 990px) {
   .hero-section {
@@ -421,6 +423,7 @@ p {
 nav {
   position: fixed;
   z-index: 100;
+  top: 0;
   width: 100vw;
   padding: 2.5rem 2.1875rem;
   background-color: transparent;

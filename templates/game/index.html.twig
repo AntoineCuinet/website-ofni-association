@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block title %}OFNI | jeu 🕹️👾{% endblock %}
+{# {% block headerspace %}{% endblock %} #}
+
+{% block main %}
+    <div class="game-section">
+        <p>🕹️👾</p>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }} {# Inclut les scripts globaux définis dans base.html.twig #}
+    <script src="{{ asset('js/game.js') }}" defer></script>
+{% endblock %}
