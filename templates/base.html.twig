@@ -11,10 +11,10 @@
         {# <meta name="description" content="', $description, '"> #}
         {# <meta name="keywords" content="', $keywords, '"> #}
 
-        {% block javascripts %}
+        {# {% block javascripts %}
             <script src="{{ asset('js/main.js') }}" async></script>
             {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
+        {% endblock %} #}
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +31,7 @@
                     <a class="navlinks {{ app.current_route == 'ofni' ? 'active' : ''}}" href="{{ path('home') }}">L'OFNI</a>
                     <a class="navlinks {{ app.current_route == 'event' ? 'active' : ''}}" href="{{ path('home') }}">Événements</a>
                     <a class="navlinks {{ app.current_route == 'shop' ? 'active' : ''}}" href="{{ path('home') }}">Boutique</a>
-                    <a class="navlinks {{ app.current_route == 'game' ? 'active' : ''}}" href="{{ path('home') }}">Jeu</a>
+                    <a class="navlinks {{ app.current_route == 'game' ? 'active' : ''}}" href="{{ path('game') }}">Jeu</a>
 
                     {% if app.user %}
                       <a class="navlinks {{ app.current_route == 'account' ? 'active' : ''}}" href="{{ path('app_account') }}">{{ app.user.pseudo }}</a>
@@ -49,8 +49,6 @@
                 </div>
             </div>
         </nav>
-            {# {% block header %}{% endblock %} #}
-            {% block headerspace %}<br><br><br><br><br><br><br><br>{% endblock %}
         </header>
 
 
@@ -73,10 +71,10 @@
                     <h3>Informations</h3>
                     <ul>
                         <li>
-                            <p><span>Lieu: </span><a class="link footer-links" href="https://maps.app.goo.gl/7PTnyfxAVZgDdQ8a8" target="_blank" rel="noopener">25000 Besançon</a></p>
+                            <p><span>Lieu: <br></span><a class="link footer-links" href="https://maps.app.goo.gl/EZCVWx7Nxz885AES8" target="_blank" rel="noopener">16 Route de Gray, 25000 Besançon</a></p>
                         </li>
                         <li>
-                            <p><span>E-mail: </span><a class="link footer-links" href="mailto:contact@ofni.fr?subject=Demande%20de%20création%20de%20site%20web&body=Bonjour%2C%20%0D%0A%0D%0AJe%20vous%20contacte%20pour...">contact@ofni.fr</a></p>
+                            <p><span>E-mail: </span><a class="link footer-links" href="mailto:contact@ofni.asso.fr?subject=Demande%20de%20création%20de%20site%20web&body=Bonjour%2C%20%0D%0A%0D%0AJe%20vous%20contacte%20pour...">contact@ofni.asso.fr</a></p>
                         </li>
                     </ul>
                 </div>
@@ -98,7 +96,11 @@
                         <li><a class="link footer-links" href="{{ url('home') }}">L'OFNI</a></li>
                         <li><a class="link footer-links" href="{{ url('home') }}">Événements</a></li>
                         <li><a class="link footer-links" href="{{ url('home') }}">Boutique</a></li>
-                        <li><a class="link footer-links" href="{{ url('home') }}">Connexion</a></li>
+                        {% if app.user %}
+                            <a class="link footer-links" href="{{ path('app_account') }}">{{ app.user.pseudo }}</a>
+                        {% else %}
+                            <a class="link footer-links" href="{{ path('app_login') }}">Connexion</a>
+                        {% endif %}
                         <li><a class="link footer-links" href="{{ url('home') }}">Mentions légales</a></li>
                     </ul>
                 </div>
@@ -107,11 +109,11 @@
             <div class="footer-legal">
                 <p>&copy; 2025 - OFNI - Tous droits réservés</p>
             </div>
-            {# {% block footer %}{% endblock %} #}
 
-            <script src="{{ asset('js/app.js') }}" ></script>
-            <script src="{{ asset('js/line.js') }}" ></script>
-            {# {% block javascripts %}<script src="{{ asset('js/app.js') }}" ></script>{% endblock %} #}
+            {% block javascripts %}
+                <script src="{{ asset('js/app.js') }}" ></script>
+                <script src="{{ asset('js/line.js') }}" ></script>
+            {% endblock %}
         </footer>
     </body>
 </html>
