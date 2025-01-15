@@ -1,15 +1,20 @@
 {% extends 'base.html.twig' %}
-{% block title %}OFNI | jeu 🕹️👾{% endblock %}
-{# {% block headerspace %}{% endblock %} #}
+{% block title %}OFNI | Jeu 🕹️👾{% endblock %}
 
 {% block main %}
     <div class="game-section">
-        <p>🕹️👾</p>
+        <p>Bienvenu sur notre nouveau jeu, inspiré de l'indémodable "Space Invaders" 🕹️👾</p>
+
+        <a class="btn" href="/game/gameplay">Jouer !</a>
+
+        <section>
+            <h2>Classement 📜</h2>
+            <p>Voici le classement des meilleurs joueurs :</p>
+        </section>
+
+        <section>
+            <h2>Comment jouer ? 👾</h2>
+            <p>Utilisez les flèches directionnelles de votre clavier pour vous déplacer et la barre espace pour tirer.</p>
+        </section>
     </div>
-{% endblock %}
-
-
-{% block javascripts %}
-    {{ parent() }} {# Inclut les scripts globaux définis dans base.html.twig #}
-    <script src="{{ asset('js/game.js') }}" defer></script>
 {% endblock %}

@@ -11,11 +11,6 @@
         {# <meta name="description" content="', $description, '"> #}
         {# <meta name="keywords" content="', $keywords, '"> #}
 
-        {# {% block javascripts %}
-            <script src="{{ asset('js/main.js') }}" async></script>
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %} #}
-
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&family=Faculty+Glyphic&family=Figtree:ital,wght@0,300..900;1,300..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Josefin+Sans&display=swap" rel="stylesheet">
@@ -74,7 +69,7 @@
                             <p><span>Lieu: <br></span><a class="link footer-links" href="https://maps.app.goo.gl/EZCVWx7Nxz885AES8" target="_blank" rel="noopener">16 Route de Gray, 25000 Besançon</a></p>
                         </li>
                         <li>
-                            <p><span>E-mail: </span><a class="link footer-links" href="mailto:contact@ofni.asso.fr?subject=Demande%20de%20création%20de%20site%20web&body=Bonjour%2C%20%0D%0A%0D%0AJe%20vous%20contacte%20pour...">contact@ofni.asso.fr</a></p>
+                            <p><span>E-mail: </span><a class="link footer-links" href="mailto:contact@ofni.asso.fr?subject=Demande%20de%20renseignements&body=Bonjour%2C%20%0D%0A%0D%0AJe%20vous%20contacte%20pour...">contact@ofni.asso.fr</a></p>
                         </li>
                     </ul>
                 </div>
@@ -111,8 +106,8 @@
             </div>
 
             {% block javascripts %}
-                <script src="{{ asset('js/app.js') }}" ></script>
-                <script src="{{ asset('js/line.js') }}" ></script>
+                <script src="{{ asset('js/app.js') }}" defer></script>
+                <script src="{{ asset('js/line.js') }}" defer></script>
             {% endblock %}
         </footer>
     </body>

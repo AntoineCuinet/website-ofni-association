@@ -809,8 +809,8 @@ iframe {
   transition: color 0.4s ease-out, border-color 0.4s ease-out;
 }
 .btn-danger:hover {
-  color: rgb(255, 97, 97);
-  border-color: rgb(255, 97, 97);
+  color: rgb(255, 0, 0);
+  border-color: rgb(255, 0, 0);
 }
 
 /* ========================================================================
@@ -1017,5 +1017,70 @@ iframe {
   color: #33cc33;
   animation-delay: 0s;
 } /* Green */
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
+#canvasId {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(17, 17, 41);
+  background-image: url("./pictures/galaxy-pattern.svg");
+  image-rendering: pixelated; /* Utilise un rendu pixelisé, sans lissage */
+  -webkit-image-rendering: pixelated; /* Pour Safari */
+  -moz-image-rendering: pixelated; /* Pour Firefox */
+}
+
+.game-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 10;
+  width: 80%;
+  height: 80%;
+  background: transparent !important;
+  border: 1px solid rgb(17, 17, 41);
+  border-radius: 15px;
+  -webkit-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  -moz-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.game-container h1 {
+  color: rgb(240, 249, 255);
+}
+.game-container p {
+  color: rgb(240, 249, 255);
+  margin-bottom: 50px;
+}
+
+.game-info-container {
+  display: none;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+}
+.game-info-container p {
+  color: rgb(240, 249, 255);
+}
 
 /*# sourceMappingURL=style.css.map */

@@ -1,0 +1,65 @@
+@use '../global/variables' as *;
+@use '../../mixins/filter' as *;
+
+#canvasId {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: $color-quaternary;
+    background-image: url('./pictures/galaxy-pattern.svg');
+    image-rendering: pixelated; /* Utilise un rendu pixelisé, sans lissage */
+    -webkit-image-rendering: pixelated; /* Pour Safari */
+    -moz-image-rendering: pixelated; /* Pour Firefox */
+}
+
+
+.game-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10;
+    width: 80%;
+    height: 80%;
+
+    background: transparent !important;
+    border: 1px solid $color-quaternary;
+    border-radius: $border-rad;
+    
+    -webkit-box-shadow: $box-shadow-right;
+    -moz-box-shadow: $box-shadow-right;
+    box-shadow: $box-shadow-right;
+    @include blur-filter();
+
+    h1 {
+        color: $color-white;
+    }
+
+    p {
+        color: $color-white;
+        margin-bottom: 50px;
+    }
+
+}
+
+
+.game-info-container {
+    display: none;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+
+    p {
+        color: $color-white;
+    }
+}
