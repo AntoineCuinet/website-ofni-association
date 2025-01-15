@@ -7,13 +7,23 @@ Ce site a été conçu et développé par Antoine CUINET, votre trésorier de l'
 
 ## 📋 Table des Matières
 
-- [Présentation](#-présentation)
-- [Fonctionnalités](#-fonctionnalités)
-- [Arborescence du Site](#️-arborescence-du-site)
-- [Technologies Utilisées](#-technologies-utilisées)
-- [Installation et Lancement](#️-installation-et-lancement)
-- [Auteur et Contact](#-auteur-et-contact)
-- [Licence](#-licence)
+- [🌐 Site Web de l'Association OFNI](#-site-web-de-lassociation-ofni)
+  - [📋 Table des Matières](#-table-des-matières)
+  - [📖 Présentation](#-présentation)
+  - [🚀 Fonctionnalités](#-fonctionnalités)
+  - [🗂️ Arborescence du Site](#️-arborescence-du-site)
+  - [💻 Technologies Utilisées](#-technologies-utilisées)
+  - [🛠️ Installation et Lancement](#️-installation-et-lancement)
+    - [Prérequis](#prérequis)
+    - [Installation](#installation)
+    - [Lancement](#lancement)
+    - [Build pour la production](#build-pour-la-production)
+  - [👥 Auteur et Contact](#-auteur-et-contact)
+    - [Auteur](#auteur)
+    - [Contact](#contact)
+      - [Mail](#mail)
+      - [Site Web](#site-web)
+  - [📜 Licence](#-licence)
 
 ## 📖 Présentation
 
@@ -75,6 +85,18 @@ Le site web de l'association OFNI est une plateforme centralisée pour les étud
 
     ```bash
     npm install
+    ```
+
+6. Pour installer les dépendances de composer
+
+    ```bash
+    composer install
+    ```
+
+7. Pour migrer la base de donnée
+
+    ```bash
+    php bin/console doctrine:migrations:migrate
     ```
 
 ### Lancement
