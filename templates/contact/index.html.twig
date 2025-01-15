@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Message envoyé{% endblock %}
+
+{% block main %}
+
+{% for flash_success in app.flashes('success') %}
+    <div class="alert alert-success" role="alert">{{ flash_success }}</div>
+{% endfor %}
+
+{% for flash_error in app.flashes('error') %}
+    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+{% endfor %}
+
+<a href="{{ path('home') }}">Retourner à l'accueil</a>
+
+{% endblock %}

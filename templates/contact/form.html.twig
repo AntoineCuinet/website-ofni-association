@@ -1,0 +1,17 @@
+{% block contact_form %}
+    <h2>Nous contacter</h2>
+    {{ form_start(form, {'attr': {'id': 'contact-form'}, 'action': path('app_contact')}) }}
+        {{ form_row(form.last_name, {
+            label: 'Nom'
+        }) }}
+        {{ form_row(form.first_name, {
+            label: 'Prénom'
+        }) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.subject, {
+            label: 'Sujet'
+        }) }}
+        {{ form_row(form.message) }}
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+    {{ form_end(form) }}
+{% endblock %}
