@@ -1,9 +1,9 @@
 @use '../global/variables' as *;
 @use '../../mixins/filter' as *;
-
+@use '../../functions/rem' as *;
 
 form {
-    border: 1px solid red;
+    // border: 1px solid red;
     width: 90%;
     margin: auto;
     padding: 30px;
@@ -11,6 +11,10 @@ form {
         width: 100%;
     }
 
+    p {
+        text-align: left;
+        padding: 30px 0;
+    }
 
     div {
         position: relative;
@@ -26,13 +30,14 @@ form {
 
 
         input, 
-        textarea {
+        textarea,
+        select {
             width: 100%;
             padding: 10px 25px;
-            margin: 20px 10px;
-            font-size: 1em;
+            margin: 5px;
+            font-size: rem(16);
 
-            color: $color-primary;
+            color: $color-font-p;
             background: transparent;
             @include blur-filter(10px);
             border: 3px solid $color-secondary;
@@ -54,21 +59,6 @@ form {
             &:valid {
                 border: 3px solid $color-secondary;
             }
-
-            &:valid ~ label,
-            &:focus ~ label {
-                transform: translateX(15px) translateY(-10px);
-                font-size: 0.65em;
-                padding: 0 10px;
-                background: $color-primary;
-                color: $color-secondary;
-                border-radius: 4px;
-                letter-spacing: 1px;
-
-                @media #{$max-width-s} {
-                    transform: translateX(15px) translateY(-7px);
-                }
-            }
         }
 
         textarea {
@@ -77,23 +67,35 @@ form {
             overflow-x: hidden;
             overflow-y: hidden;
             background: transparent;
-            color: $color-danger;
             height: auto;
             border-radius: $border-rad;
         }
 
         label {
-            position: absolute;
+            position: relative;
+            display: inline-block;
             z-index: 2;
             left: 0;
-            padding: 8px;
-            pointer-events: none;
+            padding-top: 15px;
+            // pointer-events: none;
             font-size: 1em;
-            color: $color-danger;
-            transition: 0.5s;
+            color: $color-font-p;
+            transition: $transition;
 
             @media #{$max-width-s} {
                 padding: 12px;
+            }
+        }
+
+        input[type='checkbox'] {
+            right: 0;
+            cursor: pointer;
+            outline: none;
+
+            &:focus {
+                -webkit-box-shadow: none;
+                -moz-box-shadow: none;
+                box-shadow: none;
             }
         }
     }

@@ -831,7 +831,6 @@ iframe {
  * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
 ======================================================================== */
 form {
-  border: 1px solid red;
   width: 90%;
   margin: auto;
   padding: 30px;
@@ -840,6 +839,10 @@ form {
   form {
     width: 100%;
   }
+}
+form p {
+  text-align: left;
+  padding: 30px 0;
 }
 form div {
   position: relative;
@@ -856,12 +859,13 @@ form div {
   }
 }
 form div input,
-form div textarea {
+form div textarea,
+form div select {
   width: 100%;
   padding: 10px 25px;
-  margin: 20px 10px;
-  font-size: 1em;
-  color: rgb(240, 249, 255);
+  margin: 5px;
+  font-size: 1rem;
+  color: rgb(17, 17, 41);
   background: transparent;
   -webkit-backdrop-filter: blur(10px);
   -moz-backdrop-filter: blur(10px);
@@ -873,36 +877,21 @@ form div textarea {
   transition: color 0.4s ease-out, border-color 0.4s ease-out, box-shadow 0.4s ease-out;
 }
 form div input:focus,
-form div textarea:focus {
+form div textarea:focus,
+form div select:focus {
   -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Ajoutez l'ombre lorsqu'en focus */
 }
 form div input:invalid,
-form div textarea:invalid {
+form div textarea:invalid,
+form div select:invalid {
   border: 3px dashed rgb(255, 51, 153);
 }
 form div input:valid,
-form div textarea:valid {
+form div textarea:valid,
+form div select:valid {
   border: 3px solid rgb(52, 153, 254);
-}
-form div input:valid ~ label, form div input:focus ~ label,
-form div textarea:valid ~ label,
-form div textarea:focus ~ label {
-  transform: translateX(15px) translateY(-10px);
-  font-size: 0.65em;
-  padding: 0 10px;
-  background: rgb(240, 249, 255);
-  color: rgb(52, 153, 254);
-  border-radius: 4px;
-  letter-spacing: 1px;
-}
-@media screen and (max-width: 720px) {
-  form div input:valid ~ label, form div input:focus ~ label,
-  form div textarea:valid ~ label,
-  form div textarea:focus ~ label {
-    transform: translateX(15px) translateY(-7px);
-  }
 }
 form div textarea {
   resize: none;
@@ -910,24 +899,33 @@ form div textarea {
   overflow-x: hidden;
   overflow-y: hidden;
   background: transparent;
-  color: rgb(255, 51, 153);
   height: auto;
   border-radius: 15px;
 }
 form div label {
-  position: absolute;
+  position: relative;
+  display: inline-block;
   z-index: 2;
   left: 0;
-  padding: 8px;
-  pointer-events: none;
+  padding-top: 15px;
   font-size: 1em;
-  color: rgb(255, 51, 153);
-  transition: 0.5s;
+  color: rgb(17, 17, 41);
+  transition: 0.4s ease-out;
 }
 @media screen and (max-width: 720px) {
   form div label {
     padding: 12px;
   }
+}
+form div input[type=checkbox] {
+  right: 0;
+  cursor: pointer;
+  outline: none;
+}
+form div input[type=checkbox]:focus {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 
 /* ========================================================================

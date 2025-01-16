@@ -1,6 +1,7 @@
 {% block contact_form %}
     {{ form_start(form, {'attr': {'id': 'contact-form'}, 'action': path('app_contact')}) }}
     <h2 id="contact-id">Nous contacter</h2>
+    <p>Remplissez ce formulaire pour nous contacter.</p>
         {{ form_row(form.last_name, {
             label: 'Nom'
         }) }}
