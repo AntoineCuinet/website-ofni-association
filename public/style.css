@@ -244,14 +244,7 @@ section {
   width: 90%;
   max-width: 1200px;
   padding: 20px;
-  border-radius: 30px;
-  border-top: 1px solid rgb(255, 153, 0);
-  border-left: 1px solid rgb(255, 153, 0);
-  background: rgb(52, 153, 254);
-  backdrop-filter: blur-filter(20px);
-}
-section h2 {
-  margin-bottom: 20px;
+  background: transparent;
 }
 section p {
   margin: 10px auto;
@@ -365,7 +358,7 @@ h2 {
   color: light(rgb(240, 249, 255), rgb(7, 7, 7), rgb(240, 249, 255));
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 1.5rem;
-  margin: 20px 40px;
+  margin: 60px 40px 40px 40px;
   position: relative;
   display: block;
   width: fit-content;
@@ -384,7 +377,7 @@ h3 {
   color: light(rgb(240, 249, 255), rgb(7, 7, 7), rgb(240, 249, 255));
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 1.125rem;
-  margin: 15px 50px;
+  margin: 20px 50px;
   padding-bottom: 10px;
   position: relative;
   display: block;

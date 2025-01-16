@@ -5,15 +5,11 @@ section {
     width: 90%;
     max-width: $breakpoint-large;
     padding: 20px;
-    border-radius: $border-rad * 2;
-    border-top: 1px solid $color-tertiary;
-    border-left: 1px solid $color-tertiary;
-    background: $color-secondary;
-    backdrop-filter: blur-filter(20px);
-
-    h2 {
-        margin-bottom: 20px;
-    }
+    // border-radius: $border-rad * 2;
+    // border-top: 1px solid $color-tertiary;
+    // border-left: 1px solid $color-tertiary;
+    background: transparent;
+    // backdrop-filter: blur-filter(20px);
 
     p {
         margin: 10px auto;

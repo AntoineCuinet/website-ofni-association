@@ -23,7 +23,7 @@
                 <a href="{{ path('home') }}" class="first-navlink navlinks {{ app.current_route == 'home' ? 'active' : ''}}" aria-label="Visit homepage" aria-current="page">Accueil</a>
 
                 <div class="navlinks-container">
-                    <a class="navlinks {{ app.current_route == 'ofni' ? 'active' : ''}}" href="{{ path('home') }}">L'OFNI</a>
+                    <a class="navlinks {{ app.current_route == 'presentation' ? 'active' : ''}}" href="{{ path('presentation') }}">L'OFNI</a>
                     <a class="navlinks {{ app.current_route == 'event' ? 'active' : ''}}" href="{{ path('home') }}">Événements</a>
                     <a class="navlinks {{ app.current_route == 'shop' ? 'active' : ''}}" href="{{ path('home') }}">Boutique</a>
                     <a class="navlinks {{ app.current_route == 'game' ? 'active' : ''}}" href="{{ path('game') }}">Jeu</a>
@@ -87,7 +87,7 @@
                     <h3>Liens pratiques</h3>
                     <ul>
                         <li><a class="link footer-links" href="{{ url('home') }}">Accueil</a></li>
-                        <li><a class="link footer-links" href="{{ url('home') }}">L'OFNI</a></li>
+                        <li><a class="link footer-links" href="{{ url('presentation') }}">L'OFNI</a></li>
                         <li><a class="link footer-links" href="{{ url('home') }}">Événements</a></li>
                         <li><a class="link footer-links" href="{{ url('home') }}">Boutique</a></li>
                         {% if app.user %}
