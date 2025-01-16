@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
+{% block title %}OFNI | Vérification E-mail{% endblock %}
 
 {% block main %}
     <h1>OFNI</h1>
     <h2>Votre adresse email a bien été vérifiée !!</h2>
+
+    <a class="btn" href="{{ path('home') }}">Retourner à l'accueil</a>
 {% endblock %}

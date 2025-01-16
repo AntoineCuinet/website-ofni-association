@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Créer un compte{% endblock %}
+{% block title %}OFNI | Créer un compte{% endblock %}
 
 {% block body %}
 
@@ -9,7 +8,7 @@
     {{ form_row(registrationForm.email) }}
     {{ form_row(registrationForm.password) }}
     {{ form_row(registrationForm.name) }}
-    <button class="btn">Register</button>
+    <button class="btn">Créer un compte</button>
 {{ form_end(registrationForm) }}
 
 {% endblock %}

@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% block title %}OFNI | Créer un compte{% endblock %}
 
 
 {% block main %}
@@ -16,11 +17,6 @@
             label: 'Email universitaire (.edu)'
         }) }}
 
-        <p>
-            Alumnis, entreprises, lycéens... : 
-            <a href="{{ path('app_login') }}">nous contacter</a> {# TODO: change this #}
-        </p>
-
         {{ form_row(registrationForm.pseudo) }}
         {{ form_row(registrationForm.plainPassword.first, {
             label: 'Mot de passe'
@@ -31,12 +27,10 @@
         {{ form_row(registrationForm.agreeTerms) }}
 
         <button type="submit" class="btn">Créer un compte</button>
+
+        <p>Alumnis, entreprises, lycéens... : <a class="link" href="{{ path('home') }}#contact-id">nous contacter</a></p>
+
+        <p>Tu as déjà un compte ? <a class="link" href="{{ path('app_login') }}">Se connecter</a></p>
+
     {{ form_end(registrationForm) }}
-
-<p>
-    Tu as déjà un compte ?
-    <a href="{{ path('app_login') }}">Se connecter</a>
-</p>
-
-
 {% endblock %}

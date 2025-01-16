@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% block title %}OFNI | Réinitialisation mot de passe{% endblock %}
 
 {% block main %}
     <h1>Réinitialiser votre mot de passe</h1>
@@ -10,11 +11,11 @@
         {{ form_row(requestForm.email) }}
         <div>
             <small>
-                Enter your email address, and we will send you a
-                link to reset your password.
+                Entrez votre adresse E-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.
             </small>
         </div>
 
-        <button class="btn btn-primary">Send password reset email</button>
+        <a class="btn-danger" href="{{ path('app_login') }}">Annuler</a>
+        <button class="btn btn-primary">Envoyer un E-mail</button>
     {{ form_end(requestForm) }}
 {% endblock %}

@@ -1,39 +1,20 @@
 @use '../global/variables' as *;
 @use '../../mixins/filter' as *;
 
-.form-field {
-    width: 80%;
-    max-width: $breakpoint-large;
-    display: block;
-    justify-content: center;
-    align-items: center;
+
+form {
+    border: 1px solid red;
+    width: 90%;
+    margin: auto;
     padding: 30px;
-    margin: 0 auto;
     @media #{$max-width-s} {
-        width: 100vw;
+        width: 100%;
     }
 
-    .button-group {
-        padding-top: 30px;
-        display: flex;
-        gap: 10px;
-        justify-content: center;
 
-        @media #{$max-width-s} {
-            flex-direction: column;
-            padding-top: 30px;
-            gap: 0px;
-        }
-    }
-
-    .input-text {
+    div {
         position: relative;
-        z-index: 1;
-        padding-top: 20px;
-        font-family: $font-family-p;
-        font-size: 22px;
         width: 550px;
-        background: transparent;
         text-align: center;
         left: 50%;
         transform: translateX(-50%);
@@ -43,51 +24,44 @@
             width: 250px;
         }
 
-        input[type=text] {
+
+        input, 
+        textarea {
             width: 100%;
-            height: 50px;
-            padding: 15px;
-            font-family: $font-family-p;
-            background: transparent;
-            border-radius: $border-rad;
-            @include blur-filter(15px);
-            outline: none;
+            padding: 10px 25px;
+            margin: 20px 10px;
             font-size: 1em;
-            color: $color-secondary;
+
+            color: $color-primary;
+            background: transparent;
+            @include blur-filter(10px);
+            border: 3px solid $color-secondary;
+            border-radius: $border-rad;
+            outline: none;
+
+            transition: color $transition, border-color $transition, box-shadow $transition;
 
             &:focus {
-                border: 3px solid $color-quaternary;
+                -webkit-box-shadow: $box-shadow-black;
+                -moz-box-shadow: $box-shadow-black;
+                box-shadow: $box-shadow-black ; /* Ajoutez l'ombre lorsqu'en focus */
             }
 
             &:invalid {
-                border: 3px dashed $color-quaternary;
+                border: 3px dashed $color-danger;
             }
             
             &:valid {
-                border: 3px solid $color-tertiary;
+                border: 3px solid $color-secondary;
             }
 
-            
+            &:valid ~ label,
             &:focus ~ label {
                 transform: translateX(15px) translateY(-10px);
                 font-size: 0.65em;
                 padding: 0 10px;
-                background: $color-white;
-                color: $color-quaternary;
-                border-radius: 4px;
-                letter-spacing: 1px;
-
-                @media #{$max-width-s} {
-                    transform: translateX(15px) translateY(-7px);
-                }
-            }
-
-            &:valid ~ label {
-                transform: translateX(15px) translateY(-10px);
-                font-size: 0.65em;
-                padding: 0 10px;
-                background: $color-white;
-                color: $color-tertiary;
+                background: $color-primary;
+                color: $color-secondary;
                 border-radius: 4px;
                 letter-spacing: 1px;
 
@@ -97,13 +71,25 @@
             }
         }
 
+        textarea {
+            resize: none;
+            outline: none;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            background: transparent;
+            color: $color-danger;
+            height: auto;
+            border-radius: $border-rad;
+        }
+
         label {
             position: absolute;
+            z-index: 2;
             left: 0;
-            padding: 8px 15px;
+            padding: 8px;
             pointer-events: none;
             font-size: 1em;
-            color: $color-quaternary;
+            color: $color-danger;
             transition: 0.5s;
 
             @media #{$max-width-s} {

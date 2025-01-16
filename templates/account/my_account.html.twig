@@ -1,25 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EditUserController!{% endblock %}
+{% block title %}OFNI | Mon compte{% endblock %}
 
 {% block main %}
+
+<h1>Mon compte</h1>
 
 {% for flash_success in app.flashes('success') %}
     <div class="alert alert-success" role="alert">{{ flash_success }}</div>
 {% endfor %}
 
 
-<div class="mb-3">
-Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
-</div>
-
-<h2>Changer mes informations personnelles</h2>
-
-<p>Vous pouvez changer votre pseudo et/ou votre mot de passe.</p>
-
 {{ form_errors(pseudoForm) }}
 
 {{ form_start(pseudoForm) }}
+    <h2>Changer de pseudo</h2>
+
+    <p>Vous pouvez changer votre pseudo.</p>
+
     {{ form_row(pseudoForm.pseudo, {
         label: 'Nouveau pseudo'
     }) }}
@@ -30,6 +28,10 @@ Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path
 {{ form_errors(passwordForm) }}
 
 {{ form_start(passwordForm) }}
+    <h2>Changer de mot de passe</h2>
+
+    <p>Vous pouvez changer votre mot de passe.</p>
+
     {{ form_row(passwordForm.plainPassword.first, {
         label: 'Nouveau mot de passe'
     }) }}
@@ -37,16 +39,22 @@ Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path
         label: 'Répétez le nouveau mot de passe'
     }) }}
     <button type="submit" name="password_submit" class="btn">Changer mon mot de passe</button>
+
+    <div class="mb-3">
+        Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a class="link" href="{{ path('app_logout') }}">Se déconnecter</a>
+    </div>
 {{ form_end(passwordForm) }}
 
 
-<h2>Zone dangereuse</h2>
-
-<p>Vous pouvez ici supprimer votre compte. Attention ! Cette action est <em>irréversible.</em></p>
 
 {{ form_errors(deleteAccountForm) }}
 
 {{ form_start(deleteAccountForm) }}
+
+    <h2>Zone dangereuse</h2>
+
+    <p>Vous pouvez supprimer votre compte ici. Attention ! Cette action est <em>irréversible.</em></p>
+
     {{ form_row(deleteAccountForm.delete) }}
 {{ form_end(deleteAccountForm) }}
 

@@ -146,10 +146,18 @@ nav {
         }
 
         .active {
-            color: $color-active !important;
+            color: $color-active ;
 
             &::after {
                 background: $color-active;
+            }
+
+            @media #{$max-width-m} {
+                color: light($color-primary, $color-font-title, $color-white);
+
+                &::after {
+                    background: light($color-primary, $color-font-title, $color-white);
+                }
             }
         }
 

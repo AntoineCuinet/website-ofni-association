@@ -133,6 +133,7 @@ main {
   text-align: center;
   max-width: 1200px;
   padding-top: 200px;
+  padding-bottom: 100px;
 }
 
 /* ========================================================================
@@ -561,10 +562,18 @@ nav .first-container .navlinks:last-child:hover::after {
   transform: scaleX(0);
 }
 nav .first-container .active {
-  color: rgb(52, 153, 254) !important;
+  color: rgb(52, 153, 254);
 }
 nav .first-container .active::after {
   background: rgb(52, 153, 254);
+}
+@media screen and (max-width: 990px) {
+  nav .first-container .active {
+    color: rgb(7, 7, 7);
+  }
+  nav .first-container .active::after {
+    background: rgb(7, 7, 7);
+  }
 }
 nav .first-container .first-navlink {
   font-size: 1.25rem;
@@ -821,115 +830,102 @@ iframe {
  *
  * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
 ======================================================================== */
-.form-field {
-  width: 80%;
-  max-width: 1200px;
-  display: block;
-  justify-content: center;
-  align-items: center;
+form {
+  border: 1px solid red;
+  width: 90%;
+  margin: auto;
   padding: 30px;
-  margin: 0 auto;
 }
 @media screen and (max-width: 720px) {
-  .form-field {
-    width: 100vw;
+  form {
+    width: 100%;
   }
 }
-.form-field .button-group {
-  padding-top: 30px;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-@media screen and (max-width: 720px) {
-  .form-field .button-group {
-    flex-direction: column;
-    padding-top: 30px;
-    gap: 0px;
-  }
-}
-.form-field .input-text {
+form div {
   position: relative;
-  z-index: 1;
-  padding-top: 20px;
-  font-family: "Noto Sans", Arial, Courier, monospace;
-  font-size: 22px;
   width: 550px;
-  background: transparent;
   text-align: center;
   left: 50%;
   transform: translateX(-50%);
 }
 @media screen and (max-width: 720px) {
-  .form-field .input-text {
+  form div {
     padding-top: 15px;
     font-size: 1.125rem;
     width: 250px;
   }
 }
-.form-field .input-text input[type=text] {
+form div input,
+form div textarea {
   width: 100%;
-  height: 50px;
-  padding: 15px;
-  font-family: "Noto Sans", Arial, Courier, monospace;
-  background: transparent;
-  border-radius: 15px;
-  -webkit-backdrop-filter: blur(15px);
-  -moz-backdrop-filter: blur(15px);
-  -o-backdrop-filter: blur(15px);
-  backdrop-filter: blur(15px);
-  outline: none;
+  padding: 10px 25px;
+  margin: 20px 10px;
   font-size: 1em;
+  color: rgb(240, 249, 255);
+  background: transparent;
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 3px solid rgb(52, 153, 254);
+  border-radius: 15px;
+  outline: none;
+  transition: color 0.4s ease-out, border-color 0.4s ease-out, box-shadow 0.4s ease-out;
+}
+form div input:focus,
+form div textarea:focus {
+  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Ajoutez l'ombre lorsqu'en focus */
+}
+form div input:invalid,
+form div textarea:invalid {
+  border: 3px dashed rgb(255, 51, 153);
+}
+form div input:valid,
+form div textarea:valid {
+  border: 3px solid rgb(52, 153, 254);
+}
+form div input:valid ~ label, form div input:focus ~ label,
+form div textarea:valid ~ label,
+form div textarea:focus ~ label {
+  transform: translateX(15px) translateY(-10px);
+  font-size: 0.65em;
+  padding: 0 10px;
+  background: rgb(240, 249, 255);
   color: rgb(52, 153, 254);
-}
-.form-field .input-text input[type=text]:focus {
-  border: 3px solid rgb(17, 17, 41);
-}
-.form-field .input-text input[type=text]:invalid {
-  border: 3px dashed rgb(17, 17, 41);
-}
-.form-field .input-text input[type=text]:valid {
-  border: 3px solid rgb(255, 153, 0);
-}
-.form-field .input-text input[type=text]:focus ~ label {
-  transform: translateX(15px) translateY(-10px);
-  font-size: 0.65em;
-  padding: 0 10px;
-  background: rgb(240, 249, 255);
-  color: rgb(17, 17, 41);
   border-radius: 4px;
   letter-spacing: 1px;
 }
 @media screen and (max-width: 720px) {
-  .form-field .input-text input[type=text]:focus ~ label {
+  form div input:valid ~ label, form div input:focus ~ label,
+  form div textarea:valid ~ label,
+  form div textarea:focus ~ label {
     transform: translateX(15px) translateY(-7px);
   }
 }
-.form-field .input-text input[type=text]:valid ~ label {
-  transform: translateX(15px) translateY(-10px);
-  font-size: 0.65em;
-  padding: 0 10px;
-  background: rgb(240, 249, 255);
-  color: rgb(255, 153, 0);
-  border-radius: 4px;
-  letter-spacing: 1px;
+form div textarea {
+  resize: none;
+  outline: none;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background: transparent;
+  color: rgb(255, 51, 153);
+  height: auto;
+  border-radius: 15px;
 }
-@media screen and (max-width: 720px) {
-  .form-field .input-text input[type=text]:valid ~ label {
-    transform: translateX(15px) translateY(-7px);
-  }
-}
-.form-field .input-text label {
+form div label {
   position: absolute;
+  z-index: 2;
   left: 0;
-  padding: 8px 15px;
+  padding: 8px;
   pointer-events: none;
   font-size: 1em;
-  color: rgb(17, 17, 41);
+  color: rgb(255, 51, 153);
   transition: 0.5s;
 }
 @media screen and (max-width: 720px) {
-  .form-field .input-text label {
+  form div label {
     padding: 12px;
   }
 }

@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}OFNI | Réinitialisation mot de passe{% endblock %}
 
 {% block main %}
-    <h1>Reset your password</h1>
+    <h1>Réinitialisez votre mot de passe</h1>
 
     {{ form_start(resetForm) }}
         {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Reset password</button>
+        <button class="btn btn-primary">Réinitialiser</button>
     {{ form_end(resetForm) }}
 {% endblock %}

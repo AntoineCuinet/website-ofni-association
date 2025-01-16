@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% block title %}OFNI | Connexion{% endblock %}
 
 
 {% block main %}
@@ -23,9 +24,6 @@
             <label for="password">Mot de passe</label>
             <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
         <div>
-        <div>
-            <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
-        </div>
 
         <input type="hidden" name="_csrf_token"
                value="{{ csrf_token('authenticate') }}"
@@ -44,13 +42,13 @@
         <button class="btn btn-lg btn-primary" type="submit">
             Se connecter
         </button>
+
+        <div>
+            <a class="link" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
+        </div>
+
+        <p>Pas de compte ? <a class="link" href="{{ path('app_register') }}">S'inscrire</a></p>
+
     </form>
-
-<p>
-    Pas de compte ?
-    <a href="{{ path('app_register') }}">S'inscrire</a>
-</p>
-
-
-    {% endif %}
-    {% endblock %}
+{% endif %}
+{% endblock %}

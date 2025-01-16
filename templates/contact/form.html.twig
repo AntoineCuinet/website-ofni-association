@@ -1,6 +1,6 @@
 {% block contact_form %}
-    <h2>Nous contacter</h2>
     {{ form_start(form, {'attr': {'id': 'contact-form'}, 'action': path('app_contact')}) }}
+    <h2 id="contact-id">Nous contacter</h2>
         {{ form_row(form.last_name, {
             label: 'Nom'
         }) }}

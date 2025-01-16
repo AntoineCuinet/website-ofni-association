@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Message envoyé{% endblock %}
+{% block title %}OFNI | Message envoyé{% endblock %}
 
 {% block main %}
 
@@ -12,6 +12,6 @@
     <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 {% endfor %}
 
-<a href="{{ path('home') }}">Retourner à l'accueil</a>
+<a class="btn" href="{{ path('home') }}">Retourner à l'accueil</a>
 
 {% endblock %}
