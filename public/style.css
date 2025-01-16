@@ -259,6 +259,7 @@ section p {
   gap: 20px;
   min-height: 100vh;
   transform: translateY(-200px);
+  margin-bottom: -200px;
 }
 @media screen and (max-width: 990px) {
   .hero-section {
