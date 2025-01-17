@@ -484,6 +484,8 @@ nav .first-container .navlinks-container {
     -moz-backdrop-filter: blur(10px);
     -o-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+    -webkit-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+    -moz-box-shadow: 2px 4px 6px rgb(123, 123, 123);
     box-shadow: 2px 4px 6px rgb(123, 123, 123);
     transform: translate(-101%);
   }
@@ -1072,6 +1074,218 @@ form div input[type=checkbox]:focus {
   text-align: left;
   padding: 0;
   margin: 10px;
+}
+
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
+.timeline {
+  margin: 5em auto;
+  width: 80vw;
+  max-width: 34.2em;
+}
+.timeline .checkpoint {
+  max-width: 100%;
+  width: 100%;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  position: relative;
+}
+@media screen and (max-width: 1200px) {
+  .timeline .checkpoint {
+    transform: none;
+    padding-left: 0;
+    padding-right: 0;
+    border: none;
+  }
+}
+.timeline .checkpoint div {
+  border: 2px solid rgb(52, 153, 254);
+  border-radius: 15px;
+  padding: 1.5em;
+  -webkit-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  -moz-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  box-shadow: 2px 4px 6px rgb(123, 123, 123);
+}
+.timeline .checkpoint div p {
+  padding: 0;
+}
+@media screen and (max-width: 720px) {
+  .timeline .checkpoint div p {
+    font-size: 12px;
+  }
+}
+.timeline .checkpoint div h3 {
+  padding-bottom: 0.5em;
+}
+@media screen and (max-width: 720px) {
+  .timeline .checkpoint div h3 {
+    margin-left: 10px;
+  }
+}
+.timeline .checkpoint:nth-child(odd) {
+  border-left: 3px solid rgb(52, 153, 254);
+  padding-left: 3em;
+  transform: translateX(17em);
+}
+@media screen and (max-width: 1200px) {
+  .timeline .checkpoint:nth-child(odd) {
+    transform: none;
+    padding-left: 0;
+    padding-right: 0;
+    border: none;
+  }
+}
+.timeline .checkpoint:nth-child(even) {
+  border-right: 3px solid rgb(52, 153, 254);
+  padding-right: 3em;
+  transform: translateX(-17em);
+}
+@media screen and (max-width: 1200px) {
+  .timeline .checkpoint:nth-child(even) {
+    transform: none;
+    padding-left: 0;
+    padding-right: 0;
+    border: none;
+  }
+}
+.timeline .checkpoint:nth-child(odd)::before, .timeline .checkpoint:nth-child(even)::before {
+  content: "";
+  background: rgb(52, 153, 254);
+  width: 3em;
+  height: 3px;
+  position: absolute;
+  top: 50%;
+}
+@media screen and (max-width: 1200px) {
+  .timeline .checkpoint:nth-child(odd)::before, .timeline .checkpoint:nth-child(even)::before {
+    width: 3px;
+    height: 4em;
+    left: 50%;
+    top: -2em;
+  }
+}
+.timeline .checkpoint:nth-child(odd)::before {
+  left: 0%;
+}
+@media screen and (max-width: 1200px) {
+  .timeline .checkpoint:nth-child(odd)::before {
+    left: 50%;
+  }
+}
+.timeline .checkpoint:nth-child(even)::before {
+  right: 0%;
+}
+.timeline .checkpoint:nth-child(odd) div::before, .timeline .checkpoint:nth-child(even) div::before {
+  content: "";
+  background: rgb(52, 153, 254);
+  -webkit-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  -moz-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  width: 0.8em;
+  height: 0.8em;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-37%);
+  border-radius: 50%;
+}
+@media screen and (max-width: 1200px) {
+  .timeline .checkpoint:nth-child(odd) div::before, .timeline .checkpoint:nth-child(even) div::before {
+    left: 50%;
+    top: -0.5em;
+    transform: translateX(-37%);
+  }
+}
+.timeline .checkpoint:nth-child(odd) div::before {
+  left: -0.5em;
+}
+@media screen and (max-width: 1200px) {
+  .timeline .checkpoint:nth-child(odd) div::before {
+    left: 50%;
+  }
+}
+.timeline .checkpoint:nth-child(even) div::before {
+  right: -0.5em;
+}
+@media screen and (max-width: 1200px) {
+  .timeline .checkpoint:nth-child(even) div::before {
+    right: 50%;
+  }
+}
+
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
+.logos {
+  white-space: nowrap;
+}
+.logos .logo-slide-container {
+  position: relative;
+  margin: 0 auto;
+  height: 100%;
+  padding: 30px 10px;
+  overflow: hidden;
+}
+.logos .logo-slide-container:hover .logos-slide {
+  animation-play-state: paused;
+}
+.logos .logo-slide-container::before {
+  left: 0;
+  background: linear-gradient(to left, transparent, rgb(240, 249, 255));
+}
+.logos .logo-slide-container::after {
+  right: 0;
+  background: linear-gradient(to right, transparent, rgb(240, 249, 255));
+}
+.logos .logo-slide-container::before, .logos .logo-slide-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 150px;
+  height: 100%;
+  z-index: 1;
+}
+.logos .logo-slide-container .logos-slide {
+  display: inline-block;
+  animation: 20s slide infinite linear;
+}
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+.logos .logo-slide-container .logos-slide img {
+  height: 100px;
+  border-radius: 15px;
+  box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  margin: 0 20px;
+  padding: 10px;
+  transition: transform 0.4s ease-out;
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.logos .logo-slide-container .logos-slide img:hover {
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transform: scale(1.05);
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */

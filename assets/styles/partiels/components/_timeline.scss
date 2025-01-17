@@ -1,0 +1,131 @@
+@use '../global/variables' as *;
+
+.timeline {
+    margin: 5em auto;
+    width: 80vw;
+    max-width: 34.2em;
+
+    .checkpoint {
+        max-width: 100%;
+        width: 100%;
+        padding-top: 2em;
+        padding-bottom: 2em;
+        position: relative;
+        @media #{$max-width-l} {
+            transform: none;
+            padding-left: 0;
+            padding-right: 0;
+            border: none;
+        }    
+
+        div {
+            border: 2px solid $color-secondary;
+            border-radius: $border-rad;
+            padding: 1.5em;
+            -webkit-box-shadow: $box-shadow-right;
+            -moz-box-shadow: $box-shadow-right;
+            box-shadow: $box-shadow-right;
+
+            p {
+                padding: 0;
+
+                @media #{$max-width-s} {
+                    font-size: 12px;
+                }
+            }
+
+            h3 {
+                padding-bottom: 0.5em;
+
+                @media #{$max-width-s} {
+                    margin-left: 10px;
+                }
+            }
+        }
+
+        &:nth-child(odd) {
+            border-left: 3px solid $color-secondary;
+            padding-left: 3em;
+            transform: translateX(17em);
+            @media #{$max-width-l} {
+                transform: none;
+                padding-left: 0;
+                padding-right: 0;
+                border: none;
+            }   
+        }
+        &:nth-child(even) {
+            border-right: 3px solid $color-secondary;
+            padding-right: 3em;
+            transform: translateX(-17em);
+            @media #{$max-width-l} {
+                transform: none;
+                padding-left: 0;
+                padding-right: 0;
+                border: none;
+            }   
+        }
+
+        &:nth-child(odd)::before,
+        &:nth-child(even)::before {
+            content: '';
+            background: $color-secondary;
+            width: 3em;
+            height: 3px;
+            position: absolute;
+            top: 50%;
+            @media #{$max-width-l} {
+                width: 3px;
+                height: 4em;
+                left: 50%;
+                top: -2em;
+            }  
+        }
+
+        &:nth-child(odd)::before {
+            left: 0%;
+            @media #{$max-width-l} {
+                left: 50%;
+            }
+        }
+        &:nth-child(even)::before {
+            right: 0%;
+        }
+
+        &:nth-child(odd) div::before,
+        &:nth-child(even) div::before {
+            content: '';
+            background: $color-secondary;
+
+            -webkit-box-shadow: $box-shadow-right;
+            -moz-box-shadow: $box-shadow-right;
+            box-shadow: $box-shadow-right;
+            width: 0.8em;
+            height: 0.8em;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-37%);
+            border-radius: 50%;
+
+            @media #{$max-width-l} {
+                left: 50%;
+                top: -0.5em;
+                transform: translateX(-37%);
+            }  
+        }
+
+        &:nth-child(odd) div::before {
+            left: -0.5em;
+            @media #{$max-width-l} {
+                left: 50%;
+            }
+        }
+
+        &:nth-child(even) div::before {
+            right: -0.5em;
+            @media #{$max-width-l} {
+                right: 50%;
+            }
+        }
+    }
+}

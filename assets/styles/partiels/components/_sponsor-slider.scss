@@ -1,0 +1,72 @@
+@use '../global/variables' as *;
+@use '../../mixins/filter' as *;
+
+.logos {
+    white-space: nowrap;
+
+    .logo-slide-container {
+        position: relative;
+        margin: 0 auto;
+        height: 100%;
+        padding: 30px 10px;    
+        overflow: hidden;
+
+        &:hover .logos-slide {
+            animation-play-state: paused;
+        }
+
+        &::before {
+            left: 0;
+            // border-left: 1px solid grey;
+            // border-top-left-radius: $border-rad;
+            // border-bottom-left-radius: $border-rad;
+            background: linear-gradient(to left, transparent, $color-primary);
+        }
+        &::after {
+            right: 0;
+            background: linear-gradient(to right, transparent, $color-primary);
+        }
+    
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 150px;
+            height: 100%;
+            z-index: 1;
+        }
+
+    
+        .logos-slide {
+            display: inline-block;
+            animation: 20s slide infinite linear;
+    
+            @keyframes slide {
+                from {
+                    transform: translateX(0);
+                }
+                to {
+                    transform: translateX(-100%);
+                }
+            }
+    
+            img {
+                height: 100px;
+                border-radius: $border-rad;
+                box-shadow: $box-shadow-right;
+                margin: 0 20px;
+                padding: 10px;
+                transition: transform $transition;
+                @include blur-filter();
+
+                &:hover {
+
+                    @include blur-filter();
+                    transform: scale(1.05);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

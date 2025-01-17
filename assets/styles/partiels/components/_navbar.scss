@@ -71,6 +71,8 @@ nav {
                 background: rgba(52, 153, 254, 0.9);
                 color: $color-font-p;
                 @include blur-filter();
+                -webkit-box-shadow: $box-shadow-right;
+                -moz-box-shadow: $box-shadow-right;
                 box-shadow: $box-shadow-right;
                 transform: translate(-101%);
             }
