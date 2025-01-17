@@ -19,7 +19,7 @@
         }    
 
         div {
-            border: 2px solid $color-secondary;
+            border: $border;
             border-radius: $border-rad;
             padding: 1.5em;
             -webkit-box-shadow: $box-shadow-right;

@@ -72,7 +72,7 @@ $max-width-xl: "screen and (max-width: #{$breakpoint-xlarge})";
 // ========================================================================
 // Border - border-radius
 // ========================================================================
-$border: 1px solid $color-black !default;
+$border: 3px solid $color-secondary !default;
 $border-rad: 15px !default;
 
 // ========================================================================

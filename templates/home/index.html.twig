@@ -23,22 +23,52 @@
 
     <section>
         <h2>Les dernières actualités</h2>
-        <p>Retrouvez ici les dernières actualités de l'OFNI.</p>
-        <ul>
-            <li><a class="link" href="">actualite 1</a></li> <!-- TODO: faire dynamiquement -->
-            {# <li><a href="{{ path('actualite_show', {slug: 'actualite-1'}) }}">actualite 1</a></li>
-            <li><a href="{{ path('actualite_show', {slug: 'actualite-2'}) }}">actualite 2</a></li>
-            <li><a href="{{ path('actualite_show', {slug: 'actualite-3'}) }}">actualite 3</a></li> #}
-        </ul>
+        <p>Retrouvez ici les dernières actualités de l'OFNI !</p>
+
+        <article> <!-- TODO: faire dynamiquement -->
+            <div>
+                <img src="favicon.ico" alt="Image de l'actualité">
+            </div>
+            <div>
+                <h4>17-01-2025</h4>
+                <h3>Refonte du site de L'OFNI</h3>
+                <p>C'est avec un grand plaisir que nous vous présentons le nouveau site web de l'OFNI !</p>
+            </div>
+            <div>
+                <a class="btn" href="{# {{ path('actualite_show', {slug: 'actualite-1'}) }} #}">Lire l'article</a>
+            </div>
+        </article>
     </section>
 
     <section>
         <h2>Nos événements</h2>
         <p>Retrouvez ici nos événements !</p>
-        <ul>
-            <li><a class="link" href="">événement 1</a></li> <!-- TODO: faire dynamiquement -->
-            {# <li><a href="{{ path('evenement_show', {slug: 'evenement-1'}) }}">événement 1</a></li> #}
-        </ul>
+
+        <article> <!-- TODO: faire dynamiquement -->
+            <div>
+                <img src="./pictures/ndi.png" alt="Image de l'actualité">
+            </div>
+            <div>
+                <h3>Nuit de l'info</h3>
+                <p>Venez nous rejoindre pour créer un site toute une nuit !</p>
+            </div>
+            <div>
+                <a class="btn" href="{# {{ path('actualite_show', {slug: 'actualite-1'}) }} #}">Voir l'événement</a>
+            </div>
+        </article>
+
+        <article>
+            <div>
+                <img src="./pictures/barbecue.png" alt="Image de l'actualité">
+            </div>
+            <div>
+                <h3>Barbecue</h3>
+                <p>Que de mieux qu'un bon barbuc pour fêter tous ensemble l'arrivée de l'été ?!</p>
+            </div>
+            <div>
+                <a class="btn" href="{# {{ path('actualite_show', {slug: 'actualite-1'}) }} #}">Voir l'événement</a>
+            </div>
+        </article>
     </section>
 
     {% embed 'contact/form.html.twig' %}

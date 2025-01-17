@@ -1,5 +1,69 @@
 @use 'variables' as *;
+@use '../../mixins/filter' as *;
 
 article {
-    
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    margin: 30px 0;
+    border: $border;
+    border-radius: $border-rad;
+
+    -webkit-box-shadow: $box-shadow-right;
+    -moz-box-shadow: $box-shadow-right;
+    box-shadow: $box-shadow-right;
+    @include blur-filter();
+
+    @media #{$max-width-m} {
+        flex-direction: column;
+    }
+
+    img {
+        width: 120px;
+        height: 120px;
+        border-radius: $border-rad;
+        background-color: $color-white;
+    }
+    div:first-child {
+        width: 120px;
+        height: 120px;
+        flex-shrink: 0; /* Empêche l'image de rétrécir */
+    }
+
+    h3 {
+        margin: 0 15px;
+    }
+
+    h4 {
+        margin: 0 15px;
+        padding: 0;
+        text-align: left;
+        font-size: 14px;
+        font-weight: bold;
+        color: $color-font-title;
+    }
+
+    p {
+        color: $color-font-p;
+        margin: 0;
+    }
+
+    div:nth-child(2) {
+        flex: 1; /* Occupe tout l'espace disponible */
+        display: flex;
+        flex-direction: column;
+        gap: 4px; /* Espacement entre les éléments du texte */
+    }
+
+    a {
+        margin: 10px !important;
+    }
+
+    div:last-child {
+        display: flex;
+        margin-top: auto;
+        padding: 0;
+        flex-shrink: 0;
+    }
 }

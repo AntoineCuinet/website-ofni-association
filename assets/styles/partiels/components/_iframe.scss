@@ -6,9 +6,9 @@ iframe {
     max-width: 50%;
     width: 500px !important;
     height: 700px !important;
-    border: 3px solid $color-primary;
+    border: $border;
     border-radius: 15px;
-    background: $color-primary;
+    background: transparent;
 
     @media #{$max-width-s} {
         display: none;

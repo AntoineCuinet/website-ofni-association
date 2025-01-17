@@ -33,7 +33,7 @@
     height: 80%;
 
     background: transparent !important;
-    border: 1px solid $color-quaternary;
+    border: $border;
     border-radius: $border-rad;
     
     -webkit-box-shadow: $box-shadow-right;

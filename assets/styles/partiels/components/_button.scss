@@ -31,7 +31,7 @@
     background: transparent;
     @include blur-filter(10px);
     color: $color-secondary;
-    border: 3px solid $color-secondary;
+    border: $border;
     transition: color $transition, border-color $transition;
 
     &:hover {
@@ -44,7 +44,7 @@
     @extend %btn;
     background: $color-secondary;
     color: $color-white;
-    border: 3px solid $color-secondary;
+    border: $border;
     transition: color $transition, border-color $transition, background $transition;
 
     &:hover {

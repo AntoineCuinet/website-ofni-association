@@ -339,6 +339,69 @@ section p {
  *
  * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
 ======================================================================== */
+article {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  margin: 30px 0;
+  border: 3px solid rgb(52, 153, 254);
+  border-radius: 15px;
+  -webkit-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  -moz-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+@media screen and (max-width: 990px) {
+  article {
+    flex-direction: column;
+  }
+}
+article img {
+  width: 120px;
+  height: 120px;
+  border-radius: 15px;
+  background-color: rgb(240, 249, 255);
+}
+article div:first-child {
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0; /* Empêche l'image de rétrécir */
+}
+article h3 {
+  margin: 0 15px;
+}
+article h4 {
+  margin: 0 15px;
+  padding: 0;
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(7, 7, 7);
+}
+article p {
+  color: rgb(17, 17, 41);
+  margin: 0;
+}
+article div:nth-child(2) {
+  flex: 1; /* Occupe tout l'espace disponible */
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* Espacement entre les éléments du texte */
+}
+article a {
+  margin: 10px !important;
+}
+article div:last-child {
+  display: flex;
+  margin-top: auto;
+  padding: 0;
+  flex-shrink: 0;
+}
+
 /* ========================================================================
  * File Name: style.css
  * Author: CUINET Antoine
@@ -735,9 +798,9 @@ iframe {
   max-width: 50%;
   width: 500px !important;
   height: 700px !important;
-  border: 3px solid rgb(240, 249, 255);
+  border: 3px solid rgb(52, 153, 254);
   border-radius: 15px;
-  background: rgb(240, 249, 255);
+  background: transparent;
 }
 @media screen and (max-width: 720px) {
   iframe {
@@ -1045,7 +1108,7 @@ form div input[type=checkbox]:focus {
   width: 80%;
   height: 80%;
   background: transparent !important;
-  border: 1px solid rgb(17, 17, 41);
+  border: 3px solid rgb(52, 153, 254);
   border-radius: 15px;
   -webkit-box-shadow: 2px 4px 6px rgb(123, 123, 123);
   -moz-box-shadow: 2px 4px 6px rgb(123, 123, 123);
@@ -1105,7 +1168,7 @@ form div input[type=checkbox]:focus {
   }
 }
 .timeline .checkpoint div {
-  border: 2px solid rgb(52, 153, 254);
+  border: 3px solid rgb(52, 153, 254);
   border-radius: 15px;
   padding: 1.5em;
   -webkit-box-shadow: 2px 4px 6px rgb(123, 123, 123);
