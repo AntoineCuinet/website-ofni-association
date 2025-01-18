@@ -1,0 +1,87 @@
+@use '../global/variables' as *;
+@use '../../mixins/filter' as *;
+
+.ranking {
+
+
+    .order-number {
+        font-size: 20px;
+        color: $color-tertiary;
+        font-weight: bold;
+    }
+
+    .team-bee {
+        color: $color-logo-n;
+        font-weight: 500;
+    }
+
+    .team-duck {
+        color: $color-logo-i;
+        font-weight: 500;
+    }
+
+    .top-3 {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 50px;
+        margin: 50px auto;
+        max-width: 600px;
+
+        @media #{$max-width-m} {
+            flex-direction: column;
+            align-items: center;
+        }
+
+          
+        .place {
+            width: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+            background-color: transparent;
+            text-align: center;
+            font-weight: bold;
+            border-radius: $border-rad;
+            border: $border;
+
+            -webkit-box-shadow: $box-shadow-right;
+            -moz-box-shadow: $box-shadow-right;
+            box-shadow: $box-shadow-right;
+            @include blur-filter();
+            
+            p {
+                margin: 0;
+
+                .order-number-top {
+                    font-size: 50px;
+                    display:block;
+                    color: $color-tertiary;
+                    position: relative;
+                    top: 0;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        .first {
+            height: 300px;
+            // margin-bottom: 100px;
+
+            @media #{$max-width-m} {
+                order: -1;
+            }
+        }
+
+        .second {
+            height: 250px;
+            // margin-bottom: 50px;
+        }
+
+        .third {
+            height: 200px;
+            // margin-bottom: 0;
+        }
+    }
+}

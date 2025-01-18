@@ -240,7 +240,7 @@ svg {
  * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
 ======================================================================== */
 section {
-  margin: 80px auto;
+  margin: 60px auto;
   width: 90%;
   max-width: 1200px;
   padding: 20px;
@@ -1349,6 +1349,86 @@ form div input[type=checkbox]:focus {
   backdrop-filter: blur(10px);
   transform: scale(1.05);
   cursor: pointer;
+}
+
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
+.ranking .order-number {
+  font-size: 20px;
+  color: rgb(255, 153, 0);
+  font-weight: bold;
+}
+.ranking .team-bee {
+  color: #ff9900;
+  font-weight: 500;
+}
+.ranking .team-duck {
+  color: #33cc33;
+  font-weight: 500;
+}
+.ranking .top-3 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 50px;
+  margin: 50px auto;
+  max-width: 600px;
+}
+@media screen and (max-width: 990px) {
+  .ranking .top-3 {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.ranking .top-3 .place {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  background-color: transparent;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 15px;
+  border: 3px solid rgb(52, 153, 254);
+  -webkit-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  -moz-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.ranking .top-3 .place p {
+  margin: 0;
+}
+.ranking .top-3 .place p .order-number-top {
+  font-size: 50px;
+  display: block;
+  color: rgb(255, 153, 0);
+  position: relative;
+  top: 0;
+  margin-bottom: 10px;
+}
+.ranking .top-3 .first {
+  height: 300px;
+}
+@media screen and (max-width: 990px) {
+  .ranking .top-3 .first {
+    order: -1;
+  }
+}
+.ranking .top-3 .second {
+  height: 250px;
+}
+.ranking .top-3 .third {
+  height: 200px;
 }
 
 /*# sourceMappingURL=style.css.map */
