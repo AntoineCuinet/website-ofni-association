@@ -15,9 +15,19 @@
     <body>
         <canvas id="canvasId"></canvas>
 
+        <div class="game-team-container">
+            <h1>&#128126; Space OFNIvaders &#128126;</h1>
+            <p>Choisi ton équipe !</p>
+
+            <btn id="btn-bee-start-game" class="btn">Team abeille &#128029;</btn>
+            <btn id="btn-duck-start-game" class="btn">Team canard &#129414;</btn>
+            <a class="btn-danger" href="{{ path('game') }}">Revenir sur le site</a>
+        </div>
+
         <div class="game-container">
             <h1>&#128126; Space OFNIvaders &#128126;</h1>
-            <p>Ton score: <span id="score">0</span>pts</p>
+            <p>Ton équipe: <span id="team-id"></span><br>
+            Ton score: <span id="score">0</span>pts</p>
 
             <btn id="btn-start-game" class="btn">Lancer la partie</btn>
             <a class="btn-danger" href="{{ path('game') }}">Revenir sur le site</a>

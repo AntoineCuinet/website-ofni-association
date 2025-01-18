@@ -1095,12 +1095,43 @@ form div input[type=checkbox]:focus {
   -moz-image-rendering: pixelated; /* Pour Firefox */
 }
 
-.game-container {
+.game-team-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 10;
+  width: 80%;
+  height: 80%;
+  background: transparent !important;
+  border: 3px solid rgb(52, 153, 254);
+  border-radius: 15px;
+  -webkit-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  -moz-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.game-team-container h1 {
+  color: rgb(240, 249, 255);
+}
+.game-team-container p {
+  color: rgb(240, 249, 255);
+  margin-bottom: 50px;
+}
+
+.game-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -1364,14 +1395,6 @@ form div input[type=checkbox]:focus {
   color: rgb(255, 153, 0);
   font-weight: bold;
 }
-.ranking .team-bee {
-  color: #ff9900;
-  font-weight: 500;
-}
-.ranking .team-duck {
-  color: #33cc33;
-  font-weight: 500;
-}
 .ranking .top-3 {
   display: flex;
   justify-content: center;
@@ -1429,6 +1452,16 @@ form div input[type=checkbox]:focus {
 }
 .ranking .top-3 .third {
   height: 200px;
+}
+
+.team-bee {
+  color: #ff9900;
+  font-weight: 600;
+}
+
+.team-duck {
+  color: #33cc33;
+  font-weight: 600;
 }
 
 /*# sourceMappingURL=style.css.map */

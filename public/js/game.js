@@ -3,12 +3,35 @@
 document.addEventListener("DOMContentLoaded", function() {
 
     const gameContainer = document.getElementsByClassName("game-container")[0];
+    const gameTeamChoice = document.getElementsByClassName("game-team-container")[0];
     const gameInfoContainer = document.getElementsByClassName("game-info-container")[0];
+    const btnBeeStart = document.getElementById("btn-bee-start-game");
+    const btnDuckStart = document.getElementById("btn-duck-start-game");
     const btnStart = document.getElementById("btn-start-game");
     const scoreElement = document.getElementById("score-text");
     const levelElement = document.getElementById("level-text");
     const livesElement = document.getElementById("lives-text");
     const scoreFinal = document.getElementById("score");
+    const teamChoice = document.getElementById("team-id");
+
+    var team = 0;
+
+    btnBeeStart.addEventListener("click", function() {
+        gameTeamChoice.style.display = "none";
+        gameInfoContainer.style.display = "block";
+        team = 1;
+        const game = new Game("canvasId");
+        game.start();
+    });
+
+    btnDuckStart.addEventListener("click", function() {
+        gameTeamChoice.style.display = "none";
+        gameInfoContainer.style.display = "block";
+        team = 2;
+        const game = new Game("canvasId");
+        game.start();
+    });
+
 
     btnStart.addEventListener("click", function() {
         gameContainer.style.display = "none";
@@ -101,6 +124,14 @@ document.addEventListener("DOMContentLoaded", function() {
                         alert(`💀 Game Over! Your score is ${this.score} 💀`);
                         scoreFinal.textContent = this.score;
 
+                        if (team === 1) {
+                            teamChoice.textContent = "Team abeille";
+                            teamChoice.classList.add("team-bee");
+                        } else {
+                            teamChoice.textContent = "Team canard";
+                            teamChoice.classList.add("team-duck");
+                        }
+
                         // Reset the game
                         this.player.lives = 3;
                         this.score = 0;
@@ -142,6 +173,14 @@ document.addEventListener("DOMContentLoaded", function() {
                     this.isRunning = false; // End the game
                     alert("💀 Game Over ! Your score is " + this.score + " 💀");
                     scoreFinal.textContent = this.score;
+
+                    if (team === 1) {
+                        teamChoice.textContent = "Team abeille";
+                        teamChoice.classList.add("team-bee");
+                    } else {
+                        teamChoice.textContent = "Team canard";
+                        teamChoice.classList.add("team-duck");
+                    }
 
                     // Reset the game
                     this.player.lives = 3;

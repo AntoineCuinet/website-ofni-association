@@ -10,16 +10,6 @@
         font-weight: bold;
     }
 
-    .team-bee {
-        color: $color-logo-n;
-        font-weight: 500;
-    }
-
-    .team-duck {
-        color: $color-logo-i;
-        font-weight: 500;
-    }
-
     .top-3 {
         display: flex;
         justify-content: center;
@@ -84,4 +74,13 @@
             // margin-bottom: 0;
         }
     }
+}
+.team-bee {
+    color: $color-logo-n;
+    font-weight: 600;
+}
+
+.team-duck {
+    color: $color-logo-i;
+    font-weight: 600;
 }
