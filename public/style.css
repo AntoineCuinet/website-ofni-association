@@ -1327,19 +1327,42 @@ form div input[type=checkbox]:focus {
   position: relative;
   margin: 0 auto;
   height: 100%;
-  padding: 30px 10px;
+  padding: 50px 10px;
   overflow: hidden;
+}
+@media screen and (max-width: 990px) {
+  .logos .logo-slide-container {
+    width: 100vw;
+    left: calc(-50vw + 50%);
+    margin: 0;
+    padding: 50px 0;
+  }
 }
 .logos .logo-slide-container:hover .logos-slide {
   animation-play-state: paused;
+}
+@media screen and (max-width: 720px) {
+  .logos .logo-slide-container:hover .logos-slide {
+    animation-play-state: running;
+  }
 }
 .logos .logo-slide-container::before {
   left: 0;
   background: linear-gradient(to left, transparent, rgb(240, 249, 255));
 }
+@media screen and (max-width: 990px) {
+  .logos .logo-slide-container::before {
+    background: transparent;
+  }
+}
 .logos .logo-slide-container::after {
   right: 0;
   background: linear-gradient(to right, transparent, rgb(240, 249, 255));
+}
+@media screen and (max-width: 990px) {
+  .logos .logo-slide-container::after {
+    background: transparent;
+  }
 }
 .logos .logo-slide-container::before, .logos .logo-slide-container::after {
   content: "";
@@ -1348,6 +1371,11 @@ form div input[type=checkbox]:focus {
   width: 150px;
   height: 100%;
   z-index: 1;
+}
+@media screen and (max-width: 990px) {
+  .logos .logo-slide-container::before, .logos .logo-slide-container::after {
+    width: 0;
+  }
 }
 .logos .logo-slide-container .logos-slide {
   display: inline-block;

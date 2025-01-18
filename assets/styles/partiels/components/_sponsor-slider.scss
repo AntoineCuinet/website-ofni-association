@@ -8,11 +8,22 @@
         position: relative;
         margin: 0 auto;
         height: 100%;
-        padding: 30px 10px;    
+        padding: 50px 10px;    
         overflow: hidden;
+
+        @media #{$max-width-m} {
+            width: 100vw;
+            left: calc(-50vw + 50%);
+            margin: 0;
+            padding: 50px 0;
+        }
 
         &:hover .logos-slide {
             animation-play-state: paused;
+
+            @media #{$max-width-s} {
+                animation-play-state: running;
+            }
         }
 
         &::before {
@@ -21,10 +32,17 @@
             // border-top-left-radius: $border-rad;
             // border-bottom-left-radius: $border-rad;
             background: linear-gradient(to left, transparent, $color-primary);
+
+            @media #{$max-width-m} {
+                background: transparent;
+            }
         }
         &::after {
             right: 0;
             background: linear-gradient(to right, transparent, $color-primary);
+            @media #{$max-width-m} {
+                background: transparent;
+            }
         }
     
         &::before,
@@ -35,6 +53,10 @@
             width: 150px;
             height: 100%;
             z-index: 1;
+
+            @media #{$max-width-m} {
+                width: 0;
+            }
         }
 
     
