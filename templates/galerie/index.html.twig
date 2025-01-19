@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Galerie{% endblock %}
+
+{% block main %}
+    <h1>Galerie photo</h1>
+
+<p>
+Pour toute demande de retrait de photo,
+<a href="{{ path('home') }}">Contactez nous.</a> {# TODO: change href #}
+</p>
+
+{% if is_granted('ROLE_ADMIN') %}
+    Salut l'admin !
+    {{ form_start(add_form) }}
+        {{ form_row(add_form.event, {
+            label: 'Evènement'
+        }) }}
+        {{ form_row(add_form.year, {
+            label: 'Année'
+        }) }}
+        {{ form_row(add_form.photos, {
+            label: 'Fichiers'
+        }) }}
+        {{ form_row(add_form.uri, {
+            label: 'Lien'
+        }) }}
+        <button class="btn">Ajouter photo</button>
+    {{ form_end(add_form) }}
+{% endif %}
+
+
+{% for year, events in events %}
+    <h2>{{ year }}</h2>
+    {#<ul>#}
+        {% for event_name, images in events %}
+            {#<li>#}
+                <h3>{{ event_name }}</h3>
+                {% for image in images %}
+                    <img src="{{ image }}" alt="{{ event_name }}" style="width: 200px; height: auto;">
+                {% endfor %}
+            {#</li>#}
+        {% endfor %}
+    {#</ul>#}
+{% endfor %}
+
+{% endblock %}

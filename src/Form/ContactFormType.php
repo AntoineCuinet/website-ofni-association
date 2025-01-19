@@ -32,6 +32,7 @@ class ContactFormType extends AbstractType
                 'choices' => [
                     'Création de compte pour une entreprise/lycéen/alumni...' => 'création de compte pour une entreprise/lycéen/alumni...',
                     'Bug sur le site' => 'bug sur le site',
+                    'Retrait photo' => 'Retrait photo',
                     'Renseignement' => 'renseignement',
                     'Autre' => 'autre'
                 ],
