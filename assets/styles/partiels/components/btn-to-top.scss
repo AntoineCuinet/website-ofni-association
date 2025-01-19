@@ -1,3 +1,4 @@
+@use '../global/variables' as *;
 @use '../../mixins/filter' as *;
 
 #to-top-btn {
@@ -9,14 +10,23 @@
     width: 50px;
     bottom: 20px;
     right: 20px;
-    border-radius: 10px;
+    border-radius: 50%;
+
+    -webkit-box-shadow: $box-shadow-right;
+    -moz-box-shadow: $box-shadow-right;
+    box-shadow: $box-shadow-right;
     @include blur-filter();
     opacity: 0;
+    transition: opacity $transition;
 
-    i {
+    svg {
         width: 50px;
         height: 50px;
         font-size: 50px;
+
+        path {
+            fill: $color-font-p;
+        }
     }
 
     &.active {

@@ -86,8 +86,8 @@ html {
   font-weight: 400;
   font-style: normal;
   font-size: 100%;
-  background: rgb(240, 249, 255);
-  color: rgb(17, 17, 41);
+  background: rgb(17, 17, 41);
+  color: rgb(200, 200, 200);
   line-height: 1.5;
   letter-spacing: 0.17em;
 }
@@ -147,7 +147,7 @@ main {
 footer {
   flex-shrink: 0;
   width: 100%;
-  color: rgb(17, 17, 41);
+  color: rgb(200, 200, 200);
 }
 footer .footer-container {
   max-width: 1200px;
@@ -192,7 +192,7 @@ footer .footer-container .bloc h3 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  color: rgb(7, 7, 7);
+  color: rgb(240, 249, 255);
 }
 @media screen and (max-width: 720px) {
   footer .footer-container .bloc h3 {
@@ -226,9 +226,9 @@ svg {
 
 .line {
   fill: none;
-  stroke: rgb(17, 17, 41);
+  stroke: rgb(200, 200, 200);
   stroke-width: 3;
-  border-radius: 10px solid rgb(17, 17, 41);
+  border-radius: 10px solid rgb(200, 200, 200);
 }
 
 /* ========================================================================
@@ -306,7 +306,7 @@ section p {
   text-align: left;
   font-size: 16px;
   margin-top: 15px;
-  color: rgb(17, 17, 41);
+  color: rgb(200, 200, 200);
 }
 .hero-section .hero-text a {
   margin-left: 0;
@@ -435,10 +435,10 @@ article h4 {
   text-align: left;
   font-size: 14px;
   font-weight: bold;
-  color: rgb(7, 7, 7);
+  color: rgb(240, 249, 255);
 }
 article p {
-  color: rgb(17, 17, 41);
+  color: rgb(200, 200, 200);
   margin: 0;
 }
 article div:nth-child(2) {
@@ -466,7 +466,7 @@ article div:last-child {
  * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
 ======================================================================== */
 h1 {
-  color: rgb(7, 7, 7);
+  color: rgb(240, 249, 255);
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 2rem;
   padding: 30px 30px;
@@ -474,7 +474,7 @@ h1 {
 }
 
 h2 {
-  color: rgb(7, 7, 7);
+  color: rgb(240, 249, 255);
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 1.5rem;
   margin: 60px 40px 40px 40px;
@@ -493,7 +493,7 @@ h2::after {
 }
 
 h3 {
-  color: rgb(7, 7, 7);
+  color: rgb(240, 249, 255);
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 1.125rem;
   margin: 20px 50px;
@@ -514,7 +514,7 @@ h3::after {
 }
 
 h4 {
-  color: rgb(17, 17, 41);
+  color: rgb(200, 200, 200);
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 1.125rem;
   padding: 10px 60px;
@@ -552,9 +552,9 @@ nav {
 nav.sticky {
   padding: 1.25rem 2.1875rem;
   background-color: rgba(52, 153, 254, 0.3);
-  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 4px 6px rgb(123, 123, 123);
+  -moz-box-shadow: 0 4px 6px rgb(123, 123, 123);
+  box-shadow: 0 4px 6px rgb(123, 123, 123);
   color: rgb(240, 249, 255);
   -webkit-backdrop-filter: blur(10px);
   -moz-backdrop-filter: blur(10px);
@@ -597,7 +597,7 @@ nav .first-container .navlinks-container {
     height: 100vh;
     padding: 3.125rem;
     background: rgba(52, 153, 254, 0.9);
-    color: rgb(17, 17, 41);
+    color: rgb(200, 200, 200);
     -webkit-backdrop-filter: blur(10px);
     -moz-backdrop-filter: blur(10px);
     -o-backdrop-filter: blur(10px);
@@ -616,7 +616,7 @@ nav .first-container .navlinks {
   font-size: 1.1rem;
   font-weight: bolder;
   text-decoration: none;
-  color: rgb(7, 7, 7);
+  color: rgb(240, 249, 255);
 }
 @media screen and (max-width: 990px) {
   nav .first-container .navlinks {
@@ -634,7 +634,7 @@ nav .first-container .navlinks::after {
   height: 0.1875rem;
   transform: scale(0);
   transform-origin: left;
-  background: rgb(7, 7, 7);
+  background: rgb(240, 249, 255);
   transition: transform 0.4s ease-out;
 }
 @media screen and (max-width: 990px) {
@@ -661,7 +661,7 @@ nav .first-container .navlinks:last-child {
     margin-left: 0;
     font-weight: bolder;
     text-decoration: none;
-    color: rgb(7, 7, 7);
+    color: rgb(240, 249, 255);
   }
 }
 nav .first-container .navlinks:last-child:hover {
@@ -669,7 +669,7 @@ nav .first-container .navlinks:last-child:hover {
 }
 @media screen and (max-width: 990px) {
   nav .first-container .navlinks:last-child:hover {
-    color: rgb(7, 7, 7), rgb(240, 249, 255);
+    color: rgb(240, 249, 255), rgb(240, 249, 255);
   }
 }
 nav .first-container .navlinks:last-child:hover::after {
@@ -683,10 +683,10 @@ nav .first-container .active::after {
 }
 @media screen and (max-width: 990px) {
   nav .first-container .active {
-    color: rgb(7, 7, 7);
+    color: rgb(240, 249, 255);
   }
   nav .first-container .active::after {
-    background: rgb(7, 7, 7);
+    background: rgb(240, 249, 255);
   }
 }
 nav .first-container .first-navlink {
@@ -776,6 +776,14 @@ nav .first-container .main-navlinks .hamburger {
   }
 }
 
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
 #to-top-btn {
   display: flex;
   justify-content: center;
@@ -785,17 +793,24 @@ nav .first-container .main-navlinks .hamburger {
   width: 50px;
   bottom: 20px;
   right: 20px;
-  border-radius: 10px;
+  border-radius: 50%;
+  -webkit-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  -moz-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  box-shadow: 2px 4px 6px rgb(123, 123, 123);
   -webkit-backdrop-filter: blur(10px);
   -moz-backdrop-filter: blur(10px);
   -o-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   opacity: 0;
+  transition: opacity 0.4s ease-out;
 }
-#to-top-btn i {
+#to-top-btn svg {
   width: 50px;
   height: 50px;
   font-size: 50px;
+}
+#to-top-btn svg path {
+  fill: rgb(200, 200, 200);
 }
 #to-top-btn.active {
   opacity: 1;
@@ -979,7 +994,7 @@ form div select {
   padding: 10px 25px;
   margin: 5px;
   font-size: 1rem;
-  color: rgb(17, 17, 41);
+  color: rgb(200, 200, 200);
   background: transparent;
   -webkit-backdrop-filter: blur(10px);
   -moz-backdrop-filter: blur(10px);
@@ -1023,7 +1038,7 @@ form div label {
   left: 0;
   padding-top: 15px;
   font-size: 1em;
-  color: rgb(17, 17, 41);
+  color: rgb(200, 200, 200);
   transition: 0.4s ease-out;
 }
 @media screen and (max-width: 720px) {
@@ -1403,7 +1418,7 @@ form div input[type=checkbox]:focus {
 }
 .logos .logo-slide-container::before {
   left: 0;
-  background: linear-gradient(to left, transparent, rgb(240, 249, 255));
+  background: linear-gradient(to left, transparent, rgb(17, 17, 41));
 }
 @media screen and (max-width: 990px) {
   .logos .logo-slide-container::before {
@@ -1412,7 +1427,7 @@ form div input[type=checkbox]:focus {
 }
 .logos .logo-slide-container::after {
   right: 0;
-  background: linear-gradient(to right, transparent, rgb(240, 249, 255));
+  background: linear-gradient(to right, transparent, rgb(17, 17, 41));
 }
 @media screen and (max-width: 990px) {
   .logos .logo-slide-container::after {

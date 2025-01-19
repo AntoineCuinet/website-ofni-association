@@ -2,15 +2,23 @@
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    /* Navbar (animation) */
-    const header = document.querySelector('#navbar');
+    /* Navbar + to-top-btn (animation) */
+    const header = document.querySelector('#navbar'); 
+    const toTopBtn = document.querySelector("#to-top-btn");
     window.addEventListener("scroll", () => {
         header.classList.toggle("sticky", window.scrollY > 0);
 
-        // if(document.documentElement.scrollTop > window.innerHeight * 0.7)
-        //     toTopBtn.classList.add("active");
-        // else 
-        //     toTopBtn.classList.remove("active");
+        if(document.documentElement.scrollTop > window.innerHeight)
+            toTopBtn.classList.add("active");
+        else 
+            toTopBtn.classList.remove("active");
+    });
+    toTopBtn.addEventListener("click", () => {
+        if (toTopBtn.classList.contains("active")) {
+            window.scrollTo({
+                top: 0
+            });
+        }
     });
 
     /* Navbar (hamburger) */
