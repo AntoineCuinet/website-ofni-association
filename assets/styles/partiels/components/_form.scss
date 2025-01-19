@@ -46,9 +46,9 @@ form {
             transition: color $transition, border-color $transition, box-shadow $transition;
 
             &:focus {
-                -webkit-box-shadow: $box-shadow-black;
-                -moz-box-shadow: $box-shadow-black;
-                box-shadow: $box-shadow-black ; /* Ajoutez l'ombre lorsqu'en focus */
+                -webkit-box-shadow: $box-shadow-right;
+                -moz-box-shadow: $box-shadow-right;
+                box-shadow: $box-shadow-right ; /* Ajoutez l'ombre lorsqu'en focus */
             }
 
             &:invalid {

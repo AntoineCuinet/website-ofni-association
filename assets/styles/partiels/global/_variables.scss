@@ -1,3 +1,5 @@
+@use '../../functions/lightness' as *;
+
 // ========================================================================
 // Colors
 // ========================================================================
@@ -9,10 +11,8 @@ $color-quaternary: rgb(17, 17, 41) !default; // hover color (>1%)
 $color-white: rgb(240, 249, 255) !default;
 $color-black: rgb(7,7,7) !default;
 
-$color-font-title: $color-black !default;
-$color-font-p: rgb(17, 17, 41) !default;
-$color-font-title-dark: $color-white !default;
-$color-font-p-dark: rgb(200, 200, 200) !default;
+$color-font-title: light($color-primary, $color-black, $color-white) !default;
+$color-font-p: light($color-primary, rgb(17, 17, 41), rgb(200, 200, 200)) !default;
 $color-active: $color-secondary !default;
 
 $color-danger: rgb(255, 51, 153) !default;

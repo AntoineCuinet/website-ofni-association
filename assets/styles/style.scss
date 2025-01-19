@@ -10,6 +10,7 @@
 // ========================================================================
 // Imports for variables, mixins, functions, partials, and extensions
 // ========================================================================
+@use 'functions/lightness';
 @use 'partiels/global/variables';
 @use 'mixins/transform';
 @use 'mixins/triangle';
@@ -18,7 +19,6 @@
 @use 'mixins/box-shadow';
 
 @use 'functions/rem';
-@use 'functions/lightness';
 
 @use 'partiels/global/resets';
 @use 'partiels/global/body';

@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // </svg>
 
     /* Animation de la ligne */
-    const svg = document.querySelector("svg");
+    const svg = document.querySelector(".svg-line");
     const line = document.querySelector(".line");
 
     // Configuration

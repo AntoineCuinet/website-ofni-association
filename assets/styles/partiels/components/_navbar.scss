@@ -1,6 +1,5 @@
 @use '../global/variables' as *;
 @use '../../functions/rem' as *;
-@use '../../functions/lightness' as *;
 @use '../../mixins/filter' as *;
 
 nav {
@@ -86,8 +85,7 @@ nav {
             font-size: $size-logo-text;
             font-weight: $font-weight-ber;
             text-decoration: none;
-            color: light($color-primary, $color-font-title, $color-white);
-            // color: $color-font-title;
+            color: $color-font-title;
 
             @media #{$max-width-m} {
                 font-size: $size-hamburger;
@@ -104,7 +102,7 @@ nav {
                 height: rem(3);
                 transform: scale(0);
                 transform-origin: left;
-                background: light($color-primary, $color-font-title, $color-white);
+                background: $color-font-title;
                 transition: transform $transition;
 
                 @media #{$max-width-m} {
@@ -130,14 +128,14 @@ nav {
                     margin-left: 0;
                     font-weight: $font-weight-ber;
                     text-decoration: none;
-                    color: light($color-primary, $color-font-title, $color-white);
+                    color: $color-font-title;
                 }
 
                 &:hover {
                     color: $color-tertiary;
 
                     @media #{$max-width-m} {
-                        color: light($color-primary, $color-font-title, $color-white);
+                        color: $color-font-title, $color-white;
                     }
                 }
 
@@ -155,10 +153,10 @@ nav {
             }
 
             @media #{$max-width-m} {
-                color: light($color-primary, $color-font-title, $color-white);
+                color: $color-font-title;
 
                 &::after {
-                    background: light($color-primary, $color-font-title, $color-white);
+                    background: $color-font-title;
                 }
             }
         }
@@ -243,7 +241,7 @@ nav {
                         position: absolute;
                         pointer-events: none;
                         transition: opacity 0.3s 0.15s;
-                        background-color: light($color-primary, $color-black, $color-white);
+                        background-color: $color-black;
                         mix-blend-mode: difference;
                         
 

@@ -1,6 +1,5 @@
 @use 'variables' as *;
 @use '../../functions/rem' as *;
-@use '../../functions/lightness' as *;
 @use '../../mixins/select' as *;
 
 footer {
@@ -49,7 +48,7 @@ footer {
                 font-size: $size-logo-text-mq;
                 padding-bottom: rem(20);
                 @include select();
-                color: light($color-primary, $color-font-title, $color-font-title-dark);
+                color: $color-font-title;
 
                 @media #{$max-width-s} {
                     padding-bottom: rem(5);
@@ -88,7 +87,7 @@ svg {
 
   .line {
     fill: none;
-    stroke: black;
+    stroke: $color-font-p;
     stroke-width: 3;
-    border-radius: 10px solid black;
+    border-radius: 10px solid $color-font-p;
   }

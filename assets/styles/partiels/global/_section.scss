@@ -76,7 +76,7 @@ section {
             text-align: left;
             font-size: 16px;
             margin-top: 15px;
-            color: #444;
+            color: $color-font-p;
         }
 
         a {
@@ -103,6 +103,65 @@ section {
             a {
                 margin-top: 0px;
             }
+        }
+    }
+}
+
+
+.scroll-down-container {
+    position: absolute;
+    bottom: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    animation: bounceUpDown 4s infinite ease-out;
+
+    @media #{$max-width-m} {
+        display: none;
+    }
+
+    @keyframes bounceUpDown {
+        0% {
+            transform: translate(-50%, -10px);
+        }
+        50% {
+            transform: translate(-50%, 10px);
+        }
+        100% {
+            transform: translate(-50%, -10px);
+        }
+    }
+
+    a {
+        position: relative;
+        z-index: 1;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .svg-scroll {
+        width: 80px !important;
+        height: 80px !important;
+    }
+    
+    circle {
+        animation: scroll 2s ease infinite;
+    }
+    @keyframes scroll {
+        0% { 
+          opacity: 0;
+          cy: 481;
+        }
+        33% {
+          opacity: 1;
+        }
+        100% { 
+          opacity: 0;
+          cy: 231;
         }
     }
 }

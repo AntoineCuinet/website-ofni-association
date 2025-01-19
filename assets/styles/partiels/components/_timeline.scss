@@ -1,4 +1,5 @@
 @use '../global/variables' as *;
+@use '../../mixins/filter' as *;
 
 .timeline {
     margin: 5em auto;
@@ -22,9 +23,11 @@
             border: $border;
             border-radius: $border-rad;
             padding: 1.5em;
+            // @include blur-filter();
             -webkit-box-shadow: $box-shadow-right;
             -moz-box-shadow: $box-shadow-right;
             box-shadow: $box-shadow-right;
+
 
             p {
                 padding: 0;

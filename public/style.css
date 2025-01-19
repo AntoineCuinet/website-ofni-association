@@ -226,9 +226,9 @@ svg {
 
 .line {
   fill: none;
-  stroke: black;
+  stroke: rgb(17, 17, 41);
   stroke-width: 3;
-  border-radius: 10px solid black;
+  border-radius: 10px solid rgb(17, 17, 41);
 }
 
 /* ========================================================================
@@ -306,7 +306,7 @@ section p {
   text-align: left;
   font-size: 16px;
   margin-top: 15px;
-  color: #444;
+  color: rgb(17, 17, 41);
 }
 .hero-section .hero-text a {
   margin-left: 0;
@@ -328,6 +328,61 @@ section p {
   }
   .hero-section .hero-text a {
     margin-top: 0px;
+  }
+}
+
+.scroll-down-container {
+  position: absolute;
+  bottom: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  animation: bounceUpDown 4s infinite ease-out;
+}
+@media screen and (max-width: 990px) {
+  .scroll-down-container {
+    display: none;
+  }
+}
+@keyframes bounceUpDown {
+  0% {
+    transform: translate(-50%, -10px);
+  }
+  50% {
+    transform: translate(-50%, 10px);
+  }
+  100% {
+    transform: translate(-50%, -10px);
+  }
+}
+.scroll-down-container a {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.scroll-down-container .svg-scroll {
+  width: 80px !important;
+  height: 80px !important;
+}
+.scroll-down-container circle {
+  animation: scroll 2s ease infinite;
+}
+@keyframes scroll {
+  0% {
+    opacity: 0;
+    cy: 481;
+  }
+  33% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    cy: 231;
   }
 }
 
@@ -411,7 +466,7 @@ article div:last-child {
  * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
 ======================================================================== */
 h1 {
-  color: light(rgb(240, 249, 255), rgb(7, 7, 7), rgb(240, 249, 255));
+  color: rgb(7, 7, 7);
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 2rem;
   padding: 30px 30px;
@@ -419,7 +474,7 @@ h1 {
 }
 
 h2 {
-  color: light(rgb(240, 249, 255), rgb(7, 7, 7), rgb(240, 249, 255));
+  color: rgb(7, 7, 7);
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 1.5rem;
   margin: 60px 40px 40px 40px;
@@ -438,7 +493,7 @@ h2::after {
 }
 
 h3 {
-  color: light(rgb(240, 249, 255), rgb(7, 7, 7), rgb(240, 249, 255));
+  color: rgb(7, 7, 7);
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 1.125rem;
   margin: 20px 50px;
@@ -459,7 +514,7 @@ h3::after {
 }
 
 h4 {
-  color: light(rgb(240, 249, 255), rgb(17, 17, 41), rgb(200, 200, 200));
+  color: rgb(17, 17, 41);
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 1.125rem;
   padding: 10px 60px;
@@ -614,7 +669,7 @@ nav .first-container .navlinks:last-child:hover {
 }
 @media screen and (max-width: 990px) {
   nav .first-container .navlinks:last-child:hover {
-    color: rgb(7, 7, 7);
+    color: rgb(7, 7, 7), rgb(240, 249, 255);
   }
 }
 nav .first-container .navlinks:last-child:hover::after {
@@ -938,9 +993,9 @@ form div select {
 form div input:focus,
 form div textarea:focus,
 form div select:focus {
-  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Ajoutez l'ombre lorsqu'en focus */
+  -webkit-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  -moz-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  box-shadow: 2px 4px 6px rgb(123, 123, 123); /* Ajoutez l'ombre lorsqu'en focus */
 }
 form div input:invalid,
 form div textarea:invalid,
@@ -1437,7 +1492,53 @@ form div input[type=checkbox]:focus {
     align-items: center;
   }
 }
+.ranking .top-3 .svg-loop-container {
+  position: relative;
+  z-index: 1;
+}
+@media screen and (max-width: 990px) {
+  .ranking .top-3 .svg-loop-container {
+    order: -1;
+  }
+}
+.ranking .top-3 .svg-loop-container .rotating-svg {
+  position: absolute;
+  z-index: 2;
+  left: -25%;
+  top: -30%;
+  width: 150%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: changeZIndex 2s linear infinite;
+}
+.ranking .top-3 .svg-loop-container .rotating-svg path {
+  animation: rotate 2s linear infinite;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+@keyframes changeZIndex {
+  0%, 23% {
+    z-index: 2;
+  }
+  24%, 54% {
+    z-index: 0;
+  }
+  54.1%, 100% {
+    z-index: 2;
+  }
+}
 .ranking .top-3 .place {
+  position: relative;
+  z-index: 1;
   width: 200px;
   display: flex;
   justify-content: center;
@@ -1469,11 +1570,6 @@ form div input[type=checkbox]:focus {
 }
 .ranking .top-3 .first {
   height: 300px;
-}
-@media screen and (max-width: 990px) {
-  .ranking .top-3 .first {
-    order: -1;
-  }
 }
 .ranking .top-3 .second {
   height: 250px;
