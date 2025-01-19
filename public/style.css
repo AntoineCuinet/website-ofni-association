@@ -7,6 +7,19 @@
  *
  * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
 ======================================================================== */
+:root {
+  --color-primary: $color-primary;
+  --color-font-title: $color-black;
+  --color-font-p: rgb(17, 17, 41);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: rgb(17, 17, 41);
+    --color-font-title: rgb(240, 249, 255);
+    --color-font-p: rgb(200, 200, 200);
+  }
+}
 /* Specific Colors For OFNI */
 /* ========================================================================
  * File Name: style.css
@@ -58,18 +71,18 @@ h1 {
 }
 
 ::selection {
-  color: rgb(240, 249, 255);
-  background: rgb(7, 7, 7);
+  color: var(--color-primary, rgb(240, 249, 255));
+  background: var(--color-font-title, rgb(7, 7, 7));
 }
 
 ::-moz-selection {
-  color: rgb(240, 249, 255);
-  background: rgb(7, 7, 7);
+  color: var(--color-primary, rgb(240, 249, 255));
+  background: var(--color-font-title, rgb(7, 7, 7));
 }
 
 ::-webkit-selection {
-  color: rgb(240, 249, 255);
-  background: rgb(7, 7, 7);
+  color: var(--color-primary, rgb(240, 249, 255));
+  background: var(--color-font-title, rgb(7, 7, 7));
 }
 
 /* ========================================================================
@@ -86,8 +99,8 @@ html {
   font-weight: 400;
   font-style: normal;
   font-size: 100%;
-  background: rgb(17, 17, 41);
-  color: rgb(200, 200, 200);
+  background: var(--color-primary);
+  color: var(--color-font-p);
   line-height: 1.5;
   letter-spacing: 0.17em;
 }
@@ -147,7 +160,7 @@ main {
 footer {
   flex-shrink: 0;
   width: 100%;
-  color: rgb(200, 200, 200);
+  color: var(--color-font-p);
 }
 footer .footer-container {
   max-width: 1200px;
@@ -192,7 +205,7 @@ footer .footer-container .bloc h3 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  color: rgb(240, 249, 255);
+  color: var(--color-font-title);
 }
 @media screen and (max-width: 720px) {
   footer .footer-container .bloc h3 {
@@ -226,9 +239,9 @@ svg {
 
 .line {
   fill: none;
-  stroke: rgb(200, 200, 200);
+  stroke: var(--color-font-p);
   stroke-width: 3;
-  border-radius: 10px solid rgb(200, 200, 200);
+  border-radius: 10px solid var(--color-font-p);
 }
 
 /* ========================================================================
@@ -306,7 +319,7 @@ section p {
   text-align: left;
   font-size: 16px;
   margin-top: 15px;
-  color: rgb(200, 200, 200);
+  color: var(--color-font-p);
 }
 .hero-section .hero-text a {
   margin-left: 0;
@@ -435,10 +448,10 @@ article h4 {
   text-align: left;
   font-size: 14px;
   font-weight: bold;
-  color: rgb(240, 249, 255);
+  color: var(--color-font-title);
 }
 article p {
-  color: rgb(200, 200, 200);
+  color: var(--color-font-p);
   margin: 0;
 }
 article div:nth-child(2) {
@@ -466,7 +479,7 @@ article div:last-child {
  * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
 ======================================================================== */
 h1 {
-  color: rgb(240, 249, 255);
+  color: var(--color-font-title);
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 2rem;
   padding: 30px 30px;
@@ -474,7 +487,7 @@ h1 {
 }
 
 h2 {
-  color: rgb(240, 249, 255);
+  color: var(--color-font-title);
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 1.5rem;
   margin: 60px 40px 40px 40px;
@@ -493,7 +506,7 @@ h2::after {
 }
 
 h3 {
-  color: rgb(240, 249, 255);
+  color: var(--color-font-title);
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 1.125rem;
   margin: 20px 50px;
@@ -514,7 +527,7 @@ h3::after {
 }
 
 h4 {
-  color: rgb(200, 200, 200);
+  color: var(--color-font-p);
   font-family: "Josefin Sans", Arial, Courier, monospace;
   font-size: 1.125rem;
   padding: 10px 60px;
@@ -555,7 +568,6 @@ nav.sticky {
   -webkit-box-shadow: 0 4px 6px rgb(123, 123, 123);
   -moz-box-shadow: 0 4px 6px rgb(123, 123, 123);
   box-shadow: 0 4px 6px rgb(123, 123, 123);
-  color: rgb(240, 249, 255);
   -webkit-backdrop-filter: blur(10px);
   -moz-backdrop-filter: blur(10px);
   -o-backdrop-filter: blur(10px);
@@ -597,7 +609,7 @@ nav .first-container .navlinks-container {
     height: 100vh;
     padding: 3.125rem;
     background: rgba(52, 153, 254, 0.9);
-    color: rgb(200, 200, 200);
+    color: var(--color-font-p);
     -webkit-backdrop-filter: blur(10px);
     -moz-backdrop-filter: blur(10px);
     -o-backdrop-filter: blur(10px);
@@ -605,7 +617,7 @@ nav .first-container .navlinks-container {
     -webkit-box-shadow: 2px 4px 6px rgb(123, 123, 123);
     -moz-box-shadow: 2px 4px 6px rgb(123, 123, 123);
     box-shadow: 2px 4px 6px rgb(123, 123, 123);
-    transform: translate(-101%);
+    transform: translate(-105%);
   }
 }
 nav .first-container .navlinks {
@@ -616,7 +628,7 @@ nav .first-container .navlinks {
   font-size: 1.1rem;
   font-weight: bolder;
   text-decoration: none;
-  color: rgb(240, 249, 255);
+  color: var(--color-font-title);
 }
 @media screen and (max-width: 990px) {
   nav .first-container .navlinks {
@@ -634,7 +646,7 @@ nav .first-container .navlinks::after {
   height: 0.1875rem;
   transform: scale(0);
   transform-origin: left;
-  background: rgb(240, 249, 255);
+  background: var(--color-font-title);
   transition: transform 0.4s ease-out;
 }
 @media screen and (max-width: 990px) {
@@ -661,7 +673,7 @@ nav .first-container .navlinks:last-child {
     margin-left: 0;
     font-weight: bolder;
     text-decoration: none;
-    color: rgb(240, 249, 255);
+    color: var(--color-font-title);
   }
 }
 nav .first-container .navlinks:last-child:hover {
@@ -669,7 +681,7 @@ nav .first-container .navlinks:last-child:hover {
 }
 @media screen and (max-width: 990px) {
   nav .first-container .navlinks:last-child:hover {
-    color: rgb(240, 249, 255), rgb(240, 249, 255);
+    color: var(--color-font-title);
   }
 }
 nav .first-container .navlinks:last-child:hover::after {
@@ -683,10 +695,10 @@ nav .first-container .active::after {
 }
 @media screen and (max-width: 990px) {
   nav .first-container .active {
-    color: rgb(240, 249, 255);
+    color: var(--color-font-title);
   }
   nav .first-container .active::after {
-    background: rgb(240, 249, 255);
+    background: var(--color-font-title);
   }
 }
 nav .first-container .first-navlink {
@@ -759,7 +771,7 @@ nav .first-container .main-navlinks .hamburger {
     position: absolute;
     pointer-events: none;
     transition: opacity 0.3s 0.15s;
-    background-color: rgb(7, 7, 7);
+    background: var(--color-font-p);
     mix-blend-mode: difference;
   }
   nav .first-container .main-navlinks .hamburger span:nth-child(1) {
@@ -810,7 +822,7 @@ nav .first-container .main-navlinks .hamburger {
   font-size: 50px;
 }
 #to-top-btn svg path {
-  fill: rgb(200, 200, 200);
+  fill: var(--color-font-p);
 }
 #to-top-btn.active {
   opacity: 1;
@@ -994,7 +1006,7 @@ form div select {
   padding: 10px 25px;
   margin: 5px;
   font-size: 1rem;
-  color: rgb(200, 200, 200);
+  color: var(--color-font-p);
   background: transparent;
   -webkit-backdrop-filter: blur(10px);
   -moz-backdrop-filter: blur(10px);
@@ -1038,7 +1050,7 @@ form div label {
   left: 0;
   padding-top: 15px;
   font-size: 1em;
-  color: rgb(200, 200, 200);
+  color: var(--color-font-p);
   transition: 0.4s ease-out;
 }
 @media screen and (max-width: 720px) {
@@ -1418,7 +1430,7 @@ form div input[type=checkbox]:focus {
 }
 .logos .logo-slide-container::before {
   left: 0;
-  background: linear-gradient(to left, transparent, rgb(17, 17, 41));
+  background: linear-gradient(to left, transparent, var(--color-primary));
 }
 @media screen and (max-width: 990px) {
   .logos .logo-slide-container::before {
@@ -1427,7 +1439,7 @@ form div input[type=checkbox]:focus {
 }
 .logos .logo-slide-container::after {
   right: 0;
-  background: linear-gradient(to right, transparent, rgb(17, 17, 41));
+  background: linear-gradient(to right, transparent, var(--color-primary));
 }
 @media screen and (max-width: 990px) {
   .logos .logo-slide-container::after {

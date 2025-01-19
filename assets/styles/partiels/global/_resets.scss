@@ -45,14 +45,14 @@ h1 {
 // Selectors
 // ========================================================================
 ::selection {
-    color: $color-white;
-    background: $color-black;
+    color: var(--color-primary, $color-white);
+    background: var(--color-font-title, $color-black);
 }
 ::-moz-selection {
-    color: $color-white;
-    background: $color-black;
+    color: var(--color-primary, $color-white);
+    background: var(--color-font-title, $color-black);
 }
 ::-webkit-selection {
-    color: $color-white;
-    background: $color-black;
+    color: var(--color-primary, $color-white);
+    background: var(--color-font-title, $color-black);
 }

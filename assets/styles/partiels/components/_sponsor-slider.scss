@@ -31,7 +31,7 @@
             // border-left: 1px solid grey;
             // border-top-left-radius: $border-rad;
             // border-bottom-left-radius: $border-rad;
-            background: linear-gradient(to left, transparent, $color-primary);
+            background: linear-gradient(to left, transparent, var(--color-primary));
 
             @media #{$max-width-m} {
                 background: transparent;
@@ -39,7 +39,7 @@
         }
         &::after {
             right: 0;
-            background: linear-gradient(to right, transparent, $color-primary);
+            background: linear-gradient(to right, transparent, var(--color-primary));
             @media #{$max-width-m} {
                 background: transparent;
             }

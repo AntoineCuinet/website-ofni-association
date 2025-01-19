@@ -3,7 +3,7 @@
 // ========================================================================
 // Colors
 // ========================================================================
-$color-primary: rgb(17, 17, 41) !default; // background color (60%)
+$color-primary: rgb(240, 249, 255) !default; // background color (60%)
 $color-secondary: rgb(52, 153, 254) !default; // (30%)
 $color-tertiary: rgb(255, 153, 0) !default; // (10%)
 $color-quaternary: rgb(17, 17, 41) !default; // hover color (>1%)
@@ -11,10 +11,35 @@ $color-quaternary: rgb(17, 17, 41) !default; // hover color (>1%)
 $color-white: rgb(240, 249, 255) !default;
 $color-black: rgb(7,7,7) !default;
 
-$color-font-title: light($color-primary, $color-black, $color-white) !default;
-$color-font-p: light($color-primary, rgb(17, 17, 41), rgb(200, 200, 200)) !default;
-$color-active: $color-secondary !default;
+$light-colors: (
+    primary: $color-primary,
+    title: $color-black,
+    p: rgb(17, 17, 41)
+);
 
+$dark-colors: (
+    primary: $color-quaternary,
+    title: $color-white,
+    p: rgb(200, 200, 200)
+);
+@function color($name) {
+    @return map-get($light-colors, $name);
+}
+:root {
+    --color-primary: $color-primary;
+    --color-font-title: $color-black;
+    --color-font-p: rgb(17, 17, 41);
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-primary: #{map-get($dark-colors, primary)};
+        --color-font-title: #{map-get($dark-colors, title)};
+        --color-font-p: #{map-get($dark-colors, p)};
+    }
+}
+
+
+$color-active: $color-secondary !default;
 $color-danger: rgb(255, 51, 153) !default;
 $color-danger-hover: rgb(255, 0, 0) !default;
 

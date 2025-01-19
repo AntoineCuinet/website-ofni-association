@@ -8,7 +8,7 @@ footer {
     width: 100%;
     // border-top: 1px dashed $color-black;
     // background: $color-secondary;
-    color: $color-font-p;
+    color: var(--color-font-p);
 
     .footer-container {
         max-width: $breakpoint-large;
@@ -48,7 +48,7 @@ footer {
                 font-size: $size-logo-text-mq;
                 padding-bottom: rem(20);
                 @include select();
-                color: $color-font-title;
+                color: var(--color-font-title);
 
                 @media #{$max-width-s} {
                     padding-bottom: rem(5);
@@ -85,9 +85,9 @@ svg {
     }
   }
 
-  .line {
+.line {
     fill: none;
-    stroke: $color-font-p;
+    stroke: var(--color-font-p);
     stroke-width: 3;
-    border-radius: 10px solid $color-font-p;
-  }
+    border-radius: 10px solid var(--color-font-p);
+}

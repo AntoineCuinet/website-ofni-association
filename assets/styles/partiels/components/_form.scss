@@ -36,7 +36,7 @@ form {
             margin: 5px;
             font-size: rem(16);
 
-            color: $color-font-p;
+            color: var(--color-font-p);
             background: transparent;
             @include blur-filter(10px);
             border: $border;
@@ -78,7 +78,7 @@ form {
             padding-top: 15px;
             // pointer-events: none;
             font-size: 1em;
-            color: $color-font-p;
+            color: var(--color-font-p);
             transition: $transition;
 
             @media #{$max-width-s} {

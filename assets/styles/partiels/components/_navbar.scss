@@ -24,12 +24,7 @@ nav {
         -webkit-box-shadow: $box-shadow-black;
         -moz-box-shadow: $box-shadow-black;
         box-shadow: $box-shadow-black;
-        color: $color-white;
         @include blur-filter();
-
-        // .first-container .navlinks {
-        //     color: light($color-primary, $color-font-title, $color-white);
-        // }
 
         @media #{$max-width-m} {
             padding: 0 rem(15);
@@ -68,12 +63,12 @@ nav {
                 height: 100vh;
                 padding: rem(50);
                 background: rgba(52, 153, 254, 0.9);
-                color: $color-font-p;
+                color: var(--color-font-p);
                 @include blur-filter();
                 -webkit-box-shadow: $box-shadow-right;
                 -moz-box-shadow: $box-shadow-right;
                 box-shadow: $box-shadow-right;
-                transform: translate(-101%);
+                transform: translate(-105%);
             }
         }
 
@@ -85,7 +80,7 @@ nav {
             font-size: $size-logo-text;
             font-weight: $font-weight-ber;
             text-decoration: none;
-            color: $color-font-title;
+            color: var(--color-font-title);
 
             @media #{$max-width-m} {
                 font-size: $size-hamburger;
@@ -102,7 +97,7 @@ nav {
                 height: rem(3);
                 transform: scale(0);
                 transform-origin: left;
-                background: $color-font-title;
+                background: var(--color-font-title);
                 transition: transform $transition;
 
                 @media #{$max-width-m} {
@@ -128,14 +123,14 @@ nav {
                     margin-left: 0;
                     font-weight: $font-weight-ber;
                     text-decoration: none;
-                    color: $color-font-title;
+                    color: var(--color-font-title);
                 }
 
                 &:hover {
                     color: $color-tertiary;
 
                     @media #{$max-width-m} {
-                        color: $color-font-title, $color-white;
+                        color: var(--color-font-title);
                     }
                 }
 
@@ -153,10 +148,10 @@ nav {
             }
 
             @media #{$max-width-m} {
-                color: $color-font-title;
+                color: var(--color-font-title);
 
                 &::after {
-                    background: $color-font-title;
+                    background: var(--color-font-title);
                 }
             }
         }
@@ -241,7 +236,7 @@ nav {
                         position: absolute;
                         pointer-events: none;
                         transition: opacity 0.3s 0.15s;
-                        background-color: $color-black;
+                        background: var(--color-font-p);
                         mix-blend-mode: difference;
                         
 

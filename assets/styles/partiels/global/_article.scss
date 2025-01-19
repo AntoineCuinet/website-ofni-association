@@ -41,11 +41,11 @@ article {
         text-align: left;
         font-size: 14px;
         font-weight: bold;
-        color: $color-font-title;
+        color: var(--color-font-title);
     }
 
     p {
-        color: $color-font-p;
+        color: var(--color-font-p);
         margin: 0;
     }
 

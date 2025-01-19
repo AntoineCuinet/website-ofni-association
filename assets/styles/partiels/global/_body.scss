@@ -9,8 +9,8 @@ html {
         style: normal;
         size: $font-size-global;
     }
-    background: $color-primary;
-    color: $color-font-p;
+    background: var(--color-primary);
+    color: var(--color-font-p);
     line-height: $line-height;
     letter-spacing: $letter-spacing;
 }
