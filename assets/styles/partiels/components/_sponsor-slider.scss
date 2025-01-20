@@ -11,7 +11,7 @@
         padding: 50px 10px;    
         overflow: hidden;
 
-        @media #{$max-width-m} {
+        @media #{$max-width-l} {
             width: 100vw;
             left: calc(-50vw + 50%);
             margin: 0;
@@ -26,38 +26,38 @@
             }
         }
 
-        &::before {
-            left: 0;
-            // border-left: 1px solid grey;
-            // border-top-left-radius: $border-rad;
-            // border-bottom-left-radius: $border-rad;
-            background: linear-gradient(to left, transparent, var(--color-primary));
+        // &::before {
+        //     left: 0;
+        //     // border-left: 1px solid grey;
+        //     // border-top-left-radius: $border-rad;
+        //     // border-bottom-left-radius: $border-rad;
+        //     background: linear-gradient(to left, transparent, var(--color-primary));
 
-            @media #{$max-width-m} {
-                background: transparent;
-            }
-        }
-        &::after {
-            right: 0;
-            background: linear-gradient(to right, transparent, var(--color-primary));
-            @media #{$max-width-m} {
-                background: transparent;
-            }
-        }
+        //     @media #{$max-width-l} {
+        //         background: transparent;
+        //     }
+        // }
+        // &::after {
+        //     right: 0;
+        //     background: linear-gradient(to right, transparent, var(--color-primary));
+        //     @media #{$max-width-l} {
+        //         background: transparent;
+        //     }
+        // }
     
-        &::before,
-        &::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            width: 150px;
-            height: 100%;
-            z-index: 1;
+        // &::before,
+        // &::after {
+        //     content: "";
+        //     position: absolute;
+        //     top: 0;
+        //     width: 150px;
+        //     height: 100%;
+        //     z-index: 1;
 
-            @media #{$max-width-m} {
-                width: 0;
-            }
-        }
+        //     @media #{$max-width-l} {
+        //         width: 0;
+        //     }
+        // }
 
     
         .logos-slide {

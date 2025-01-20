@@ -5,7 +5,8 @@
     <h1>👾 Space OFNIvaders 👾</h1>
     <p>Bienvenue sur notre nouveau jeu, inspiré de l'indémodable "Space Invaders" &#128377;&#128126;</p>
 
-    <a class="btn" href="/game/gameplay">Jouer !</a>
+    <a class="btn hidden-phone" href="/game/gameplay">Jouer !</a>
+    <p class="hidden-pc">Connectez-vous sur un ordinateur pour jouer.</p>
 
     <section>
         <h2>Classement &#128220;</h2>
@@ -20,7 +21,7 @@
                 <div class="svg-loop-container">
                     <svg class="rotating-svg" viewBox="0 0 160 160" width="160" height="160">
                     <g transform="matrix(0.866, -0.5, 0.25, 0.433, 80, 80)">
-                        <path d="M 0,70 A 65,70 0 0,0 65,0 5,5 0 0,1 75,0 75,70 0 0,1 0,70Z" fill="#ff9900"></path>
+                        <path d="M 17,70 A 65,70 0 0,0 65,0 5,5 0 0,1 75,0 75,70 0 0,1 17,70Z" fill="#ff9900"></path>
                     </g>
                     </svg>
                 <div class="place first">  
@@ -53,6 +54,6 @@
         Ce jeu est infini, le but est de faire le plus de points possible !</p>
         <p>Malheureusement, ce jeu n'est pas encore jouable sur mobile.</p>
 
-        <a class="btn" href="/game/gameplay">J'essaie le jeu !</a>
+        <a class="btn hidden-phone" href="/game/gameplay">J'essaie le jeu !</a>
     </section>
 {% endblock %}

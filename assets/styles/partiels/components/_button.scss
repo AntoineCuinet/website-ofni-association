@@ -68,3 +68,18 @@
         border-color: $color-danger-hover;
     }
 }
+
+
+.hidden-phone {
+    @media #{$max-width-m} {
+        display: none;
+    }
+}
+
+.hidden-pc {
+    display: none;
+
+    @media #{$max-width-m} {
+        display: block;
+    }
+}
