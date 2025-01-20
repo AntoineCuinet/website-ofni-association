@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Galerie{% endblock %}
+
+{% block main %}
+    <h1>Galerie photo</h1>
+
+<p>Pour accéder à cette page, il faut être connecté et être étudiant.</p>
+
+<a class="btn" href={{ path('app_login') }}>Se connecter</a>
+
+{% endblock %}
