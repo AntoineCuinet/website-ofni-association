@@ -132,6 +132,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    const deleteForms = document.querySelectorAll('.delete-form');
+    deleteForms.forEach((form) => {
+        form.addEventListener('submit', function (e) {
+            if (!confirm('Voulez vous vraiment supprimer cette image ??')) {
+                e.preventDefault(); // Prevent the form from submitting
+            }
+        });
+    });
+});
+
 </script>
 
 {% endblock %}
