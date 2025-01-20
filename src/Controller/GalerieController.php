@@ -74,7 +74,7 @@ class GalerieController extends AbstractController
      */
     private function fetchPhotosData(EntityManagerInterface $entityManager): array
     {
-        $photos = $entityManager->getRepository(Photo::class)->findAll();
+        $photos = $entityManager->getRepository(Photo::class)->findBy([], ['year' => 'DESC']);
 
         $photos_to_display = [];
 
