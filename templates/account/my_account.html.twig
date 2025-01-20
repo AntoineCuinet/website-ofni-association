@@ -10,6 +10,9 @@
     <div class="alert alert-success" role="alert">{{ flash_success }}</div>
 {% endfor %}
 
+<div class="mb-3">
+    Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a class="link" href="{{ path('app_logout') }}">Se déconnecter</a>
+</div>
 
 {{ form_errors(pseudoForm) }}
 
@@ -40,9 +43,6 @@
     }) }}
     <button type="submit" name="password_submit" class="btn">Changer mon mot de passe</button>
 
-    <div class="mb-3">
-        Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a class="link" href="{{ path('app_logout') }}">Se déconnecter</a>
-    </div>
 {{ form_end(passwordForm) }}
 
 

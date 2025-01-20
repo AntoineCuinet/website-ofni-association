@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\File;
 
 class AddPhotoFormType extends AbstractType
@@ -15,19 +16,22 @@ class AddPhotoFormType extends AbstractType
     {
         $builder
             ->add('event')
-            ->add('uri')
             ->add('photos', FileType::class, [
                 'mapped' => false,
                 'multiple' => true,
                 'constraints' => [
-                    new File([
-                        'maxSize' => "5M",
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                            'image/gif',
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid image file (JPEG, PNG, GIF).',
+                    new All([
+                        "constraints" => [
+                            new File([
+                                'maxSize' => "5M",
+                                'mimeTypes' => [
+                                    'image/jpeg',
+                                    'image/png',
+                                    'image/gif',
+                                ],
+                                'mimeTypesMessage' => 'Please upload a valid image file (JPEG, PNG, GIF).',
+                            ])
+                        ]
                     ])
                 ]
             ])

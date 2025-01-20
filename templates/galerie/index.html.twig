@@ -2,8 +2,17 @@
 
 {% block title %}Galerie{% endblock %}
 
+
 {% block main %}
     <h1>Galerie photo</h1>
+
+{% for flash_success in app.flashes('success') %}
+    <div class="alert alert-success" role="alert">{{ flash_success }}</div>
+{% endfor %}
+
+{% for flash_error in app.flashes('error') %}
+    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+{% endfor %}
 
 <p>
 Pour toute demande de retrait de photo,
@@ -22,26 +31,107 @@ Pour toute demande de retrait de photo,
         {{ form_row(add_form.photos, {
             label: 'Fichiers'
         }) }}
-        {{ form_row(add_form.uri, {
-            label: 'Lien'
-        }) }}
         <button class="btn">Ajouter photo</button>
     {{ form_end(add_form) }}
 {% endif %}
 
 
 {% for year, events in events %}
-    <h2>{{ year }}</h2>
+    <h2 class="year-title">{{ year }}</h2>
     {#<ul>#}
         {% for event_name, images in events %}
             {#<li>#}
-                <h3>{{ event_name }}</h3>
+                <h3 class="event-title">{{ event_name }}</h3>
+                <div class="gallery-grid">
                 {% for image in images %}
-                    <img src="{{ image }}" alt="{{ event_name }}" style="width: 200px; height: auto;">
+                    <div class="photo-container">
+                        <img class="photo" src="{{ image.uri }}" alt="{{ event_name }}" style="width: 250px; height: 250px; object-fit: cover; cursor: pointer; margin: 10px;" data-image="{{ image.uri }}">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <form method="post" action="{{ path('delete_photo', {id: image.id}) }}" class="delete-form">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ image.id) }}">
+                                <button type="submit" class="delete-button">🗑</button>
+                            </form>
+                        {% endif %}
+                    </div>
                 {% endfor %}
+                </div>
             {#</li>#}
         {% endfor %}
     {#</ul>#}
 {% endfor %}
+
+
+<!-- Modal -->
+<div id="photoModal" class="photo-modal">
+    <span id="closeModal" class="close">&times;</span>
+    <div id="modalContent" class="modal-content">
+        <img id="modalImage" src="" alt="Full-size photo">
+        <div class="modal-arrows">
+            <button id="prevPhoto" class="modal-arrow">&#10094;</button>
+            <button id="nextPhoto" class="modal-arrow">&#10095;</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById("photoModal");
+    const modalImage = document.getElementById("modalImage");
+    const closeModal = document.getElementById("closeModal");
+    const prevPhoto = document.getElementById("prevPhoto");
+    const nextPhoto = document.getElementById("nextPhoto");
+
+    let imagesArray = []; // Array to store image sources for navigation
+    let currentIndex = 0; // Index of the currently displayed image
+
+    // Open modal when an image is clicked
+    const images = document.querySelectorAll(".photo");
+    images.forEach((image, index) => {
+        image.addEventListener("click", function() {
+            // Store all image sources in an array
+            imagesArray = Array.from(images).map(img => img.getAttribute("data-image"));
+            currentIndex = index; // Set the current image index
+
+            // Set the modal image source
+            modalImage.src = imagesArray[currentIndex];
+            modal.style.display = "flex"; // Show the modal
+        });
+    });
+
+    // Close the modal
+    closeModal.addEventListener("click", function() {
+        modal.style.display = "none";
+    });
+
+    // Navigate to the previous image
+    prevPhoto.addEventListener("click", function() {
+        if (currentIndex > 0) {
+            currentIndex--;
+        } else {
+            currentIndex = imagesArray.length - 1; // Go to the last image if at the beginning
+        }
+        modalImage.src =  imagesArray[currentIndex];
+    });
+
+    // Navigate to the next image
+    nextPhoto.addEventListener("click", function() {
+        if (currentIndex < imagesArray.length - 1) {
+            currentIndex++;
+        } else {
+            currentIndex = 0; // Go to the first image if at the end
+        }
+        modalImage.src = imagesArray[currentIndex];
+    });
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener("click", function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+});
+
+</script>
 
 {% endblock %}
