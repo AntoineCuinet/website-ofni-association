@@ -171,8 +171,13 @@ document.addEventListener("DOMContentLoaded", function() {
             this.aliens.forEach((alien) => {
                 if (alien.y + alien.height >= this.canvas.height - 10) {
                     this.isRunning = false; // End the game
+
+                    this.saveScore();
                     alert("💀 Game Over ! Your score is " + this.score + " 💀");
                     scoreFinal.textContent = this.score;
+
+
+
 
                     if (team === 1) {
                         teamChoice.textContent = "Team abeille";
@@ -249,6 +254,25 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }        
       
+        saveScore() {
+            let t = team == 1 ? 'abeille': 'canard';
+
+            fetch('/game/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+                body: JSON.stringify({ score: this.score, team: t })
+            }) .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response error : ' + response.statusText);
+                    }
+                    return response.json();
+                }).catch(error => {
+                    console.error('Error saving score : ', error);
+                });
+        }
 
         /**
          * Starts the game loop.

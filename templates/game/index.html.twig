@@ -15,7 +15,10 @@
         <div class="ranking">
             <div class="top-3">
                 <div class="place second">
-                    <p><span class="order-number-top">2.</span>Jane Doe<br><span class="team-bee">Abeille</span><br>900 points</p>
+                    <p>
+                    <span class="order-number-top">2.
+                    </span>{{ second.name }}<br>
+                    <span class="{{ (second.team == 'Abeille') ? 'team-bee' : 'team-duck' }}">{{ second.team }}</span><br>{{ second.score }} points</p>
                 </div>
 
                 <div class="svg-loop-container">
@@ -25,25 +28,22 @@
                     </g>
                     </svg>
                 <div class="place first">  
-                    <p><span class="order-number-top">1.</span>John Doe<br><span class="team-bee">Abeille</span><br>1000 points</p>
+                    <p><span class="order-number-top">1.
+                    </span>{{ first.name }}<br>
+                    <span class="{{ (first.team == 'Abeille') ? 'team-bee' : 'team-duck' }}">{{ first.team }}</span><br>{{ first.score }} points</p>
                 </div>
                 </div>
 
                 <div class="place third">
-                    <p><span class="order-number-top">3.</span>Foo Bar<br><span class="team-duck">Canard</span><br>800 points</p>
+                    <p><span class="order-number-top">3.</span>{{ third.name }}<br><span class="{{ (third.team == 'Abeille') ? 'team-bee' : 'team-duck' }}">{{ third.team }}</span><br>{{ third.score }} points</p>
                 </div>
             </div>
             <div class="others">
-                <p><span class="order-number">4.</span> <strong>John Doe</strong> - <span class="team-bee">Abeille</span> - 700 points</p>
-                <p><span class="order-number">5.</span> <strong>John Doe</strong> -<span class="team-duck">Canard</span> - 600 points</p>
-                <p><span class="order-number">6.</span> <strong>John Doe</strong>- <span class="team-bee">Abeille</span> - 500 points</p>
-                <p><span class="order-number">7.</span> <strong>John Doe</strong> - <span class="team-bee">Abeille</span> - 400 points</p>
-                <p><span class="order-number">8.</span> <strong>John Doe</strong>- <span class="team-duck">Canard</span> - 300 points</p>
-                <p><span class="order-number">9.</span> <strong>John Doe</strong> - <span class="team-bee">Abeille</span> - 200 points</p>
-                <p><span class="order-number">10.</span> <strong>John Doe</strong>- <span class="team-duck">Canard</span> - 100 points</p>
+                {% for player_nbr, player in top %}
+                <p><span class="order-number">{{ player_nbr }}.</span> <strong>{{ player.name }}</strong> - <span class="{{ (player.team == 'Abeille') ? 'team-bee' : 'team-duck' }}">{{ player.team }}</span> - {{ player.score }} points</p>
+                {% endfor %}
             </div>
         </div>
-        {# TODO: faire le classement #}
     </section>
 
     <section>
