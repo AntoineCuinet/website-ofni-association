@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Photo;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -35,7 +36,13 @@ class AddPhotoFormType extends AbstractType
                     ])
                 ]
             ])
-            ->add('year')
+            ->add('year', ChoiceType::class, [
+                'choices' => array_combine(range(date('Y'), date('Y') - 100), range(date('Y'), date('Y') - 100)),
+                'choice_label' => function ($choice, $key, $value) {
+                    return $value;
+                },
+                'placeholder' => 'Choisissez une année',
+            ])
         ;
     }
 
