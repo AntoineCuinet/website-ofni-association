@@ -14,10 +14,7 @@
     <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 {% endfor %}
 
-<p>
-Pour toute demande de retrait de photo,
-<a href="{{ path('home') }}">Contactez nous.</a> {# TODO: change href #}
-</p>
+<p>Pour toute demande de retrait de photo, <a class="link" href="{{ path('home') }}#contact-id">Contactez nous</a>.</p>
 
 {% if is_granted('ROLE_ADMIN') %}
     Salut l'admin !
@@ -37,27 +34,25 @@ Pour toute demande de retrait de photo,
 
 
 {% for year, events in events %}
-    <h2 class="year-title">{{ year }}</h2>
-    {#<ul>#}
-        {% for event_name, images in events %}
-            {#<li>#}
-                <h3 class="event-title">{{ event_name }}</h3>
-                <div class="gallery-grid">
-                {% for image in images %}
-                    <div class="photo-container">
-                        <img class="photo" src="{{ image.uri }}" alt="{{ event_name }}" style="width: 250px; height: 250px; object-fit: cover; cursor: pointer; margin: 10px;" data-image="{{ image.uri }}">
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <form method="post" action="{{ path('delete_photo', {id: image.id}) }}" class="delete-form">
-                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ image.id) }}">
-                                <button type="submit" class="delete-button">🗑</button>
-                            </form>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-                </div>
-            {#</li>#}
+<section>
+    <h2>{{ year }}</h2>
+    {% for event_name, images in events %}
+        <h3>{{ event_name }}</h3>
+        <div class="gallery-grid">
+        {% for image in images %}
+            <div class="photo-container">
+                <img class="photo" src="{{ image.uri }}" alt="{{ event_name }}" data-image="{{ image.uri }}">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <form method="post" action="{{ path('delete_photo', {id: image.id}) }}" class="delete-form">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ image.id) }}">
+                        <button type="submit" class="delete-button">&#10060;</button>
+                    </form>
+                {% endif %}
+            </div>
         {% endfor %}
-    {#</ul>#}
+        </div>
+    {% endfor %}
+</section>
 {% endfor %}
 
 

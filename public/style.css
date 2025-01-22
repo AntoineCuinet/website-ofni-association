@@ -1599,36 +1599,38 @@ form div input[type=checkbox]:focus {
   font-weight: 600;
 }
 
-/* gallery.scss */
-/* Year Title Styling */
-.year-title {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  text-align: center;
-  color: #333;
-}
-
-/* Event Title Styling */
-.event-title {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #666;
-}
-
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
 /* Grid Layout for Gallery */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
   justify-items: center;
+}
+@media screen and (max-width: 720px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
 }
 
 /* Individual Photo Container Styling */
 .photo-container {
   position: relative;
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
+}
+@media screen and (max-width: 720px) {
+  .photo-container {
+    width: 100px;
+    height: 100px;
+  }
 }
 
 /* Styling for the Photos */
@@ -1637,10 +1639,16 @@ form div input[type=checkbox]:focus {
   height: 100%;
   object-fit: cover;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease-out;
+  border-radius: 15px;
+  -webkit-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  -moz-box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  box-shadow: 2px 4px 6px rgb(123, 123, 123);
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
-
-/* Hover Effect for Image */
 .photo:hover {
   transform: scale(1.05);
 }
@@ -1648,33 +1656,19 @@ form div input[type=checkbox]:focus {
 /* Styling for the Delete Button */
 .delete-button {
   position: absolute;
-  top: 5px;
-  right: 5px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: none;
-  padding: 5px;
+  top: 5%;
+  right: 5%;
+  background-color: rgb(240, 249, 255);
   cursor: pointer;
-  font-size: 1.2rem;
-  color: #d9534f;
   border-radius: 50%;
-  transition: background-color 0.3s;
+  border: none;
+  padding: 5px 7px;
+  transition: background-color 0.4s ease-out;
 }
-
 .delete-button:hover {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 153, 0);
 }
 
-.delete-form {
-  margin: 0;
-  padding: 0;
-}
-
-/* Media Queries for responsiveness */
-@media (max-width: 768px) {
-  .gallery-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
-}
 /* Modal Styles */
 .photo-modal {
   display: none; /* Hidden by default */
@@ -1711,7 +1705,7 @@ form div input[type=checkbox]:focus {
   top: 15px;
   right: 15px;
   font-size: 30px;
-  color: white;
+  color: rgb(255, 51, 153);
   cursor: pointer;
 }
 
@@ -1728,16 +1722,15 @@ form div input[type=checkbox]:focus {
 .modal-arrow {
   background-color: rgba(255, 255, 255, 0.7);
   border: none;
-  padding: 10px;
+  padding: 5px 10px;
   font-size: 24px;
   cursor: pointer;
-  color: #333;
+  color: rgb(7, 7, 7);
   border-radius: 50%;
-  transition: background-color 0.3s;
+  transition: background-color 0.4s ease-out;
 }
-
 .modal-arrow:hover {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(240, 249, 255);
 }
 
 /*# sourceMappingURL=style.css.map */
