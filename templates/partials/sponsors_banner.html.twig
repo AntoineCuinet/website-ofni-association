@@ -1,0 +1,21 @@
+<section id="sponsors" class="logos">
+    <h2>Nos partenaires</h2>
+
+    <div class="logo-slide-container">
+        <div class="logos-slide">
+        {% for sponsor in sponsors %}
+            <a href="{{ sponsor.website }}" target="_blank"><img src="/pictures/sponsors/{{ sponsor.logoName }}" alt="Logo {{ sponsor.name }}" title="Site {{ sponsor.name }}" loading="lazy"></a>
+        {% endfor %}
+        </div>
+        <div class="logos-slide">
+        {% for sponsor in sponsors %}
+            <a href="{{ sponsor.website }}" target="_blank"><img src="/pictures/sponsors/{{ sponsor.logoName }}" alt="Logo {{ sponsor.name }}" title="Site {{ sponsor.name }}" loading="lazy"></a>
+        {% endfor %}
+        </div>
+        <div class="logos-slide">
+        {% for sponsor in sponsors %}
+            <a href="{{ sponsor.website }}" target="_blank"><img src="/pictures/sponsors/{{ sponsor.logoName }}" alt="Logo {{ sponsor.name }}" title="Site {{ sponsor.name }}" loading="lazy"></a>
+        {% endfor %}
+        </div>
+    </div>
+</section>
