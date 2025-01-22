@@ -24,9 +24,9 @@
 
                 <div class="navlinks-container">
                     <a class="navlinks {{ app.current_route == 'presentation' ? 'active' : ''}}" href="{{ path('presentation') }}">L'OFNI</a>
-                    <a class="navlinks {{ app.current_route == 'event' ? 'active' : ''}}" href="{{ path('home') }}">Événements</a>
-                    <a class="navlinks {{ app.current_route == 'event' ? 'active' : ''}}" href="{{ path('galerie') }}">Galerie photos</a>
-                    <a class="navlinks {{ app.current_route == 'shop' ? 'active' : ''}}" href="{{ path('home') }}">Boutique</a>
+                    <a class="navlinks {{ app.current_route == 'event' ? 'active' : ''}}" href="{# TODO #}">Événements</a>
+                    <a class="navlinks {{ app.current_route == 'event' ? 'active' : ''}}" href="{{ path('galerie') }}">Galerie</a>
+                    <a class="navlinks {{ app.current_route == 'shop' ? 'active' : ''}}" href="{# TODO #}">Boutique</a>
                     <a class="navlinks {{ app.current_route == 'game' ? 'active' : ''}}" href="{{ path('game') }}">Jeu</a>
 
                     {% if app.user %}
@@ -92,14 +92,16 @@
                     <ul>
                         <li><a class="link footer-links" href="{{ url('home') }}">Accueil</a></li>
                         <li><a class="link footer-links" href="{{ url('presentation') }}">L'OFNI</a></li>
-                        <li><a class="link footer-links" href="{{ url('home') }}">Événements</a></li>
-                        <li><a class="link footer-links" href="{{ url('home') }}">Boutique</a></li>
+                        <li><a class="link footer-links" href="{# TODO #}">Événements</a></li>
+                        <li><a class="link footer-links" href="{{ path('galerie') }}">Galerie</a></li>
+                        <li><a class="link footer-links" href="{# TODO #}">Boutique</a></li>
+                        <li><a class="link footer-links" href="{{ path('game') }}">Jeu</a></li>
                         {% if app.user %}
-                            <a class="link footer-links" href="{{ path('app_account') }}">{{ app.user.pseudo }}</a>
+                            <a class="link footer-links" href="{{ path('app_account') }}">Mon compte</a>
                         {% else %}
                             <a class="link footer-links" href="{{ path('app_login') }}">Connexion</a>
                         {% endif %}
-                        <li><a class="link footer-links" href="{{ url('home') }}">Mentions légales</a></li>
+                        <li><a class="link footer-links" href="{# TODO #}">Mentions légales</a></li>
                     </ul>
                 </div>
             </div>

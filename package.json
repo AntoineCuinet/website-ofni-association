@@ -11,8 +11,10 @@
         "npm-check-updates": "^17.1.2"
     },
     "scripts": {
-        "start": "concurrently --kill-others \"npm run server\" \"npm run sass\"",
+        "start": "concurrently --kill-others \"npm run server\" \"npm run email-worker\" \"npm run sass\"",
         "server": "php -S localhost:8000 -t public",
+        "email-worker": "php bin/console messenger:consume async --time-limit=3600 --memory-limit=128M",
+        "migration": "php bin/console doctrine:migrations:migrate",
         "build": "encore production --progress",
         "sass": "sass assets/styles/style.scss:public/style.css --watch",
         "build-sass": "sass assets/styles/style.scss:public/style.css --style=compressed --no-source-map"
