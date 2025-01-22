@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}OFNI | Mail de confirmation envoyé{% endblock %}
+
+{% block main %}
+
+<h1>Un e-mail de confirmation a été envoyé</h1>
+<p>
+Merci de vérifier votre boîte de réception (ainsi que vos spams) pour confirmer votre adresse e-mail.
+<br>
+Si vous ne recevez pas l'e-mail dans quelques minutes, <a href="{{ path('app_register') }}">cliquez ici</a> pour recommencer l'inscription.
+</p>
+{% endblock %}

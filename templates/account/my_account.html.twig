@@ -14,6 +14,23 @@
     Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a class="link" href="{{ path('app_logout') }}">Se déconnecter</a>
 </div>
 
+{{ form_errors(namesForm) }}
+
+{{ form_start(namesForm) }}
+    <h2>Changer votre nom/prénom</h2>
+
+    <p>Vous pouvez changer votre nom et votre prénom.</p>
+
+    {{ form_row(namesForm.name, {
+        label: 'Nouveau nom'
+    }) }}
+    {{ form_row(namesForm.first_name, {
+        label: 'Nouveau prénom'
+    }) }}
+    <button type="submit" name="pseudo_submit" class="btn">Changer mon nom/prénom</button>
+{{ form_end(namesForm) }}
+
+
 {{ form_errors(pseudoForm) }}
 
 {{ form_start(pseudoForm) }}

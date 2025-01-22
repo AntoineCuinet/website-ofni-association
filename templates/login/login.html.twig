@@ -9,21 +9,24 @@
                 Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
             </div>
     {% else %}
-    <form method="post">
+    <form method="post" action="{{ path('app_login') }}">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
 
         
 
-        <div>
-            <label for="username">Email</label>
-            <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-        </div>
-        <div>
-            <label for="password">Mot de passe</label>
-            <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
-        <div>
+<div>
+    <label for="username">Email ou Pseudo</label>
+    <input type="text" value="{{ last_username }}" name="username" id="username" class="form-control" autocomplete="email" required autofocus>
+</div>
+<div>
+    <label for="password">Mot de passe</label>
+    <input type="password" name="password" id="password" class="form-control" autocomplete="current-password" required>
+</div>
 
         <input type="hidden" name="_csrf_token"
                value="{{ csrf_token('authenticate') }}"

@@ -21,12 +21,27 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 class MyAccountController extends AbstractController
 {
 
-    private FormInterface $pseudoForm, $passwordForm, $deleteAccountForm;
+    private FormInterface $namesForm, $pseudoForm, $passwordForm, $deleteAccountForm;
 
 
     private function buildEditForms(): void {
+        $this->namesForm = $this->container->get('form.factory')->createNamedBuilder('namesForm')
+            ->add('name', TextType::class, [
+                'data' => $this->getUser()->getName(),
+                'constraints' => [
+                    new Length(['min' => 2, 'minMessage' => 'Votre nom doit contenir au moins 2 caractères']),
+                ]
+            ])
+            ->add('first_name', TextType::class, [
+                'data' => $this->getUser()->getFirstName(),
+                'constraints' => [
+                    new Length(['min' => 2, 'minMessage' => 'Votre prénom doit contenir au moins 2 caractères']),
+                ]
+            ])
+            ->getForm();
         $this->pseudoForm = $this->container->get('form.factory')->createNamedBuilder('pseudoForm')
             ->add('pseudo', TextType::class, [
+                'data' => $this->getUser()->getPseudo(),
                 'constraints' => [
                     new Length(['min' => 6, 'minMessage' => 'Le pseudo doit contenir au moins 6 caractères']),
                 ]
@@ -82,6 +97,7 @@ class MyAccountController extends AbstractController
         }
 
         $this->buildEditForms();
+        $this->namesForm->handleRequest($request);
         $this->passwordForm->handleRequest($request);
         $this->pseudoForm->handleRequest($request);
         $this->deleteAccountForm->handleRequest($request);
@@ -113,6 +129,24 @@ class MyAccountController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
         }
+        $changedNames = false;
+        if ($this->namesForm->isSubmitted() && $this->namesForm->isValid()) {
+
+            $new_name = $this->namesForm->get('name')->getData();
+            $new_first_name = $this->namesForm->get('first_name')->getData();
+            $old_name = $user->getName();
+            $old_first_name = $user->getFirstName();
+            $changedNames = $old_name != $new_name || $old_first_name != $new_first_name;
+
+            if ($changedNames) {
+                $user->setName($new_name);
+                $user->setFirstName($new_first_name);
+            }
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
+
 
         if ($this->deleteAccountForm->isSubmitted() && $this->deleteAccountForm->isValid()) {
             // log out
@@ -133,10 +167,13 @@ class MyAccountController extends AbstractController
             $this->addFlash('success', 'Votre mot de passe a bien été changé');
 
         return $this->render('account/my_account.html.twig', [
+            'namesForm' => $this->namesForm,
             'pseudoForm' => $this->pseudoForm,
             'passwordForm' => $this->passwordForm,
             'deleteAccountForm' => $this->deleteAccountForm
     ]);
-}
+
+    }
+
 
 }

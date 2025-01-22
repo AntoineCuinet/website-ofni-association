@@ -40,6 +40,12 @@ class RegistrationController extends AbstractController
 
             $user->setRoles(['ROLE_ETUDIANT']);
 
+            $email = $form->get('email')->getData();
+            $names = explode('.', explode('@', $email)[0]);
+
+            $user->setFirstName(ucfirst($names[0]));
+            $user->setName(ucfirst($names[1]));
+
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -52,9 +58,7 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
-            // do anything else you need here, like send an email
-
-            return $security->login($user, 'form_login', 'main');
+            return $this->render('registration/confirmation_email_sent.html.twig');
         }
 
         return $this->render('registration/register.html.twig', [
