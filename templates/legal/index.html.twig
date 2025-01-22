@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block title %}OFNI | Mentions légales{% endblock %}
+
+{% block main %}
+    <h1>Mentions légales</h1>
+    <p>Bienvenue sur le site officiel de l'OFNI !</p>
+
+    <section>
+        <h2>TITRE</h2>
+        <p>OFNI</p>
+        <p>16 Route de Gray, 25000 Besançon</p>
+        <p>E-mail: <a class="link footer-links" href="mailto:contact@ofni.asso.fr?subject=Demande%20de%20renseignements&body=Bonjour%2C%20%0D%0A%0D%0AJe%20vous%20contacte%20pour...">contact@ofni.asso.fr</a></p>
+    </section>
+
+    <a class="btn-full" href="{{ url('home') }}">Accueil &#8594;</a>
+
+    {% embed 'contact/form.html.twig' %}
+         {% set form = contact_form %} 
+    {% endembed %}
+{% endblock %}
