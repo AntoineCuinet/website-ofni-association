@@ -1,16 +1,22 @@
 @use '../global/variables' as *;
+@use '../../mixins/filter' as *;
 
 iframe {
     display: block;
-    margin-top: 50px;
-    max-width: 50%;
-    width: 500px !important;
-    height: 700px !important;
+    overflow: hidden;
+    margin: 70px auto;
+    width: 80%;
+    height: 800px;
     border: $border;
-    border-radius: 15px;
+    border-radius: $border-rad;
     background: transparent;
 
-    @media #{$max-width-s} {
-        display: none;
+    @include blur-filter();
+    -webkit-box-shadow: $box-shadow-right;
+    -moz-box-shadow: $box-shadow-right;
+    box-shadow: $box-shadow-right;
+
+    @media #{$max-width-m} {
+        width: 100%;
     }
 }

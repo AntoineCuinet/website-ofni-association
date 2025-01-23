@@ -49,11 +49,12 @@
     position: absolute;
     top: 5%;
     right: 5%;
+    width: 30px;
+    height: 30px;
     background-color: $color-white;
     cursor: pointer;
     border-radius: 50%;
     border: none;
-    padding: 5px 7px;
     transition: background-color $transition;
 
     &:hover {
@@ -115,7 +116,8 @@
 .modal-arrow {
     background-color: rgba(255, 255, 255, 0.7);
     border: none;
-    padding: 5px 10px;
+    width: 40px;
+    height: 40px;
     font-size: 24px;
     cursor: pointer;
     color: $color-black;
