@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title "Instances d'événements" %}
+
+{% block main %}
+    <h1>Instances d'événements - Dashboard</h1>
+    <a href="{{ path('event.instance.create') }}">Créer une nouvelle instance</a>
+    <table>
+        <thead>
+            <tr><th>Nom</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+        {% for instance in instances %}
+            <tr>
+                <td>{{ instance.name }}</td>
+                <td>
+                    <a href="{{ path('event.instance.show', { 'id': instance.id, slug: instance.slug }) }}">Voir</a>
+                    <a href="{{ path('event.instance.edit', { 'id': instance.id }) }}">Modifier</a>
+                    <a href="{{ path('event.instance.delete', { 'id': instance.id }) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

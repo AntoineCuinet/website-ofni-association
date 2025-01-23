@@ -1,0 +1,13 @@
+<article>
+    <div>
+        <img src="/pictures/events/{{ instance.parentEvent.imageName }}" alt="Illustration de {{ instance.name }}">
+    </div>
+    <div>
+        <h4>{{ instance.date | date("d/m/Y") }}</h4>
+        <h3>{{ instance.name }}</h3>
+        <p>{{ instance.parentEvent.descriptionMini }}</p>
+    </div>
+    <div>
+        <a class="btn" href="{{ path('event.instance.show', {id: instance.id, slug: instance.slug}) }}">Voir l'événement</a>
+    </div>
+</article>

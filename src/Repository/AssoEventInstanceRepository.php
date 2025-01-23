@@ -16,6 +16,39 @@ class AssoEventInstanceRepository extends ServiceEntityRepository
         parent::__construct($registry, AssoEventInstance::class);
     }
 
+    public function history(): array
+    {
+        return $this->createQueryBuilder('i')
+            ->orderBy('i.date', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function prev(int $limit = 5): array
+    {
+        return $this->createQueryBuilder('i')
+            ->where('i.date < :now')
+            ->setParameter('now', new \DateTime())
+            ->orderBy('i.date', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function next(int $limit = 5): array
+    {
+        return $this->createQueryBuilder('i')
+            ->where('i.date > :now')
+            ->setParameter('now', new \DateTime())
+            ->orderBy('i.date', 'ASC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return AssoEventInstance[] Returns an array of AssoEventInstance objects
 //     */

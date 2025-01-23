@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title "Instances d'événements" %}
+
+{% block main %}
+    <h1>Les événements à venir</h1>
+    <section>
+        <h2>Nos prochains événements</h2>
+        {% for instance in next %}
+            {% include "partials/instance_teaser.html.twig" with {instance: instance} only %}
+        {% endfor %}
+    </section>
+    <section>
+        <h2>Les derniers qui ont été menés à point !</h2>
+        {% for instance in prev %}
+            {% include "partials/instance_teaser.html.twig" with {instance: instance} only %}
+        {% endfor %}
+    </section>
+{% endblock %}

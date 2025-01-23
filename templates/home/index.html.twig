@@ -53,35 +53,12 @@
     <section>
         <h2>Nos événements</h2>
         <p>Retrouvez ici nos événements !</p>
-
-        <article> <!-- TODO: faire dynamiquement -->
-            <div>
-                <img src="./pictures/ndi.png" alt="Image de l'actualité">
-            </div>
-            <div>
-                <h3>Nuit de l'info</h3>
-                <p>Venez nous rejoindre pour créer un site toute une nuit !</p>
-            </div>
-            <div>
-                <a class="btn" href="{# {{ path('actualite_show', {slug: 'actualite-1'}) }} #}">Voir l'événement</a> {# TODO #}
-            </div>
-        </article>
-
-        <article>
-            <div>
-                <img src="./pictures/barbecue.png" alt="Image de l'actualité">
-            </div>
-            <div>
-                <h3>Barbecue</h3>
-                <p>Que de mieux qu'un bon barbuc pour fêter tous ensemble l'arrivée de l'été ?!</p>
-            </div>
-            <div>
-                <a class="btn" href="{# {{ path('actualite_show', {slug: 'actualite-1'}) }} #}">Voir l'événement</a> {# TODO #}
-            </div>
-        </article>
+        {% for instance in instances %}
+            {% include "partials/instance_teaser.html.twig" with {instance: instance} only %}
+        {% endfor %}
     </section>
 
     {% embed 'contact/form.html.twig' %}
-         {% set form = contact_form %} 
+        {% set form = contact_form %}
     {% endembed %}
 {% endblock %}

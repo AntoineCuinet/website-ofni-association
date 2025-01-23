@@ -1,0 +1,8 @@
+{% extends "base.html.twig" %}
+
+{% block title "Modification d'instance" %}
+
+{% block main %}
+    <h1>Modification de {{ instance.name }}</h1>
+    {{ form(form) }}
+{% endblock %}

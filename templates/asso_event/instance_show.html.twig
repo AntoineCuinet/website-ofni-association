@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AssoEventController!{% endblock %}
+{% block title %}instance.name{% endblock %}
 
 {% block main %}
 <h1>{{ instance.parentEvent.name }}</h1>
+<h4>{{ instance.date | date('d/m/Y') }}</h4>
 <figure>
     <img src="/pictures/events/{{ instance.parentEvent.imageName }}" alt="Illustration {{ instance.parentEvent.name }}">
 </figure>
 <h2>{{ instance.name }}</h2>
 <p>{{ instance.parentEvent.description }}</p>
-{% include "partials/sponsors_banner.html.twig" with {'sponsors': instance.sponsors} %}
+{% include "partials/sponsors_banner.html.twig" with {'sponsors': instance.sponsors} only %}
 {% endblock %}
