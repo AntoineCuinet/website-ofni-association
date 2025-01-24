@@ -92,9 +92,9 @@
                     <ul>
                         <li><a class="link footer-links" href="{{ url('home') }}">Accueil</a></li>
                         <li><a class="link footer-links" href="{{ url('presentation') }}">L'OFNI</a></li>
-                        <li><a class="link footer-links" href="{# TODO #}">Événements</a></li>
+                        <li><a class="link footer-links" href="{{ path('event.instance.index') }}">Événements</a></li>
                         <li><a class="link footer-links" href="{{ path('galerie') }}">Galerie</a></li>
-                        <li><a class="link footer-links" href="{# TODO #}">Boutique</a></li>
+                        <li><a class="link footer-links" href="{{ path('shop') }}">Boutique</a></li>
                         <li><a class="link footer-links" href="{{ path('game') }}">Jeu</a></li>
                         {% if app.user %}
                             <a class="link footer-links" href="{{ path('app_account') }}">Mon compte</a>
