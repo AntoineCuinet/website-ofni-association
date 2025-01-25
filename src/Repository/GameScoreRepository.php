@@ -16,6 +16,31 @@ class GameScoreRepository extends ServiceEntityRepository
         parent::__construct($registry, GameScore::class);
     }
 
+    public function totalScores(): array {
+        $res = [];
+        $res['canard'] = $this->createQueryBuilder('score')
+            ->select('sum(score.score)')
+            ->where('score.team = \'canard\'')
+            ->getQuery()
+            ->getOneOrNullResult();
+        $res['abeille'] = $this->createQueryBuilder('score')
+            ->select('sum(score.score)')
+            ->where('score.team = \'abeille\'')
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $canard_first = $res['canard'] >= $res['abeille'];
+        return [
+            'team_first' => [
+                'name' => $canard_first ? 'Canard' : 'Abeille',
+                'score' => $canard_first ? $res['canard'][1] : $res['abeille'][1],
+            ],
+            'team_second' => [
+                'name' => !$canard_first ? 'Canard' : 'Abeille',
+                'score' => !$canard_first ? $res['canard'][1] : $res['abeille'][1],
+            ],
+        ];
+    }
 //    /**
 //     * @return GameScore[] Returns an array of GameScore objects
 //     */
