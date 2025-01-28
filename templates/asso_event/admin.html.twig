@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+{% block title %}OFNI | Instance d'événements{% endblock %}
+
+{% block main %}
+    <h1>Gestion des événements</h1>
+    <h2>Événements</h2>
+    <a href="{{ path('event.create') }}" class="btn">Créer un nouvel événement</a>
+    <table>
+        <thead>
+            <tr><th>Nom</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr>
+                <td>{{ event.name }}</td>
+                <td>
+                    <a href="{{ path('event.show', {id: event.id, slug: event.slug}) }}" class="btn">Voir</a>
+                    <a href="{{ path('event.edit', {id: event.id}) }}" class="btn">Modifier</a>
+                    <a href="{{ path('event.edit.image', {id: event.id}) }}" class="btn">Modifier l'image</a>
+                    <a href="{{ path('event.delete', {id: event.id}) }}" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h2>Instances d'événements</h2>
+    <a href="{{ path('event.instance.create') }}" class="btn">Créer une nouvelle instance</a>
+    <table>
+        <thead>
+            <tr><th>Nom</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+        {% for instance in instances %}
+            <tr>
+                <td>{{ instance.name }}</td>
+                <td>
+                    <a href="{{ path('event.instance.show', { id: instance.id, slug: instance.slug }) }}" class="btn">Voir</a>
+                    <a href="{{ path('event.instance.edit', { id: instance.id }) }}" class="btn">Modifier</a>
+                    <a href="{{ path('event.instance.delete', { id: instance.id }) }}" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

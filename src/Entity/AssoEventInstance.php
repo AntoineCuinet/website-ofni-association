@@ -16,7 +16,7 @@ class AssoEventInstance
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'instances')]
+    #[ORM\ManyToOne(inversedBy: 'instances', fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: false)]
     private ?AssoEvent $parentEvent = null;
 

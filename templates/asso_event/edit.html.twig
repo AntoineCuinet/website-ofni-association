@@ -4,5 +4,6 @@
 
 {% block main %}
     <h1>Modification | {{ event.name }}</h1>
+    {% block tools %}{% endblock %}
     {{ form(form) }}
 {% endblock %}

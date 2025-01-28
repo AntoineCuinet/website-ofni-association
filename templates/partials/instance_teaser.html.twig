@@ -1,6 +1,6 @@
 <article>
     <div>
-        <img src="/pictures/events/{{ instance.parentEvent.imageName }}" alt="Illustration de {{ instance.name }}">
+        <img src="/{{ instance.parentEvent.imagePath }}" alt="Illustration de {{ instance.name }}">
     </div>
     <div>
         <h4>{{ instance.date | date("d/m/Y") }}</h4>

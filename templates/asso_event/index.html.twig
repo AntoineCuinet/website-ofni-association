@@ -7,4 +7,5 @@
     {% for event in events %}
         {% include "partials/event_teaser.html.twig" with {event: event} only %}
     {% endfor %}
+    <a href="{{ path('event.instance.index') }}" class="btn">Les éditions qui arrivent</a>
 {% endblock %}

@@ -4,11 +4,12 @@
 {% block main %}
     <h1>Nos événements</h1>
     <section>
-        <h2>Nos prochains événements</h2>
+        <h2>Les prochains</h2>
         {% for instance in next %}
             {% include "partials/instance_teaser.html.twig" with {instance: instance} only %}
         {% endfor %}
     </section>
+    <a href="{{ path('event.index') }}" class="btn">Quelle sont nos principales manifestations ?</a>
     <section>
         <h2>Les derniers qui ont été menés à point !</h2>
         {% for instance in prev %}

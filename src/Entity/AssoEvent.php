@@ -15,6 +15,7 @@ class AssoEvent
 {
     public const IMAGE_DIR_PATH = 'pictures/events/';
     public const DEFAULT_IMAGE_NAME = 'event_default.png';
+    public const IMAGE_PREFIX = 'event_';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -110,6 +111,7 @@ class AssoEvent
     public function setImageName(?string $imageName): static
     {
         $this->imageName = $imageName;
+        $this->imagePathResolver();
 
         return $this;
     }
@@ -128,11 +130,17 @@ class AssoEvent
     {
         $this->image = $image;
 
-        // upload image
-        if ($image) {
-            $imageName = uniqid("event_") . '.' . $image->guessClientExtension();
-            $image->move('pictures/events', $imageName);
-            $this->setImageName($imageName);
+        if ($image !== null) {
+            // upload image
+            if ($this->imageName === null)
+                $this->imageName = uniqid(AssoEvent::IMAGE_PREFIX) . '.' . $image->guessClientExtension();
+            $image->move(AssoEvent::IMAGE_DIR_PATH, $this->imageName);
+            $this->setImageName($this->imageName);
+        }
+        else if (!str_ends_with($this->imagePath, AssoEvent::DEFAULT_IMAGE_NAME)) {
+            // remove image
+            unlink($this->imagePath);
+            $this->setImageName(null);
         }
 
         return $this;

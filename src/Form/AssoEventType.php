@@ -23,22 +23,32 @@ class AssoEventType extends AbstractType
                 'label' => 'Résumé'
             ])
         ;
+        // create mode
         if (!$options['is_edit']) {
             $builder
                 ->add('image', FileType::class, options: [
                     'label' => 'Image',
                     'required' => false
                 ])
+                ->add('submit', SubmitType::class, options: [
+                    'label' => 'Créer',
+                    'attr' => [
+                        'class' => 'btn'
+                    ]
+                ])
             ;
         }
-        $builder
-            ->add('submit', SubmitType::class, options: [
-                'label' => 'Créer',
-                'attr' => [
-                    'class' => 'btn'
-                ]
-            ])
-        ;
+        // edit mode
+        else {
+            $builder
+                ->add('submit', SubmitType::class, options: [
+                    'label' => 'Mettre à jour',
+                    'attr' => [
+                        'class' => 'btn'
+                    ]
+                ])
+            ;
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void

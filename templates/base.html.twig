@@ -24,7 +24,7 @@
 
                 <div class="navlinks-container">
                     <a class="navlinks {{ app.current_route == 'presentation' ? 'active' : ''}}" href="{{ path('presentation') }}">L'OFNI</a>
-                    <a class="navlinks {{ app.current_route == 'event.instance.index' ? 'active' : ''}}" href="{{ path('event.instance.index') }}">Événements</a>
+                    <a class="navlinks {{ app.current_route starts with 'event' ? 'active' : ''}}" href="{{ path('event.instance.index') }}">Événements</a>
                     <a class="navlinks {{ app.current_route == 'galerie' ? 'active' : ''}}" href="{{ path('galerie') }}">Galerie</a>
                     <a class="navlinks {{ app.current_route == 'shop' ? 'active' : ''}}" href="{{ path('shop') }}">Boutique</a>
                     <a class="navlinks {{ app.current_route == 'game' ? 'active' : ''}}" href="{{ path('game') }}">Jeu</a>

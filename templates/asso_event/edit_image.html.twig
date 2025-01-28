@@ -1,0 +1,5 @@
+{% extends "asso_event/edit.html.twig" %}
+
+{% block tools %}
+    <a href="{{ path('event.edit.image.delete', {id: event.id}) }}" class="btn btn-danger">Supprimer l'image</a>
+{% endblock %}

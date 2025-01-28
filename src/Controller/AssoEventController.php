@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\AssoEvent;
 use App\Entity\AssoEventInstance;
+use App\Form\AssoEventImageType;
 use App\Form\AssoEventInstanceType;
 use App\Form\AssoEventType;
 use App\Repository\AssoEventInstanceRepository;
@@ -54,7 +55,7 @@ class AssoEventController extends AbstractController
             // save event in database
             $em->persist($event);
             $em->flush();
-            return $this->redirectToRoute('event.index');
+            return $this->redirectToRoute('event.admin');
         }
         // page rendering
         return $this->render('asso_event/create.html.twig', [
@@ -73,12 +74,57 @@ class AssoEventController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // save event in database
             $em->flush();
-            return $this->redirectToRoute('event.index');
+            return $this->redirectToRoute('event.admin');
         }
         // page rendering
         return $this->render('asso_event/edit.html.twig', [
             'event' => $event,
             'form' => $form
+        ]);
+    }
+
+    #[Route('/events/{id}/edit/image', name: 'event.edit.image', requirements: ['id' => '\d+'])]
+    public function editImage(AssoEvent $event, Request $request, EntityManagerInterface $em): Response
+    {
+        // form create and handling
+        $form = $this->createForm(AssoEventImageType::class, $event);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // save event in database
+            $em->flush();
+            return $this->redirectToRoute('event.admin');
+        }
+        // page rendering
+        return $this->render('asso_event/edit_image.html.twig', [
+            'event' => $event,
+            'form' => $form
+        ]);
+    }
+
+    #[Route('/events/{id}/edit/image/delete', name: 'event.edit.image.delete', requirements: ['id' => '\d+'])]
+    public function deleteImage(AssoEvent $event, EntityManagerInterface $em): Response
+    {
+        $event->setImage(null);
+        $em->flush();
+        return $this->redirectToRoute('event.admin');
+    }
+
+    #[Route('/events/{id}/delete', name: 'event.delete', requirements: ['id' => '\d+'])]
+    public function delete(AssoEvent $event, EntityManagerInterface $em): Response
+    {
+        $event->setImage(null);
+        $em->remove($event);
+        $em->flush();
+        return $this->redirectToRoute('event.admin');
+    }
+
+    #[Route('/events/admin', name: 'event.admin')]
+    public function admin(AssoEventRepository $eventRepo, AssoEventInstanceRepository $instanceRepo): Response
+    {
+        // page rendering
+        return $this->render('asso_event/admin.html.twig', [
+            'events' => $eventRepo->findAll(),
+            'instances' => $instanceRepo->findAll()
         ]);
     }
 
@@ -118,10 +164,7 @@ class AssoEventController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($instance);
             $em->flush();
-            return $this->redirectToRoute('event.instance.show', [
-                'id' => $instance->getId(),
-                'slug' => $instance->getSlug()
-            ]);
+            return $this->redirectToRoute('event.admin');
         }
         // page rendering
         return $this->render('asso_event/instance_create.html.twig', [
@@ -137,10 +180,7 @@ class AssoEventController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
-            return $this->redirectToRoute('event.instance.show', [
-                'id' => $instance->getId(),
-                'slug' => $instance->getSlug()
-            ]);
+            return $this->redirectToRoute('event.admin');
         }
         //  page rendering
         return $this->render('asso_event/instance_edit.html.twig', [
@@ -154,15 +194,6 @@ class AssoEventController extends AbstractController
     {
         $em->remove($instance);
         $em->flush();
-        return $this->redirectToRoute('home');
-    }
-
-    #[Route('/events/instance/admin', name: 'event.instance.admin')]
-    public function instanceAdmin(AssoEventInstanceRepository $repository): Response
-    {
-        // page rendering
-        return $this->render('asso_event/instance_admin.html.twig', [
-            'instances' => $repository->history()
-        ]);
+        return $this->redirectToRoute('event.admin');
     }
 }
