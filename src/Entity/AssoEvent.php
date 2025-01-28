@@ -7,10 +7,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: AssoEventRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class AssoEvent
 {
+    public const IMAGE_DIR_PATH = 'pictures/events/';
+    public const DEFAULT_IMAGE_NAME = 'event_default.png';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -30,6 +35,8 @@ class AssoEvent
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imageName = null;
+    private ?string $imagePath = null;
+    private ?UploadedFile $image = null;
 
     /**
      * @var Collection<int, AssoEventInstance>
@@ -107,6 +114,30 @@ class AssoEvent
         return $this;
     }
 
+    public function getImagePath(): ?string
+    {
+        return $this->imagePath;
+    }
+
+    public function getImage(): ?UploadedFile
+    {
+        return $this->image;
+    }
+
+    public function setImage(?UploadedFile $image): static
+    {
+        $this->image = $image;
+
+        // upload image
+        if ($image) {
+            $imageName = uniqid("event_") . '.' . $image->guessClientExtension();
+            $image->move('pictures/events', $imageName);
+            $this->setImageName($imageName);
+        }
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, AssoEventInstance>
      */
@@ -132,6 +163,23 @@ class AssoEvent
             if ($instance->getParentEvent() === $this) {
                 $instance->setParentEvent(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Resolve image name to ensure that the name refers to an existing image.
+     *
+     * @param ?string $imageName The image name to resolve.
+     * @return string The resolved image name.
+     */
+    #[ORM\PostLoad]
+    public function imagePathResolver(): static
+    {
+        $dir_path = AssoEvent::IMAGE_DIR_PATH;
+        if ($this->imageName === null || !file_exists($this->imagePath = $dir_path . $this->imageName)) {
+            $this->imagePath = $dir_path . AssoEvent::DEFAULT_IMAGE_NAME;
         }
 
         return $this;

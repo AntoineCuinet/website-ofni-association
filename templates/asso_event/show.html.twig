@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+
+{% block title 'OFNI | Événement' %}
+
+{% block main %}
+    <h1>{{ event.name }}</h1>
+    <figure>
+        <img src="/{{ event.imagePath }}" alt="Illustration de {{ event.name }}">
+    </figure>
+    <p>{{ event.description }}</p>
+{% endblock %}

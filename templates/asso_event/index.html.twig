@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{% block title 'OFNI | Événements'%}
+
+{% block main %}
+    <h1>Nos grands événements</h1>
+    {% for event in events %}
+        {% include "partials/event_teaser.html.twig" with {event: event} only %}
+    {% endfor %}
+{% endblock %}

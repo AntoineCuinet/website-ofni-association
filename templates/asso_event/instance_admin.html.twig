@@ -13,9 +13,9 @@
             <tr>
                 <td>{{ instance.name }}</td>
                 <td>
-                    <a href="{{ path('event.instance.show', { 'id': instance.id, slug: instance.slug }) }}">Voir</a>
-                    <a href="{{ path('event.instance.edit', { 'id': instance.id }) }}">Modifier</a>
-                    <a href="{{ path('event.instance.delete', { 'id': instance.id }) }}">Supprimer</a>
+                    <a href="{{ path('event.instance.show', { 'id': instance.id, slug: instance.slug }) }}" class="link">Voir</a>
+                    <a href="{{ path('event.instance.edit', { 'id': instance.id }) }}" class="link">Modifier</a>
+                    <a href="{{ path('event.instance.delete', { 'id': instance.id }) }}" class="link">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}

@@ -1,0 +1,12 @@
+<article>
+    <div>
+        <img src="/{{ event.imagePath }}" alt="Illustration de {{ event.name }}">
+    </div>
+    <div>
+        <h3>{{ event.name }}</h3>
+        <p>{{ event.descriptionMini }}</p>
+    </div>
+    <div>
+        <a class="btn" href="{{ path('event.show', {id: event.id, slug: event.slug}) }}">Voir l'événement</a>
+    </div>
+</article>
