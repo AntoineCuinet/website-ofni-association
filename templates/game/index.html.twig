@@ -9,7 +9,37 @@
     <p class="hidden-pc">Connectez-vous sur un ordinateur pour jouer.</p>
 
     <section>
-        <h2>Classement &#128220;</h2>
+        <h2>Classement des équipes</h2>
+        <div class="ranking">
+            {#<div id="model-container" style="width: 300px; height: 400px; margin: auto;"></div>#}
+            <div class="top-3">
+                <div class="place second">
+                    <p>
+                    <span class="order-number-top">2.
+                    </span><br>
+                    <span class="{{ (team_second.name == 'Abeille') ? 'team-bee' : 'team-duck' }}">{{ team_second.name }}</span><br>{{ team_second.score }} points</p>
+                </div>
+
+                <div class="svg-loop-container">
+                    <svg class="rotating-svg" viewBox="0 0 160 160" width="160" height="160">
+                    <g transform="matrix(0.866, -0.5, 0.25, 0.433, 80, 80)">
+                        <path d="M 17,70 A 65,70 0 0,0 65,0 5,5 0 0,1 75,0 75,70 0 0,1 17,70Z" fill="#ff9900"></path>
+                    </g>
+                    </svg>
+                <div class="place first">  
+                    <p><span class="order-number-top">1.
+                    </span><br>
+                    <span class="{{ (team_first.name == 'Abeille') ? 'team-bee' : 'team-duck' }}">{{ team_first.name }}</span><br>{{ team_first.score }} points</p>
+                </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <section>
+        <h2>Classement des joueurs &#128220;</h2>
         <p>Voici le classement des meilleurs joueurs :</p>
 
         <div class="ranking">
@@ -56,4 +86,12 @@
 
         <a class="btn hidden-phone" href="/game/gameplay">J'essaie le jeu !</a>
     </section>
+
+    
+
+{#
+    <script src="{{ asset('build/three-model.js') }}"></script>
+    <script src="{{ asset('build/runtime.js') }}"></script>
+#}
+
 {% endblock %}

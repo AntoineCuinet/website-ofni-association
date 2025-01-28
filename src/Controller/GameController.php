@@ -21,11 +21,20 @@ class GameController extends AbstractController
     {
         
         $scores = $entityManager->getRepository(GameScore::class)->findBy([], ['score' => 'DESC'], 10);
+        $teams_scores = $entityManager->getRepository(GameScore::class)->totalScores();
 
         $scores_size = count($scores);
         if ($scores_size < 3) {
             // TODO: faire quelques parties lorsque l'on déploiera le jeu.
             return $this->render('game/index.html.twig', [
+                'team_first' => [
+                    'name' => 'Canard',
+                    'score' => 2150,
+                ],
+                'team_second' => [
+                    'name' => 'Abeille',
+                    'score' => 1000
+                ],
                 'first' => [
                     'name' => 'John Doe',
                     'team' =>  'Abeille',
@@ -52,7 +61,7 @@ class GameController extends AbstractController
             ]);
         }
 
-        $to_display = [];
+        $to_display = $teams_scores;
         $to_display['first'] = [
             'name' => $scores[0]->getUser()->getPseudo(),
             'team' => $scores[0]->getTeam() == Team::BEE ? 'Abeille' : 'Canard',
