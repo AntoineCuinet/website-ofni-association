@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'OFNI | Actualité' %}
+
+{% block main %}
+    <h1>{{ actu.name }}</h1>
+    <p>{{ actu.postedAt | date('d/m/Y') }}</p>
+    <figure>
+        <img src="/{{ actu.imagePath }}" alt="Illustration de {{ actu.name }}">
+    </figure>
+    <p>{{ actu.content | nl2br }}</p>
+    <a href="{{ path('home') }}" class="btn">Retour à l'accueil</a>
+{% endblock %}

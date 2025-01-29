@@ -5,7 +5,7 @@
     <div>
         <h4>{{ instance.date | date("d/m/Y") }}</h4>
         <h3>{{ instance.name }}</h3>
-        <p>{{ instance.parentEvent.descriptionMini }}</p>
+        <p>{{ instance.parentEvent.descriptionMini | nl2br }}</p>
     </div>
     <div>
         <a class="btn" href="{{ path('event.instance.show', {id: instance.id, slug: instance.slug}) }}">Voir l'événement</a>

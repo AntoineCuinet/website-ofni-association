@@ -1,0 +1,12 @@
+<article>
+    <div>
+        <img src="/{{ actu.imagePath }}" alt="Illustration de {{ actu.name }}">
+    </div>
+    <div>
+        <h3>{{ actu.name }}</h3>
+        <p>{{ actu.contentMini | nl2br }}</p>
+    </div>
+    <div>
+        <a class="btn" href="{{ path('actu.show', {id: actu.id}) }}">Voir l'actu</a>
+    </div>
+</article>

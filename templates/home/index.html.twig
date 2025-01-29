@@ -2,7 +2,6 @@
 
 {% block main %}
     <div class="hero-section">
-        
         <div class="hero-text">
             <h1>L’<span class="o">a</span><span class="f">s</span><span class="n">s</span><span class="i">o</span> des étudiants en Informatique</h1>
             <p>Bienvenue sur le site des étudiants en Informatique de l'Université de Franche-Comté !</p>
@@ -34,20 +33,9 @@
     <section>
         <h2>Les dernières actualités</h2>
         <p>Retrouvez ici les dernières actualités de l'OFNI !</p>
-
-        <article> <!-- TODO: faire dynamiquement -->
-            <div>
-                <img src="favicon.ico" alt="Image de l'actualité">
-            </div>
-            <div>
-                <h4>17-01-2025</h4>
-                <h3>Refonte du site de L'OFNI</h3>
-                <p>C'est avec un grand plaisir que nous vous présentons le nouveau site web de l'OFNI !</p>
-            </div>
-            <div>
-                <a class="btn" href="{# {{ path('actualite_show', {slug: 'actualite-1'}) }} #}">Lire l'article</a> {# TODO #}
-            </div>
-        </article>
+        {% for actu in actus %}
+            {% include "partials/actu_teaser.html.twig" with {actu: actu} only %}
+        {% endfor %}
     </section>
 
     <section>

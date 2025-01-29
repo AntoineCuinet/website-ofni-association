@@ -4,7 +4,7 @@
     </div>
     <div>
         <h3>{{ event.name }}</h3>
-        <p>{{ event.descriptionMini }}</p>
+        <p>{{ event.descriptionMini | nl2br }}</p>
     </div>
     <div>
         <a class="btn" href="{{ path('event.show', {id: event.id, slug: event.slug}) }}">Voir l'événement</a>
