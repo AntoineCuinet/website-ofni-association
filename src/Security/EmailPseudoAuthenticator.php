@@ -89,7 +89,7 @@ class EmailPseudoAuthenticator extends AbstractAuthenticator
         return new RedirectResponse($this->router->generate('app_login'));
     }
 
-    public function start(Request $request, AuthenticationException $authException = null): Response
+    public function start(Request $request, ?AuthenticationException $authException = null): Response
     {
         return new JsonResponse(['message' => 'Authentication required'], Response::HTTP_UNAUTHORIZED);
     }

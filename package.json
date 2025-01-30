@@ -4,19 +4,26 @@
     "license": "UNLICENSED",
     "private": true,
     "dependencies": {
-        "sass": "^1.79.1"
+        "sass": "^1.79.1",
+        "three": "^0.172.0"
     },
     "devDependencies": {
+        "@symfony/webpack-encore": "^5.0.1",
         "concurrently": "^9.0.1",
-        "npm-check-updates": "^17.1.2"
+        "file-loader": "^6.2.0",
+        "npm-check-updates": "^17.1.2",
+        "sass-loader": "^16.0.4",
+        "webpack-dev-server": "^5.2.0"
     },
     "scripts": {
-        "start": "concurrently --kill-others \"npm run server\" \"npm run email-worker\" \"npm run sass\"",
+        "start": "concurrently --kill-others \"npm run server\" \"npm run email-worker\" \"npm run watch-assets\" \"npm run sass\"",
         "server": "php -S localhost:8000 -t public",
         "email-worker": "php bin/console messenger:consume async --time-limit=3600 --memory-limit=128M",
         "migration": "php bin/console doctrine:migrations:migrate",
-        "build": "encore production --progress",
+        "build": "npm run build-assets && npm run build-sass",
         "sass": "sass assets/styles/style.scss:public/style.css --watch",
-        "build-sass": "sass assets/styles/style.scss:public/style.css --style=compressed --no-source-map"
+        "build-sass": "sass assets/styles/style.scss:public/style.css --style=compressed --no-source-map",
+        "watch-assets": "encore dev --watch",
+        "build-assets": "encore production --progress"
     }
 }

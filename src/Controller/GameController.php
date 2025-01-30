@@ -73,9 +73,9 @@ class GameController extends AbstractController
             'score' => $scores[1]->getScore()
         ];
         $to_display['third'] = [
-            'name' => $scores[1]->getUser()->getPseudo(),
-            'team' => $scores[1]->getTeam() == Team::BEE ? 'Abeille' : 'Canard',
-            'score' => $scores[1]->getScore()
+            'name' => $scores[2]->getUser()->getPseudo(),
+            'team' => $scores[2]->getTeam() == Team::BEE ? 'Abeille' : 'Canard',
+            'score' => $scores[2]->getScore()
         ];
         $to_display['top'] = [];
         for ($i = 3; $i < $scores_size; $i++) {

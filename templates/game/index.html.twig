@@ -10,10 +10,10 @@
 
     <section>
         <h2>Classement des équipes</h2>
-        <div class="ranking">
-            {#<div id="model-container" style="width: 300px; height: 400px; margin: auto;"></div>#}
+        <div class="ranking" style="margin: 250px;">
             <div class="top-3">
                 <div class="place second">
+                    <div id="{{ (team_second.name == 'Abeille') ? 'bee' : 'duck'}}-model-container" style="width: 300px; height: 400px; margin: auto; position: absolute; top: -100%"></div>
                     <p>
                     <span class="order-number-top">2.
                     </span><br>
@@ -27,6 +27,7 @@
                     </g>
                     </svg>
                 <div class="place first">  
+                    <div id="{{ (team_first.name == 'Abeille') ? 'bee' : 'duck'}}-model-container" style="width: 300px; height: 400px; margin: auto; position: absolute; top: -100%"></div>
                     <p><span class="order-number-top">1.
                     </span><br>
                     <span class="{{ (team_first.name == 'Abeille') ? 'team-bee' : 'team-duck' }}">{{ team_first.name }}</span><br>{{ team_first.score }} points</p>
@@ -89,9 +90,7 @@
 
     
 
-{#
     <script src="{{ asset('build/three-model.js') }}"></script>
     <script src="{{ asset('build/runtime.js') }}"></script>
-#}
 
 {% endblock %}
