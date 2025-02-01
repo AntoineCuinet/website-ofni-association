@@ -1,0 +1,13 @@
+{
+  "build/app.js": "/build/app.js",
+  "build/three-model.js": "/build/three-model.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/models/yellow-rubber-duck/textures/RubberDuck_Texture.jpeg": "/build/models/yellow-rubber-duck/textures/RubberDuck_Texture.jpeg",
+  "build/models/yellow-rubber-duck/source/Yellow rubber duck.zip": "/build/models/yellow-rubber-duck/source/Yellow rubber duck.zip",
+  "build/models/yellow-rubber-duck/source/yellow_rubber_duck/Texture/RubberDuck_Texture.jpg": "/build/models/yellow-rubber-duck/source/yellow_rubber_duck/Texture/RubberDuck_Texture.jpg",
+  "build/models/cartoon_bee/scene.bin": "/build/models/cartoon_bee/scene.bin",
+  "build/models/yellow-rubber-duck/source/yellow_rubber_duck/Rubbish_Duck.bin": "/build/models/yellow-rubber-duck/source/yellow_rubber_duck/Rubbish_Duck.bin",
+  "build/models/cartoon_bee/scene.gltf": "/build/models/cartoon_bee/scene.gltf",
+  "build/models/yellow-rubber-duck/source/yellow_rubber_duck/Rubbish_Duck.gltf": "/build/models/yellow-rubber-duck/source/yellow_rubber_duck/Rubbish_Duck.gltf",
+  "build/models/cartoon_bee/license.txt": "/build/models/cartoon_bee/license.txt"
+}

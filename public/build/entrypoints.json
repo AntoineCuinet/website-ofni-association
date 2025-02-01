@@ -1,0 +1,16 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/build/runtime.js",
+        "/build/app.js"
+      ]
+    },
+    "three-model": {
+      "js": [
+        "/build/runtime.js",
+        "/build/three-model.js"
+      ]
+    }
+  }
+}

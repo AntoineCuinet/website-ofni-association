@@ -44,25 +44,6 @@
 }
 
 
-/* Styling for the Delete Button */
-.delete-button {
-    position: absolute;
-    top: 5%;
-    right: 5%;
-    width: 30px;
-    height: 30px;
-    background-color: $color-white;
-    cursor: pointer;
-    border-radius: 50%;
-    border: none;
-    transition: background-color $transition;
-
-    &:hover {
-        background-color: $color-tertiary;
-    }
-}
-
-
 /* Modal Styles */
 .photo-modal {
     display: none; /* Hidden by default */
