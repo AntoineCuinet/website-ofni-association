@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block title 'OFNI | Admin' %}
+
+{% block main %}
+    <h1>Gestion des actualités</h1>
+    <a href="{{ path('admin.index') }}" class="btn">Retour au dashboard</a>
+    <h2>Actions rapides</h2>
+    <a href="{{ path('admin.actu.delete.old', {nbrPreservedMonths: 2}) }}", class="btn btn-danger">Supprimer les actus qui ont plus de 2 mois</a>
+    <a href="{{ path('admin.actu.delete.all') }}" class="btn btn-danger">Supprimer toutes les actus</a>
+    <h2>Modification un peu plus fine</h2>
+    <a href="{{ path('admin.actu.create') }}" class="btn">Ajouter une actualité</a>
+    <table>
+        <thead>
+            <tr><th>Nom</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+        {% for actu in actus %}
+            <tr>
+                <td>{{ actu.name }}</td>
+                <td>
+                    <a href="{{ path('actu.show', {id: actu.id}) }}" class="btn">Voir</a>
+                    <a href="{{ path('admin.actu.delete', {id: actu.id}) }}" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

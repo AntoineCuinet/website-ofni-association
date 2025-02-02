@@ -3,8 +3,9 @@
 
 {% block main %}
     <h1>Gestion des événements</h1>
+    <a href="{{ path('admin.index') }}" class="btn">Retour au dashboard</a>
     <h2>Événements</h2>
-    <a href="{{ path('event.create') }}" class="btn">Créer un nouvel événement</a>
+    <a href="{{ path('admin.event.create') }}" class="btn">Créer un nouvel événement</a>
     <table>
         <thead>
             <tr><th>Nom</th><th>Actions</th></tr>
@@ -15,16 +16,16 @@
                 <td>{{ event.name }}</td>
                 <td>
                     <a href="{{ path('event.show', {id: event.id, slug: event.slug}) }}" class="btn">Voir</a>
-                    <a href="{{ path('event.edit', {id: event.id}) }}" class="btn">Modifier</a>
-                    <a href="{{ path('event.edit.image', {id: event.id}) }}" class="btn">Modifier l'image</a>
-                    <a href="{{ path('event.delete', {id: event.id}) }}" class="btn btn-danger">Supprimer</a>
+                    <a href="{{ path('admin.event.edit', {id: event.id}) }}" class="btn">Modifier</a>
+                    <a href="{{ path('admin.event.edit.image', {id: event.id}) }}" class="btn">Modifier l'image</a>
+                    <a href="{{ path('admin.event.delete', {id: event.id}) }}" class="btn btn-danger">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
     <h2>Instances d'événements</h2>
-    <a href="{{ path('event.instance.create') }}" class="btn">Créer une nouvelle instance</a>
+    <a href="{{ path('admin.event.instance.create') }}" class="btn">Créer une nouvelle instance</a>
     <table>
         <thead>
             <tr><th>Nom</th><th>Actions</th></tr>
@@ -35,8 +36,8 @@
                 <td>{{ instance.name }}</td>
                 <td>
                     <a href="{{ path('event.instance.show', { id: instance.id, slug: instance.slug }) }}" class="btn">Voir</a>
-                    <a href="{{ path('event.instance.edit', { id: instance.id }) }}" class="btn">Modifier</a>
-                    <a href="{{ path('event.instance.delete', { id: instance.id }) }}" class="btn btn-danger">Supprimer</a>
+                    <a href="{{ path('admin.event.instance.edit', { id: instance.id }) }}" class="btn">Modifier</a>
+                    <a href="{{ path('admin.event.instance.delete', { id: instance.id }) }}" class="btn btn-danger">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'OFNI | Admin' %}
+
+{% block main %}
+    <h1>Dashboard administrateur</h1>
+    <h2>Gestion du site</h2>
+    <a href="{{ path('admin.event') }}" class="btn">Gérer les événements</a>
+    <a href="{{ path('admin.actu') }}" class="btn">Gérer les actualités</a>
+{% endblock %}

@@ -4,6 +4,10 @@
 
 {% block main %}
 
+{% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('admin.index') }}" class="btn-full">Dashboard administrateur</a>
+{% endif %}
+
 <h1>Mon compte</h1>
 
 {% for flash_success in app.flashes('success') %}

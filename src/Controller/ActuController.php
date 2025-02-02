@@ -21,7 +21,7 @@ class ActuController extends AbstractController
         ]);
     }
 
-    #[Route('/actu/create', name: 'actu.create')]
+    #[Route('/admin/actu/create', name: 'admin.actu.create')]
     public function create(Request $request, EntityManagerInterface $em): Response
     {
         $actu = new Actu();
@@ -39,7 +39,7 @@ class ActuController extends AbstractController
         ]);
     }
 
-    #[Route('/actu/{id}/delete', name: 'actu.delete', requirements: ['id' => '\d+'])]
+    #[Route('/admin/actu/{id}/delete', name: 'admin.actu.delete', requirements: ['id' => '\d+'])]
     public function delete(Actu $actu, Request $request, EntityManagerInterface $em): Response
     {
         $actu->setImage(null);
@@ -48,7 +48,19 @@ class ActuController extends AbstractController
         return $this->redirectToRoute('actu.admin');
     }
 
-    #[Route('/actu/delete-{nbrPreservedMonths}', name: 'actu.delete.old', requirements: ['nbrPreservedMonths' => '\d+'])]
+    #[Route('/admin/actu/delete', name: 'admin.actu.delete.all')]
+    public function deleteAll(ActuRepository $repository, EntityManagerInterface $em): Response
+    {
+        $actus = $repository->findAll();
+        foreach ($actus as $actu) {
+            $actu->setImage(null);
+            $em->remove($actu);
+        }
+        $em->flush();
+        return $this->redirectToRoute('admin.actu');
+    }
+
+    #[Route('/admin/actu/delete-{nbrPreservedMonths}', name: 'admin.actu.delete.old', requirements: ['nbrPreservedMonths' => '\d+'])]
     public function deleteOld(int $nbrPreservedMonths, ActuRepository $repository, EntityManagerInterface $em): Response
     {
         $date = new \DateTimeImmutable("-$nbrPreservedMonths months");
@@ -59,14 +71,5 @@ class ActuController extends AbstractController
         }
         $em->flush();
         return $this->redirectToRoute('actu.admin');
-    }
-
-    #[Route('/actu/admin', name: 'actu.admin')]
-    public function admin(ActuRepository $repository): Response
-    {
-        $actus = $repository->history(0);
-        return $this->render('actu/admin.html.twig', [
-            'actus' => $actus
-        ]);
     }
 }
