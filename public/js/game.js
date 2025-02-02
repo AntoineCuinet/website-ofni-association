@@ -2,6 +2,39 @@
 
 document.addEventListener("DOMContentLoaded", function() {
 
+    /* Music */
+    const musicButton = document.getElementById('music-button');
+    let isPaused = true;
+    let audio1 = new Audio();
+    audio1.src = '../js/sounds/background-music.mp3';
+
+    function startMusicLoop() {
+        isPaused = false;
+        audio1.play();
+
+        audio1.addEventListener('ended', () => {
+            if (!isPaused) {
+                audio1.currentTime = 0;
+                audio1.play();
+            }
+        });
+    }
+
+    startMusicLoop();
+
+    musicButton.addEventListener('click', () => {
+        if (isPaused) {
+            startMusicLoop();
+            musicButton.innerHTML = '&#128266;';
+        } else {
+            isPaused = true;
+            audio1.pause();
+            musicButton.innerHTML = '&#128263;';
+        }
+    });
+
+
+    /* Const */
     const gameContainer = document.getElementsByClassName("game-container")[0];
     const gameTeamChoice = document.getElementsByClassName("game-team-container")[0];
     const gameInfoContainer = document.getElementsByClassName("game-info-container")[0];
@@ -13,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const livesElement = document.getElementById("lives-text");
     const scoreFinal = document.getElementById("score");
     const teamChoice = document.getElementById("team-id");
-
+    const quit = document.getElementById("quit-button");
     var team = 0;
 
     btnBeeStart.addEventListener("click", function() {
@@ -94,6 +127,34 @@ document.addEventListener("DOMContentLoaded", function() {
          * Updates the state of the game elements.
          */
         update(currentTime) {
+            // quit.addEventListener("click", function() { //TODO: quit button
+            //     this.isRunning = false; // End the game
+        
+            //         this.saveScore();
+            //         alert("💀 Game Over ! Your score is " + this.score + " 💀");
+            //         scoreFinal.textContent = this.score;
+        
+            //         if (team === 1) {
+            //             teamChoice.textContent = "Team abeille";
+            //             teamChoice.classList.add("team-bee");
+            //         } else {
+            //             teamChoice.textContent = "Team canard";
+            //             teamChoice.classList.add("team-duck");
+            //         }
+        
+            //         // Reset the game
+            //         this.player.lives = 3;
+            //         this.score = 0;
+            //         this.level = 1;
+            //         scoreElement.textContent = this.score;
+            //         levelElement.textContent = this.level;
+            //         livesElement.textContent = this.player.lives;
+        
+            //         gameInfoContainer.style.display = "none";
+            //         gameContainer.style.display = "flex";
+            // });
+
+
             // Update player bullets
             this.bullets.forEach((bullet, index) => {
                 bullet.update();
@@ -121,6 +182,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     // Check if game over
                     if (this.player.lives <= 0) {
                         this.isRunning = false; // Stop the game
+
+                        this.saveScore();
                         alert(`💀 Game Over! Your score is ${this.score} 💀`);
                         scoreFinal.textContent = this.score;
 
@@ -281,9 +344,9 @@ document.addEventListener("DOMContentLoaded", function() {
             // Main game loop
             const loop = (currentTime) => {
                 if (this.isRunning) {
-                this.update(currentTime);
-                this.draw();
-                requestAnimationFrame(loop);
+                    this.update(currentTime);
+                    this.draw();
+                    requestAnimationFrame(loop);
                 }
             };
             requestAnimationFrame(loop);
@@ -299,7 +362,7 @@ document.addEventListener("DOMContentLoaded", function() {
             this.height = 4;
             this.speed = 5;
             this.image = new Image();
-            this.image.src = "/js/sprites/Alien1.jpg";
+            this.image.src = "/js/sprites/spaceship.png";
             this.lastShootTime = 0;
             this.shootCooldown = 300;
             this.lives = 3;
@@ -360,8 +423,9 @@ document.addEventListener("DOMContentLoaded", function() {
             this.shootCooldown = 1000; // Intervalle initial entre les tirs (en ms)
 
             this.images = [
-                "/js/sprites/Alien1.jpg",
-                "/js/sprites/Alien2.jpg",
+                "/js/sprites/green.png",
+                "/js/sprites/red.png",
+                "/js/sprites/yellow.png",
             ];
 
             const randomIndex = Math.floor(Math.random() * this.images.length);

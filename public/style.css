@@ -1290,6 +1290,13 @@ form div input[type=checkbox]:focus {
   margin: 10px;
 }
 
+.game-music-container {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  z-index: 1000;
+}
+
 /* ========================================================================
  * File Name: style.css
  * Author: CUINET Antoine
