@@ -5,6 +5,10 @@
     <h1>👾 Space OFNIvaders 👾</h1>
     <p>Bienvenue sur notre nouveau jeu, inspiré de l'indémodable "Space Invaders" &#128377;&#128126;</p>
 
+    {% if not app.user %}
+    <p class="hidden-phone">&#10071; <a class="link" href="{{ path('app_login') }}">Connectez-vous</a> pour que votre score soit enregistré ! &#10071;</p>
+    {% endif %}
+
     <a class="btn hidden-phone" href="/game/gameplay">Jouer !</a>
     <p class="hidden-pc">Connectez-vous sur un ordinateur pour jouer.</p>
 

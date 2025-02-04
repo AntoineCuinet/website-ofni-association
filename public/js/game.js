@@ -1,43 +1,12 @@
 "use strict";
 
-document.addEventListener("DOMContentLoaded", function() {
-
-    /* Music */
-    const musicButton = document.getElementById('music-button');
-    let isPaused = true;
-    let audio1 = new Audio();
-    audio1.src = '../js/sounds/background-music.mp3';
-
-    function startMusicLoop() {
-        isPaused = false;
-        audio1.play();
-
-        audio1.addEventListener('ended', () => {
-            if (!isPaused) {
-                audio1.currentTime = 0;
-                audio1.play();
-            }
-        });
-    }
-
-    startMusicLoop();
-
-    musicButton.addEventListener('click', () => {
-        if (isPaused) {
-            startMusicLoop();
-            musicButton.innerHTML = '&#128266;';
-        } else {
-            isPaused = true;
-            audio1.pause();
-            musicButton.innerHTML = '&#128263;';
-        }
-    });
-
-
-    /* Const */
-    const gameContainer = document.getElementsByClassName("game-container")[0];
-    const gameTeamChoice = document.getElementsByClassName("game-team-container")[0];
-    const gameInfoContainer = document.getElementsByClassName("game-info-container")[0];
+document.addEventListener("DOMContentLoaded", function () {
+    /*********************************************************************************/
+    /*                                    CONST                                      */
+    /*********************************************************************************/
+    const gameContainer = document.querySelector(".game-container");
+    const gameTeamChoice = document.querySelector(".game-team-container");
+    const gameInfoContainer = document.querySelector(".game-info-container");
     const btnBeeStart = document.getElementById("btn-bee-start-game");
     const btnDuckStart = document.getElementById("btn-duck-start-game");
     const btnStart = document.getElementById("btn-start-game");
@@ -47,174 +16,106 @@ document.addEventListener("DOMContentLoaded", function() {
     const scoreFinal = document.getElementById("score");
     const teamChoice = document.getElementById("team-id");
     const quit = document.getElementById("quit-button");
-    var team = 0;
+    const musicButton = document.getElementById('music-button');
 
-    btnBeeStart.addEventListener("click", function() {
-        gameTeamChoice.style.display = "none";
-        gameInfoContainer.style.display = "block";
-        team = 1;
-        const game = new Game("canvasId");
-        game.start();
-    });
+    let team = 0;
+    let isPaused = true;
+    let audio1 = new Audio();
+    audio1.src = '../js/sounds/background-music.mp3';
 
-    btnDuckStart.addEventListener("click", function() {
-        gameTeamChoice.style.display = "none";
-        gameInfoContainer.style.display = "block";
-        team = 2;
-        const game = new Game("canvasId");
-        game.start();
-    });
+    /*********************************************************************************/
+    /*                                   LISTENER                                    */
+    /*********************************************************************************/
+    if (musicButton) {
+        musicButton.addEventListener('click', toggleMusic);
+    }
 
+    if (btnBeeStart) {
+        btnBeeStart.addEventListener("click", () => startGame(1));
+    }
 
-    btnStart.addEventListener("click", function() {
-        gameContainer.style.display = "none";
-        gameInfoContainer.style.display = "block";
-        const game = new Game("canvasId");
-        game.start();
-    });
+    if (btnDuckStart) {
+        btnDuckStart.addEventListener("click", () => startGame(2));
+    }
 
+    if (btnStart) {
+        btnStart.addEventListener("click", () => startGame(0));
+    }
+
+    /*********************************************************************************/
+    /*                                  CLASS GAME                                   */
+    /*********************************************************************************/
     class Game {
         constructor(canvasId) {
             this.canvas = document.getElementById(canvasId);
+            if (!this.canvas) throw new Error("Canvas element not found");
             this.ctx = this.canvas.getContext("2d", { antialias: false });
-            // this.ctx.imageSmoothingEnabled = false; // Désactive l'anticrénelage pour les images
-            // this.ctx.imageSmoothingQuality = 'low'; // Qualité de lissage minimale
             this.player = new Player(this.canvas.width / 2 - 20, this.canvas.height - 10);
             this.aliens = [];
             this.bullets = [];
             this.isRunning = true;
             this.score = 0;
+            this.level = 1;
             this.initAliens();
             this.setupControls();
             this.lastTime = 0;
             this.shootFrequencyIncrease = 1.01;
-            this.level = 1;
         }
-      
-        /**
-         * Initializes the grid of aliens.
-         */
+
         initAliens() {
-            const rows = 5; // Number of rows of aliens
-            const cols = 10; // Number of columns of aliens
-            const alienSpacing = 2; // Space between aliens
+            const rows = 5;
+            const cols = 10;
+            const alienSpacing = 2;
             const alienWidth = 6;
             const alienHeight = 4;
 
             for (let row = 0; row < rows; row++) {
                 for (let col = 0; col < cols; col++) {
                     const x = col * (alienWidth + alienSpacing) + alienSpacing;
-                    const y = row * (alienHeight + alienSpacing) + alienSpacing; // Commence en haut
+                    const y = row * (alienHeight + alienSpacing) + alienSpacing;
                     this.aliens.push(new Alien(x, y));
                 }
             }
         }
 
-
-        /**
-         * Sets up controls for player actions.
-         */
         setupControls() {
             document.addEventListener("keydown", (event) => {
-            if (event.key === "ArrowLeft") this.player.move("left", this.canvas.width);
-            if (event.key === "ArrowRight") this.player.move("right", this.canvas.width);
-            if (event.key === " ") this.player.shoot(this.bullets); // Space bar to shoot
+                if (event.key === "ArrowLeft") this.player.move("left", this.canvas.width);
+                if (event.key === "ArrowRight") this.player.move("right", this.canvas.width);
+                if (event.key === " ") this.player.shoot(this.bullets);
             });
         }
-        
-      
-        /**
-         * Updates the state of the game elements.
-         */
+
         update(currentTime) {
-            // quit.addEventListener("click", function() { //TODO: quit button
-            //     this.isRunning = false; // End the game
-        
-            //         this.saveScore();
-            //         alert("💀 Game Over ! Your score is " + this.score + " 💀");
-            //         scoreFinal.textContent = this.score;
-        
-            //         if (team === 1) {
-            //             teamChoice.textContent = "Team abeille";
-            //             teamChoice.classList.add("team-bee");
-            //         } else {
-            //             teamChoice.textContent = "Team canard";
-            //             teamChoice.classList.add("team-duck");
-            //         }
-        
-            //         // Reset the game
-            //         this.player.lives = 3;
-            //         this.score = 0;
-            //         this.level = 1;
-            //         scoreElement.textContent = this.score;
-            //         levelElement.textContent = this.level;
-            //         livesElement.textContent = this.player.lives;
-        
-            //         gameInfoContainer.style.display = "none";
-            //         gameContainer.style.display = "flex";
-            // });
+            if (!this.isRunning) return;
 
-
-            // Update player bullets
             this.bullets.forEach((bullet, index) => {
                 bullet.update();
 
-                // Remove bullets that go off-screen
                 if (bullet.y < 0 || bullet.y > this.canvas.height) {
                     this.bullets.splice(index, 1);
                 }
 
-                // Check for collisions with the player
                 if (!bullet.isPlayerBullet && isColliding(bullet, this.player)) {
-                    this.bullets.splice(index, 1); // Remove the bullet
-                    this.player.lives--; // Decrease player's lives
+                    this.bullets.splice(index, 1);
+                    this.player.lives--;
                     this.updateLivesDisplay();
 
-                    // Reset player position
                     this.player.x = this.canvas.width / 2 - this.player.width / 2;
-
-                    // Make the player invincible for 2 seconds
                     this.player.isInvincible = true;
-                    setTimeout(() => {
-                        this.player.isInvincible = false;
-                    }, 2000);
+                    setTimeout(() => this.player.isInvincible = false, 2000);
 
-                    // Check if game over
                     if (this.player.lives <= 0) {
-                        this.isRunning = false; // Stop the game
-
-                        this.saveScore();
-                        alert(`💀 Game Over! Your score is ${this.score} 💀`);
-                        scoreFinal.textContent = this.score;
-
-                        if (team === 1) {
-                            teamChoice.textContent = "Team abeille";
-                            teamChoice.classList.add("team-bee");
-                        } else {
-                            teamChoice.textContent = "Team canard";
-                            teamChoice.classList.add("team-duck");
-                        }
-
-                        // Reset the game
-                        this.player.lives = 3;
-                        this.score = 0;
-                        this.level = 1;
-                        scoreElement.textContent = this.score;
-                        levelElement.textContent = this.level;
-                        livesElement.textContent = this.player.lives;
-
-                        gameInfoContainer.style.display = "none";
-                        gameContainer.style.display = "flex";
+                        this.isRunning = false;
+                        this.gameOver();
                     }
                 }
 
-                // Check for collisions with aliens
                 if (bullet.isPlayerBullet) {
                     this.aliens.forEach((alien, alienIndex) => {
                         if (isColliding(bullet, alien)) {
-                            this.bullets.splice(index, 1); // Remove bullet
-                            this.aliens.splice(alienIndex, 1); // Remove alien
-
+                            this.bullets.splice(index, 1);
+                            this.aliens.splice(alienIndex, 1);
                             this.score += 10;
                             this.updateScore();
                         }
@@ -222,126 +123,70 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
 
-            // If no aliens are left, go to the next level
             if (this.aliens.length === 0) {
                 this.nextLevel();
             }
 
-            // Move aliens
-            this.aliens.forEach((alien) => alien.move(this.canvas.width));
-
-            // Check for game over condition (aliens reaching the bottom)
             this.aliens.forEach((alien) => {
+                alien.move(this.canvas.width);
                 if (alien.y + alien.height >= this.canvas.height - 10) {
-                    this.isRunning = false; // End the game
-
-                    this.saveScore();
-                    alert("💀 Game Over ! Your score is " + this.score + " 💀");
-                    scoreFinal.textContent = this.score;
-
-
-
-
-                    if (team === 1) {
-                        teamChoice.textContent = "Team abeille";
-                        teamChoice.classList.add("team-bee");
-                    } else {
-                        teamChoice.textContent = "Team canard";
-                        teamChoice.classList.add("team-duck");
-                    }
-
-                    // Reset the game
-                    this.player.lives = 3;
-                    this.score = 0;
-                    this.level = 1;
-                    scoreElement.textContent = this.score;
-                    levelElement.textContent = this.level;
-                    livesElement.textContent = this.player.lives;
-
-                    gameInfoContainer.style.display = "none";
-                    gameContainer.style.display = "flex";
+                    this.isRunning = false;
+                    this.gameOver();
                 }
                 alien.shoot(this.bullets, currentTime);
             });
+
             if (this.shootFrequencyIncrease < 5) {
                 this.shootFrequencyIncrease *= 1.001;
             }
         }
 
         updateScore() {
-            scoreElement.textContent = this.score; // Update the score text
+            if (scoreElement) scoreElement.textContent = this.score;
         }
 
         updateLevel() {
-            levelElement.textContent = this.level; // Update the level text
+            if (levelElement) levelElement.textContent = this.level;
         }
 
         updateLivesDisplay() {
-            livesElement.textContent = this.player.lives;
+            if (livesElement) livesElement.textContent = this.player.lives;
         }
-      
-        /**
-         * Draws all elements on the canvas.
-         */
-        draw() {
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // Clear the canvas
 
-            this.player.draw(this.ctx); // Draw the player
-            this.bullets.forEach((bullet) => bullet.draw(this.ctx)); // Draw bullets
-            this.aliens.forEach((alien) => alien.draw(this.ctx)); // Draw aliens
+        draw() {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.player.draw(this.ctx);
+            this.bullets.forEach((bullet) => bullet.draw(this.ctx));
+            this.aliens.forEach((alien) => alien.draw(this.ctx));
         }
 
         nextLevel() {
             this.level++;
             this.updateLevel();
-            this.aliens = []; // Clear current aliens
-            
-            // Increase alien speed
+            this.aliens = [];
             const alienSpeed = 1 + this.level * 0.05;
-        
-            // Reinitialize aliens with increased speed
-            const rows = 5; 
-            const cols = 10; 
-            const alienSpacing = 2; 
+            const rows = 5;
+            const cols = 10;
+            const alienSpacing = 2;
             const alienWidth = 6;
             const alienHeight = 4;
-        
+
             for (let row = 0; row < rows; row++) {
                 for (let col = 0; col < cols; col++) {
                     const x = col * (alienWidth + alienSpacing) + alienSpacing;
                     const y = row * (alienHeight + alienSpacing) + alienSpacing;
                     const alien = new Alien(x, y);
-                    alien.speed = alienSpeed; // Set increased speed
+                    alien.speed = alienSpeed;
                     this.aliens.push(alien);
                 }
             }
-        }        
-      
-        saveScore() {
-            let t = team == 1 ? 'abeille': 'canard';
-
-            fetch('/game/save', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest',
-                },
-                body: JSON.stringify({ score: this.score, team: t })
-            }) .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response error : ' + response.statusText);
-                    }
-                    return response.json();
-                }).catch(error => {
-                    console.error('Error saving score : ', error);
-                });
         }
 
-        /**
-         * Starts the game loop.
-         */
+        gameOver() {
+            endGame(this);
+        }
+
         start() {
-            // Main game loop
             const loop = (currentTime) => {
                 if (this.isRunning) {
                     this.update(currentTime);
@@ -353,7 +198,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-
+    /*********************************************************************************/
+    /*                                CLASS PLAYER                                   */
+    /*********************************************************************************/
     class Player {
         constructor(x, y) {
             this.x = x;
@@ -368,49 +215,33 @@ document.addEventListener("DOMContentLoaded", function() {
             this.lives = 3;
             this.isInvincible = false;
         }
-      
-        /**
-         * Moves the player left or right based on the direction.
-         * @param {string} direction - 'left' or 'right'
-         * @param {number} canvasWidth - Width of the canvas to restrict movement
-         */
+
         move(direction, canvasWidth) {
-            // Move left or right
             if (direction === "left" && this.x > 0) {
-                this.x -= this.speed; // Move left
+                this.x -= this.speed;
             } else if (direction === "right" && this.x + this.width < canvasWidth) {
-                this.x += this.speed; // Move right
+                this.x += this.speed;
             }
         }
-      
-        /**
-         * Creates a new bullet and adds it to the bullets array.
-         * @param {Array} bulletsArray - Array to store the bullets
-         */
+
         shoot(bulletsArray) {
             const currentTime = Date.now();
             if (currentTime - this.lastShootTime >= this.shootCooldown) {
-                const bullet = new Bullet(this.x + this.width / 2, this.y, -5, true); // Bullet shoots upwards
-                bulletsArray.push(bullet); // Add the bullet to the array
+                const bullet = new Bullet(this.x + this.width / 2, this.y, -5, true);
+                bulletsArray.push(bullet);
                 this.lastShootTime = currentTime;
             }
         }
-      
-        /**
-         * Draws the player on the canvas.
-         * @param {CanvasRenderingContext2D} ctx - The drawing context of the canvas
-         */
+
         draw(ctx) {
-            if (this.isInvincible) {
-                ctx.globalAlpha = 0.5; // Make the player semi-transparent
-            } else {
-                ctx.globalAlpha = 1.0; // Restore normal opacity
-            }
+            ctx.globalAlpha = this.isInvincible ? 0.5 : 1.0;
             ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
     }
 
-      
+    /*********************************************************************************/
+    /*                                  CLASS ALIEN                                  */
+    /*********************************************************************************/
     class Alien {
         constructor(x, y) {
             this.x = x;
@@ -418,51 +249,36 @@ document.addEventListener("DOMContentLoaded", function() {
             this.width = 6;
             this.height = 4;
             this.speed = 0.5;
-            this.direction = 1; // 1 for moving right, -1 for moving left
-            this.lastShootTime = 0; // Temps du dernier tir
-            this.shootCooldown = 1000; // Intervalle initial entre les tirs (en ms)
-
+            this.direction = 1;
+            this.lastShootTime = 0;
+            this.shootCooldown = 1000;
             this.images = [
                 "/js/sprites/green.png",
                 "/js/sprites/red.png",
                 "/js/sprites/yellow.png",
             ];
-
-            const randomIndex = Math.floor(Math.random() * this.images.length);
             this.image = new Image();
-            this.image.src = this.images[randomIndex];
-            this.image.onload = () => {
-                this.isImageLoaded = true;
-            };
+            this.image.src = this.images[Math.floor(Math.random() * this.images.length)];
+            this.isImageLoaded = false;
+            this.image.onload = () => this.isImageLoaded = true;
         }
-      
-        /**
-         * Moves the alien horizontally. If it hits a boundary, it changes direction
-         * and moves down slightly.
-         * @param {number} canvasWidth - The width of the canvas for boundary detection.
-         */
+
         move(canvasWidth) {
             this.x += this.speed * this.direction;
-
-            // Change direction and move down if hitting canvas edges
             if (this.x <= 0 || this.x + this.width >= canvasWidth) {
-                this.direction *= -1; // Reverse direction
-                this.y += 20; // Move down
+                this.direction *= -1;
+                this.y += 20;
             }
         }
 
         shoot(bulletsArray, currentTime) {
-            if (currentTime - this.lastShootTime > this.shootCooldown && Math.random() < 0.0001) { 
-                const bullet = new Bullet(this.x + this.width / 2, this.y + this.height, 2, false); // Tir vers le bas
+            if (currentTime - this.lastShootTime > this.shootCooldown && Math.random() < 0.0001) {
+                const bullet = new Bullet(this.x + this.width / 2, this.y + this.height, 2, false);
                 bulletsArray.push(bullet);
                 this.lastShootTime = currentTime;
             }
         }
-      
-        /**
-         * Draws the alien on the canvas.
-         * @param {CanvasRenderingContext2D} ctx - The drawing context of the canvas
-         */
+
         draw(ctx) {
             if (this.isImageLoaded) {
                 ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
@@ -470,7 +286,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-      
+    /*********************************************************************************/
+    /*                                CLASS BULLET                                   */
+    /*********************************************************************************/
     class Bullet {
         constructor(x, y, speed, isPlayerBullet = true) {
             this.x = x;
@@ -479,20 +297,28 @@ document.addEventListener("DOMContentLoaded", function() {
             this.isPlayerBullet = isPlayerBullet;
             this.width = 1;
             this.height = 2;
-            this.color = isPlayerBullet ? "yellow" : "red"; // Different colors for player/enemy bullets
+            this.color = isPlayerBullet ? "yellow" : "red";
+            this.playShootSound();
         }
-      
+
+        playShootSound() {
+            const shootSound = new Audio(`../js/sounds/shoot${this.isPlayerBullet ? '1' : '2'}.mp3`);
+            shootSound.play();
+        }
+
         update() {
             this.y += this.speed;
         }
-      
+
         draw(ctx) {
             ctx.fillStyle = this.color;
             ctx.fillRect(this.x, this.y, this.width, this.height);
         }
     }
 
-      
+    /*********************************************************************************/
+    /*                                HELPER FUNCTIONS                               */
+    /*********************************************************************************/
     function isColliding(rect1, rect2) {
         return (
             rect1.x < rect2.x + rect2.width &&
@@ -501,4 +327,76 @@ document.addEventListener("DOMContentLoaded", function() {
             rect1.y + rect1.height > rect2.y
         );
     }
+
+    function endGame(gameInstance) {
+        saveScore(gameInstance.score, gameInstance.team);
+        alert(`💀 Game Over ! Your score is ${gameInstance.score} 💀`);
+        if (scoreFinal) scoreFinal.textContent = gameInstance.score;
+        if (teamChoice) {
+            teamChoice.textContent = gameInstance.team === 1 ? "Team abeille" : "Team canard";
+            teamChoice.classList.add(gameInstance.team === 1 ? "team-bee" : "team-duck");
+        }
+        resetGame(gameInstance);
+    }
+
+    function saveScore(score, team) {
+        const teamName = team === 1 ? 'abeille' : 'canard';
+        fetch('/game/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            body: JSON.stringify({ score: score, team: teamName })
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Network response error: ' + response.statusText);
+            return response.json();
+        })
+        .then(data => console.log('Score saved successfully:', data))
+        .catch(error => console.error('Error saving score:', error));
+    }
+
+    function resetGame(gameInstance) {
+        gameInstance.player.lives = 3;
+        gameInstance.score = 0;
+        gameInstance.level = 1;
+        if (scoreElement) scoreElement.textContent = gameInstance.score;
+        if (levelElement) levelElement.textContent = gameInstance.level;
+        if (livesElement) livesElement.textContent = gameInstance.player.lives;
+        if (gameInfoContainer) gameInfoContainer.style.display = "none";
+        if (gameContainer) gameContainer.style.display = "flex";
+    }
+
+    function toggleMusic() {
+        if (isPaused) {
+            startMusicLoop();
+            if (musicButton) musicButton.innerHTML = '&#128266;';
+        } else {
+            isPaused = true;
+            audio1.pause();
+            if (musicButton) musicButton.innerHTML = '&#128263;';
+        }
+    }
+
+    function startMusicLoop() {
+        isPaused = false;
+        audio1.play();
+        audio1.addEventListener('ended', () => {
+            if (!isPaused) {
+                audio1.currentTime = 0;
+                audio1.play();
+            }
+        });
+    }
+
+    function startGame(selectedTeam) {
+        team = selectedTeam;
+        if (gameTeamChoice) gameTeamChoice.style.display = "none";
+        if (gameInfoContainer) gameInfoContainer.style.display = "block";
+        const game = new Game("canvasId");
+        game.start();
+    }
+
+    startMusicLoop();
 });
