@@ -23,6 +23,16 @@ document.addEventListener("DOMContentLoaded", function () {
     let audio1 = new Audio();
     audio1.src = '../js/sounds/background-music.mp3';
 
+    let isSoundEnabled = localStorage.getItem('Music');
+
+    if (isSoundEnabled === null) {
+        isSoundEnabled = true;
+        localStorage.setItem('Music', isSoundEnabled);
+    } else {
+        isSoundEnabled = isSoundEnabled === 'true';
+    }
+    
+
     /*********************************************************************************/
     /*                                   LISTENER                                    */
     /*********************************************************************************/
@@ -32,14 +42,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (btnBeeStart) {
         btnBeeStart.addEventListener("click", () => startGame(1));
+        team = 1;
     }
 
     if (btnDuckStart) {
         btnDuckStart.addEventListener("click", () => startGame(2));
+        team = 2;
     }
 
     if (btnStart) {
-        btnStart.addEventListener("click", () => startGame(0));
+        btnStart.addEventListener("click", () => startGame(team));
+    }
+
+    if (quit) {
+        quit.addEventListener("click", () => {
+            if (confirm(`❗️ Es-tu sûr de vouloir quitter ? Ton score ne sera pas comptabiliser ❗️`)) {
+                window.location.reload();
+            }
+        });
     }
 
     /*********************************************************************************/
@@ -302,8 +322,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         playShootSound() {
-            const shootSound = new Audio(`../js/sounds/shoot${this.isPlayerBullet ? '1' : '2'}.mp3`);
-            shootSound.play();
+            if(isSoundEnabled) {
+                const shootSound = new Audio(`../js/sounds/${this.isPlayerBullet ? 'lazer1' : 'lazer2'}.mp3`);
+                shootSound.play();
+            }
         }
 
         update() {
@@ -369,11 +391,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function toggleMusic() {
-        if (isPaused) {
+        isSoundEnabled = !isSoundEnabled;
+        localStorage.setItem('Music', isSoundEnabled);
+        if (isSoundEnabled) {
             startMusicLoop();
             if (musicButton) musicButton.innerHTML = '&#128266;';
         } else {
-            isPaused = true;
             audio1.pause();
             if (musicButton) musicButton.innerHTML = '&#128263;';
         }
@@ -392,11 +415,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function startGame(selectedTeam) {
         team = selectedTeam;
-        if (gameTeamChoice) gameTeamChoice.style.display = "none";
-        if (gameInfoContainer) gameInfoContainer.style.display = "block";
+        gameTeamChoice.style.display = "none";
+        gameInfoContainer.style.display = "block";
         const game = new Game("canvasId");
         game.start();
     }
 
-    startMusicLoop();
+    if (isSoundEnabled) { 
+        startMusicLoop();
+    }
 });
