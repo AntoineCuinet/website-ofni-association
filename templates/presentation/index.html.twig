@@ -17,19 +17,48 @@
         L'OFNI fait également office d’intermédiaire entre les membres de l’association, les chercheurs et les entreprises en conservant un réseau d’anciens membres et des contacts avec <a href="#sponsors" class="link">nos sponsors</a>.</p>
     </section>
 
+{% if is_granted('ROLE_ADMIN') %}
+    Salut l'admin !
+    {{ form_start(board_form) }}
+        {{ form_row(board_form.year_start) }}
+        {{ form_row(board_form.year_end) }}
+        {{ form_row(board_form.president, {
+            label: 'Président'
+        }) }}
+        {{ form_row(board_form.tresorier, {
+            label: 'Trésorier'
+        }) }}
+        {{ form_row(board_form.secretaire, {
+            label: 'Secretaire'
+        }) }}
+        {# {{ form_row(board_form.others, {
+            label: 'Autres membres'
+        }) }} #}
+        <button id="add-member" class="btn">Ajouter membre</button>
+        <button class="btn">Ajouter bureau</button>
+    {{ form_end(board_form) }}
+{% endif %}
+
+
     <section>
         <h2>Nos bureaux</h2>
 
         <div class="timeline">
-            <div class="checkpoint">
-                <div>
-                    <h3>Bureau 2024-2025</h3>
-                    <p><strong>Président : </strong>Tristan AMIOTTE-SUCHET</p>
-                    <p><strong>Trésorier : </strong>Antoine CUINET</p>
-                    <p><strong>Secrétaire : </strong>Gaspard QUENTIN</p>
-                    <p><strong>Vice-président : </strong>Vital FOCHEUX</p>
+            {% for board in boards %}
+                <div class="checkpoint">
+                    <div>
+                        <h3>Bureau {{ board.years }}</h3>
+                        <p><strong>Président : </strong>{{ board.president }}</p>
+                        <p><strong>Trésorier : </strong>{{ board.tresorier }}</p>
+                        <p><strong>Secrétaire : </strong>{{ board.secretaire }}</p>
+                        {% if board.others is defined %}
+                            {% for role, name in board.others %}
+                                <p><strong>{{ role }} : </strong>{{ name }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
 
     </section>
@@ -50,4 +79,98 @@
             </div>
         </div>
     </section>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('form[name="board"]');
+            console.log(form);
+            if (form) {
+            form.addEventListener('submit', async (e) => {
+                    e.preventDefault(); // Prevent the default form submission
+
+                    // Collect the form data
+                    const formData = new FormData(form);
+                    const data = {};
+
+                    // Add the main form fields
+                    formData.forEach((value, key) => {
+                            data[key] = value;
+                            });
+
+                    // Collect dynamically added members
+                    const members = [];
+                    const memberInputs = document.querySelectorAll('.member-input');
+                    memberInputs.forEach(input => {
+                            const role = input.querySelector('select').value;
+                            const name = input.querySelector('input[type="text"]').value;
+                            if (role && name) {
+                            members.push({ role, name });
+                            }
+                            });
+
+                    // Add members to the data
+                    if (members.length > 0) {
+                        data['members'] = members;
+                    }
+
+                    // Send the data as JSON
+                    try {
+                        const response = await fetch('{{ path("presentation") }}', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+'X-Requested-With': 'XMLHttpRequest' // To identify AJAX requests
+},
+body: JSON.stringify(data)
+});
+
+if (response.ok) {
+    window.location.reload(); // Reload the page on success
+} else {
+    console.error('Error submitting form:', response.statusText);
+}
+} catch (error) {
+    console.error('Error submitting form:', error);
+}
+});
+}
+
+// Add member input dynamically
+const addMemberBtn = document.getElementById('add-member');
+if (addMemberBtn) {
+    addMemberBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent form submission
+
+            const options = [
+            "Vice-président",
+            "Secrétaire adjoint",
+            "Trésorier adjoint",
+            "Consultant",
+            "Membre"
+            ];
+
+            const div = document.createElement('div');
+            div.className = 'member-input';
+
+            const select = document.createElement('select');
+            options.forEach(option => {
+                    const opt = document.createElement('option');
+                    opt.value = option;
+                    opt.textContent = option;
+                    select.appendChild(opt);
+                    });
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.placeholder = 'Nom du membre';
+
+            div.appendChild(select);
+            div.appendChild(input);
+            addMemberBtn.parentNode.insertBefore(div, addMemberBtn);
+    });
+}
+});
+</script>
+
 {% endblock %}
