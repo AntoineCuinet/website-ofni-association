@@ -62,6 +62,49 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    const levels = [
+        {
+            level: 1,
+            rows: 3,
+            cols: 5,
+            alienSpeed: 0.4,
+            alienSpacing: 6,
+            alienWidth: 6,
+            alienHeight: 4,
+            formation: "grid",
+        },
+        {
+            level: 2,
+            rows: 4,
+            cols: 6,
+            alienSpeed: 0.5,
+            alienSpacing: 5,
+            alienWidth: 6,
+            alienHeight: 4,
+            formation: "V",
+        },
+        {
+            level: 3,
+            rows: 3,
+            cols: 3,
+            alienSpeed: 0.6,
+            alienSpacing: 3,
+            alienWidth: 6,
+            alienHeight: 4,
+            formation: "circle",
+        },
+        {
+            level: 4,
+            rows: 6,
+            cols: 8,
+            alienSpeed: 0.7,
+            alienSpacing: 4,
+            alienWidth: 6,
+            alienHeight: 4,
+            formation: "grid",
+        }
+    ];
+
     /*********************************************************************************/
     /*                                  CLASS GAME                                   */
     /*********************************************************************************/
@@ -76,25 +119,69 @@ document.addEventListener("DOMContentLoaded", function () {
             this.isRunning = true;
             this.score = 0;
             this.level = 1;
-            this.initAliens();
+            this.currentLevelConfig = null; // Configuration du niveau actuel
+            this.loadLevel(this.level); // Charger le premier niveau
             this.setupControls();
             this.lastTime = 0;
-            this.shootFrequencyIncrease = 1.01;
+        }
+
+        loadLevel(level) {
+            this.currentLevelConfig = levels.find(l => l.level === level);
+            if (!this.currentLevelConfig) {
+                console.error("Niveau non trouvé :", level);
+                return;
+            }
+
+            // Réinitialiser les envahisseurs
+            this.aliens = [];
+            this.initAliens();
         }
 
         initAliens() {
-            const rows = 5;
-            const cols = 10;
-            const alienSpacing = 2;
-            const alienWidth = 6;
-            const alienHeight = 4;
+            const { rows, cols, alienSpacing, alienWidth, alienHeight, formation } = this.currentLevelConfig;
 
-            for (let row = 0; row < rows; row++) {
-                for (let col = 0; col < cols; col++) {
-                    const x = col * (alienWidth + alienSpacing) + alienSpacing;
-                    const y = row * (alienHeight + alienSpacing) + alienSpacing;
-                    this.aliens.push(new Alien(x, y));
+            switch (formation) {
+            case "grid":
+                // Disposition en grille
+                for (let row = 0; row < rows; row++) {
+                    for (let col = 0; col < cols; col++) {
+                        const x = col * (alienWidth + alienSpacing) + alienSpacing;
+                        const y = row * (alienHeight + alienSpacing) + alienSpacing;
+                        const alien = new Alien(x, y, this.currentLevelConfig.alienSpeed);
+                        this.aliens.push(alien);
+                    }
                 }
+            break;
+        
+            case "V":
+                // Disposition en V
+                for (let row = 0; row < rows; row++) {
+                    const numAliens = cols - row; // Réduire le nombre d'envahisseurs par rangée
+                    for (let col = 0; col < numAliens; col++) {
+                        const x = (col + row / 2) * (alienWidth + alienSpacing) + alienSpacing;
+                        const y = row * (alienHeight + alienSpacing) + alienSpacing;
+                        const alien = new Alien(x, y, this.currentLevelConfig.alienSpeed);
+                        this.aliens.push(alien);
+                    }
+                }
+            break;
+
+            case "circle":
+                // Disposition en cercle
+                const centerX = this.canvas.width / 2;
+                const centerY = 20; // Ajustez cette valeur pour éviter que les aliens ne soient trop bas
+                const radius = Math.min(15, this.canvas.width / 2 - 50); // Limiter le rayon pour rester dans le canvas
+                for (let i = 0; i < rows * cols; i++) {
+                    const angle = (i / (rows * cols)) * 2 * Math.PI;
+                    const x = centerX + Math.cos(angle) * radius;
+                    const y = centerY + Math.sin(angle) * radius;
+                    const alien = new Alien(x, y, this.currentLevelConfig.alienSpeed);
+                    this.aliens.push(alien);
+                }
+            break;
+
+            default:
+                console.error("Formation non reconnue :", formation);
             }
         }
 
@@ -117,6 +204,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
                 if (!bullet.isPlayerBullet && isColliding(bullet, this.player)) {
+                    // Add sound
+                    const hitSound = new Audio('../js/sounds/hit.mp3');
+                    hitSound.play();
+
                     this.bullets.splice(index, 1);
                     this.player.lives--;
                     this.updateLivesDisplay();
@@ -138,6 +229,11 @@ document.addEventListener("DOMContentLoaded", function () {
                             this.aliens.splice(alienIndex, 1);
                             this.score += 10;
                             this.updateScore();
+
+                            if (this.aliens.length === 0) {
+                                this.nextLevel(); // Passer au niveau suivant
+                                return; // Arrêter la mise à jour pour éviter des erreurs
+                            }
                         }
                     });
                 }
@@ -152,6 +248,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (alien.y + alien.height >= this.canvas.height - 10) {
                     this.isRunning = false;
                     this.gameOver();
+                    return;
                 }
                 alien.shoot(this.bullets, currentTime);
             });
@@ -182,27 +279,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         nextLevel() {
             this.level++;
-            this.updateLevel();
-            this.aliens = [];
-            const alienSpeed = 1 + this.level * 0.05;
-            const rows = 5;
-            const cols = 10;
-            const alienSpacing = 2;
-            const alienWidth = 6;
-            const alienHeight = 4;
 
-            for (let row = 0; row < rows; row++) {
-                for (let col = 0; col < cols; col++) {
-                    const x = col * (alienWidth + alienSpacing) + alienSpacing;
-                    const y = row * (alienHeight + alienSpacing) + alienSpacing;
-                    const alien = new Alien(x, y);
-                    alien.speed = alienSpeed;
-                    this.aliens.push(alien);
-                }
-            }
+            this.loadLevel(this.level);
+            this.updateLevel();
+            this.bullets = [];
+            this.player.x = this.canvas.width / 2 - this.player.width / 2;
         }
 
         gameOver() {
+            this.isRunning = false;
+            this.player.lives = 3;
+            this.score = 0;
+            this.level = 1;
+            this.loadLevel(this.level);
+            this.updateScore();
+            this.updateLevel();
+            this.updateLivesDisplay();
             endGame(this);
         }
 
@@ -263,12 +355,12 @@ document.addEventListener("DOMContentLoaded", function () {
     /*                                  CLASS ALIEN                                  */
     /*********************************************************************************/
     class Alien {
-        constructor(x, y) {
+        constructor(x, y, speed) {
             this.x = x;
             this.y = y;
             this.width = 6;
             this.height = 4;
-            this.speed = 0.5;
+            this.speed = speed;
             this.direction = 1;
             this.lastShootTime = 0;
             this.shootCooldown = 1000;
