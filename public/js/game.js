@@ -62,48 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    const levels = [
-        {
-            level: 1,
-            rows: 3,
-            cols: 5,
-            alienSpeed: 0.4,
-            alienSpacing: 6,
-            alienWidth: 6,
-            alienHeight: 4,
-            formation: "grid",
-        },
-        {
-            level: 2,
-            rows: 4,
-            cols: 6,
-            alienSpeed: 0.5,
-            alienSpacing: 5,
-            alienWidth: 6,
-            alienHeight: 4,
-            formation: "V",
-        },
-        {
-            level: 3,
-            rows: 3,
-            cols: 3,
-            alienSpeed: 0.6,
-            alienSpacing: 3,
-            alienWidth: 6,
-            alienHeight: 4,
-            formation: "circle",
-        },
-        {
-            level: 4,
-            rows: 6,
-            cols: 8,
-            alienSpeed: 0.7,
-            alienSpacing: 4,
-            alienWidth: 6,
-            alienHeight: 4,
-            formation: "grid",
-        }
-    ];
 
     /*********************************************************************************/
     /*                                  CLASS GAME                                   */
@@ -126,11 +84,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         loadLevel(level) {
-            this.currentLevelConfig = levels.find(l => l.level === level);
-            if (!this.currentLevelConfig) {
-                console.error("Niveau non trouvé :", level);
-                return;
-            }
+            // this.currentLevelConfig = levels.find(l => l.level === level);
+            // if (!this.currentLevelConfig) {
+            //     console.error("Niveau non trouvé :", level);
+            //     return;
+            // }
+            this.currentLevelConfig = generateLevel(level);
+            console.log("Niveau chargé :", this.currentLevelConfig);
 
             // Réinitialiser les envahisseurs
             this.aliens = [];
@@ -279,6 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         nextLevel() {
             this.level++;
+            console.log("Passage au niveau", this.level);
 
             this.loadLevel(this.level);
             this.updateLevel();
@@ -288,13 +249,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         gameOver() {
             this.isRunning = false;
-            this.player.lives = 3;
-            this.score = 0;
-            this.level = 1;
-            this.loadLevel(this.level);
-            this.updateScore();
-            this.updateLevel();
-            this.updateLivesDisplay();
             endGame(this);
         }
 
@@ -508,12 +462,73 @@ document.addEventListener("DOMContentLoaded", function () {
     function startGame(selectedTeam) {
         team = selectedTeam;
         gameTeamChoice.style.display = "none";
+        gameContainer.style.display = "none";
         gameInfoContainer.style.display = "block";
         const game = new Game("canvasId");
         game.start();
+    }
+
+    function generateLevel(level) {
+        const baseRows = 3;
+        const baseCols = 5;
+        const baseSpeed = 0.5;
+        const baseSpacing = 10;
+    
+        // Calculer les paramètres avec des limites maximales
+        const rows = Math.min(baseRows + Math.floor(level / 3), 10); // Max 10 rangées
+        const cols = Math.min(baseCols + Math.floor(level / 2), 15); // Max 15 colonnes
+        const alienSpeed = Math.min(baseSpeed + (level * 0.1), 3); // Max vitesse de 3
+        const alienSpacing = Math.max(5, baseSpacing - (level * 0.5)); // Min espacement de 5
+    
+        const formations = ["grid", "V", "circle"];
+        const formation = formations[Math.floor(Math.random() * formations.length)];
+    
+        return {
+            level: level,
+            rows: rows,
+            cols: cols,
+            alienSpeed: alienSpeed,
+            alienSpacing: alienSpacing,
+            alienWidth: 6,
+            alienHeight: 4,
+            formation: formation,
+        };
     }
 
     if (isSoundEnabled) { 
         startMusicLoop();
     }
 });
+
+// const levels = [
+//     {
+//         level: 1,
+//         rows: 3,
+//         cols: 5,
+//         alienSpeed: 0.4,
+//         alienSpacing: 6,
+//         alienWidth: 6,
+//         alienHeight: 4,
+//         formation: "grid",
+//     },
+//     {
+//         level: 2,
+//         rows: 4,
+//         cols: 6,
+//         alienSpeed: 0.5,
+//         alienSpacing: 5,
+//         alienWidth: 6,
+//         alienHeight: 4,
+//         formation: "V",
+//     },
+//     {
+//         level: 3,
+//         rows: 3,
+//         cols: 3,
+//         alienSpeed: 0.6,
+//         alienSpacing: 3,
+//         alienWidth: 6,
+//         alienHeight: 4,
+//         formation: "circle",
+//     }
+// ];
