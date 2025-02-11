@@ -135,7 +135,7 @@ class AssoEvent
             if ($this->imageName === null)
                 $this->imageName = uniqid(AssoEvent::IMAGE_PREFIX) . '.' . $image->guessClientExtension();
             $image->move(AssoEvent::IMAGE_DIR_PATH, $this->imageName);
-            $this->setImageName($this->imageName);
+            $this->imagePathResolver();
         }
         else if (!str_ends_with($this->imagePath, AssoEvent::DEFAULT_IMAGE_NAME)) {
             // remove image

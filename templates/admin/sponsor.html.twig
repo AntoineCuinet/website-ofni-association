@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block title 'OFNI | Admin' %}
+
+{% block main %}
+    <h1>Gestion des sponsors</h1>
+    <a href="{{ path('admin.index') }}" class="btn">Retour au dashboard</a>
+    <h2>Ajout et modification</h2>
+    <a href="{{ path('admin.sponsor.create') }}" class="btn">Ajouter un nouveau sponsor</a>
+    <table>
+        <thead>
+            <tr><th>Nom</th><th>Permanent</th><th>Site web</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+        {% for sponsor in sponsors %}
+            <tr>
+                <td>{{ sponsor.name }}</td>
+                <td>{% if sponsor.permanent %}&times;{% endif %}
+                <td><a href="{{ sponsor.website }}" target="_blank" class="link">{{ sponsor.website }}</a></td>
+                <td>
+                    <a href="{{ path('admin.sponsor.edit', {id: sponsor.id}) }}" class="btn">Modifier</a>
+                    <a href="{{ path('admin.sponsor.edit.logo', {id: sponsor.id}) }}" class="btn">Modifier logo</a>
+                    <a href="{{ path('admin.sponsor.delete', {id: sponsor.id}) }}" class="btn btn-danger">Supprimer</a>
+                </td>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

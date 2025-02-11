@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'OFNI | Admin' %}
+
+{% block main %}
+    <h1>{% if is_edit %}Modification d'un sponsor{% else %}Création d'un nouveau sponsor{% endif %}</h1>
+    {{ form(form) }}
+{% endblock %}

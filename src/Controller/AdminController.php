@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\ActuRepository;
 use App\Repository\AssoEventInstanceRepository;
 use App\Repository\AssoEventRepository;
+use App\Repository\SponsorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -35,6 +36,14 @@ class AdminController extends AbstractController
         $actus = $repository->history(0);
         return $this->render('admin/actu.html.twig', [
             'actus' => $actus
+        ]);
+    }
+
+    #[Route('/admin/sponsors', name: 'admin.sponsor')]
+    public function sponsor(SponsorRepository $repository): Response
+    {
+        return $this->render('admin/sponsor.html.twig', [
+            'sponsors' => $repository->findAll(),
         ]);
     }
 }

@@ -4,17 +4,17 @@
     <div class="logo-slide-container">
         <div class="logos-slide">
         {% for sponsor in sponsors %}
-            <a href="{{ sponsor.website }}" target="_blank"><img src="/pictures/sponsors/{{ sponsor.logoName }}" alt="Logo {{ sponsor.name }}" title="Site {{ sponsor.name }}" loading="lazy"></a>
+            <a href="{{ sponsor.website }}" target="_blank"><img src="/{{ sponsor.logoPath }}" alt="Logo {{ sponsor.name }}" title="Site {{ sponsor.name }}" loading="lazy"></a>
         {% endfor %}
         </div>
         <div class="logos-slide">
         {% for sponsor in sponsors %}
-            <a href="{{ sponsor.website }}" target="_blank"><img src="/pictures/sponsors/{{ sponsor.logoName }}" alt="Logo {{ sponsor.name }}" title="Site {{ sponsor.name }}" loading="lazy"></a>
+            <a href="{{ sponsor.website }}" target="_blank"><img src="/{{ sponsor.logoPath }}" alt="Logo {{ sponsor.name }}" title="Site {{ sponsor.name }}" loading="lazy"></a>
         {% endfor %}
         </div>
         <div class="logos-slide">
         {% for sponsor in sponsors %}
-            <a href="{{ sponsor.website }}" target="_blank"><img src="/pictures/sponsors/{{ sponsor.logoName }}" alt="Logo {{ sponsor.name }}" title="Site {{ sponsor.name }}" loading="lazy"></a>
+            <a href="{{ sponsor.website }}" target="_blank"><img src="/{{ sponsor.logoPath }}" alt="Logo {{ sponsor.name }}" title="Site {{ sponsor.name }}" loading="lazy"></a>
         {% endfor %}
         </div>
     </div>
