@@ -20,7 +20,7 @@
                 <td>{{ actu.name }}</td>
                 <td>
                     <a href="{{ path('actu.show', {id: actu.id}) }}" class="btn">Voir</a>
-                    <a href="{{ path('admin.actu.delete', {id: actu.id}) }}" class="btn btn-danger">Supprimer</a>
+                    <a href="{{ path('admin.actu.delete', {id: actu.id}) }}" class="btn-danger">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}

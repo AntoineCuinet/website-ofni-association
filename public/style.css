@@ -1748,4 +1748,28 @@ form div input[type=checkbox]:focus {
   background-color: rgb(240, 249, 255);
 }
 
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
+figure {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+figure img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -o-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
 /*# sourceMappingURL=style.css.map */

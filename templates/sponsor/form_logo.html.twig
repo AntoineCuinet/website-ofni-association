@@ -4,6 +4,6 @@
 
 {% block main %}
     <h1>Mise à jour du logo</h1>
-    <a href="{{ path('admin.sponsor.edit.logo.delete', {id: sponsor.id}) }}" class="btn btn-danger">Supprimer le logo</a>
+    <a href="{{ path('admin.sponsor.edit.logo.delete', {id: sponsor.id}) }}" class="btn-danger">Supprimer le logo</a>
     {{ form(form) }}
 {% endblock %}

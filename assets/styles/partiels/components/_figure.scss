@@ -1,0 +1,16 @@
+@use '../global/variables' as *;
+@use '../../mixins/filter' as *;
+
+figure {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0;
+
+    img {
+        width: 100%;
+        height: auto;
+        border-radius: $border-rad;
+        @include blur-filter(10px);
+        overflow: hidden;
+    }
+}
