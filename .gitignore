@@ -32,3 +32,7 @@
 ###> node_modules ###
 node_modules/
 ###< node_modules ###
+
+###> FileSync ###
+.sync.ffs_db
+###< FileSync ###
