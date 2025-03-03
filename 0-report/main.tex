@@ -13,6 +13,8 @@
 \usepackage{amsmath}
 \usepackage{eso-pic}
 \usepackage{leftidx}
+\usepackage{float}
+\usepackage{caption}
 \usepackage[colorlinks=true,
             urlcolor=black,
             linkcolor=black,
@@ -32,9 +34,9 @@
 % ================================
 
 \title{\LARGE{Rapport de projet tutoré}}
-\author{\huge{\strong{\nom{Antoine}{Cuinet}}}\\
-        \huge{\strong{\nom{Tristan}{Amiotte-Suchet}}}\\[0,5cm]
-        \huge{\strong{\nom{Gaspard}{Quentin}}}}
+\author{\huge{\textbf{Antoine Cuinet}}\\
+        \huge{\textbf{Tristan Amiotte-suchet}}\\[0,5cm]
+        \huge{\textbf{Gaspard Quentin}}}
 \date{Février 2025}
 
 % ================================
@@ -42,13 +44,12 @@
 % ================================
 
 \begin{document}
-
 \selectlanguage{french}
 \hypersetup{pdfborder=0 0 0}
 
 \input{assets/cover}
-\input{assets/tableofcontents}
 \input{assets/thank}
+\input{assets/tableofcontents}
 \input{assets/glossary}
 \input{assets/introduction}
 \input{assets/chapter-1}

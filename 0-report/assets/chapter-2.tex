@@ -1,44 +1,85 @@
 \chapter{Le développement du nouveau site}
 
+% Ne pas lire pour l'instant !!
+
 % TODO: Peut-être revoir où placer la partie répartition du travail, vu qu'on annonce ce qui a été fait par qui, alors que l'on n'a pas encore annoncé ce que l'on voulait faire et ce qui a été implémenté.
 
 % TODO: Peut-être restructurer et mettre la répartition du travail comme une sous-section en début de chaque partie (maquette, développement).
 
-La seconde partie de ce projet a été consacrée à la conception d'une maquette du site, à la recherche et à l’apprentissage des technologies à utiliser, ainsi qu’au développement de la plateforme.
+Lors de la première phase du projet, nous avons tout d'abord dû réfléchir aux besoins auxquels le site devait répondre.  
+À travers plusieurs réunions, nous avons alors réfléchi aux améliorations que nous souhaitions apporter par rapport à l’ancien site de l’OFNI et défini la liste des fonctionnalités que nous souhaitions implémenter.  
 
-\section{Répartition du travail}
+C'est également à ce moment-là que nous avons dû juger de la faisabilité de certaines fonctionnalités au regard du RGPD (Règlement Général sur la Protection des Données).
 
-Afin de travailler efficacement en groupe, nous avons réparti la charge de travail de manière équilibrée entre les membres de l'équipe.
+\subsection{Fonctionnalités du site}
 
-Pour la conception de la maquette, nous avons d'abord réfléchi ensemble aux différentes pages qui devaient composer le site, avant que chacun ne prenne en charge certaines d’entre elles. Cette répartition s’est faite naturellement, chacun ayant des préférences différentes.
+Ainsi, après ces réunions, voici les fonctionnalités principales que nous avons retenues : 
 
-Lors de la phase de développement, et sur les conseils de nos tuteurs, M. Demougin et Mme Pierrot, nous avons adopté l’outil Trello. Cet outil nous a permis de lister et d’organiser les différentes tâches à accomplir, tout en suivant leur état d'avancement. En collaboration avec nos tuteurs, nous avons ainsi identifié les fonctionnalités à implémenter et avons réparti leur développement au sein du groupe.
-
-Antoine a pris en charge l’implémentation du front-end du site ainsi que le développement du jeu. Il a également rédigé la majorité des contenus textuels du site. Tristan s’est occupé de l’implémentation du système d’ajout et de gestion dynamique des événements et des articles, ainsi que de la création des formulaires d’inscription aux événements. Il a également développé la page boutique. Gaspard s’est quant à lui chargé de la mise en place du système d’authentification et de gestion des comptes, ainsi que de la dynamisation de certaines pages, notamment celles dédiées au jeu et à la présentation de l’association. Il a également développé les formulaires de contact, le système d’envoi automatisé d’e-mails et la page galerie photos.
+\begin{itemize}
+    \item Une page de présentation de l'association et de son histoire
+    \item Une page événements et la possibilité de s'inscrire à ces derniers
+    \item Une page actualités
+    \item Une page boutique permettant d'acheter des produits et d'adhérer à l'association
+    \item Une page galerie photo
+    \item Un jeu (ajouté au cours de la phase de développement du projet)
+    \item Un formulaire de contact pour les entreprises
+    \item Une page administrateur pour les futurs bureaux de l'OFNI afin de simplifier la transmission de l'association
+    \item Un compte utilisateur permettant : 
+    \begin{itemize}
+        \item d'accéder à la galerie photo,
+        \item d'accéder au jeu,
+        \item de s'inscrire aux événements et de les gérer.
+    \end{itemize}
+    \item Un compte administrateur permettant : 
+    \begin{itemize}
+        \item de gérer les événements et les actualités,
+        \item de gérer les photos,
+        \item d'accéder à la page administrateur.
+    \end{itemize}
+\end{itemize}
 
 \section{Le maquettage du nouveau site}
 
 % TODO: Ajouter des images pour illustrer la maquette.
 
-Avant d’entamer le développement, il a été nécessaire de définir précisément les fonctionnalités du site. À travers plusieurs réunions, nous avons réfléchi aux améliorations que nous souhaitions apporter par rapport à l’ancien site de l’OFNI et avons évalué la faisabilité des fonctionnalités envisagées.
+Une fois ces fonctionnalités définies, nous avons entamé la conception de la maquette du site en deux étapes. Une première version manuscrite nous a permis de structurer le site de manière schématique, puis une version finalisée a été réalisée sur Figma afin d’obtenir une maquette propre et exploitable.
 
-Une fois ces choix définis, nous avons entamé la conception de la maquette du site, en deux étapes. Une première version manuscrite nous a permis de structurer le site de manière schématique, puis une version finalisée a été réalisée sur Figma afin d’obtenir une maquette propre et exploitable.
-
-L’objectif principal de cette maquette était de définir les fonctionnalités et leur emplacement, sans se concentrer sur la charte graphique ni sur le design visuel du site.
+L'objectif principal de cette maquette était de confirmer les fonctionnalités désirées et de commencer à visualiser leur implémentation et la forme qu'elles allaient prendre, sans se concentrer sur la charte graphique ni sur le design visuel du site.
 
 \subsection{Version manuscrite}
 
-Dans un premier temps, nous avons réalisé une esquisse manuscrite afin d’organiser les différentes pages du site et de positionner les éléments fonctionnels. Cette étape a facilité la réflexion sur la structure générale et l'agencement des fonctionnalités.
+Dans un premier temps, nous avons réalisé une esquisse manuscrite afin d’organiser les différentes pages du site et de positionner les éléments fonctionnels. Cette étape a été cruciale dans ce projet puisqu'elle nous a facilité la réflexion sur la structure générale du site et l'agencement des fonctionnalités.
 
-% TODO: Ajouter une image d’une page manuscrite de la maquette.
+C'est également ici que nous avons commencé à imaginer comment rendre notre site le plus maintenable possible sans ajouter de code supplémentaire. Nous avons pensé à créer la possibilité de gérer le contenu du site sans code (comme le ferait un Système de gestion de contenu comme Wordpress par exemple)
+Nous avons également imaginé et schématisé un système de génération de formulaires personnalisés pour les événements.
 
-Une fois cette première version terminée, nous avons échangé avec nos tuteurs afin d’ajuster certains éléments. C’est également à ce stade que nous avons commencé à nous interroger sur la conformité de notre site avec le RGPD (Règlement Général sur la Protection des Données).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{assets/pictures/maquette-inscription.pdf}
+    \captionsetup{justification=centering}
+    \caption{Page de la maquette manuscrite concernant le système d'inscription à des événements}
+    \label{fig:enter-label}
+\end{figure}
+
+
+Une fois cette version manuscrite terminée, nous avons échangé avec nos tuteurs afin d’ajuster certains éléments.
+Nous avons notamment été amenés à repenser la façon dont l'utilisateur devait interagir avec le site afin de rendre l'expérience la plus intuitive possible.
 
 \subsection{Version finalisée sur Figma}
 
-Après plusieurs ajustements, nous avons élaboré une version numérique définitive sur Figma. Ce logiciel nous a permis de retranscrire nos brouillons manuscrits en une maquette plus aboutie et fidèle à notre vision du projet.
+Après plusieurs ajustements, nous 
+avons commencé l'élaboration d'une version numérique finalisée sur l'outil Figma.
+Bien que nous ne connaissions pas le logiciel, nous avons pu rapidement le prendre en main et il nous a ainsi permis de transformer nos brouillons manuscrits en une maquette plus aboutie et fidèle à notre vision du projet.
 
-% TODO: Ajouter un aperçu général de Figma et un zoom sur une page spécifique.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{assets/pictures/figma.png}
+    \caption{Quelques pages de la maquette numérisée}
+    \label{fig:enter-label}
+\end{figure}
+
+De plus l'apprentissage de Figma a également permis à Antoine, qui était chargé du design et de la charte graphique du site, de pouvoir effectuer des maquettes stylisées afin de trouver le visuel qu'il souhaitait appliquer au projet.
 
 \section{Les technologies utilisées}
 
@@ -46,7 +87,7 @@ Une fois la maquette finalisée, nous avons sélectionné les technologies les p
 
 \subsection{Le framework Symfony}
 
-Pour le développement du serveur, nous avons choisi un framework PHP, ayant déjà appris ce langage lors de l’unité d’enseignement \citer{Langages du Web} en deuxième année de licence. Ce choix nous permettait de nous concentrer sur l’architecture du projet sans devoir apprendre un nouveau langage, tout en assurant une continuité pour les futurs membres de l’association qui connaîtront également PHP.
+Pour le développement du serveur, nous avons choisi un framework PHP, ayant déjà appris ce langage lors de l’unité d’enseignement \citer{Langages du Web} en deuxième année de licence. Ce choix nous permettait de nous concentrer sur l’architecture du projet sans devoir apprendre un nouveau langage, tout en assurant une continuité pour les futurs membres de l’association qui connaîtront également \logo{PHP}.
 
 Après avoir comparé Laravel et Symfony, nous avons opté pour ce dernier, son architecture orientée objet étant plus familière et mieux adaptée à notre approche du développement.
 
@@ -56,12 +97,27 @@ Pour générer dynamiquement les pages HTML, nous avons utilisé Twig, le moteur
 
 \subsection{Le langage JavaScript}
 
-Le développement du jeu nécessitait une technologie compatible avec tous les navigateurs modernes. Nous avons donc utilisé JavaScript, qui offre une exécution rapide et une intégration fluide avec le reste du site.
+En cours de projet, nous avons été amenés à ajouter une nouvelle fonctionnalité au site : un jeu ludique ayant pour objectif de donner envie aux étudiants de venir sur le site de façon régulière.
+L'idée nous a été proposée par un de nos tuteurs, M. Demougin, après la conception de la maquette Figma.  
+Cette idée nous a beaucoup plu, et nous avons alors décidé d'implémenter une version revisitée du célèbre jeu \textit{Space Invaders}. 
 
-\subsection{Le préprocesseur Sass}
+Le langage JavaScript a été rapidement adopté pour la réalisation de cette partie du projet, en raison de son intégration facile et de sa compatibilité avec la grande majorité des navigateurs.
 
-Afin d’améliorer la structuration et la maintenabilité du code \logo{CSS}, nous avons utilisé le préprocesseur \logo{Sass}. Cet outil a permis une meilleure organisation des styles et une gestion plus efficace de la mise en page, garantissant une adaptation optimale du site à tous types d’écrans. L’utilisation de Sass facilitera également d’éventuelles évolutions graphiques du site dans le futur.
+\subsection{Le préprocesseur \logo{Sass}}
 
+Afin d’améliorer la structuration et la maintenabilité du code \logo{CSS}, nous avons utilisé le préprocesseur \logo{Sass}. Cet outil a permis une meilleure organisation des styles et une gestion plus efficace de la mise en page, garantissant une adaptation optimale du site à tous types d’écrans. L’utilisation de \logo{Sass} facilitera également d’éventuelles évolutions graphiques du site dans le futur.
+
+\section{Répartition du travail}
+
+Afin de travailler efficacement en groupe, nous avons réparti la charge de travail de manière équilibrée entre les membres de l'équipe.
+
+Pour la conception de la maquette, nous avons d'abord réfléchi ensemble aux différentes pages qui devaient composer le site, avant que chacun ne prenne en charge certaines d’entre elles. Cette répartition s’est faite naturellement, chacun ayant des préférences différentes.
+
+Lors de la phase de développement, et sur les conseils de nos tuteurs, M. Demougin et Mme Pierrot, nous avons adopté l’outil Trello. Cet outil nous a permis de lister et d’organiser les différentes tâches à accomplir, tout en suivant leur état d'avancement. En collaboration avec nos tuteurs, nous avons ainsi identifié les fonctionnalités à implémenter et avons réparti leur développement au sein du groupe.
+
+Antoine a pris en charge l’implémentation du front-end du site ainsi que le développement du jeu. Il a également rédigé la majorité des contenus textuels du site.  
+Tristan s’est occupé de l’implémentation du système d’ajout et de gestion dynamique des événements et des articles, ainsi que de la création des formulaires d’inscription aux événements. Il a également développé la page boutique.  
+Gaspard s’est quant à lui chargé de la mise en place du système d’authentification et de gestion des comptes, ainsi que de la dynamisation de certaines pages, notamment celles dédiées au jeu et à la présentation de l’association. Il a également développé les formulaires de contact, le système d’envoi automatisé d’e-mails et la page galerie photos.
 
 \section{Les difficultés rencontrées}
 \label{sec:difficultes}
