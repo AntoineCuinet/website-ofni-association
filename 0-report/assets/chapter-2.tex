@@ -1,4 +1,5 @@
 \chapter{Le développement du nouveau site}
+\label{chap:dev}
 
 % Ne pas lire pour l'instant !!
 
@@ -6,31 +7,32 @@
 
 % TODO: Peut-être restructurer et mettre la répartition du travail comme une sous-section en début de chaque partie (maquette, développement).
 
-Lors de la première phase du projet, nous avons tout d'abord dû réfléchir aux besoins auxquels le site devait répondre.  
-À travers plusieurs réunions, nous avons alors réfléchi aux améliorations que nous souhaitions apporter par rapport à l’ancien site de l’OFNI et défini la liste des fonctionnalités que nous souhaitions implémenter.  
+Lors de la première phase du projet, nous avons tout d'abord dû réfléchir aux besoins auxquels le site devait répondre.
+À travers plusieurs réunions, nous avons alors réfléchi aux améliorations que nous souhaitions apporter par rapport à l’ancien site de \ofni\ et défini la liste des fonctionnalités que nous souhaitions implémenter.
 
-C'est également à ce moment-là que nous avons dû juger de la faisabilité de certaines fonctionnalités au regard du RGPD (Règlement Général sur la Protection des Données).
+C'est également à ce moment-là que nous avons dû juger de la faisabilité de certaines fonctionnalités au regard du \logo{RGPD} (Règlement Général sur la Protection des Données).
 
 \subsection{Fonctionnalités du site}
+\label{subsec:fonctionnalites}
 
-Ainsi, après ces réunions, voici les fonctionnalités principales que nous avons retenues : 
+Ainsi, après ces réunions, voici les fonctionnalités principales que nous avons retenues :
 
 \begin{itemize}
     \item Une page de présentation de l'association et de son histoire
     \item Une page événements et la possibilité de s'inscrire à ces derniers
     \item Une page actualités
     \item Une page boutique permettant d'acheter des produits et d'adhérer à l'association
-    \item Une page galerie photo
+    \item Une page galerie photos
     \item Un jeu (ajouté au cours de la phase de développement du projet)
     \item Un formulaire de contact pour les entreprises
-    \item Une page administrateur pour les futurs bureaux de l'OFNI afin de simplifier la transmission de l'association
-    \item Un compte utilisateur permettant : 
+    \item Une page administrateur pour les futurs bureaux de l'\ofni\ afin de simplifier la transmission de l'association
+    \item Un compte utilisateur permettant :
     \begin{itemize}
-        \item d'accéder à la galerie photo,
+        \item d'accéder à la galerie photos,
         \item d'accéder au jeu,
         \item de s'inscrire aux événements et de les gérer.
     \end{itemize}
-    \item Un compte administrateur permettant : 
+    \item Un compte administrateur permettant :
     \begin{itemize}
         \item de gérer les événements et les actualités,
         \item de gérer les photos,
@@ -39,18 +41,20 @@ Ainsi, après ces réunions, voici les fonctionnalités principales que nous avo
 \end{itemize}
 
 \section{Le maquettage du nouveau site}
+\label{sec:maquettage}
 
 % TODO: Ajouter des images pour illustrer la maquette.
 
-Une fois ces fonctionnalités définies, nous avons entamé la conception de la maquette du site en deux étapes. Une première version manuscrite nous a permis de structurer le site de manière schématique, puis une version finalisée a été réalisée sur Figma afin d’obtenir une maquette propre et exploitable.
+Une fois ces fonctionnalités définies, nous avons entamé la conception de la maquette du site en deux étapes. Une première version manuscrite nous a permis de structurer le site de manière schématique, puis une version finalisée a été réalisée sur \logo{Figma} afin d’obtenir une maquette propre et exploitable.
 
 L'objectif principal de cette maquette était de confirmer les fonctionnalités désirées et de commencer à visualiser leur implémentation et la forme qu'elles allaient prendre, sans se concentrer sur la charte graphique ni sur le design visuel du site.
 
 \subsection{Version manuscrite}
+\label{subsec:maquette-manuscrite}
 
 Dans un premier temps, nous avons réalisé une esquisse manuscrite afin d’organiser les différentes pages du site et de positionner les éléments fonctionnels. Cette étape a été cruciale dans ce projet puisqu'elle nous a facilité la réflexion sur la structure générale du site et l'agencement des fonctionnalités.
 
-C'est également ici que nous avons commencé à imaginer comment rendre notre site le plus maintenable possible sans ajouter de code supplémentaire. Nous avons pensé à créer la possibilité de gérer le contenu du site sans code (comme le ferait un Système de gestion de contenu comme Wordpress par exemple)
+C'est également ici que nous avons commencé à imaginer comment rendre notre site le plus maintenable possible sans ajouter de code supplémentaire. Nous avons pensé à créer la possibilité de gérer le contenu du site sans code (comme le ferait un système de gestion de contenu comme \logo{Wordpress} par exemple)
 Nous avons également imaginé et schématisé un système de génération de formulaires personnalisés pour les événements.
 
 
@@ -66,10 +70,11 @@ Nous avons également imaginé et schématisé un système de génération de fo
 Une fois cette version manuscrite terminée, nous avons échangé avec nos tuteurs afin d’ajuster certains éléments.
 Nous avons notamment été amenés à repenser la façon dont l'utilisateur devait interagir avec le site afin de rendre l'expérience la plus intuitive possible.
 
-\subsection{Version finalisée sur Figma}
+\subsection{Version finalisée sur \logo{Figma}}
+\label{subsec:maquette-figma}
 
-Après plusieurs ajustements, nous 
-avons commencé l'élaboration d'une version numérique finalisée sur l'outil Figma.
+Après plusieurs ajustements, nous
+avons commencé l'élaboration d'une version numérique finalisée sur l'outil \logo{Figma}.
 Bien que nous ne connaissions pas le logiciel, nous avons pu rapidement le prendre en main et il nous a ainsi permis de transformer nos brouillons manuscrits en une maquette plus aboutie et fidèle à notre vision du projet.
 
 \begin{figure}[H]
@@ -79,45 +84,51 @@ Bien que nous ne connaissions pas le logiciel, nous avons pu rapidement le prend
     \label{fig:maquette-figma}
 \end{figure}
 
-De plus l'apprentissage de Figma a également permis à Antoine, qui était chargé du design et de la charte graphique du site, de pouvoir effectuer des maquettes stylisées afin de trouver le visuel qu'il souhaitait appliquer au projet.
+De plus l'apprentissage de \logo{Figma} a également permis à Antoine, qui était chargé du design et de la charte graphique du site, de pouvoir effectuer des maquettes stylisées afin de trouver le visuel qu'il souhaitait appliquer au projet.
 
 \section{Les technologies utilisées}
+\label{sec:technologies-utilisees}
 
 Une fois la maquette finalisée, nous avons sélectionné les technologies les plus adaptées pour développer un site performant et facilement maintenable par les futurs membres de l’association.
 
-\subsection{Le framework Symfony}
+\subsection{Le \langue{framework} \logo{Symfony}}
+\label{subsec:symfony}
 
-Pour le développement du serveur, nous avons choisi un framework PHP, ayant déjà appris ce langage lors de l’unité d’enseignement \citer{Langages du Web} en deuxième année de licence. Ce choix nous permettait de nous concentrer sur l’architecture du projet sans devoir apprendre un nouveau langage, tout en assurant une continuité pour les futurs membres de l’association qui connaîtront également \logo{PHP}.
+Pour le développement du serveur, nous avons choisi un \langue{framework} \logo{PHP}, ayant déjà appris ce langage lors de l’unité d’enseignement \citer{Langages du Web} en deuxième année de licence. Ce choix nous permettait de nous concentrer sur l’architecture du projet sans devoir apprendre un nouveau langage, tout en assurant une continuité pour les futurs membres de l’association qui connaîtront également \logo{PHP}.
 
-Après avoir comparé Laravel et Symfony, nous avons opté pour ce dernier, son architecture orientée objet étant plus familière et mieux adaptée à notre approche du développement.
+Après avoir comparé \logo{Laravel} et \logo{Symfony}, nous avons opté pour ce dernier, son architecture orientée objet étant plus familière et mieux adaptée à notre approche du développement.
 
-\subsection{Le moteur de template Twig}
+\subsection{Le moteur de \langue{template} \logo{Twig}}
+\label{subsec:twig}
 
-Pour générer dynamiquement les pages HTML, nous avons utilisé Twig, le moteur de template recommandé par Symfony. Ce choix a facilité la séparation entre la logique métier et l'affichage, améliorant ainsi la lisibilité et la maintenabilité du code.
+Pour générer dynamiquement les pages \logo{HTML}, nous avons utilisé \logo{Twig}, le moteur de \langue{template} recommandé par \logo{Symfony}. Ce choix a facilité la séparation entre la logique métier et l'affichage, améliorant ainsi la lisibilité et la maintenabilité du code.
 
-\subsection{Le langage JavaScript}
+\subsection{Le langage \logo{JavaScript}}
+\label{subsec:javascript}
 
 En cours de projet, nous avons été amenés à ajouter une nouvelle fonctionnalité au site : un jeu ludique ayant pour objectif de donner envie aux étudiants de venir sur le site de façon régulière.
-L'idée nous a été proposée par un de nos tuteurs, M. Demougin, après la conception de la maquette Figma.  
-Cette idée nous a beaucoup plu, et nous avons alors décidé d'implémenter une version revisitée du célèbre jeu \textit{Space Invaders}. 
+L'idée nous a été proposée par un de nos tuteurs, M. \propre{Demougin}, après la conception de la maquette \logo{Figma}.
+Cette idée nous a beaucoup plu, et nous avons alors décidé d'implémenter une version revisitée du célèbre jeu \logo{Space Invaders}.
 
-Le langage JavaScript a été rapidement adopté pour la réalisation de cette partie du projet, en raison de son intégration facile et de sa compatibilité avec la grande majorité des navigateurs.
+Le langage \logo{JavaScript} a été rapidement adopté pour la réalisation de cette partie du projet, en raison de son intégration facile et de sa compatibilité avec la grande majorité des navigateurs.
 
 \subsection{Le préprocesseur \logo{Sass}}
+\label{subsec:sass}
 
 Afin d’améliorer la structuration et la maintenabilité du code \logo{CSS}, nous avons utilisé le préprocesseur \logo{Sass}. Cet outil a permis une meilleure organisation des styles et une gestion plus efficace de la mise en page, garantissant une adaptation optimale du site à tous types d’écrans. L’utilisation de \logo{Sass} facilitera également d’éventuelles évolutions graphiques du site dans le futur.
 
 \section{Répartition du travail}
+\label{sec:repartition-travail}
 
 Afin de travailler efficacement en groupe, nous avons réparti la charge de travail de manière équilibrée entre les membres de l'équipe.
 
 Pour la conception de la maquette, nous avons d'abord réfléchi ensemble aux différentes pages qui devaient composer le site, avant que chacun ne prenne en charge certaines d’entre elles. Cette répartition s’est faite naturellement, chacun ayant des préférences différentes.
 
-Lors de la phase de développement, et sur les conseils de nos tuteurs, M. Demougin et Mme Pierrot, nous avons adopté l’outil Trello. Cet outil nous a permis de lister et d’organiser les différentes tâches à accomplir, tout en suivant leur état d'avancement. En collaboration avec nos tuteurs, nous avons ainsi identifié les fonctionnalités à implémenter et avons réparti leur développement au sein du groupe.
+Lors de la phase de développement, et sur les conseils de nos tuteurs, M. \propre{Demougin} et Mme. \propre{Pierrot}, nous avons adopté l’outil \logo{Trello}. Cet outil nous a permis de lister et d’organiser les différentes tâches à accomplir, tout en suivant leur état d'avancement. En collaboration avec nos tuteurs, nous avons ainsi identifié les fonctionnalités à implémenter et avons réparti leur développement au sein du groupe.
 
-Antoine a pris en charge l’implémentation du front-end du site ainsi que le développement du jeu. Il a également rédigé la majorité des contenus textuels du site.  
-Tristan s’est occupé de l’implémentation du système d’ajout et de gestion dynamique des événements et des articles, ainsi que de la création des formulaires d’inscription aux événements. Il a également développé la page boutique.  
-Gaspard s’est quant à lui chargé de la mise en place du système d’authentification et de gestion des comptes, ainsi que de la dynamisation de certaines pages, notamment celles dédiées au jeu et à la présentation de l’association. Il a également développé les formulaires de contact, le système d’envoi automatisé d’e-mails et la page galerie photos.
+Antoine a pris en charge l’implémentation du front-end du site ainsi que le développement du jeu. Il a également rédigé la majorité des contenus textuels du site.
+Tristan s’est occupé de l’implémentation du système d’ajout et de gestion dynamique des événements et des articles, ainsi que de la création des formulaires d’inscription aux événements. Il a également développé la page boutique.
+Gaspard s’est quant à lui chargé de la mise en place du système d’authentification et de gestion des comptes, ainsi que de la dynamisation de certaines pages, notamment celles dédiées au jeu et à la présentation de l’association. Il a également développé les formulaires de contact, le système d’envoi automatisé d’\langue{e-mails} et la page galerie photos.
 
 \section{Les difficultés rencontrées}
 \label{sec:difficultes}
