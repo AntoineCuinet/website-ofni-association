@@ -1,12 +1,6 @@
 \chapter{Le développement du nouveau site}
 \label{chap:dev}
 
-% Ne pas lire pour l'instant !!
-
-% TODO: Peut-être revoir où placer la partie répartition du travail, vu qu'on annonce ce qui a été fait par qui, alors que l'on n'a pas encore annoncé ce que l'on voulait faire et ce qui a été implémenté.
-
-% TODO: Peut-être restructurer et mettre la répartition du travail comme une sous-section en début de chaque partie (maquette, développement).
-
 Lors de la première phase du projet, nous avons tout d'abord dû réfléchir aux besoins auxquels le site devait répondre.
 À travers plusieurs réunions, nous avons alors réfléchi aux améliorations que nous souhaitions apporter par rapport à l’ancien site de \ofni\ et défini la liste des fonctionnalités que nous souhaitions implémenter.
 
@@ -113,9 +107,17 @@ Cette idée nous a beaucoup plu, et nous avons alors décidé d'implémenter une
 Le langage \logo{JavaScript} a été rapidement adopté pour la réalisation de cette partie du projet, en raison de son intégration facile et de sa compatibilité avec la grande majorité des navigateurs.
 
 \subsection{Le préprocesseur \logo{Sass}}
-\label{subsec:sass}
 
-Afin d’améliorer la structuration et la maintenabilité du code \logo{CSS}, nous avons utilisé le préprocesseur \logo{Sass}. Cet outil a permis une meilleure organisation des styles et une gestion plus efficace de la mise en page, garantissant une adaptation optimale du site à tous types d’écrans. L’utilisation de \logo{Sass} facilitera également d’éventuelles évolutions graphiques du site dans le futur.
+Afin d’améliorer la structuration et la maintenabilité du code \logo{CSS}, nous avons utilisé le préprocesseur \logo{Sass (Syntactically Awesome StyleSheets)}.
+C'est un préprocesseur \logo{CSS} qui améliore et optimise l'écriture des styles en ajoutant des fonctionnalités avancées que \logo{CSS} natif ne propose pas.
+L'objectif de ce préprocesseur est d'écrire du code \logo{Sass} qui sera ensuite compilé en \logo{CSS} pour être interprété par les navigateurs.
+
+Il permet, entre autres, d’utiliser des variables, des imbrications de sélecteurs, des mixins (blocs réutilisables de styles), des fonctions et l’importation de fichiers, ce qui facilite l'organisation et la maintenabilité du code.
+Grâce à \logo{Sass}, les fichiers \logo{CSS} peuvent être mieux structurés en étant divisés en plusieurs fichiers partiels (préfixés par '\logo{\_}'~), chacun correspondant à un élément spécifique du projet (variables, composants, mises en page, etc.). 
+Ces fichiers sont ensuite importés dans un fichier principal, permettant ainsi une meilleure organisation et réutilisation du code.
+\logo{Sass} utilise l’extension de fichier \logo{.scss}, qui reprend la syntaxe classique du \logo{CSS} tout en y ajoutant ces fonctionnalités avancées.
+
+En automatisant certaines tâches et en limitant la redondance, Sass améliore la productivité des développeurs et rend le code plus lisible, évolutif et facile à maintenir sur le long terme.
 
 \section{Répartition du travail}
 \label{sec:repartition-travail}
