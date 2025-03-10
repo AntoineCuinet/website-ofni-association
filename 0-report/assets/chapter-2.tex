@@ -24,19 +24,19 @@ Concernant les utilisateurs, un système de comptes a été mis en place. Un com
 %TODO: change this
 Lors de ces réflexions, nous avons sélectionné les technologies les plus adaptées pour développer un site performant et facilement maintenable par les futurs membres de l’association.
 
-\subsubsection*{L'outil de gestion de projet Trello}
+\subsubsection*{L'outil de gestion de projet \logo{Trello}}
 
-Sur les conseils de nos tuteurs, M. Demougin et Mme Pierrot, nous avons adopté l’outil Trello. Cet outil nous a permis de lister et d’organiser les différentes tâches à accomplir, tout en suivant leur état d'avancement. En collaboration avec nos tuteurs, nous avons ainsi identifié les fonctionnalités à implémenter et avons réparti leur développement au sein du groupe.
+Sur les conseils de nos tuteurs, M. \propre{Demougin} et Mme. \propre{Pierrot}, nous avons adopté l’outil \logo{Trello}. Cet outil nous a permis de lister et d’organiser les différentes tâches à accomplir, tout en suivant leur état d'avancement. En collaboration avec nos tuteurs, nous avons ainsi identifié les fonctionnalités à implémenter et avons réparti leur développement au sein du groupe.
 
-\subsubsection*{Le framework Symfony}
+\subsubsection*{Le framework \logo{Symfony}}
 
-Pour le développement du serveur, nous avons choisi un framework PHP, ayant déjà appris ce langage lors de l’unité d’enseignement \citer{Langages du Web} en deuxième année de licence. Ce choix nous permettait de nous concentrer sur l’architecture du projet sans devoir apprendre un nouveau langage, tout en assurant une continuité pour les futurs membres de l’association qui connaîtront peut être également le \logo{PHP}, tant que ce langage reste au programme de licence du moins.
+Pour le développement du serveur, nous avons choisi un \langue{framework} \logo{PHP}, ayant déjà appris ce langage lors de l’unité d’enseignement \citer{Langages du Web} en deuxième année de licence. Ce choix nous permettait de nous concentrer sur l’architecture du projet sans devoir apprendre un nouveau langage, tout en assurant une continuité pour les futurs membres de l’association qui connaîtront peut être également le \logo{PHP}, tant que ce langage reste au programme de licence du moins.
 
-Après avoir comparé Laravel et Symfony, nous avons opté pour ce dernier, son architecture orientée objet étant plus familière et mieux adaptée à notre approche du développement.
+Après avoir comparé Laravel et \logo{Symfony}, nous avons opté pour ce dernier, son architecture orientée objet étant plus familière et mieux adaptée à notre approche du développement.
 
-\subsubsection*{Le moteur de template Twig}
+\subsubsection*{Le moteur de template \logo{Twig}}
 
-Pour générer dynamiquement les pages HTML, nous avons utilisé Twig, le moteur de template recommandé par Symfony. Ce choix a facilité la séparation entre la logique métier et l'affichage, améliorant ainsi la lisibilité et la maintenabilité du code.
+Pour générer dynamiquement les pages HTML, nous avons utilisé \logo{Twig}, le moteur de template recommandé par \logo{Symfony}. Ce choix a facilité la séparation entre la logique métier et l'affichage, améliorant ainsi la lisibilité et la maintenabilité du code.
 
 \subsubsection*{Le langage JavaScript}
 
@@ -72,7 +72,7 @@ Une fois cette version manuscrite terminée, nous avons échangé avec nos tuteu
 Nous avons notamment été amenés à repenser la façon dont l'utilisateur devait interagir avec le site afin de rendre l'expérience la plus intuitive possible.
 
 
-Après plusieurs ajustements, nous 
+Après plusieurs ajustements, nous
 avons commencé l'élaboration d'une version numérique finalisée sur l'outil Figma.
 Bien que nous ne connaissions pas le logiciel, nous avons pu rapidement le prendre en main et il nous a ainsi permis de transformer nos brouillons manuscrits en une maquette plus aboutie et fidèle à notre vision du projet.
 
@@ -92,44 +92,29 @@ De plus l'apprentissage de Figma nous a également permis de pouvoir effectuer d
 
 Lors du développement du site, nous nous sommes accordés de sorte afin que chacun travaille de façon équitable et si possible sur ce qu'il apprécie faire le plus. 
 Ainsi, Antoine a pris en charge l’implémentation du front-end du site ainsi que le développement du jeu. Il a également rédigé la majorité des contenus textuels du site.  
-Tristan s’est occupé de l’implémentation du système d’ajout et de gestion dynamique des événements et des articles, ainsi que de la création des formulaires d’inscription aux événements. Il a également développé la page boutique.  
+Tristan s’est occupé de l’implémentation du système d’ajout et de gestion dynamique des événements et des articles, ainsi que de la création des formulaires d’inscription aux événements. Il a également développé la page boutique.
 Gaspard s’est quant à lui chargé de la mise en place du système d’authentification et de gestion des comptes, ainsi que de la dynamisation de certaines pages, notamment celles dédiées au jeu et à la présentation de l’association. Il a également développé les formulaires de contact, le système d’envoi automatisé d’e-mails et la page galerie photos.
 
-Concernant les technologies, nous avons confirmé notre choix préliminaire des technologies et sommes restés avec Symfony comme framework principal.
+Concernant les technologies, nous avons confirmé notre choix préliminaire des technologies et sommes restés avec \logo{Symfony} comme framework principal.
 
-Il convient alors de vous présenter brièvement comment Symfony fonctionne.
+Il convient alors de vous présenter brièvement comment \logo{Symfony} fonctionne.
 
-\subsubsection*{L'architecture MVC}
+\subsubsection*{L'architecture \logo{MVC}}
 
-Tout d'abord, tout code Symfony est structuré en respectant l'architecture MVC, ce qui signifie que chaque élément que l'on va ajouter à notre projet est divisé en trois parties : le \textbf{modèle} (M), la \textbf{vue} (V) et le \textbf{contrôleur} (C). 
+Tout d'abord, tout code \logo{Symfony} est structuré en respectant l'architecture MVC, ce qui signifie que chaque élément que l'on va ajouter à notre projet est divisé en trois parties : le \textbf{modèle} (M), la \textbf{vue} (V) et le \textbf{contrôleur} (C). 
 
 Le \textbf{modèle} est la partie qui gère les données du projet. Il correspond aux entités et aux interactions avec la base de données. C’est grâce à lui que l’on peut stocker, récupérer et manipuler les informations essentielles au bon fonctionnement du site.
 
-La \textbf{vue} est responsable de l'affichage des données et de l'interface utilisateur. Dans notre projet, nous avons utilisé Twig, le moteur de template de Symfony, afin de générer dynamiquement les pages HTML en séparant la logique de la présentation.
+La \textbf{vue} est responsable de l'affichage des données et de l'interface utilisateur. Dans notre projet, nous avons utilisé \logo{Twig}, le moteur de \langue{template} de \logo{\logo{Symfony}}, afin de générer dynamiquement les pages \logo{HTML} en séparant la logique de la présentation.
 
-Enfin, le \textbf{contrôleur} joue le rôle d’intermédiaire entre le modèle et la vue. Il reçoit les requêtes des utilisateurs, interagit avec le modèle pour récupérer ou modifier des données, puis choisit la vue à afficher en fonction du contexte. En Symfony, chaque contrôleur est une classe PHP contenant des méthodes appelées "actions", qui déterminent la réponse renvoyée à l’utilisateur.
+Enfin, le \textbf{contrôleur} joue le rôle d’intermédiaire entre le modèle et la vue. Il reçoit les requêtes des utilisateurs, interagit avec le modèle pour récupérer ou modifier des données, puis choisit la vue à afficher en fonction du contexte. En \logo{\logo{Symfony}}, chaque contrôleur est une classe \logo{PHP} contenant des méthodes appelées "actions", qui déterminent la réponse renvoyée à l’utilisateur.
 
 Grâce à cette architecture, le développement du site s’est fait de manière modulaire et organisée, facilitant ainsi l’ajout de nouvelles fonctionnalités et la maintenance du code sur le long terme.
 
-
-\subsection{Les fonctionnnalités implémentées}
-
-%TODO: 
-\textbf{Intégrer ici la partie 6.1 de Tristan (avec les difficultés rencontrées dedans)}
-%TODO: retirer ceci
-
-
-
-
-
-
-
-
-%TODO: supprimer cette partie
-\section{Les difficultés rencontrées}
+\section{Les problématiques rencontrées}
 \label{sec:difficultes}
 
-Plus concrètement, l'implémentation du site se voit confrontée à plusieurs difficultés et interrogations, tant techniques qu'éthiques. Il est attendu de la partie CMS du site, une certaine factorisation. Mais le stockage des données personnelles ainsi que la décision d'autoriser ou non une inscription, sont des questions qui sont à prendre en compte du début à la fin du développement.
+Plus concrètement, le maquettage du site se voit confrontée à plusieurs problématiques et interrogations, tant techniques qu'éthiques. Il est d'abord attendu de la structure du site, une certaine factorisation. Puis, le stockage des données personnelles ainsi que la décision d'autoriser ou non une inscription, sont des questions qui sont à prendre en compte du début à la fin du développement.
 
 \subsection{L'autorisation d'inscrition}
 \label{subsec:autorisation-inscription}

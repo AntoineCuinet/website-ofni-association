@@ -1,12 +1,28 @@
 \chapter{Bilan}
 
 À l’issue de ce projet, nous avons pu livrer une première version du site de \ofni, intégrant les principales fonctionnalités définies en amont.
+\bigskip
 
-Ce développement nous a permis de consolider nos compétences en \logo{Symfony}, en \logo{JavaScript} et en \logo{Sass}, tout en découvrant des outils tels que \logo{Figma} pour le maquettage et \logo{Trello} pour la gestion de projet.
+Il est important de noter que tout n'a pas été implémenté. Les différentes réunions de travail ont permis de définir les priorités et de déterminer ce qui était le plus important pour le site. Certaines fonctionnalités ont alors été retirées pour cause d'une utilité moindre ou d'une impossibilité à les commencer, tandis que d'autres ont été ajoutées en cours de développement.
+
+On peut par exemple noter qu'au départ, il fut prévu que le système de connexion passe par le \logo{CAS} officiel de l'\univ. Cependant, les demandes d'autorisation pour utiliser ces systèmes n'ayant pas abouti, l'idée a dû finalement être abandonnée. Il en est de même pour la gestion des utilisateurs, qui devait être faite par le \logo{CAS}.
+
+Mais au-delà des restrictions administratives, d'autres fonctionnalités n'ont pas vu le jour par pure manque de temps. C'est par exemple le cas du \citer{Crochet \logo{Discord}}, qui devait permettre de diffuser automatiquement les événements de l'\ofni\ sur le serveur \logo{Discord} de l'association dès la création de l'événement sur le site.
+\bigskip
+
+Certes, tout n'est pas implémenté. À ce jour, le site est fonctionnel et permet de remplir les objectifs principaux qui lui ont été fixés. Ajoutant en plus certaines fonctionnalités comme \game. Il est alors naturel de se demander quelles sont les prochaines pistes d'amélioration pour le site.
+
+On pense en tout premier lieu aux \langue{features} qui ne sont pas contraintes administrativement, comme le \citer{Crochet \logo{Discord}} vu précédemment.
+
+Mais même du côté de ce qui fonctionne, on peut aussi y voir des pistes d'amélioration majeures, en particulier concernant la partie \logo{CMS}. En effet, pour la génération de formulaires, nous avons vu section \ref{sec:connexion-inscription} que les \formwidget\ natifs étaient là par défaut et ne pouvaient, ni être modifiés, ni être ajoutés. Il serait alors intéressant de permettre à l'administrateur de créer ses propres \formwidget\ natifs, pour pouvoir les réutiliser dans d'autres \formwidget\ plus complexes. Cela peut par exemple passer par la définition d'une \logo{Regex} par l'administrateur. Cette \logo{Regex} permettrait alors de valider ou non le champ de texte lors de la soumission du formulaire par l'utilisateur.
+
+D'un point de vue du développement, il peut également être judicieux de rédiger une documentation encore plus complète pour les futurs bureaux qui souhaiteraient reprendre le projet. Cela permettrait de faciliter la prise en main du site et de garantir une continuité dans son développement.
+\bigskip
+
+D'un point de vue plus personnel, ce développement nous a permis de consolider nos compétences en \logo{Symfony}, en \logo{JavaScript} et en \logo{Sass}, tout en découvrant des outils tels que \logo{Figma} pour le maquettage et \logo{Trello} pour la gestion de projet.
 \bigskip
 
 Si le site répond aux objectifs fixés, certaines fonctionnalités ont dû être adaptées ou reportées en raison de contraintes techniques ou administratives. Malgré cela, nous avons réussi à implémenter une plateforme complète et évolutive, avec une attention particulière portée à la maintenabilité et à l’expérience utilisateur.
-\bigskip
 
 Ce projet nous a également permis de mieux appréhender le travail en équipe sur un projet d’envergure, en nous confrontant à des problématiques concrètes de gestion du temps, de répartition des tâches et d’adaptation aux imprévus.
 \bigskip

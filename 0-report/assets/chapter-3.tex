@@ -3,13 +3,8 @@
 
 Le développement du site achevé permet alors de voir avec un peu plus de recul ce qui a concrètement été réalisé, rajouté ou abandonné. Tout cela permet également une comparaison avec les objectifs initiaux du projet donnés en grande partie par la maquette du site.
 
-\section{Les fonctionnalités implémentées}
-\label{sec:implem}
-
-Regardons d'abord ce qui est fonctionnel à l'heure où le site se voit mis en ligne pour la première fois.
-
-\subsection{Les pages de formalités}
-\label{subsec:pages-formalites}
+\section{Les pages de formalités}
+\label{sec:pages-formalites}
 
 % home page screenshot
 \begin{figure}[h]
@@ -23,8 +18,8 @@ Le site contient un certain nombre de pages de formalités, qui sont des pages s
 
 Il est tout de même possible de trouver un petit peu de dynamisme sur certaines pages, notamment la page d'accueil qui contient des petits \langue{teasers} sur les activités à venir de l'association, ou encore des actualités.
 
-\subsection{Le jeu \game}
-\label{subsec:jeu}
+\section{Le jeu \game}
+\label{sec:jeu}
 
 % game screenshot
 \begin{figure}[h]
@@ -36,8 +31,8 @@ Il est tout de même possible de trouver un petit peu de dynamisme sur certaines
 
 Peu avant le début de la phase de développement, il fut décider d'ajouter un petit jeu vidéo au site avec un afficage du meilleur joueur pour rendre la visite du site plus attractive. Le jeu \game\ est un jeu de type \citer{Space Invaders} où le joueur doit tirer sur des vaisseaux ennemis pour marquer des points. Le jeu est jouable directement depuis le site, sans avoir besoin de télécharger quoi que ce soit. On peut voir une capture d'écran du jeu \game\ en \figureref{fig:game}.
 
-\subsection{La connexion et l'inscription aux événements}
-\label{subsec:connexion-inscription}
+\section{La connexion et l'inscription aux événements}
+\label{sec:connexion-inscription}
 
 Ces actualités et événements de l'\ofni\ constitue la partie centrale du site. Tout cela commence évidemment par un page de connexion, ou de création de compte si l'utilisateur n'en a pas encore. Une fois connecté, l'utilisateur peut alors s'inscrire à des événements.
 
@@ -52,26 +47,3 @@ Lorsque l'administrateur décide de créer un nouveau formulaire, il va en réal
 \end{description}
 
 Lorsque l'utilisateur s'inscrit à un événement, le formulaire, correspondant à un \formwidget, est alors généré dynamiquement. Il est alors possible de définir des formulaires très complexes, avec des champs de différents types, des champs répétables, etc.
-
-\section{Les fonctionnalités non implémentées}
-\label{sec:non-implem}
-
-Il est important de noter que tout n'a pas été implémenté. Les différentes réunions de travail ont permis de définir les priorités et de déterminer ce qui était le plus important pour le site. Certaines fonctionnalités ont alors été retirées pour cause d'une utilité moindre ou d'une impossibilité à les commencer, tandis que d'autres ont été ajoutées en cours de développement.
-\bigskip
-
-On peut par exemple noter qu'au départ, il fut prévu que le système de connexion passe par le \logo{CAS} officiel de l'\univ. Cependant, les demandes d'autorisation pour utiliser ces systèmes n'ayant pas abouti, l'idée a dû finalement être abandonnée. Il en est de même pour la gestion des utilisateurs, qui devait être faite par le \logo{CAS}.
-
-Mais au-delà des restrictions administratives, d'autres fonctionnalités n'ont pas vu le jour par pure manque de temps. C'est par exemple le cas du \citer{Crochet \logo{Discord}}, qui devait permettre de diffuser automatiquement les événements de l'\ofni\ sur le serveur \logo{Discord} de l'association dès la création de l'événement sur le site.
-
-\section{Ambitions pour l'avenir du site}
-\label{sec:avenir}
-
-Certes, tout n'est pas implémenté. À ce jour, le site est fonctionnel et permet de remplir les objectifs principaux qui lui ont été fixés. Ajoutant en plus certaines fonctionnalités comme \game. Il est alors naturel de se demander quelles sont les prochaines pistes d'amélioration pour le site.
-\bigskip
-
-On pense en tout premier lieu aux \langue{features} qui ne sont pas contraintes administrativement, comme le \citer{Crochet \logo{Discord}} vu précédemment dans la section \ref{sec:non-implem}.
-
-Mais même du côté de ce qui fonctionne, on peut aussi y voir des pistes d'amélioration majeures, en particulier concernant la partie \logo{CMS}. En effet, pour la génération de formulaires, nous avons vu section \ref{subsec:connexion-inscription} que les \formwidget\ natifs étaient là par défaut et ne pouvaient, ni être modifiés, ni être ajoutés. Il serait alors intéressant de permettre à l'administrateur de créer ses propres \formwidget\ natifs, pour pouvoir les réutiliser dans d'autres \formwidget\ plus complexes. Cela peut par exemple passer par la définition d'une \logo{Regex} par l'administrateur. Cette \logo{Regex} permettrait alors de valider ou non le champ de texte lors de la soumission du formulaire par l'utilisateur.
-\bigskip
-
-D'un point de vue du développement, il peut également être judicieux de rédiger une documentation encore plus complète pour les futurs bureaux qui souhaiteraient reprendre le projet. Cela permettrait de faciliter la prise en main du site et de garantir une continuité dans son développement.
