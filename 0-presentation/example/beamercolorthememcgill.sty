@@ -1,0 +1,64 @@
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/color/beamercolorthememcgill.sty,v 1.5 2004/10/07 22:21:15 tantau Exp $
+
+% Copyright 2003 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% This program can be redistributed and/or modified under the terms
+% of the GNU Public License, version 2.
+
+\mode<presentation>
+
+% \definecolor{couleurbarretitreslide}{RGB}{210,0,0}
+\definecolor{couleurbarretitreslide}{RGB}{0, 0, 160}
+\definecolor{couleurtitreslide}{RGB}{220,220,220}
+\definecolor{couleurtexteblock}{RGB}{220,220,220}
+\definecolor{couleurfond}{RGB}{255,255,255}
+\definecolor{gris1}{RGB}{220,220,220}
+\definecolor{gris2}{RGB}{180,180,180}
+% \definecolor{couleurrouge}{RGB}{210,0,0}
+\definecolor{couleurrouge}{RGB}{0, 0, 160}
+\definecolor{couleurorange}{RGB}{255, 180, 0}
+
+\setbeamercolor{normal text}{fg=black,bg=couleurfond}
+\setbeamercolor{structure}{fg=couleurbarretitreslide}
+
+\setbeamercolor{alerted text}{fg=couleurorange}
+
+\setbeamercolor{item projected}{use=item,fg=white,bg=couleurbarretitreslide}
+
+\setbeamercolor*{palette primary}{fg=couleurtitreslide,bg=couleurbarretitreslide}
+\setbeamercolor*{palette secondary}{fg=couleurtitreslide,bg=couleurbarretitreslide}
+\setbeamercolor*{palette tertiary}{fg=black!100!red}
+\setbeamercolor*{palette quaternary}{fg=black!1!red}
+
+\setbeamercolor*{sidebar}{parent=palette primary}
+
+\setbeamercolor*{palette sidebar primary}{fg=couleurbarretitreslide}
+\setbeamercolor*{palette sidebar secondary}{fg=red}
+\setbeamercolor*{palette sidebar tertiary}{fg=couleurbarretitreslide}
+\setbeamercolor*{palette sidebar quaternary}{fg=red}
+
+\setbeamercolor{framesubtitle}{fg=red}
+
+\setbeamercolor*{subtitle}{fg=couleurtitreslide}
+
+\setbeamercolor*{block title}{fg=couleurtexteblock}
+\setbeamercolor*{block title alerted}{parent=alerted text}
+\setbeamercolor*{block title example}{parent=example text}
+\setbeamercolor*{block body}{}
+\setbeamercolor*{block body alerted}{}
+\setbeamercolor*{block body example}{}
+
+\setbeamercolor*{titlelike}{parent=palette secondary}
+
+\setbeamercolor*{author in head/foot}{fg=gris1,bg=couleurrouge}
+\setbeamercolor*{title in head/foot}{fg=couleurrouge,bg=gris1}
+\setbeamercolor*{date in head/foot}{fg=black,bg=gris2}
+
+\setbeamercolor*{section in head/foot}{parent=palette tertiary}
+\setbeamercolor*{subsection in head/foot}{parent=palette primary}
+
+
+
+
+\mode
+<all>

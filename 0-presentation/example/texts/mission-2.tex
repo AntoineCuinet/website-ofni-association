@@ -1,0 +1,60 @@
+\section{Système de contrôle qualité}
+\sectitle{La mise en place d'un système de contrôle qualité}
+
+\begin{frame}
+    \frametitle{Outil d'origine pour le contrôle qualité}
+    \includegraphics[width=\textwidth]{images/excel.png}
+\end{frame}
+
+\begin{frame} \transdissolve<2->[duration=0.3]
+    \frametitle{Objectifs fixés}
+    \itemstitle{Développements envisagés}
+    \begin{enumerate}
+        \item<2-> Création d'un nouvel onglet \citer{qualité}
+        \item<3-> Visualisation des opérations avec tri/filtres
+        \item<4-> Liste des dernières opérations effectuées
+        \item<5-> Système de recherche des derniers certificats
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Structuration dans la base de données}
+    \includegraphics[width=\textwidth]{images/lbope.png}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Le tableau principal}
+    \includegraphics[width=\textwidth]{images/table-ope.png}
+\end{frame}
+
+\begin{frame}[fragile] \transwipe[duration=0.5]
+    \frametitle{La requête de sélection}
+    \begin{sourcecode}
+        \lstinputlisting[language=SQL]{src/selection-ope.sql}
+    \end{sourcecode}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Vue d'ensemble de l'onglet \citer{Qualité}}
+    \includegraphics[width=\textwidth]{images/onglet-qualite.png}
+\end{frame}
+
+\begin{frame}
+    \frametitle{La recherche des nouveaux certificats}
+    \includegraphics[width=\textwidth]{images/liste-certif.png}
+\end{frame}
+
+\begin{frame} \transdissolve<2-3>[duration=0.3]
+    \frametitle{La récupération des opérations}
+    \itemstitle{Système de transition mis en place}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \begin{enumerate}
+            \item<2-> Extraction des données sur \excel
+            \item<3-> Établissement des jointures
+        \end{enumerate}
+
+        \column{0.5\textwidth}
+        \uncover<4>{\includegraphics[width=\columnwidth]{images/transition-ope.png}}
+    \end{columns}
+\end{frame}

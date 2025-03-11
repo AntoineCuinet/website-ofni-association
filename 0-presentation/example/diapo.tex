@@ -4,7 +4,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english, french]{babel}
 
-\usepackage{xcolor, graphicx, shorttoc}
+\usepackage{xcolor, graphicx, fontspec, shorttoc}
+\usepackage{mdframed, listings}
 
 % ================================
 %             STYLE
@@ -13,26 +14,27 @@
 % beamer
 \input{beamer-config}
 
-% ================================
-%            COMMANDS
-% ================================
+% colors
+\definecolor{automatica-blue}{RGB}{0, 0, 160}
+
+% fonts
+\newfontfamily{\tahomab}{tahomabd.ttf}
+
+% configuration pour les codes sources
+\input{listings-config}
 
 % commands
-\input{src/commands}
+\input{commands}
 
 % ================================
 %            PARAMETERS
 % ================================
 
-\title[Refonte du site internet de l'association]{Refonte d'un site internet pour une association étudiante}
-\author[OFNI]{
-    \nom{Tristan}{Amiotte-Suchet} \\
-    \nom{Antoine}{Cuinet} \\
-    \nom{Gaspard}{Quentin} \\
-}
+\title[Mon expérience dans l'ingénierie logicielle]{Mon expérience dans l'ingénierie logicielle au sein d'un laboratoire de métrologie}
+\author[Tristan A-S]{\personne{Tristan}{Amiotte-Suchet}}
 \institute{Université de Franche Comté}
-\date{De octobre 2024 à mars 2025 \\ Année universitaire 2024 - 2025}
-\logo{pictures/logo-umlp-black.png}
+\date{Du 5 juin au 28 juillet 2023 \\ Année universitaire 2022 - 2023}
+\logo{images/logo-univ.png}
 
 % ================================
 %             DOCUMENT
@@ -48,6 +50,21 @@
     \frametitle{Plan de la présentation}
     \tableofcontents[hideallsubsections]
 \end{frame}
+
+% présentation entreprise
+\include{texts/presentation-ent}
+
+% windev et wlangage
+\include{texts/logiciels}
+
+% mission 1
+\include{texts/mission-1}
+
+% mission 2
+\include{texts/mission-2}
+
+% bilan
+\include{texts/bilan}
 
 % fin de présentation
 \appendix
