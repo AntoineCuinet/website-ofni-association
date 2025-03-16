@@ -11,7 +11,7 @@
 % ================================
 
 % beamer
-\input{beamer-config}
+\input{src/beamer-config}
 
 % ================================
 %            COMMANDS
@@ -43,7 +43,7 @@
 % title page
 \frame[plain, noframenumbering]{\titlepage}
 
-% table des matières
+% table of contents
 \begin{frame}
     \frametitle{Plan de la présentation}
     \tableofcontents[hideallsubsections]
@@ -51,183 +51,28 @@
 
 
 % introduction
-\begin{frame}
-    \frametitle{Introduction}
-    \centering
-    \textbf{Objectif}: Concevoir et développer un nouveau site web pour l’OFNI
-    \vspace{1cm}
+% @Antoine
+\input{contents/intro}
 
-    \textbf{Processus}: Analyse des besoins, maquettage, choix des technologies et implémentation des différentes fonctionnalités
-\end{frame}
+% maquettage
+% @Gaspard
+\input{contents/maquette}
 
-\begin{frame}
-    \frametitle{Le site web de l’association OFNI}
-    \framesubtitle{Le projet}
-    \centering
-    \textbf{Trois phases}: Maquettage du site, développement du site et réalisation du rapport et de la soutenance orale
-\end{frame}
+% implémentation
+% @Gaspard
+\input{contents/implem}
 
-\begin{frame}
-    \frametitle{Le site web de l’association OFNI}
-    \framesubtitle{L’association OFNI}
-    \centering
-    \textbf{OFNI}: Association des étudiants en informatique de l’université
-    \vspace{1cm}
+% structuration
+% @Tristan
+\input{contents/struct}
 
-    \textbf{Pourquoi ce projet?} Ancien site obsolète, non mis à jour, failles de sécurité, ne répond plus aux besoins actuels
-\end{frame}
+% démonstration
+% @Antoine
+\section{Démonstration}
+\sectitle{Démonstration du site web}
 
-
-
-
-
-\begin{frame}
-    \dots
-\end{frame}
-
-
-
-
-%% Partie Gaspard %%
-
-
-\begin{frame}
-    \frametitle{Réflexions préliminaires}
-
-    \begin{itemize}
-        \item Définition des besoins du site (\textbf{réunions hebdomadaires}).
-        \item Analyse des améliorations par rapport à l’ancien site.
-        \item Étude de faisabilité en lien avec le \textbf{RGPD}.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Les fonctionnalités du site}
-
-    \begin{itemize}
-        \item \textbf{Présentation de l’association} et de son histoire.
-        \item \textbf{Gestion des événements} (inscriptions et suivi).
-        \item \textbf{Page d’actualités}.
-        \item \textbf{Boutique en ligne} (adhésion et produits).
-        \item \textbf{Galerie photo}.
-        \item \textbf{Espace administrateur} (gestion des événements, photos, etc.).
-        \item \textbf{Système de comptes} (utilisateurs et administrateurs).
-        \item \textbf{Jeu ludique} inspiré de \textit{Space Invaders}.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Choix des technologies}
-
-    \begin{itemize}
-        \item Outil de gestion de projet : \textbf{Trello}.
-        \item Serveur : choix d’un framework \textbf{PHP}.
-        \item Comparaison \textbf{Laravel} vs \textbf{Symfony} :
-              \begin{itemize}
-                \item Laravel : approche fonctionnelle, plus simple mais moins familière.
-                \item Symfony : approche orientée objet, plus adaptée à nos compétences.
-              \end{itemize}
-        \item Décision finale : \textbf{Symfony} pour sa maintenabilité et son usage répandu en France.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Maquettage du site}
-
-    \begin{itemize}
-        \item Conception en \textbf{deux étapes} :
-              \begin{itemize}
-                \item \textbf{Esquisse manuscrite} pour organiser les pages.
-                \item \textbf{Maquette numérique} réalisée sur \textbf{Figma}.
-              \end{itemize}
-        \item Validation et ajustements après échanges avec les tuteurs.
-        \item Réflexion sur la maintenabilité (\textbf{gestion de contenu sans code}).
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Exemples de maquettes}
-
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{../0-report/assets/pictures/maquette.png}
-        %\captionof{figure}{Esquisse manuscrite}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{../0-report/assets/pictures/figma.png}
-        %\captionof{figure}{Maquette numérique}
-    \end{minipage}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Implémentation du site}
-
-    \begin{itemize}
-        \item Développement en \textbf{Symfony} (architecture MVC).
-        \item Structuration du code :
-              \begin{itemize}
-                \item \textbf{Modèle} : gestion des données et BDD.
-                \item \textbf{Vue} : affichage via \textbf{Twig}.
-                \item \textbf{Contrôleur} : lien entre modèle et vue.
-              \end{itemize}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Architecture MVC}
-
-    \centering
-    \includegraphics[width=0.7\linewidth]{../0-report/assets/pictures/mvc.png}
-    %\caption{Architecture MVC dans Symfony}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Technologies utilisées}
-
-    \begin{itemize}
-        \item \textbf{Sass} : amélioration et structuration du CSS.
-        \item Avantages de Sass :
-              \begin{itemize}
-                \item Variables et réutilisation de styles.
-                \item Meilleure organisation du code CSS.
-              \end{itemize}
-        \item \textbf{JavaScript} : utilisé pour le jeu intégré au site.
-    \end{itemize}
-\end{frame}
-
-%% Fin partie Gaspard %%
-
-
-
-\begin{frame}
-    \frametitle{Démonstration}
-    \centering
-    \textbf{Démonstration du site web}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Conclusion}
-    \centering
-    \textbf{Bilan}: Première version fontionnelle du site, sécurisée, adaptée aux besoins de l’association
-    \vspace{1cm}
-
-    \textbf{Ajout}: jeu OFNIvaders
-    \vspace{1cm}
-
-    \textbf{Pistes d'améliorations}: CMS, calendrier interactif, SEO, etc.
-\end{frame}
-
-
-% fin de présentation
-\appendix
-\begin{frame}[plain, noframenumbering]
-    \scshape\huge\centering
-    \vspace{1cm}
-    Merci pour votre attention !\par
-    \vspace{2cm}
-    Avez-vous des questions ?\par
-\end{frame}
+% conclusion
+% @Antoine
+\input{contents/conclusion}
 
 \end{document}
