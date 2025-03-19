@@ -46,5 +46,6 @@ Présentation rapide, page par page
 Bilan
 Ajout
 Piste d'amélioration
+SEO (Search Engine Optimization) Optimisation pour les moteurs de recherche
 
-Pts de vue perso: consolider compétences (Symfony, JS, PHP, SASS) + découvrir outils (Trello, Figma) + travail en équipe / répartition des taches / gestion du tps
+Pts de vue de l'équipe: consolider compétences (Symfony, JS, PHP, SASS) + découvrir outils (Trello, Figma) + travail en équipe / répartition des taches / gestion du tps
