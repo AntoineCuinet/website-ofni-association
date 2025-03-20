@@ -5,7 +5,7 @@ Cette partie du rapport décrit le déroulement du développement du projet de f
 \section{Réflexions préliminaires}
 
 Lors de la première phase du projet, nous avons tout d'abord dû réfléchir aux besoins auxquels le site doit répondre.  
-À travers plusieurs réunions hebdomadaires, nous avons alors réfléchi aux améliorations que nous souhaitions apporter par rapport à l’ancien site de l’\ofni\ et défini la liste des fonctionnalités que nous souhaitions implémenter.  
+À travers plusieurs réunions hebdomadaires, nous avons alors pensé aux améliorations que nous souhaitions apporter par rapport à l’ancien site de l’\ofni\ et défini la liste des fonctionnalités que nous souhaitions implémenter.  
 
 C'est également à ce moment-là que nous avons dû juger de la faisabilité de certaines fonctionnalités au regard du Règlement Général sur la Protection des Données (RGPD), qui régule et protège les droits des utilisateurs d'Internet dans l'Union Européenne.
 
@@ -13,18 +13,18 @@ C'est également à ce moment-là que nous avons dû juger de la faisabilité de
 
 Ainsi, après ces réunions, nous avons retenu plusieurs fonctionnalités principales pour répondre aux besoins de l'association et de ses membres. Le site comporte une page de présentation de l’association et de son histoire, ainsi qu’une page dédiée aux événements, permettant aux utilisateurs de s’inscrire et de gérer leurs inscriptions. Une page actualités permet de suivre les dernières informations concernant l’association.  
 
-Une boutique en ligne a également été mise en place afin de permettre l’achat de produits ainsi que l’adhésion à l’association. Un espace galerie photo a été conçu pour partager les souvenirs des événements passés.  
+Une boutique en ligne a également été mise en place afin de permettre l’achat de produits ainsi que l’adhésion à l’association. Un espace galerie photos a été conçu pour partager les souvenirs des événements passés.  
 
 En cours de projet, nous avons été amenés à ajouter une nouvelle fonctionnalité au site : un jeu ludique ayant pour objectif de donner envie aux étudiants de venir sur le site de façon régulière. L'idée nous a été proposée par un de nos tuteurs, Monsieur \propre{Demougin}, après la conception de la maquette. Cette idée nous a beaucoup plu, et nous avons alors décidé d'implémenter une version revisitée du célèbre jeu \logo{Space Invaders}: \game.
 \pagebreak
 
 Un formulaire de contact est mis à disposition des entreprises souhaitant entrer en relation avec l’association. Par ailleurs, une page administrateur a été intégrée pour faciliter la transmission et la gestion du site par les futurs bureaux de l’\ofni.  
 
-Concernant les utilisateurs, un système de comptes a été mis en place. Un compte utilisateur permet d’accéder à la galerie photo, de jouer au jeu et de s’inscrire aux événements. De leur côté, les administrateurs disposent d’un compte spécifique leur permettant de gérer les événements, les actualités et les photos, ainsi que d’accéder aux paramètres avancés du site.
+Concernant les utilisateurs, un système de comptes a été mis en place. Un compte utilisateur permet d’accéder à la galerie photos, de jouer au jeu et de s’inscrire aux événements. De leur côté, les administrateurs disposent d’un compte spécifique leur permettant de gérer les événements, les actualités et les photos, ainsi que d’accéder aux paramètres avancés du site.
 
 \subsection{Recherche sur les technologies}
 
-Lors de ces réflexions, nous avons recherchés les technologies les plus adaptées pour développer un site performant et facilement maintenable par les futurs membres de l’association.
+Lors de ces réflexions, nous avons recherché les technologies les plus adaptées pour développer un site performant et facilement maintenable par les futurs membres de l’association.
 \bigskip
 
 Afin de mieux gérer notre organisation, sur les conseils de nos tuteurs Monsieur \propre{Demougin} et Madame \propre{Pierrot}, nous avons adopté l’outil \logo{Trello}. Cet outil nous a permis de lister et d’organiser les différentes tâches à accomplir, tout en suivant leur état d'avancement. En collaboration avec nos tuteurs, nous avons ainsi identifié les fonctionnalités à implémenter et avons réparti leur développement au sein du groupe.
@@ -47,16 +47,16 @@ L'objectif principal de cette maquette était de confirmer les fonctionnalités 
 Afin de travailler efficacement en groupe, nous avons réparti la charge de travail de manière équilibrée entre les membres de l'équipe. Pour la conception de la maquette, nous avons d'abord réfléchi ensemble aux différentes pages qui devaient composer le site, avant que chacun ne prenne en charge certaines d’entre elles. Cette répartition s’est faite naturellement, chacun ayant des préférences différentes.
 \bigskip
 
-Dans un premier temps, nous avons réalisé une esquisse manuscrite, tel que l'exemple de la \figureref{manuscrite} de la page de galerie photo, afin d’organiser les différentes pages du site et de positionner les éléments fonctionnels. Cette étape a été cruciale dans ce projet puisqu'elle nous a facilité la réflexion sur la structure générale du site et l'agencement des fonctionnalités.
+Dans un premier temps, nous avons réalisé une esquisse manuscrite, tel que l'exemple de la \figureref{manuscrite} de la page de galerie photos, afin d’organiser les différentes pages du site et de positionner les éléments fonctionnels. Cette étape a été cruciale dans ce projet puisqu'elle nous a facilité la réflexion sur la structure générale du site et l'agencement des fonctionnalités.
 
-C'est également ici que nous avons commencé à imaginer comment rendre notre site le plus maintenable possible sans ajouter de code supplémentaire. Nous avons pensé à créer la possibilité de gérer le contenu du site sans code (comme le ferait un Système de gestion de contenu comme \logo{Wordpress} par exemple)
+C'est également ici que nous avons commencé à imaginer comment rendre notre site le plus maintenable possible sans ajouter de code supplémentaire. Nous avons pensé à créer la possibilité de gérer le contenu du site sans code (comme le ferait un Système de gestion de contenu comme \logo{Wordpress} par exemple).
 Nous avons également imaginé et schématisé un système de génération de formulaires personnalisés pour les événements.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=10cm]{assets/pictures/maquette.png}
     \captionsetup{justification=centering}
-    \caption{Page de la maquette manuscrite concernant la gestion de la gallerie photo}
+    \caption{Page de la maquette manuscrite concernant la gestion de la galerie photos}
     \label{manuscrite}%
 \end{figure}
 \bigskip
@@ -65,7 +65,7 @@ Une fois cette version manuscrite terminée, nous avons échangé avec nos tuteu
 Nous avons notamment été amenés à repenser la façon dont l'utilisateur devait interagir avec le site afin de rendre l'expérience la plus intuitive possible.
 
 Après plusieurs ajustements, nous
-avons commencé l'élaboration d'une version numérique finalisée sur l'outil \logo{Figma}, la \figureref{figma} montre un exemple de cette maquette.
+avons commencé l'élaboration d'une version numérique finalisée sur l'outil \logo{Figma}. La \figureref{figma} montre un exemple de cette maquette.
 Bien que nous ne connaissions pas le logiciel, nous avons pu rapidement le prendre en main et il nous a ainsi permis de transformer nos brouillons manuscrits en une maquette plus aboutie et fidèle à notre vision du projet.
 
 De plus, l'apprentissage de \logo{Figma} nous a également permis de pouvoir effectuer des maquettes stylisées afin de trouver le visuel qu'on souhaitait appliquer au projet.
@@ -82,13 +82,13 @@ De plus, l'apprentissage de \logo{Figma} nous a également permis de pouvoir eff
 
 \section{L'Implémentation du site}
 
-Lors du développement du site, nous nous sommes accordés de sorte afin que chacun travaille de façon équitable et si possible sur ce qu'il apprécie faire le plus.
+Lors du développement du site, nous nous sommes accordés afin que chacun travaille de façon équitable et si possible sur ce qu'il apprécie de faire le plus.
 \bigskip
 
 Concernant les technologies, nous avons décidé d'utiliser comme framework principal \logo{Symfony}. En effet, l'approche orientée objet sera plus facilement maintenable dans le futur puisque les étudiants qui reprendront l'association connaîtront bien ce paradigme. De plus, étant une technologie populaire en France, la présence d'une documentation en français ainsi que l'accès à beaucoup de ressources sur le sujet est un avantage pour cette dernière. Enfin, beaucoup d'entreprises françaises utilisent \logo{Symfony}, le connaître nous procure donc un avantage pour notre carrière professionnelle future.
 \bigskip
 
-Il convient alors de vous présenter brièvement comment \logo{Symfony} fonctionne.
+Il convient maintenant de vous présenter brièvement comment \logo{Symfony} fonctionne.
 
 Tout d'abord, tout code \logo{Symfony} est structuré en respectant l'architecture MVC, comme montré dans la \figureref{mvc}, ce qui signifie que chaque élément que l'on va ajouter à notre projet est divisé en trois parties : le \textbf{modèle} (M), la \textbf{vue} (V) et le \textbf{contrôleur} (C). 
 
