@@ -130,7 +130,7 @@ Enfin, pour la réalisation du jeu, le langage JavaScript a été rapidement ado
 \section{Les choix de développement}  
 \label{sec:difficultes}
 
-Plus concrètement, le maquettage du site se voit confrontée à plusieurs problématiques et interrogations, tant techniques qu'éthiques. Il est d'abord attendu de la structure du site une certaine factorisation. Puis, le stockage des données personnelles ainsi que la décision d'autoriser ou non une inscription, sont des questions qui sont à prendre en compte du début à la fin du développement.
+Plus concrètement, le maquettage du site se voit confronté à plusieurs problématiques et interrogations, tant techniques qu'éthiques. Il est d'abord attendu de la structure du site une certaine factorisation. Puis, le stockage des données personnelles ainsi que la décision d'autoriser ou non une inscription, sont des questions qui sont à prendre en compte du début à la fin du développement.
 
 \subsection{L'autorisation d'inscription}
 \label{subsec:autorisation-inscription}
@@ -139,17 +139,17 @@ Pour s'inscrire aux événements de l'\ofni\, il est nécessaire de posséder un
 
 Il faut alors trouver un élément concret qui permet de distinguer un membre de l'université d'une autre personne. Il est alors logique de se tourner vers les adresses e-mails. En effet, les adresses e-mails des membres de la faculté sont de la forme~: \code{prenom.nom@[edu.]univ-fcomte.fr}.
 
-Lors de la réception d'une nouvelle demande d'inscription, l'algorithme doit donc simplement vérifier que l'adresse \langue{e-mail} de la personne soit conforme au spécimen précédent. Si c'est le cas, alors l'inscription est automatiquement validée à compter de l'instant ou la personne aura utilisé le lien de confirmation d'adresse qui lui a alors été envoyé. Sinon, il doit en faire manuellement la demande via le formulaire de contact situé sur la page d'accueil du site. Qu'importe la voie utilisée, une fois le compte créé, l'utilisateur peut alors s'inscrire aux différents événements.
+Lors de la réception d'une nouvelle demande d'inscription, l'algorithme doit donc simplement vérifier que l'adresse \langue{e-mail} de la personne soit conforme au spécimen précédent. Si c'est le cas, alors l'inscription est automatiquement validée à compter de l'instant où la personne aura utilisé le lien de confirmation d'adresse qui lui a alors été envoyé. Sinon, il doit en faire manuellement la demande via le formulaire de contact situé sur la page d'accueil du site. Qu'importe la voie utilisée, une fois le compte créé, l'utilisateur peut alors s'inscrire aux différents événements.
 
 \subsection{La génération de formulaire}
 \label{subsec:generation-formulaire}
 
-L'inscription à un événement nécessite, dans la quasi totalité des cas, le remplissage d'un formulaire par l'utilisateur. Ce dernier étant susceptible de changer à chaque événement, il est donc nécessaire de pouvoir générer dynamiquement ces formulaires en fonction des besoins. Pour cela, l'idée est alors de stocker les formulaires dans la base de données au format \logo{JSON}. Ainsi, lors de la création d'un événement, l'organisateur peut définir le formulaire qui doit être utilisé pour l'inscription. Si ce formulaire n'existe pas déjà, il peut alors le créer. Puis, lors de l'inscription, l'affichage du formulaire côté utilisateur est généré automatiquement en fonction des données stockées.
+L'inscription à un événement nécessite, dans la quasi totalité des cas, le remplissage d'un formulaire par l'utilisateur. Ce dernier étant susceptible de changer à chaque événement, il est donc nécessaire de pouvoir générer dynamiquement ces formulaires en fonction des besoins. Pour cela, l'idée est alors de les stocker dans la base de données au format \logo{JSON}. Ainsi, lors de la création d'un événement, l'organisateur peut définir le formulaire qui doit être utilisé pour l'inscription. S'il n'existe pas déjà, il peut alors le créer. Puis, lors de l'inscription, l'affichage du formulaire côté utilisateur est généré automatiquement en fonction des données stockées.
 
 \subsection{La factorisation des événements}
 \label{subsec:factorisation-evenements}
 
-Avoir des formulaires réutilisables est un grand atout pour l'aspect \logo{CMS} du site. Mais au delà de l'inscription, la page utilisée pour présenter chaque événements, rique d'être très similaire d'année en année sur deux éditions d'un même événement. Il est alors nécessaire de pouvoir factoriser ces pages pour éviter de devoir tout recréer tous les texts et toutes les illustrations.
+Avoir des formulaires réutilisables est un grand atout pour l'aspect \logo{CMS} du site. Mais au delà de l'inscription, la page utilisée pour présenter chaque événements, rique d'être très similaire d'année en année sur deux éditions d'un même événement. Il est alors nécessaire de pouvoir factoriser ces pages pour éviter de devoir recréer tous les textes et toutes les illustrations.
 \bigskip
 
 Pour pallier ce souci de factorisation, la structure du site permet alors à l'administrateur de créer d'abord un événement. Ce dernier est intemporel et n'est donc pas lié à une édition spécifique. Ce dernier centralise un nom, une illustration ainsi qu'un texte de présentation puis un autre texte de résumé. Dans un deuxième temps, l'administrateur peut alors créer une édition de cet événement. Cette édition est alors liée à l'événement et contient les informations spécifiques à son déroulement, comme la date, le lieu, le prix, etc. Ceci est, dans la terminologie du site, appelé une \citer{Instance d'événement}, faisant ainsi une petite référence au monde du développement, qui est après tout le point commun de tous les membres de l'\ofni.
