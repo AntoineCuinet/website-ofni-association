@@ -50,5 +50,3 @@ Piste d'amélioration
 SEO (Search Engine Optimization) Optimisation pour les moteurs de recherche
 
 Pts de vue de **l'équipe**: consolider compétences (Symfony, JS, PHP, SASS) + découvrir outils (Trello, Figma) + travail en équipe / répartition des taches / gestion du tps
-
-TODO: vrai sponsior + evenement de jeudi dans demo
