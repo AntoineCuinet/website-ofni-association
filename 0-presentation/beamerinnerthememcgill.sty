@@ -11,12 +11,19 @@
 
 
 \setbeamertemplate{title page}{
-    \centering
-    \includegraphics[width=0.5\textwidth]{pictures/logo-umlp-black.png}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \includegraphics[width=4cm]{pictures/logo-umlp-black.png}
 
-    \vspace{\stretch{0.5}}
+        \column{0.5\textwidth}
+        \includegraphics[width=5cm]{pictures/logo_OFNI.png}
+    \end{columns}
+    \centering
+
+    \vspace{\stretch{1.5}}
 
     \hrulefill\par
+    \vspace{\stretch{0.3}}
     \textsc{\inserttitle}\par
     \hrulefill\par
 
@@ -26,6 +33,8 @@
         % creators
         \column{0.5\textwidth}
         \centering
+        \footnotesize
+        Étudiants~: \\
         {\footnotesize\insertauthor}\par
         % tutors
         \column{0.5\textwidth}
