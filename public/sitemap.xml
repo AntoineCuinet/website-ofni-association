@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- Accueil -->
+    <url>
+        <loc>https://www.ofni.asso.fr/</loc>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- À propos -->
+    <url>
+        <loc>https://www.ofni.asso.fr/presentation/</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Événements -->
+    <url>
+        <loc>https://www.ofni.asso.fr/events/</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Boutique -->
+    <url>
+        <loc>https://www.ofni.asso.fr/shop/</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Jeu -->
+    <url>
+        <loc>https://www.ofni.asso.fr/game/</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Mentions légales -->
+    <url>
+        <loc>https://www.acuinet.fr/legal</loc>
+        <priority>0.3</priority>
+    </url>
+</urlset>

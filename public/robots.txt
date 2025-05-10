@@ -1,0 +1,19 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /admin
+Disallow: /build/
+Disallow: /js/
+Disallow: /pictures/
+Disallow: /uploads/
+Disallow: /reset-password/
+Disallow: /reset-password
+Disallow: /verify/
+Disallow: /register
+Disallow: /account
+Disallow: /photos/
+Disallow: /error/
+Disallow: /_profiler/
+Disallow: /_wdt/
+Disallow: /_error/
+
+Sitemap: https://ofni.asso.fr/sitemap.xml
