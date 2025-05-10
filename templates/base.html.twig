@@ -8,8 +8,15 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
         {% block stylesheets %}<link rel="stylesheet" href="{{ asset('style.css') }}">{% endblock %}
 
-        {# <meta name="description" content="', $description, '"> #}
-        {# <meta name="keywords" content="', $keywords, '"> #}
+        <meta name="description" content="Le site officiel de l'association OFNI, des étudiants en informatique de l'Université Marie et Louis Paster de Besançon.">
+        <meta name="keywords" content="ofni, association, étudiants, informatique, université, besançon">
+        <meta name="author" content="OFNI">
+
+        <meta property="og:title" content="OFNI - Site officiel">
+        <meta property="og:description" content="Le site officiel de l'association OFNI, des étudiants en informatique de l'Université Marie et Louis Paster de Besançon.">
+        <meta property="og:image" content="./favicon.ico">
+        <meta property="og:url" content="{{ url('home') }}">
+        <meta property="og:type" content="website">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
