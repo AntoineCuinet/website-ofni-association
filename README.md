@@ -1,7 +1,7 @@
 # 🌐 Site Web de l'Association OFNI
 
-Bienvenue dans le dépôt du site web de l'association OFNI des étudiants en informatique de l'Université de Franche-Comté. Ce projet a pour objectif de fournir une plateforme intuitive et moderne pour la communauté étudiante, avec des fonctionnalités dédiées à la gestion des événements, des projets et des ressources partagées.
-Ce site a été conçu et développé par Antoine CUINET, votre trésorier de l'association OFNI du bureau de 2024-2025.
+Bienvenue dans le dépôt du site web de l'association OFNI des étudiants en informatique de l'Université Marie et Louis Paster de Besançon. Ce projet a pour objectif de fournir une plateforme intuitive et moderne pour la communauté étudiante, avec des fonctionnalités dédiées à la gestion des événements, des projets et des ressources partagées.
+Ce site a été conçu et développé par Antoine CUINET, Gaspard QUENTIN et Tristan AMIOTTE-SUCHET, membres du bureau de l'association OFNI de 2024-2025.
 
 ![Logo de l'association OFNI](screenshot.png)
 
@@ -18,8 +18,8 @@ Ce site a été conçu et développé par Antoine CUINET, votre trésorier de l'
     - [Installation](#installation)
     - [Lancement](#lancement)
     - [Build pour la production](#build-pour-la-production)
-  - [👥 Auteur et Contact](#-auteur-et-contact)
-    - [Auteur](#auteur)
+  - [👥 Auteurs et Contact](#-auteurs-et-contact)
+    - [Auteurs](#auteurs)
     - [Contact](#contact)
       - [Mail](#mail)
       - [Site Web](#site-web)
@@ -31,16 +31,15 @@ Le site web de l'association OFNI est une plateforme centralisée pour les étud
 
 - S'informer sur l'association ainsi que sur les événements à venir
 - Participer à des projets et des événements étudiants
-- Accéder à des ressources pédagogiques et tutoriels
 - Suivre les actualités de l'association
 
 ## 🚀 Fonctionnalités
 
 - Page d'accueil interactive avec les dernières actualités et événements.
-- Gestion des événements avec un calendrier interactif.
-- Espace membre avec des cours et des ressources pédagogiques en ligne.
+- Gestion des événements.
 - Adhésion en ligne via un formulaire simple.
 - Réalisation de sondages pour un évenement.
+- Une galerie photos.
 - Une boutique en lignes pour des goodies et des places à des événements.
 - Partenariats et opportunités de stages pour aider les étudiants à entrer en contact avec des entreprises.
 
@@ -50,7 +49,7 @@ Le site web de l'association OFNI est une plateforme centralisée pour les étud
 - À propos : Histoire de l'association, équipe du bureau, objectifs, status.
 - Événements : Calendrier des événements, inscription, sondages, détails.
 - Boutique : Formulaire d'inscription pour rejoindre l'association, goodies.
-- Espace membre : Cours, tutoriels, annales, ressources pédagogiques
+- Espace photos : Les photos des événements.
 
 ## 💻 Technologies Utilisées
 
@@ -77,8 +76,8 @@ Le site web de l'association OFNI est une plateforme centralisée pour les étud
 4. Clonez le dépôt du projet :
 
     ```bash
-    git clone https://github.com/AntoineCuinet/ofni-website.git
-    cd ofni-website
+    git clone https://github.com/AntoineCuinet/website-ofni-association
+    cd website-ofni-association
     ```
 
 5. Afin d'installer les dépendances du projet, ouvrez votre terminal à la racine du projet puis entrez cela :
@@ -124,22 +123,24 @@ npm run build-sass
 npm run build
 ```
 
-## 👥 Auteur et Contact
+## 👥 Auteurs et Contact
 
-### Auteur
+### Auteurs
 
-Antoine CUINET - Développeur Web et membre de l'association
+Antoine CUINET - Développeur et membre de l'association
 Pour plus d'informations, [voir ce site: portfolio de Antoine CUINET](https://acuinet.fr/)
+Gaspard QUENTIN - Développeur et membre de l'association
+Tristan AMIOTTE-SUCHET - Développeur et membre de l'association
 
 ### Contact
 
 #### Mail
 
-[Antoine CUINET](mailto:antoine@acuinet.fr)
+[Président de l'asso](mailto:contact@ofni.asso.fr)
 
 #### Site Web
 
-[Antoine CUINET](https://acuinet.fr/)
+[Site web de l'OFNI](https://ofni.asso.fr/)
 
 ## 📜 Licence
 

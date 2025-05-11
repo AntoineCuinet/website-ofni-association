@@ -1,0 +1,10 @@
+{
+    "name": "OFNI",
+    "description": "Le site officiel de l'association OFNI, des étudiants en informatique de l'Université Marie et Louis Paster de Besançon.",
+    "author": "CUINET ANTOINE",
+    "version": "2.0.0",
+    "config": {
+      "lang": "fr",
+      "theme": "light/dark"
+    }
+}
