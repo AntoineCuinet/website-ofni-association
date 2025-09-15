@@ -40,8 +40,8 @@ class AssoEventInstanceRepository extends ServiceEntityRepository
     public function next(int $limit = 5): array
     {
         return $this->createQueryBuilder('i')
-            ->where('i.date > :now')
-            ->setParameter('now', new \DateTime())
+            ->where('i.date >= :now')
+            ->setParameter('now', new \DateTime()->setTime(0, 0, 0))
             ->orderBy('i.date', 'ASC')
             ->setMaxResults($limit)
             ->getQuery()
