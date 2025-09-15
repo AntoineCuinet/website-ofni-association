@@ -1,52 +1,56 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <div class="hero-section">
-        <div class="hero-text">
-            <h1>L’<span class="o">a</span><span class="f">s</span><span class="n">s</span><span class="i">o</span> des étudiants en Informatique</h1>
-            <p>Bienvenue sur le site des étudiants en Informatique de l'Université de Franche-Comté !</p>
-            <a href="{{ path('game') }}" class="btn">S'amuser</a>
-            <a href="{{ path('shop') }}" class="btn-full">Adhérer &#8594;</a>
-        </div>
+	<div class="hero-section">
+		<div class="hero-text">
+			<h1>L’<span class="o">a</span>
+				<span class="f">s</span>
+				<span class="n">s</span>
+				<span class="i">o</span>
+				des étudiants en Informatique</h1>
+			<p>Bienvenue sur le site des étudiants en Informatique de l'Université Marie et Louis Pasteur !</p>
+			<a href="{{ path('game') }}" class="btn">S'amuser</a>
+			<a href="{{ path('shop') }}" class="btn-full">Adhérer &#8594;</a>
+		</div>
 
-        <div class="logo">
-            <p>
-                <span class="letter o" data-initial="O" data-final="I"></span>
-                <span class="letter f" data-initial="F" data-final="N"></span>
-                <span class="letter n" data-initial="N" data-final="F"></span>
-                <span class="letter i" data-initial="I" data-final="O"></span>
-            </p>
-        </div>
-    </div>
+		<div class="logo">
+			<p>
+				<span class="letter o" data-initial="O" data-final="I"></span>
+				<span class="letter f" data-initial="F" data-final="N"></span>
+				<span class="letter n" data-initial="N" data-final="F"></span>
+				<span class="letter i" data-initial="I" data-final="O"></span>
+			</p>
+		</div>
+	</div>
 
-    <div id="scroll-down" class="scroll-down-container">
-        <a href="#scroll-down">
-        <svg class="svg-scroll" width="80px" height="80px" viewBox="30.5 -9.5 554 813" enable-background="new 30.5 -9.5 554 813" xml:space="preserve">
-        <path fill="#3499fe" d="M328,0h-44C271.68,0,42,5.28,42,242v308c0,9.9,3.96,242,242,242h44c13.86,0,242-6.16,242-242V242C570,232.1,566.04,0,328,0z
-                M526,550c0,191.62-177.76,198-198,198h-44C92.38,748,86,570.24,86,550V242C86,50.82,263.54,44,284,44h44
-                c191.62,0,198,177.76,198,198V550z"/>
-        <circle fill="#3499fe" cx="306" cy="231" r="45"/>
-        </svg>
-        </a>
-    </div>
+	<div id="scroll-down" class="scroll-down-container">
+		<a href="#scroll-down">
+			<svg class="svg-scroll" width="80px" height="80px" viewbox="30.5 -9.5 554 813" enable-background="new 30.5 -9.5 554 813" xml:space="preserve">
+				<path fill="#3499fe" d="M328,0h-44C271.68,0,42,5.28,42,242v308c0,9.9,3.96,242,242,242h44c13.86,0,242-6.16,242-242V242C570,232.1,566.04,0,328,0z
+										                M526,550c0,191.62-177.76,198-198,198h-44C92.38,748,86,570.24,86,550V242C86,50.82,263.54,44,284,44h44
+										                c191.62,0,198,177.76,198,198V550z"/>
+				<circle fill="#3499fe" cx="306" cy="231" r="45"/>
+			</svg>
+		</a>
+	</div>
 
-    <section>
-        <h2>Les dernières actualités</h2>
-        <p>Retrouvez ici les dernières actualités de l'OFNI !</p>
-        {% for actu in actus %}
-            {% include "partials/actu_teaser.html.twig" with {actu: actu} only %}
-        {% endfor %}
-    </section>
+	<section>
+		<h2>Les dernières actualités</h2>
+		<p>Retrouvez ici les dernières actualités de l'OFNI !</p>
+		{% for actu in actus %}
+			{% include "partials/actu_teaser.html.twig" with {actu: actu} only %}
+		{% endfor %}
+	</section>
 
-    <section>
-        <h2>Nos événements</h2>
-        <p>Retrouvez ici nos événements !</p>
-        {% for instance in instances %}
-            {% include "partials/instance_teaser.html.twig" with {instance: instance} only %}
-        {% endfor %}
-    </section>
+	<section>
+		<h2>Nos événements</h2>
+		<p>Retrouvez ici nos événements !</p>
+		{% for instance in instances %}
+			{% include "partials/instance_teaser.html.twig" with {instance: instance} only %}
+		{% endfor %}
+	</section>
 
-    {% embed 'contact/form.html.twig' %}
-        {% set form = contact_form %}
-    {% endembed %}
+	{% embed 'contact/form.html.twig' %}
+		{% set form = contact_form %}
+	{% endembed %}
 {% endblock %}
