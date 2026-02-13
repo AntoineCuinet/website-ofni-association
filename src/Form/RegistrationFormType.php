@@ -25,7 +25,7 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'constraints' => [
                     new Assert\Regex([
-                        'pattern' => '/.*@edu\.univ-fcomte\.fr/',
+                        'pattern' => '/.*@(edu\.univ-fcomte\.fr|edu\.umlp\.fr)/',
                         'match' => true,
                         'message' => "Votre adresse mail doit être celle de l'université !"
                     ])
