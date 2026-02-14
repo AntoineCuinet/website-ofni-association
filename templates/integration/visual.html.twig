@@ -45,8 +45,13 @@
 
     <!-- Middle: Code Editor -->
     <div class="editor-pane">
-        <div class="panel-header">
+        <div class="panel-header editor-header">
             <h3>Code Python</h3>
+            <div class="font-size-controls">
+                <button id="font-decrease" class="font-size-btn" title="Réduire la taille">A-</button>
+                <span id="font-size-label">14</span>
+                <button id="font-increase" class="font-size-btn" title="Augmenter la taille">A+</button>
+            </div>
         </div>
         <div class="panel-content" style="padding: 0; display: flex; flex-direction: column;">
             <!-- Monaco Editor Container -->
@@ -175,5 +180,40 @@
     .status-running { color: #fbbf24; font-weight: bold; }
     .status-success { color: #34d399; font-weight: bold; }
     .status-error { color: #f87171; font-weight: bold; }
+
+    .editor-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .font-size-controls {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .font-size-btn {
+        background: rgba(128, 128, 128, 0.2);
+        border: 1px solid rgba(128, 128, 128, 0.4);
+        color: var(--color-font-p);
+        padding: 2px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-weight: bold;
+        line-height: 1.4;
+    }
+
+    .font-size-btn:hover {
+        background: rgba(128, 128, 128, 0.4);
+    }
+
+    #font-size-label {
+        font-size: 0.8rem;
+        color: var(--color-font-p);
+        min-width: 20px;
+        text-align: center;
+    }
 </style>
 {% endblock %}

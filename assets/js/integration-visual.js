@@ -65,6 +65,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    // Font size controls
+    let currentFontSize = 14;
+    const fontSizeLabel = document.getElementById('font-size-label');
+    document.getElementById('font-decrease')?.addEventListener('click', () => {
+        if (currentFontSize > 8) {
+            currentFontSize -= 2;
+            editor.updateOptions({ fontSize: currentFontSize });
+            fontSizeLabel.textContent = currentFontSize;
+        }
+    });
+    document.getElementById('font-increase')?.addEventListener('click', () => {
+        if (currentFontSize < 32) {
+            currentFontSize += 2;
+            editor.updateOptions({ fontSize: currentFontSize });
+            fontSizeLabel.textContent = currentFontSize;
+        }
+    });
+
     // Load Pyodide
     try {
         if (typeof loadPyodide === 'function') {
