@@ -33,6 +33,10 @@
 node_modules/
 ###< node_modules ###
 
+###> webpack encore ###
+/public/build/
+###< webpack encore ###
+
 ###> FileSync ###
 .sync.ffs_db
 ###< FileSync ###
