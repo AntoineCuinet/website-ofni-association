@@ -11,6 +11,24 @@
         "/build/runtime.js",
         "/build/three-model.js"
       ]
+    },
+    "integration-visual": {
+      "js": [
+        "/build/runtime.js",
+        "/build/integration-visual.js"
+      ],
+      "css": [
+        "/build/integration-visual.css"
+      ]
+    },
+    "integration-classic": {
+      "js": [
+        "/build/runtime.js",
+        "/build/integration-classic.js"
+      ],
+      "css": [
+        "/build/integration-classic.css"
+      ]
     }
   }
 }

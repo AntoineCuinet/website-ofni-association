@@ -1,0 +1,179 @@
+{% extends 'integration/base_integration.html.twig' %}
+
+{% block title %}Epreuve Visuelle{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/integration-visual.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Load Pyodide (CDN for simplicity) -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+    <script src="{{ asset('build/runtime.js') }}"></script>
+    <script src="{{ asset('build/integration-visual.js') }}"></script>
+{% endblock %}
+
+{% block main %}
+<div class="leetcode-container">
+    <!-- Left Side: Problem Description -->
+    <div class="problem-pane">
+        <div class="panel-header">
+            <h2>Énigme #2 : Le Chemin du Robot</h2>
+        </div>
+        <div class="panel-content">
+            <p>
+                Le robot doit atteindre la zone verte.
+            </p>
+            <p><strong>Commandes disponibles :</strong></p>
+            <ul>
+                <li><code>robot.up()</code></li>
+                <li><code>robot.down()</code></li>
+                <li><code>robot.left()</code></li>
+                <li><code>robot.right()</code></li>
+            </ul>
+            <p><strong>Objectif :</strong></p>
+            <p>Écrivez un script Python pour guider le robot du point de départ (Bleu) à la sortie (Vert). Les murs sont noirs.</p>
+            
+            <div id="console-output" class="console-box">
+                <div class="console-title">Console Output:</div>
+                <pre id="output-text">En attente...</pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Middle: Code Editor -->
+    <div class="editor-pane">
+        <div class="panel-header">
+            <h3>Code Python</h3>
+        </div>
+        <div class="panel-content" style="padding: 0; display: flex; flex-direction: column;">
+            <!-- Monaco Editor Container -->
+            <div id="code-editor-container"></div>
+            
+            <div class="actions">
+                <button id="run-btn" class="btn" disabled>Chargement de Python...</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Side: Visual Canvas -->
+    <div class="visual-pane">
+        <div class="panel-header">
+            <h3>Visualisation</h3>
+        </div>
+        <div class="panel-content canvas-container">
+            <canvas id="game-canvas" width="400" height="400"></canvas>
+            <div id="status-message" class="status-waiting">Prêt</div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .leetcode-container {
+        display: grid;
+        grid-template-columns: 25% 40% 35%;
+        height: calc(100vh - 50px); /* viewport minus header */
+        width: 100%;
+        background-color: var(--color-primary);
+        color: var(--color-font-p);
+    }
+
+    .problem-pane, .editor-pane, .visual-pane {
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid rgba(128, 128, 128, 0.3);
+        overflow: hidden;
+        min-height: 0;
+    }
+
+    .visual-pane {
+        border-right: none;
+    }
+
+    .panel-header {
+        background-color: var(--color-primary);
+        border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+        padding: 10px 15px;
+        flex-shrink: 0;
+    }
+
+    .panel-header h2, .panel-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: var(--color-font-title);
+    }
+
+    .panel-header h2::after, .panel-header h3::after {
+        display: none;
+    }
+
+    .panel-content {
+        padding: 15px;
+        overflow-y: auto;
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        color: var(--color-font-p);
+        position: relative;
+    }
+
+    /* Monaco Editor Container Style */
+    #code-editor-container {
+        width: 100%;
+        flex: 1;
+        min-height: 0;
+        position: relative;
+        overflow: hidden; /* Important for Monaco */
+    }
+
+    .actions {
+        padding: 10px;
+        background-color: var(--color-primary);
+        text-align: right;
+        border-top: 1px solid rgba(128, 128, 128, 0.3);
+    }
+
+    .canvas-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #111;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    canvas {
+        background-color: white;
+        max-width: 100%;
+        max-height: 100%;
+        image-rendering: pixelated;
+    }
+
+    .console-box {
+        margin-top: 20px;
+        background: rgba(0,0,0,0.3);
+        border-radius: 4px;
+        padding: 10px;
+        font-family: monospace;
+        font-size: 0.9em;
+    }
+    .console-title {
+        color: #888;
+        font-size: 0.8em;
+        margin-bottom: 5px;
+    }
+    #output-text {
+        white-space: pre-wrap;
+        margin: 0;
+        color: #ccc;
+    }
+
+    .status-waiting { color: #aaa; }
+    .status-running { color: #fbbf24; font-weight: bold; }
+    .status-success { color: #34d399; font-weight: bold; }
+    .status-error { color: #f87171; font-weight: bold; }
+</style>
+{% endblock %}

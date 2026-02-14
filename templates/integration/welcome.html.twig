@@ -1,0 +1,25 @@
+{% extends 'integration/base_integration.html.twig' %}
+
+{% block title %}Intégration - Accueil{% endblock %}
+
+{% block main %}
+<div style="max-width: 800px; margin: 0 auto; padding: 2rem;">
+    <h1>Bienvenue à la journée d'intégration !</h1>
+    <p>
+        Cette plateforme a été conçue spécialement pour vous mettre à l'épreuve.
+        Vous y trouverez une série d'énigmes et de problèmes algorithmiques à résoudre.
+    </p>
+    <p>
+        Préparez-vous à chauffer vos neurones !
+    </p>
+    
+    <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
+        <a href="{{ path('app_integration') }}" style="background-color: #007bff; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; font-weight: bold;">
+            Énigme Classique (LeetCode)
+        </a>
+        <a href="{{ path('app_integration_visual') }}" style="background-color: #10b981; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; font-weight: bold;">
+            Énigme Visuelle (Robot)
+        </a>
+    </div>
+</div>
+{% endblock %}

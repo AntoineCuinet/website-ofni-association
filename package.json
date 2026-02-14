@@ -11,6 +11,8 @@
         "@symfony/webpack-encore": "^5.0.1",
         "concurrently": "^9.0.1",
         "file-loader": "^6.2.0",
+        "monaco-editor": "^0.55.1",
+        "monaco-editor-webpack-plugin": "^7.1.1",
         "npm-check-updates": "^17.1.2",
         "sass-loader": "^16.0.4",
         "webpack-dev-server": "^5.2.0"

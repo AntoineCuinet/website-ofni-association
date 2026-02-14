@@ -1,4 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 Encore
     // Directory where compiled assets will be stored
@@ -8,6 +9,8 @@ Encore
     // Add your JavaScript entry file
     .addEntry('app', './assets/app.js')
     .addEntry('three-model', './assets/js/three-model.js')
+    .addEntry('integration-visual', './assets/js/integration-visual.js')
+    .addEntry('integration-classic', './assets/js/integration-classic.js')
     .copyFiles({from: './assets/models/',
        to: 'models/[path][name].[ext]'})
     // Enable Sass/SCSS support
@@ -17,7 +20,10 @@ Encore
     .enableSingleRuntimeChunk()
     // Enable hashed filenames (e.g., app.abc123.css)
     //.enableVersioning(Encore.isProduction());
-    .enableVersioning(false);
+    .enableVersioning(false)
+    .addPlugin(new MonacoWebpackPlugin({
+        languages: ['python'] // Only load Python support to keep build size down
+    }));
    
 
 // Export the final configuration

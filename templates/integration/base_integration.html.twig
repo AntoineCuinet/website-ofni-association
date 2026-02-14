@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+    <header id="integration-header">
+        <nav id="navbar" class="integration-nav">
+            <div class="first-container">
+                <a href="{{ path('app_integration_welcome') }}" class="first-navlink navlinks" aria-label="Retour à l'accueil" style="margin-right: auto; display: block !important; opacity: 1 !important; visibility: visible !important; color: var(--color-font-title) !important;">Accueil</a>
+                
+                <div class="navlinks-container">
+                    {% if app.user %}
+                      <span class="navlinks" style="color: var(--color-font-title) !important;">{{ app.user.pseudo }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+    </header>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Strong overrides using ID selectors and html body prefix */
+        
+        html, body {
+            height: 100vh !important;
+            margin: 0 !important;
+            overflow: hidden !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        /* 
+           Force the navbar to be part of the flow (relative) 
+           and enforce styling to match the theme.
+        */
+        html body nav#navbar {
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            padding: 10px 20px !important;
+            background-color: var(--color-primary) !important; /* Theme background */
+            box-shadow: none !important;
+            z-index: 1000 !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+
+        /* 
+           Ensure the main container takes ALL remaining space 
+           and has NO max-width constraint.
+        */
+        html body main {
+            flex: 1 1 auto !important;
+            min-height: 0 !important;
+            width: 100vw !important; /* Force full viewport width */
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            display: flex !important;
+            flex-direction: column !important;
+            text-align: left !important;
+        }
+
+        #to-top-btn, footer {
+            display: none !important;
+        }
+    </style>
+{% endblock %}
