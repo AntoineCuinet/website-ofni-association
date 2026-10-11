@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../global/variables' as *;
 @use '../../functions/rem' as *;
 @use '../../mixins/filter' as *;
@@ -152,6 +153,69 @@ nav {
 
                 &::after {
                     background: var(--color-font-title);
+                }
+            }
+        }
+
+        // Admin link: site accent color + shield icon, so it reads as "special" without being a button
+        .navlinks-admin {
+            --color-admin: #{color.adjust($color-tertiary, $lightness: -10%)};
+            color: var(--color-admin);
+            white-space: nowrap;
+
+            @media (prefers-color-scheme: dark) {
+                --color-admin: #{$color-tertiary};
+            }
+
+            &::after,
+            &.active::after {
+                background: var(--color-admin);
+            }
+
+            &.active {
+                color: var(--color-admin);
+
+                &::after {
+                    transform: scaleX(1);
+                }
+            }
+
+            // In the mobile menu (blue background) orange is unreadable: keep the text color, the icon marks it
+            @media #{$max-width-m} {
+                &,
+                &.active {
+                    color: var(--color-font-title);
+                }
+            }
+
+            &__icon {
+                width: 0.95em;
+                height: 0.95em;
+                margin-right: 0.35em;
+                vertical-align: -0.12em;
+                fill: none;
+                stroke: currentColor;
+                stroke-width: 2.2;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
+
+            // Between the hamburger breakpoint and the full-width layout the label doesn't fit:
+            // show the shield only (label kept for screen readers, title gives the tooltip)
+            @media screen and (min-width: #{$breakpoint-medium + 1}) and (max-width: #{$breakpoint-large}) {
+                &__icon {
+                    width: 1.15em;
+                    height: 1.15em;
+                    margin-right: 0;
+                }
+
+                &__label {
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    overflow: hidden;
+                    clip: rect(0 0 0 0);
+                    white-space: nowrap;
                 }
             }
         }

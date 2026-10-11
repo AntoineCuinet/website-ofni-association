@@ -1,0 +1,14 @@
+{# Current effective state of a registration form (or null for a form not created yet) #}
+<p class="registration-status">
+    {% if registrationForm is null %}
+        Pas encore de formulaire d'inscription pour cette instance.
+    {% elseif not registrationForm.open %}
+        Actuellement : inscriptions fermées.
+    {% elseif registrationForm.closesAt is null %}
+        Actuellement : inscriptions ouvertes.
+    {% elseif registrationForm.acceptingRegistrations %}
+        Actuellement : inscriptions ouvertes jusqu'au {{ registrationForm.closesAt | date('d/m/Y à H:i') }}.
+    {% else %}
+        Actuellement : inscriptions fermées (date de clôture dépassée le {{ registrationForm.closesAt | date('d/m/Y à H:i') }}).
+    {% endif %}
+</p>

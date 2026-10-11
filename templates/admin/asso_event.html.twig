@@ -37,6 +37,10 @@
                 <td>
                     <a href="{{ path('event.instance.show', { id: instance.id, slug: instance.slug }) }}" class="btn">Voir</a>
                     <a href="{{ path('admin.event.instance.edit', { id: instance.id }) }}" class="btn">Modifier</a>
+                    <a href="{{ path('admin.event.instance.registration', { id: instance.id }) }}" class="btn">Formulaire d'inscription</a>
+                    {% if instance.registrationForm %}
+                        <a href="{{ path('admin.event.instance.registrations', { id: instance.id }) }}" class="btn">Inscriptions ({{ instance.registrationForm.registrations | length }})</a>
+                    {% endif %}
                     <a href="{{ path('admin.event.instance.delete', { id: instance.id }) }}" class="btn-danger">Supprimer</a>
                 </td>
             </tr>

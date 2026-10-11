@@ -1,0 +1,60 @@
+{% extends "base.html.twig" %}
+{% block title %}OFNI | Formulaire d'inscription{% endblock %}
+
+{% macro field_row(field) %}
+    <fieldset class="registration-field" data-field-row>
+        {{ form_widget(field) }}
+        <div class="registration-field__actions">
+            <button type="button" class="btn" data-field-up title="Monter">↑</button>
+            <button type="button" class="btn" data-field-down title="Descendre">↓</button>
+            <button type="button" class="btn btn-danger" data-field-remove>Supprimer</button>
+        </div>
+    </fieldset>
+{% endmacro %}
+
+{% block main %}
+    {% import _self as macros %}
+    <h1>Formulaire d'inscription : {{ instance.name }}</h1>
+    <a href="{{ path('admin.event') }}" class="btn">Retour aux événements</a>
+    {% if registrationForm %}
+        <a href="{{ path('admin.event.instance.registrations', {id: instance.id}) }}" class="btn">Voir les inscriptions ({{ registrationForm.registrations | length }})</a>
+    {% endif %}
+    {% include "partials/flashes.html.twig" %}
+    {% include "event_registration/_status.html.twig" with {registrationForm: savedRegistrationForm} only %}
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.status) }}
+        {{ form_row(form.closesAt) }}
+
+        <h2>Champs</h2>
+        {% if registrationForm and registrationForm.registrations is not empty %}
+            <p>Attention : des personnes sont déjà inscrites. Supprimer un champ masque leurs réponses à ce champ.</p>
+        {% endif %}
+        {{ form_errors(form.fields) }}
+        <div data-field-list
+             data-prototype="{{ macros.field_row(form.fields.vars.prototype) | e('html_attr') }}"
+             data-index="{{ form.fields | length > 0 ? max(form.fields | keys) + 1 : 0 }}">
+            {% for field in form.fields %}
+                {{ macros.field_row(field) }}
+            {% endfor %}
+        </div>
+        <button type="button" class="btn" data-field-add>Ajouter un champ</button>
+        {% do form.fields.setRendered %}
+
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+
+    {% if registrationForm %}
+        <form method="post" action="{{ path('admin.event.instance.registration.delete', {id: instance.id}) }}" onsubmit="return confirm('Supprimer le formulaire et toutes les inscriptions ?')">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete-registration-form-' ~ registrationForm.id) }}">
+            <button type="submit" class="btn btn-danger">Supprimer le formulaire et les inscriptions</button>
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/registration-form-builder.js') }}" defer></script>
+{% endblock %}

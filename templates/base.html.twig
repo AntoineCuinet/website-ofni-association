@@ -64,6 +64,9 @@
                     <a class="navlinks {{ app.current_route == 'shop' ? 'active' : ''}}" href="{{ path('shop') }}">Boutique</a>
                     <a class="navlinks {{ app.current_route == 'game' ? 'active' : ''}}" href="{{ path('game') }}">Jeu</a>
 
+                    {% if is_granted('ROLE_ADMIN') %}
+                      <a class="navlinks navlinks-admin {{ app.current_route starts with 'admin' ? 'active' : ''}}" href="{{ path('admin.index') }}" title="Administration"><svg class="navlinks-admin__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg><span class="navlinks-admin__label">Administration</span></a>
+                    {% endif %}
                     {% if app.user %}
                       <a class="navlinks {{ app.current_route == 'account' ? 'active' : ''}}" href="{{ path('app_account') }}">{{ app.user.pseudo }}</a>
                     {% else %}

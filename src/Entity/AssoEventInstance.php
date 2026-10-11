@@ -35,6 +35,9 @@ class AssoEventInstance
     #[ORM\ManyToMany(targetEntity: Sponsor::class)]
     private Collection $sponsors;
 
+    #[ORM\OneToOne(mappedBy: 'instance', cascade: ['remove'])]
+    private ?RegistrationForm $registrationForm = null;
+
     public function __construct()
     {
         $this->sponsors = new ArrayCollection();
@@ -113,6 +116,18 @@ class AssoEventInstance
     public function removeSponsor(Sponsor $sponsor): static
     {
         $this->sponsors->removeElement($sponsor);
+
+        return $this;
+    }
+
+    public function getRegistrationForm(): ?RegistrationForm
+    {
+        return $this->registrationForm;
+    }
+
+    public function setRegistrationForm(?RegistrationForm $registrationForm): static
+    {
+        $this->registrationForm = $registrationForm;
 
         return $this;
     }

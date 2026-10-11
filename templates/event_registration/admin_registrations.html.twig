@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+{% block title %}OFNI | Inscriptions{% endblock %}
+
+{% block main %}
+    <h1>Inscriptions : {{ instance.name }}</h1>
+    <a href="{{ path('admin.event') }}" class="btn">Retour aux événements</a>
+    <a href="{{ path('admin.event.instance.registration', {id: instance.id}) }}" class="btn">Modifier le formulaire</a>
+    <a href="{{ path('admin.event.instance.registrations.csv', {id: instance.id}) }}" class="btn">Exporter en CSV</a>
+    {% include "partials/flashes.html.twig" %}
+
+    {% include "event_registration/_status.html.twig" with {registrationForm: registrationForm} only %}
+    <p>{{ registrationForm.registrations | length }} inscription(s).</p>
+    <div class="table-scroll">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Participant</th><th>Date</th>
+                    {% for field in registrationForm.fields %}
+                        <th>{{ field.label }}</th>
+                    {% endfor %}
+                    <th class="data-table__actions">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for registration in registrationForm.registrations %}
+                <tr>
+                    <td class="data-table__nowrap">
+                        <strong>{{ registration.user.firstName }} {{ registration.user.name }}</strong>
+                        <span class="data-table__sub">{{ registration.user.pseudo }}</span>
+                        <a class="data-table__sub" href="mailto:{{ registration.user.email }}">{{ registration.user.email }}</a>
+                    </td>
+                    <td class="data-table__nowrap">{{ registration.createdAt | date('d/m/Y H:i') }}</td>
+                    {% for field in registrationForm.fields %}
+                        <td>{{ registration.answer(field) | nl2br }}</td>
+                    {% endfor %}
+                    <td class="data-table__actions">
+                        <form method="post" action="{{ path('admin.registration.delete', {id: registration.id}) }}" onsubmit="return confirm('Supprimer cette inscription ?')">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete-registration-' ~ registration.id) }}">
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td class="data-table__empty" colspan="{{ 3 + registrationForm.fields | length }}">Aucune inscription pour le moment.</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

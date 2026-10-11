@@ -2,6 +2,7 @@
 {% block title %}OFNI | Instance d'événements{% endblock %}
 
 {% block main %}
+    {% include "partials/flashes.html.twig" %}
     <h1>{{ instance.parentEvent.name }}</h1>
     <h4>{{ instance.date | date('d/m/Y') }}</h4>
     <figure>
@@ -9,6 +10,30 @@
     </figure>
     <h2>{{ instance.name }}</h2>
     <p>{{ instance.parentEvent.description | nl2br }}</p>
+    {% set registrationForm = instance.registrationForm %}
+    {% if registrationForm %}
+        <section class="registration">
+            <h2>Inscription</h2>
+            {% if userRegistration %}
+                <p>Vous êtes inscrit·e à cet événement depuis le {{ userRegistration.createdAt | date('d/m/Y à H:i') }}.</p>
+                {% if registrationForm.acceptingRegistrations %}
+                    <form method="post" action="{{ path('event.instance.register.cancel', {id: instance.id}) }}" onsubmit="return confirm('Annuler votre inscription ?')">
+                        <input type="hidden" name="_token" value="{{ csrf_token('cancel-registration-' ~ instance.id) }}">
+                        <button type="submit" class="btn btn-danger">Annuler mon inscription</button>
+                    </form>
+                {% endif %}
+            {% elseif not registrationForm.acceptingRegistrations %}
+                <p>Inscriptions fermées.</p>
+            {% elseif not app.user %}
+                <p><a href="{{ path('app_login') }}" class="link">Connectez-vous pour vous inscrire</a>.</p>
+            {% else %}
+                {% if registrationForm.closesAt %}
+                    <p>Inscriptions ouvertes jusqu'au {{ registrationForm.closesAt | date('d/m/Y à H:i') }}.</p>
+                {% endif %}
+                <a href="{{ path('event.instance.register', {id: instance.id, slug: instance.slug}) }}" class="btn-full">S'inscrire</a>
+            {% endif %}
+        </section>
+    {% endif %}
     {% include "partials/sponsors_banner.html.twig" with {'sponsors': instance.sponsors} only %}
     <a href="{{ path('event.instance.index') }}" class="btn">Retour à la liste</a>
 {% endblock %}
