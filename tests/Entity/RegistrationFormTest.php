@@ -2,10 +2,8 @@
 
 namespace App\Tests\Entity;
 
-use App\Entity\RegistrationField;
 use App\Entity\RegistrationForm;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RegistrationFormTest extends KernelTestCase
 {
@@ -33,72 +31,5 @@ class RegistrationFormTest extends KernelTestCase
     public function testNewFormIsClosedByDefault(): void
     {
         self::assertFalse((new RegistrationForm())->isOpen());
-    }
-
-    public function testAddAndRemoveFieldKeepsBothSidesInSync(): void
-    {
-        $form = new RegistrationForm();
-        $field = new RegistrationField();
-
-        $form->addField($field);
-        $form->addField($field);
-        self::assertCount(1, $form->getFields());
-        self::assertSame($form, $field->getForm());
-
-        $form->removeField($field);
-        self::assertCount(0, $form->getFields());
-    }
-
-    public function testChoiceFieldWithoutChoicesIsInvalid(): void
-    {
-        $field = (new RegistrationField())
-            ->setLabel('Taille')
-            ->setType(RegistrationField::TYPE_CHOICE)
-            ->setChoices([]);
-
-        self::assertGreaterThan(0, count($this->validator()->validate($field)));
-    }
-
-    public function testChoiceFieldWithChoicesIsValid(): void
-    {
-        $field = (new RegistrationField())
-            ->setLabel('Taille')
-            ->setType(RegistrationField::TYPE_CHOICE)
-            ->setChoices(['S', 'M']);
-
-        self::assertCount(0, $this->validator()->validate($field));
-    }
-
-    public function testTextFieldDoesNotNeedChoices(): void
-    {
-        $field = (new RegistrationField())
-            ->setLabel('Équipe')
-            ->setType(RegistrationField::TYPE_TEXT);
-
-        self::assertCount(0, $this->validator()->validate($field));
-    }
-
-    public function testUnknownTypeIsInvalid(): void
-    {
-        $field = (new RegistrationField())
-            ->setLabel('Équipe')
-            ->setType('file');
-
-        self::assertGreaterThan(0, count($this->validator()->validate($field)));
-    }
-
-    public function testTypesListsEveryType(): void
-    {
-        self::assertEqualsCanonicalizing(
-            [RegistrationField::TYPE_TEXT, RegistrationField::TYPE_TEXTAREA, RegistrationField::TYPE_CHOICE],
-            array_values(RegistrationField::TYPES)
-        );
-    }
-
-    private function validator(): ValidatorInterface
-    {
-        self::bootKernel();
-
-        return static::getContainer()->get(ValidatorInterface::class);
     }
 }

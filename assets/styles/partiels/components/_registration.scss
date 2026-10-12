@@ -34,3 +34,46 @@
         }
     }
 }
+
+// Generated widget forms (templates/form_widget/_theme.html.twig)
+.widget-composed,
+.widget-list {
+    border: $border;
+    border-radius: $border-rad;
+    padding: 10px 20px;
+    margin: 20px 0;
+
+    legend {
+        padding: 0 5px;
+    }
+}
+
+.widget-list {
+    &__entry {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin: 10px 0;
+    }
+
+    &__entry-content {
+        flex: 1;
+        min-width: 0;
+
+        > .widget-composed {
+            margin: 0;
+        }
+    }
+
+    &__add,
+    &__remove {
+        min-width: 2.5em;
+    }
+}
+
+.registration-preview {
+    border: $border;
+    border-radius: $border-rad;
+    padding: 10px 20px;
+    margin: 20px 0;
+}

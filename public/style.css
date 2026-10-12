@@ -1961,4 +1961,40 @@ figure img {
   margin: 10px 0 0 10px;
 }
 
+.widget-composed,
+.widget-list {
+  border: 3px solid rgb(52, 153, 254);
+  border-radius: 15px;
+  padding: 10px 20px;
+  margin: 20px 0;
+}
+.widget-composed legend,
+.widget-list legend {
+  padding: 0 5px;
+}
+
+.widget-list__entry {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 10px 0;
+}
+.widget-list__entry-content {
+  flex: 1;
+  min-width: 0;
+}
+.widget-list__entry-content > .widget-composed {
+  margin: 0;
+}
+.widget-list__add, .widget-list__remove {
+  min-width: 2.5em;
+}
+
+.registration-preview {
+  border: 3px solid rgb(52, 153, 254);
+  border-radius: 15px;
+  padding: 10px 20px;
+  margin: 20px 0;
+}
+
 /*# sourceMappingURL=style.css.map */

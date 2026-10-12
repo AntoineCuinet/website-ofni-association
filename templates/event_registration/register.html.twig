@@ -19,3 +19,8 @@
     {% endif %}
     <a href="{{ path('event.instance.show', {id: instance.id, slug: instance.slug}) }}" class="btn">Retour à l'événement</a>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/form-widget-list.js') }}" defer></script>
+{% endblock %}

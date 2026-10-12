@@ -9,14 +9,15 @@
     {% include "partials/flashes.html.twig" %}
 
     {% include "event_registration/_status.html.twig" with {registrationForm: registrationForm} only %}
+    {% set columns = registration_columns(registrationForm) %}
     <p>{{ registrationForm.registrations | length }} inscription(s).</p>
     <div class="table-scroll">
         <table class="data-table">
             <thead>
                 <tr>
                     <th>Participant</th><th>Date</th>
-                    {% for field in registrationForm.fields %}
-                        <th>{{ field.label }}</th>
+                    {% for column in columns %}
+                        <th>{{ column.name }}</th>
                     {% endfor %}
                     <th class="data-table__actions">Actions</th>
                 </tr>
@@ -30,8 +31,8 @@
                         <a class="data-table__sub" href="mailto:{{ registration.user.email }}">{{ registration.user.email }}</a>
                     </td>
                     <td class="data-table__nowrap">{{ registration.createdAt | date('d/m/Y H:i') }}</td>
-                    {% for field in registrationForm.fields %}
-                        <td>{{ registration.answer(field) | nl2br }}</td>
+                    {% for column in columns %}
+                        <td>{{ registration_answer(registration, column) | nl2br }}</td>
                     {% endfor %}
                     <td class="data-table__actions">
                         <form method="post" action="{{ path('admin.registration.delete', {id: registration.id}) }}" onsubmit="return confirm('Supprimer cette inscription ?')">
@@ -41,7 +42,7 @@
                     </td>
                 </tr>
             {% else %}
-                <tr><td class="data-table__empty" colspan="{{ 3 + registrationForm.fields | length }}">Aucune inscription pour le moment.</td></tr>
+                <tr><td class="data-table__empty" colspan="{{ 3 + columns | length }}">Aucune inscription pour le moment.</td></tr>
             {% endfor %}
             </tbody>
         </table>

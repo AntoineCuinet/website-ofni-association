@@ -27,9 +27,8 @@ class Registration
     private \DateTimeImmutable $createdAt;
 
     /**
-     * Answers keyed by RegistrationField id.
-     *
-     * @var array<int, string>
+     * Submitted data of the form's widget: keyed by "widget_<id>", lists are
+     * arrays of entries and composed widgets nested arrays.
      */
     #[ORM\Column(type: Types::JSON)]
     private array $answers = [];
@@ -73,26 +72,15 @@ class Registration
         return $this->createdAt;
     }
 
-    /**
-     * @return array<int, string>
-     */
     public function getAnswers(): array
     {
         return $this->answers;
     }
 
-    /**
-     * @param array<int, string> $answers
-     */
     public function setAnswers(array $answers): static
     {
         $this->answers = $answers;
 
         return $this;
-    }
-
-    public function getAnswer(RegistrationField $field): ?string
-    {
-        return $this->answers[$field->getId()] ?? null;
     }
 }

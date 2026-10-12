@@ -2,10 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\FormWidget;
 use App\Entity\RegistrationForm;
+use App\Enum\FormWidgetKind;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -48,14 +51,17 @@ class EventRegistrationFormType extends AbstractType
                 'required' => false,
                 'row_attr' => ['data-registration-closes-at' => true],
             ])
-            ->add('fields', CollectionType::class, [
-                'label' => 'Champs',
-                'entry_type' => EventRegistrationFieldType::class,
-                'entry_options' => ['label' => false],
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'prototype' => true,
+            // the form itself is a composed widget of the library, so it can be reused
+            ->add('widget', EntityType::class, [
+                'label' => 'Widget du formulaire',
+                'class' => FormWidget::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Choisir un widget composé…',
+                'query_builder' => fn (EntityRepository $repository) => $repository->createQueryBuilder('w')
+                    ->andWhere('w.kind = :kind')
+                    ->setParameter('kind', FormWidgetKind::COMPOSED)
+                    ->orderBy('w.name', 'ASC'),
+                'attr' => ['data-registration-widget' => true],
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer',

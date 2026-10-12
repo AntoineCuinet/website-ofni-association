@@ -16,28 +16,25 @@ class FormWidgetRepository extends ServiceEntityRepository
         parent::__construct($registry, FormWidget::class);
     }
 
-    //    /**
-    //     * @return FormWidget[] Returns an array of FormWidget objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('f')
-    //            ->andWhere('f.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('f.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+     * Widgets directly made of the given one (lists repeating it, composed widgets containing it).
+     *
+     * @return FormWidget[]
+     */
+    public function findReferencing(FormWidget $widget): array
+    {
+        // content is JSON, filtered in PHP: the library stays small
+        return array_values(array_filter(
+            $this->findAll(),
+            fn (FormWidget $candidate) => in_array($widget->getId(), $candidate->getChildIds(), true)
+        ));
+    }
 
-    //    public function findOneBySomeField($value): ?FormWidget
-    //    {
-    //        return $this->createQueryBuilder('f')
-    //            ->andWhere('f.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * @return FormWidget[]
+     */
+    public function findAllOrdered(): array
+    {
+        return $this->findBy([], ['name' => 'ASC']);
+    }
 }

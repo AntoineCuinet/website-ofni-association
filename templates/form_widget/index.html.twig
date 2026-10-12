@@ -1,0 +1,64 @@
+{% extends "base.html.twig" %}
+{% block title %}OFNI | Widgets de formulaire{% endblock %}
+
+{% block main %}
+    <h1>Bibliothèque de widgets</h1>
+    <a href="{{ path('admin.index') }}" class="btn">Retour au dashboard</a>
+    <a href="{{ path('admin.event') }}" class="btn">Gérer les événements</a>
+    {% include "partials/flashes.html.twig" %}
+    <p>Les formulaires d'inscription sont faits de widgets :</p>
+    <ul>
+        <li><strong>les champs de base</strong>, fixes : un simple champ HTML (texte, email, date…) ;</li>
+        <li><strong>les widgets composés</strong> : plusieurs widgets regroupés, chacun avec le nom affiché aux utilisateurs. Un formulaire d'inscription est un widget composé ;</li>
+        <li><strong>les listes</strong> : un widget que l'utilisateur répète autant de fois qu'il le souhaite (bouton +).</li>
+    </ul>
+    <p>Le nom d'un widget composé ou d'une liste n'est visible que par les admins.</p>
+    <p>
+        <a href="{{ path('admin.form_widget.new', {kind: 'composed'}) }}" class="btn">Nouveau widget composé</a>
+        <a href="{{ path('admin.form_widget.new', {kind: 'list'}) }}" class="btn">Nouvelle liste</a>
+    </p>
+    <h2>Widgets</h2>
+    <div class="table-scroll">
+        <table class="data-table">
+            <thead>
+                <tr><th>Nom</th><th>Type</th><th>Utilisé par</th><th class="data-table__actions">Actions</th></tr>
+            </thead>
+            <tbody>
+            {% for widget in widgets %}
+                {% set usage = usages[widget.id] %}
+                <tr>
+                    <td><strong>{{ widget.name }}</strong></td>
+                    <td class="data-table__nowrap">{{ widget.kind.label }}</td>
+                    <td>
+                        {% for parent in usage.widgets %}
+                            <a class="data-table__sub" href="{{ path('admin.form_widget.edit', {id: parent.id}) }}">{{ parent.name }}</a>
+                        {% endfor %}
+                        {% for registrationForm in usage.forms %}
+                            <a class="data-table__sub" href="{{ path('admin.event.instance.registration', {id: registrationForm.instance.id}) }}">Inscription : {{ registrationForm.instance.name }}</a>
+                        {% endfor %}
+                        {% if usage.widgets is empty and usage.forms is empty %}—{% endif %}
+                    </td>
+                    <td class="data-table__actions">
+                        <a href="{{ path('admin.form_widget.show', {id: widget.id}) }}" class="btn">Aperçu</a>
+                        <a href="{{ path('admin.form_widget.edit', {id: widget.id}) }}" class="btn">Modifier</a>
+                        <form method="post" action="{{ path('admin.form_widget.delete', {id: widget.id}) }}" onsubmit="return confirm('Supprimer ce widget ?')">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete-form-widget-' ~ widget.id) }}">
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td class="data-table__empty" colspan="4">Aucun widget pour le moment.</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Champs de base</h2>
+    <p>Ils ne sont pas modifiables : leur nom, leur caractère obligatoire et leurs options se définissent dans chaque widget composé qui les utilise.</p>
+    <ul class="widget-natives">
+        {% for native in natives %}
+            <li><a href="{{ path('admin.form_widget.show', {id: native.id}) }}" class="link">{{ native.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

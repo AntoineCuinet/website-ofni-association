@@ -8,7 +8,10 @@ use App\Entity\RegistrationForm;
 use App\Entity\User;
 use App\Form\EventRegistrationAnswerType;
 use App\Form\EventRegistrationFormType;
+use App\Form\FormWidgetFieldResolver;
+use App\Form\FormWidgetViewType;
 use App\Repository\RegistrationRepository;
+use App\Service\FormWidgetAnswerFormatter;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -48,17 +51,10 @@ class EventRegistrationController extends AbstractController
         ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $answers = [];
-            foreach ($registrationForm->getFields() as $field) {
-                $value = $form->get('field_'.$field->getId())->getData();
-                if (null !== $value && '' !== $value) {
-                    $answers[$field->getId()] = (string) $value;
-                }
-            }
             $registration = (new Registration())
                 ->setForm($registrationForm)
                 ->setUser($user)
-                ->setAnswers($answers);
+                ->setAnswers($this->cleanAnswers($form->get('answers')->getData() ?? []));
             $em->persist($registration);
             try {
                 $em->flush();
@@ -112,13 +108,6 @@ class EventRegistrationController extends AbstractController
         $form = $this->createForm(EventRegistrationFormType::class, $registrationForm);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // normalize positions to 0..n-1, keeping submission order for ties
-            $fields = $registrationForm->getFields()->toArray();
-            usort($fields, fn ($a, $b) => $a->getPosition() <=> $b->getPosition());
-            foreach (array_values($fields) as $position => $field) {
-                $field->setPosition($position);
-            }
-
             if (null === $registrationForm->getId()) {
                 $registrationForm->setInstance($instance);
                 $em->persist($registrationForm);
@@ -135,6 +124,10 @@ class EventRegistrationController extends AbstractController
             'registrationForm' => $instance->getRegistrationForm(),
             'savedRegistrationForm' => $savedRegistrationForm,
             'form' => $form,
+            // what users currently see
+            'preview' => $savedRegistrationForm
+                ? $this->createForm(FormWidgetViewType::class, null, ['widget' => $savedRegistrationForm->getWidget(), 'csrf_protection' => false, 'label' => false])->createView()
+                : null,
         ]);
     }
 
@@ -166,24 +159,25 @@ class EventRegistrationController extends AbstractController
     }
 
     #[Route('/admin/events/instance/{id}/registrations.csv', name: 'admin.event.instance.registrations.csv', requirements: ['id' => '\d+'])]
-    public function adminRegistrationsCsv(AssoEventInstance $instance): Response
+    public function adminRegistrationsCsv(AssoEventInstance $instance, FormWidgetAnswerFormatter $formatter): Response
     {
         $registrationForm = $instance->getRegistrationForm() ?? throw $this->createNotFoundException();
+        $columns = $formatter->columns($registrationForm);
 
-        $response = new StreamedResponse(function () use ($registrationForm) {
+        $response = new StreamedResponse(function () use ($registrationForm, $columns, $formatter) {
             $out = fopen('php://output', 'w');
             // BOM + ";" so the file opens correctly in a French Excel
             fwrite($out, "\u{FEFF}");
             $header = ['Nom', 'Prénom', 'Pseudo', 'Email', 'Date'];
-            foreach ($registrationForm->getFields() as $field) {
-                $header[] = $field->getLabel();
+            foreach ($columns as $column) {
+                $header[] = $column->name;
             }
             fputcsv($out, $header, ';', '"', '');
             foreach ($registrationForm->getRegistrations() as $registration) {
                 $user = $registration->getUser();
                 $row = [$user->getName(), $user->getFirstName(), $user->getPseudo(), $user->getEmail(), $registration->getCreatedAt()->format('d/m/Y H:i')];
-                foreach ($registrationForm->getFields() as $field) {
-                    $row[] = $registration->getAnswer($field) ?? '';
+                foreach ($columns as $column) {
+                    $row[] = $formatter->answer($registration, $column);
                 }
                 fputcsv($out, $row, ';', '"', '');
             }
@@ -229,6 +223,25 @@ class EventRegistrationController extends AbstractController
             // the registration is saved anyway, only the confirmation is lost
             return false;
         }
+    }
+
+    /**
+     * Drops empty values and renumbers list entries (removed entries leave gaps).
+     */
+    private function cleanAnswers(array $data): array
+    {
+        $answers = [];
+        foreach ($data as $key => $value) {
+            if (FormWidgetFieldResolver::isEmptyData($value)) {
+                continue;
+            }
+            $answers[$key] = is_array($value) ? $this->cleanAnswers($value) : $value;
+        }
+
+        // list entries have integer keys, widgets "widget_<id>" ones
+        $isList = [] !== $answers && array_filter(array_keys($answers), 'is_int') === array_keys($answers);
+
+        return $isList ? array_values($answers) : $answers;
     }
 
     private function redirectToShow(AssoEventInstance $instance): Response

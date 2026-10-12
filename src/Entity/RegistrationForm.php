@@ -30,13 +30,11 @@ class RegistrationForm
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $closesAt = null;
 
-    /**
-     * @var Collection<int, RegistrationField>
-     */
-    #[ORM\OneToMany(targetEntity: RegistrationField::class, mappedBy: 'form', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    #[ORM\OrderBy(['position' => 'ASC'])]
-    #[Assert\Valid]
-    private Collection $fields;
+    /** The (composed) library widget users fill in to register */
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'RESTRICT')]
+    #[Assert\NotNull(message: 'Choisissez le widget du formulaire.')]
+    private ?FormWidget $widget = null;
 
     /**
      * @var Collection<int, Registration>
@@ -47,7 +45,6 @@ class RegistrationForm
 
     public function __construct()
     {
-        $this->fields = new ArrayCollection();
         $this->registrations = new ArrayCollection();
     }
 
@@ -113,27 +110,14 @@ class RegistrationForm
         return $this->isOpen && (null === $this->closesAt || new \DateTime() < $this->closesAt);
     }
 
-    /**
-     * @return Collection<int, RegistrationField>
-     */
-    public function getFields(): Collection
+    public function getWidget(): ?FormWidget
     {
-        return $this->fields;
+        return $this->widget;
     }
 
-    public function addField(RegistrationField $field): static
+    public function setWidget(?FormWidget $widget): static
     {
-        if (!$this->fields->contains($field)) {
-            $this->fields->add($field);
-            $field->setForm($this);
-        }
-
-        return $this;
-    }
-
-    public function removeField(RegistrationField $field): static
-    {
-        $this->fields->removeElement($field);
+        $this->widget = $widget;
 
         return $this;
     }

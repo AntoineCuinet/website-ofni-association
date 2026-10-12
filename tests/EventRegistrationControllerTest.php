@@ -4,10 +4,13 @@ namespace App\Tests;
 
 use App\Entity\AssoEvent;
 use App\Entity\AssoEventInstance;
+use App\Entity\FormWidget;
 use App\Entity\Registration;
-use App\Entity\RegistrationField;
 use App\Entity\RegistrationForm;
 use App\Entity\User;
+use App\Enum\FormWidgetKind;
+use App\Model\FormWidgetEntry;
+use App\Service\NativeWidgets;
 use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -28,6 +31,15 @@ class EventRegistrationControllerTest extends WebTestCase
     private array $eventIds = [];
     /** @var int[] */
     private array $userIds = [];
+    /** @var int[] */
+    private array $widgetIds = [];
+
+    /**
+     * Entry keys of the last form created by createRootWidget(): required text, optional textarea, optional choice.
+     *
+     * @var string[]
+     */
+    private array $fields = [];
 
     private User $user;
     private User $admin;
@@ -57,7 +69,7 @@ class EventRegistrationControllerTest extends WebTestCase
         $em = $this->em();
 
         try {
-            // Removing the event cascades to instances, forms, fields and registrations.
+            // Removing the event cascades to instances, forms and registrations.
             foreach ($this->eventIds as $id) {
                 if ($event = $em->find(AssoEvent::class, $id)) {
                     $em->remove($event);
@@ -74,9 +86,12 @@ class EventRegistrationControllerTest extends WebTestCase
             // Raw SQL fallback, so a failing ORM cleanup never leaks fixtures into later tests.
             $connection = $em->getConnection();
             $delete = fn (string $sql, array $ids) => $ids && $connection->executeStatement($sql, [$ids], [ArrayParameterType::INTEGER]);
+            $delete('DELETE FROM registration_form WHERE widget_id IN (?)', $this->widgetIds);
             $delete('DELETE FROM asso_event_instance WHERE parent_event_id IN (?)', $this->eventIds);
             $delete('DELETE FROM asso_event WHERE id IN (?)', $this->eventIds);
             $delete('DELETE FROM user WHERE id IN (?)', $this->userIds);
+            // Widgets are library items, not removed with the events.
+            $delete('DELETE FROM form_widget WHERE id IN (?)', $this->widgetIds);
         }
     }
 
@@ -171,7 +186,8 @@ class EventRegistrationControllerTest extends WebTestCase
     public function testRegisterPageRendersEveryFieldType(): void
     {
         $instance = $this->createInstance();
-        [$text, $textarea, $choice] = $this->createForm($instance, description: 'Venez nombreux')->getFields()->toArray();
+        $this->createForm($instance, description: 'Venez nombreux');
+        [$text, $textarea, $choice] = $this->fields;
         $this->client->loginUser($this->user);
 
         $this->client->request('GET', $this->registerUrl($instance));
@@ -188,7 +204,7 @@ class EventRegistrationControllerTest extends WebTestCase
     {
         $instance = $this->createInstance();
         $form = $this->createForm($instance);
-        [$text, $textarea, $choice] = $form->getFields()->toArray();
+        [$text, $textarea, $choice] = $this->fields;
         $this->client->loginUser($this->user);
 
         $this->client->request('GET', $this->registerUrl($instance));
@@ -205,9 +221,9 @@ class EventRegistrationControllerTest extends WebTestCase
         self::assertSame($this->user->getId(), $registrations[0]->getUser()->getId());
         self::assertInstanceOf(\DateTimeInterface::class, $registrations[0]->getCreatedAt());
         self::assertEquals([
-            $text->getId() => 'Les Ofnis',
-            $textarea->getId() => "Ligne 1\nLigne 2",
-            $choice->getId() => 'Végétarien',
+            $text => 'Les Ofnis',
+            $textarea => "Ligne 1\nLigne 2",
+            $choice => 'Végétarien',
         ], $registrations[0]->getAnswers());
 
         // Confirmation email
@@ -226,7 +242,7 @@ class EventRegistrationControllerTest extends WebTestCase
     {
         $instance = $this->createInstance();
         $form = $this->createForm($instance);
-        [$text] = $form->getFields()->toArray();
+        [$text] = $this->fields;
         $this->client->loginUser($this->user);
 
         $this->client->request('GET', $this->registerUrl($instance));
@@ -242,7 +258,7 @@ class EventRegistrationControllerTest extends WebTestCase
     {
         $instance = $this->createInstance();
         $form = $this->createForm($instance);
-        [$text] = $form->getFields()->toArray();
+        [$text] = $this->fields;
         $this->client->loginUser($this->user);
 
         $this->client->request('GET', $this->registerUrl($instance));
@@ -259,13 +275,13 @@ class EventRegistrationControllerTest extends WebTestCase
     {
         $instance = $this->createInstance();
         $form = $this->createForm($instance);
-        [$text, , $choice] = $form->getFields()->toArray();
+        [$text, , $choice] = $this->fields;
         $this->client->loginUser($this->user);
 
         $crawler = $this->client->request('GET', $this->registerUrl($instance));
         $values = $crawler->selectButton('S\'inscrire')->form()->getPhpValues();
-        $values['event_registration_answer']['field_'.$text->getId()] = 'Les Ofnis';
-        $values['event_registration_answer']['field_'.$choice->getId()] = 'Pizza';
+        $values['event_registration_answer']['answers'][$text] = 'Les Ofnis';
+        $values['event_registration_answer']['answers'][$choice] = 'Pizza';
         $this->client->request('POST', $this->registerUrl($instance), $values);
 
         self::assertResponseStatusCodeSame(422);
@@ -276,13 +292,13 @@ class EventRegistrationControllerTest extends WebTestCase
     {
         $instance = $this->createInstance();
         $form = $this->createForm($instance);
-        [$text] = $form->getFields()->toArray();
+        [$text] = $this->fields;
         $this->client->loginUser($this->user);
 
         // Grab a valid CSRF token while not yet registered
         $crawler = $this->client->request('GET', $this->registerUrl($instance));
         $values = $crawler->selectButton('S\'inscrire')->form()->getPhpValues();
-        $values['event_registration_answer']['field_'.$text->getId()] = 'Les Ofnis';
+        $values['event_registration_answer']['answers'][$text] = 'Les Ofnis';
 
         $this->createRegistration($form, $this->user);
 
@@ -299,12 +315,12 @@ class EventRegistrationControllerTest extends WebTestCase
     {
         $instance = $this->createInstance();
         $form = $this->createForm($instance);
-        [$text] = $form->getFields()->toArray();
+        [$text] = $this->fields;
         $this->client->loginUser($this->user);
 
         $crawler = $this->client->request('GET', $this->registerUrl($instance));
         $values = $crawler->selectButton('S\'inscrire')->form()->getPhpValues();
-        $values['event_registration_answer']['field_'.$text->getId()] = 'Les Ofnis';
+        $values['event_registration_answer']['answers'][$text] = 'Les Ofnis';
 
         $this->setOpen($form, false);
 
@@ -326,6 +342,206 @@ class EventRegistrationControllerTest extends WebTestCase
         self::assertSelectorTextContains('main', 'Inscriptions fermées');
         self::assertSelectorNotExists('form[name="event_registration_answer"]');
         self::assertCount(0, $this->registrationsFor($form));
+    }
+
+    public function testEveryNativeTypeAndReusedNative(): void
+    {
+        $instance = $this->createInstance();
+        $text = $this->natives()->get(FormWidget::TYPE_TEXT);
+        $form = $this->createForm($instance, widget: $this->createComposed('Tout '.$this->suffix, [
+            // the same native twice, with different names
+            [$text, 'first', 'Prénom', true],
+            [$text, 'last', 'Nom de famille'],
+            [$this->natives()->get(FormWidget::TYPE_NUMBER), 'age', 'Âge'],
+            [$this->natives()->get(FormWidget::TYPE_DATE), 'arrival', 'Arrivée'],
+            [$this->natives()->get(FormWidget::TYPE_TEL), 'phone', 'Téléphone'],
+            [$this->natives()->get(FormWidget::TYPE_CHECKBOX), 'rules', 'J\'accepte le règlement', true],
+            [$this->natives()->get(FormWidget::TYPE_CHECKBOX), 'photos', 'Photos autorisées'],
+        ]));
+        $this->client->loginUser($this->user);
+
+        $crawler = $this->client->request('GET', $this->registerUrl($instance));
+        self::assertSelectorExists('input[type="text"][name="'.$this->answerName('first').'"][required]');
+        self::assertSelectorExists('input[type="text"][name="'.$this->answerName('last').'"]:not([required])');
+        self::assertSelectorExists('input[type="number"][name="'.$this->answerName('age').'"]');
+        self::assertSelectorExists('input[type="date"][name="'.$this->answerName('arrival').'"]');
+        self::assertSelectorExists('input[type="tel"][name="'.$this->answerName('phone').'"]');
+        self::assertSelectorExists('input[type="checkbox"][name="'.$this->answerName('rules').'"]');
+        self::assertSelectorTextContains('main', 'Nom de famille');
+
+        // the required checkbox must be ticked
+        $values = $crawler->selectButton('S\'inscrire')->form()->getPhpValues();
+        $values['event_registration_answer']['answers']['first'] = 'Ada';
+        $this->client->request('POST', $this->registerUrl($instance), $values);
+        self::assertResponseStatusCodeSame(422);
+        self::assertSelectorTextContains('main', 'Cette case doit être cochée');
+
+        $values['event_registration_answer']['answers'] = array_replace($values['event_registration_answer']['answers'], ['last' => 'Lovelace', 'age' => '36', 'arrival' => '2099-03-01', 'phone' => '+33 6 12 34 56 78', 'rules' => '1']);
+        $this->client->request('POST', $this->registerUrl($instance), $values);
+        self::assertResponseRedirects();
+        $answers = $this->registrationsFor($form)[0]->getAnswers();
+        self::assertSame('Ada', $answers['first']);
+        self::assertSame('Lovelace', $answers['last']);
+        self::assertEquals(36, $answers['age']);
+        self::assertSame('2099-03-01', $answers['arrival']);
+        self::assertTrue($answers['rules']);
+        self::assertArrayNotHasKey('photos', $answers);
+
+        $this->client->loginUser($this->admin);
+        $this->client->request('GET', $this->listUrl($instance));
+        self::assertSelectorTextContains('table tbody', '01/03/2099');
+        self::assertSelectorTextContains('table tbody', 'Oui');
+        self::assertSelectorTextContains('table tbody', 'Non');
+    }
+
+    public function testInvalidPhoneIsRejected(): void
+    {
+        $instance = $this->createInstance();
+        $form = $this->createForm($instance, widget: $this->createComposed('Tel '.$this->suffix, [
+            [$this->natives()->get(FormWidget::TYPE_TEL), 'phone', 'Téléphone'],
+        ]));
+        $this->client->loginUser($this->user);
+
+        $this->client->request('GET', $this->registerUrl($instance));
+        $this->client->submitForm('S\'inscrire', [$this->answerName('phone') => 'appelle-moi']);
+
+        self::assertResponseStatusCodeSame(422);
+        self::assertSelectorTextContains('main', 'Numéro de téléphone invalide');
+        self::assertCount(0, $this->registrationsFor($form));
+    }
+
+    // ---------------------------------------------------------------------
+    // Public: list widgets
+    // ---------------------------------------------------------------------
+
+    public function testListWidgetShowsOneEntryByDefault(): void
+    {
+        $instance = $this->createInstance();
+        [, $list, $member, , $listWidget] = $this->createListForm($instance, min: 0);
+        $this->client->loginUser($this->user);
+
+        $crawler = $this->client->request('GET', $this->registerUrl($instance));
+
+        self::assertResponseIsSuccessful();
+        $listNode = $crawler->filter('[data-widget-list]');
+        self::assertCount(1, $listNode);
+        self::assertSame('0', $listNode->attr('data-min'));
+        self::assertSame('__w'.$listWidget->getId().'__', $listNode->attr('data-prototype-name'));
+        self::assertStringContainsString('__w'.$listWidget->getId().'__', $listNode->attr('data-prototype'));
+        self::assertCount(1, $crawler->filter('[data-widget-list-entry]'));
+        self::assertCount(1, $crawler->filter('[data-widget-list-add]'));
+        $entryName = $this->answerName($list).'[0]['.$member['name'].']';
+        self::assertSelectorExists('input[name="'.$entryName.'"]');
+        self::assertSelectorExists('input[type="email"][name="'.$this->answerName($list).'[0]['.$member['email'].']"]');
+        self::assertSelectorTextContains('main', 'Coéquipiers');
+    }
+
+    public function testListWidgetAcceptsSeveralEntries(): void
+    {
+        $instance = $this->createInstance();
+        [$form, $list, $member, $team] = $this->createListForm($instance, min: 1);
+        $this->client->loginUser($this->user);
+
+        $crawler = $this->client->request('GET', $this->registerUrl($instance));
+        $values = $crawler->selectButton('S\'inscrire')->form()->getPhpValues();
+        $answers = &$values['event_registration_answer']['answers'];
+        $answers[$team] = 'Les Ofnis';
+        // indexes as left by the JS after adding 3 entries and removing the second one
+        $answers[$list] = [
+            0 => [$member['name'] => 'Alice', $member['email'] => 'alice@example.com'],
+            2 => [$member['name'] => 'Bob', $member['email'] => ''],
+            3 => [$member['name'] => '', $member['email'] => ''],
+        ];
+        $this->client->request('POST', $this->registerUrl($instance), $values);
+
+        self::assertResponseRedirects($this->showUrl($instance));
+        $registrations = $this->registrationsFor($form);
+        self::assertCount(1, $registrations);
+        // blank entries are dropped, the others renumbered
+        self::assertSame([
+            $team => 'Les Ofnis',
+            $list => [
+                [$member['name'] => 'Alice', $member['email'] => 'alice@example.com'],
+                [$member['name'] => 'Bob'],
+            ],
+        ], $registrations[0]->getAnswers());
+
+        // the admin table shows one line per entry
+        $this->client->loginUser($this->admin);
+        $this->client->request('GET', $this->listUrl($instance));
+        self::assertSelectorTextContains('table thead', 'Coéquipiers');
+        self::assertSelectorTextContains('table tbody', 'Nom : Alice ; Email : alice@example.com');
+        self::assertSelectorTextContains('table tbody', 'Nom : Bob');
+    }
+
+    /**
+     * @dataProvider emptyListProvider
+     */
+    public function testEmptyListDependsOnMinimum(int $min, int $expectedStatus): void
+    {
+        $instance = $this->createInstance();
+        [$form, $list, , $team] = $this->createListForm($instance, min: $min);
+        $this->client->loginUser($this->user);
+
+        $crawler = $this->client->request('GET', $this->registerUrl($instance));
+        $values = $crawler->selectButton('S\'inscrire')->form()->getPhpValues();
+        $values['event_registration_answer']['answers'][$team] = 'Les Ofnis';
+        // the user removed the default entry
+        unset($values['event_registration_answer']['answers'][$list]);
+        $this->client->request('POST', $this->registerUrl($instance), $values);
+
+        self::assertResponseStatusCodeSame($expectedStatus);
+        self::assertCount(302 === $expectedStatus ? 1 : 0, $this->registrationsFor($form));
+        if (422 === $expectedStatus) {
+            self::assertSelectorTextContains('main', 'Ajoutez au moins une entrée');
+        }
+    }
+
+    public static function emptyListProvider(): iterable
+    {
+        yield 'may be empty' => [0, 302];
+        yield 'at least one entry' => [1, 422];
+    }
+
+    public function testListEntriesAreValidated(): void
+    {
+        $instance = $this->createInstance();
+        [$form, $list, $member, $team] = $this->createListForm($instance, min: 0);
+        $this->client->loginUser($this->user);
+
+        $crawler = $this->client->request('GET', $this->registerUrl($instance));
+        $values = $crawler->selectButton('S\'inscrire')->form()->getPhpValues();
+        $values['event_registration_answer']['answers'][$team] = 'Les Ofnis';
+        $values['event_registration_answer']['answers'][$list] = [
+            // a filled entry still needs its required name, and a valid email
+            [$member['name'] => '', $member['email'] => 'not-an-email'],
+        ];
+        $this->client->request('POST', $this->registerUrl($instance), $values);
+
+        self::assertResponseStatusCodeSame(422);
+        self::assertSelectorTextContains('main', 'Ce champ est obligatoire');
+        self::assertSelectorTextContains('main', 'Adresse email invalide');
+        self::assertCount(0, $this->registrationsFor($form));
+    }
+
+    public function testListOfNativeWidget(): void
+    {
+        $instance = $this->createInstance();
+        $listWidget = $this->createWidget('Allergies', FormWidgetKind::LIST, ['widget' => $this->natives()->get(FormWidget::TYPE_TEXT)->getId(), 'min' => 0]);
+        $list = 'allergies';
+        $form = $this->createForm($instance, widget: $this->createComposed('Repas '.$this->suffix, [[$listWidget, $list, 'Allergies']]));
+        $this->client->loginUser($this->user);
+
+        $crawler = $this->client->request('GET', $this->registerUrl($instance));
+        // optional list: its entries' inputs aren't required in the browser
+        self::assertSelectorExists('input[name="'.$this->answerName($list).'[0]"]:not([required])');
+        $values = $crawler->selectButton('S\'inscrire')->form()->getPhpValues();
+        $values['event_registration_answer']['answers'][$list] = ['Arachides', '', 'Gluten'];
+        $this->client->request('POST', $this->registerUrl($instance), $values);
+
+        self::assertResponseRedirects();
+        self::assertSame([$list => ['Arachides', 'Gluten']], $this->registrationsFor($form)[0]->getAnswers());
+        self::assertEmailHtmlBodyContains($this->getMailerMessages()[0], 'Arachides<br />');
     }
 
     // ---------------------------------------------------------------------
@@ -459,20 +675,17 @@ class EventRegistrationControllerTest extends WebTestCase
         $instance = $this->createInstance();
         $this->client->loginUser($this->admin);
 
+        $root = $this->createRootWidget();
+
         $crawler = $this->client->request('GET', $this->builderUrl($instance));
         self::assertResponseIsSuccessful();
-        self::assertSelectorExists('[data-prototype]');
 
-        $values = $crawler->selectButton('Enregistrer')->form()->getPhpValues();
-        $values['event_registration_form']['description'] = 'Inscrivez-vous !';
-        $values['event_registration_form']['status'] = 'until';
-        $values['event_registration_form']['closesAt'] = '2099-01-01T12:00';
-        $values['event_registration_form']['fields'] = [
-            ['label' => 'Équipe', 'type' => RegistrationField::TYPE_TEXT, 'required' => '1', 'choices' => ''],
-            ['label' => 'Commentaire', 'type' => RegistrationField::TYPE_TEXTAREA, 'choices' => ''],
-            ['label' => 'Taille', 'type' => RegistrationField::TYPE_CHOICE, 'required' => '1', 'choices' => "S\r\n M \r\n\r\nL"],
-        ];
-        $this->client->request('POST', $this->builderUrl($instance), $values);
+        $form = $crawler->selectButton('Enregistrer')->form();
+        $form['event_registration_form[description]'] = 'Inscrivez-vous !';
+        $form['event_registration_form[status]']->select('until');
+        $form['event_registration_form[closesAt]'] = '2099-01-01T12:00';
+        $form['event_registration_form[widget]']->select((string) $root->getId());
+        $this->client->submit($form);
 
         self::assertResponseRedirects();
 
@@ -481,13 +694,46 @@ class EventRegistrationControllerTest extends WebTestCase
         self::assertSame('Inscrivez-vous !', $form->getDescription());
         self::assertTrue($form->isOpen());
         self::assertEquals(new \DateTime('2099-01-01 12:00'), $form->getClosesAt());
+        self::assertSame($root->getId(), $form->getWidget()->getId());
+    }
 
-        $fields = $form->getFields()->toArray();
-        self::assertCount(3, $fields);
-        self::assertSame(['Équipe', 'Commentaire', 'Taille'], array_map(fn (RegistrationField $f) => $f->getLabel(), $fields));
-        self::assertSame([0, 1, 2], array_map(fn (RegistrationField $f) => $f->getPosition(), $fields));
-        self::assertSame([true, false, true], array_map(fn (RegistrationField $f) => $f->isRequired(), $fields));
-        self::assertSame(['S', 'M', 'L'], $fields[2]->getChoices());
+    public function testAdminFormNeedsWidget(): void
+    {
+        $instance = $this->createInstance();
+        $this->client->loginUser($this->admin);
+
+        $crawler = $this->client->request('GET', $this->builderUrl($instance));
+        $this->client->submit($crawler->selectButton('Enregistrer')->form());
+
+        self::assertResponseStatusCodeSame(422);
+        self::assertNull($this->formFor($instance));
+    }
+
+    public function testAdminWidgetChoicesAreComposedWidgetsOnly(): void
+    {
+        $instance = $this->createInstance();
+        $root = $this->createRootWidget();
+        $this->client->loginUser($this->admin);
+
+        $crawler = $this->client->request('GET', $this->builderUrl($instance));
+
+        self::assertCount(1, $crawler->filter('select[name="event_registration_form[widget]"] option[value="'.$root->getId().'"]'));
+        foreach ($this->natives()->all() as $native) {
+            self::assertCount(0, $crawler->filter('select[name="event_registration_form[widget]"] option[value="'.$native->getId().'"]'));
+        }
+    }
+
+    public function testAdminPagePreviewsSavedWidget(): void
+    {
+        $instance = $this->createInstance();
+        $form = $this->createForm($instance);
+        $this->client->loginUser($this->admin);
+
+        $this->client->request('GET', $this->builderUrl($instance));
+
+        self::assertSelectorTextContains('.registration-preview', 'Régime alimentaire');
+        self::assertSelectorExists('.registration-preview select option[value="Vegan"]');
+        self::assertSelectorExists('a[href="/admin/widgets/'.$form->getWidget()->getId().'/edit"]');
     }
 
     /**
@@ -604,91 +850,6 @@ class EventRegistrationControllerTest extends WebTestCase
         self::assertSelectorTextContains('.registration-status', 'Pas encore de formulaire');
     }
 
-    public function testAdminChoiceFieldNeedsChoices(): void
-    {
-        $instance = $this->createInstance();
-        $this->client->loginUser($this->admin);
-
-        $crawler = $this->client->request('GET', $this->builderUrl($instance));
-        $values = $crawler->selectButton('Enregistrer')->form()->getPhpValues();
-        $values['event_registration_form']['fields'] = [
-            ['label' => 'Taille', 'type' => RegistrationField::TYPE_CHOICE, 'choices' => " \n "],
-        ];
-        $this->client->request('POST', $this->builderUrl($instance), $values);
-
-        self::assertResponseStatusCodeSame(422);
-        self::assertNull($this->formFor($instance));
-    }
-
-    public function testAdminFieldNeedsLabel(): void
-    {
-        $instance = $this->createInstance();
-        $this->client->loginUser($this->admin);
-
-        $crawler = $this->client->request('GET', $this->builderUrl($instance));
-        $values = $crawler->selectButton('Enregistrer')->form()->getPhpValues();
-        $values['event_registration_form']['fields'] = [
-            ['label' => '', 'type' => RegistrationField::TYPE_TEXT, 'choices' => ''],
-        ];
-        $this->client->request('POST', $this->builderUrl($instance), $values);
-
-        self::assertResponseStatusCodeSame(422);
-        self::assertNull($this->formFor($instance));
-    }
-
-    public function testAdminCanEditReorderAndRemoveFields(): void
-    {
-        $instance = $this->createInstance();
-        $form = $this->createForm($instance);
-        [$text, , $choice] = $form->getFields()->toArray();
-        $this->client->loginUser($this->admin);
-
-        $crawler = $this->client->request('GET', $this->builderUrl($instance));
-        self::assertResponseIsSuccessful();
-
-        // Existing fields are prefilled, choices as one option per line
-        $phpValues = $crawler->selectButton('Enregistrer')->form()->getPhpValues();
-        self::assertCount(3, $phpValues['event_registration_form']['fields']);
-        self::assertSame("Végétarien\nVegan\nSans restriction", str_replace("\r\n", "\n", $phpValues['event_registration_form']['fields'][2]['choices']));
-
-        // Drop the textarea, move the choice first, rename the text field.
-        // Rows keep their index (so each stays bound to its field); order comes from "position".
-        $fields = $phpValues['event_registration_form']['fields'];
-        $values = $phpValues;
-        $values['event_registration_form']['fields'] = [
-            0 => array_merge($fields[0], ['label' => 'Nom d\'équipe', 'position' => '1']),
-            2 => array_merge($fields[2], ['position' => '0']),
-        ];
-        $this->client->request('POST', $this->builderUrl($instance), $values);
-        self::assertResponseRedirects();
-
-        $fields = $this->formFor($instance)->getFields()->toArray();
-        self::assertCount(2, $fields);
-        self::assertSame(['Régime alimentaire', 'Nom d\'équipe'], array_map(fn (RegistrationField $f) => $f->getLabel(), $fields));
-        self::assertSame([0, 1], array_map(fn (RegistrationField $f) => $f->getPosition(), $fields));
-        // Field identity is preserved, so existing answers still match their question
-        self::assertSame([$choice->getId(), $text->getId()], array_map(fn (RegistrationField $f) => $f->getId(), $fields));
-    }
-
-    public function testAdminNewFieldsAreAppendedInSubmittedOrder(): void
-    {
-        $instance = $this->createInstance();
-        $this->client->loginUser($this->admin);
-
-        $crawler = $this->client->request('GET', $this->builderUrl($instance));
-        $values = $crawler->selectButton('Enregistrer')->form()->getPhpValues();
-        // No position given, as for rows added before the JS sets one
-        $values['event_registration_form']['fields'] = [
-            ['label' => 'A', 'type' => RegistrationField::TYPE_TEXT, 'choices' => ''],
-            ['label' => 'B', 'type' => RegistrationField::TYPE_TEXT, 'choices' => ''],
-        ];
-        $this->client->request('POST', $this->builderUrl($instance), $values);
-
-        $fields = $this->formFor($instance)->getFields()->toArray();
-        self::assertSame(['A', 'B'], array_map(fn (RegistrationField $f) => $f->getLabel(), $fields));
-        self::assertSame([0, 1], array_map(fn (RegistrationField $f) => $f->getPosition(), $fields));
-    }
-
     public function testAdminCanDeleteForm(): void
     {
         $instance = $this->createInstance();
@@ -722,6 +883,7 @@ class EventRegistrationControllerTest extends WebTestCase
         $form = $this->createForm($instance);
         $this->createRegistration($form, $this->user);
         $formId = $form->getId();
+        $widgetId = $form->getWidget()->getId();
         $this->client->loginUser($this->admin);
 
         $this->client->request('GET', '/admin/events/instance/'.$instance->getId().'/delete');
@@ -729,8 +891,9 @@ class EventRegistrationControllerTest extends WebTestCase
         self::assertResponseRedirects();
         $em = $this->em();
         self::assertNull($em->find(RegistrationForm::class, $formId));
-        self::assertCount(0, $em->getRepository(RegistrationField::class)->findBy(['form' => $formId]));
         self::assertCount(0, $em->getRepository(Registration::class)->findBy(['form' => $formId]));
+        // the widget stays in the library
+        self::assertNotNull($em->find(FormWidget::class, $widgetId));
     }
 
     // ---------------------------------------------------------------------
@@ -859,38 +1022,85 @@ class EventRegistrationControllerTest extends WebTestCase
         return $instance;
     }
 
+    private function createWidget(string $name, FormWidgetKind $kind, array $content): FormWidget
+    {
+        $em = $this->em();
+        $widget = (new FormWidget())->setName($name)->setKind($kind)->setContent($content);
+        $em->persist($widget);
+        $em->flush();
+        $this->widgetIds[] = $widget->getId();
+
+        return $widget;
+    }
+
+    private function natives(): NativeWidgets
+    {
+        return static::getContainer()->get(NativeWidgets::class);
+    }
+
     /**
-     * Creates a form with three fields: required text, optional textarea, optional choice.
+     * A composed widget of three natives (their keys kept in $this->fields): required text, optional textarea, optional choice.
      */
+    private function createRootWidget(): FormWidget
+    {
+        $this->fields = ['team', 'notes', 'diet'];
+
+        return $this->createComposed('Inscription '.$this->suffix, [
+            [$this->natives()->get(FormWidget::TYPE_TEXT), 'team', 'Nom de l\'équipe', true],
+            [$this->natives()->get(FormWidget::TYPE_TEXTAREA), 'notes', 'Remarques'],
+            [$this->natives()->get(FormWidget::TYPE_CHOICE), 'diet', 'Régime alimentaire', false, ['Végétarien', 'Vegan', 'Sans restriction']],
+        ]);
+    }
+
+    /**
+     * @param array<array{0: FormWidget, 1: string, 2: string, 3?: bool, 4?: string[]}> $entries widget, key, name, required, choices
+     */
+    private function createComposed(string $name, array $entries): FormWidget
+    {
+        return $this->createWidget($name, FormWidgetKind::COMPOSED, array_map(
+            fn (array $entry) => FormWidgetEntry::toContent($entry[0]->getId(), $entry[1], $entry[2], $entry[3] ?? false, $entry[4] ?? []),
+            $entries
+        ));
+    }
+
+    /**
+     * A form made of a required "Équipe" text and a "Coéquipiers" list of
+     * composed members (required name, optional email).
+     *
+     * @return array{0: RegistrationForm, 1: string, 2: array{name: string, email: string}, 3: string, 4: FormWidget}
+     */
+    private function createListForm(AssoEventInstance $instance, int $min): array
+    {
+        $member = ['name' => 'name', 'email' => 'email'];
+        $memberWidget = $this->createComposed('Coéquipier '.$this->suffix, [
+            [$this->natives()->get(FormWidget::TYPE_TEXT), 'name', 'Nom', true],
+            [$this->natives()->get(FormWidget::TYPE_EMAIL), 'email', 'Email'],
+        ]);
+        $listWidget = $this->createWidget('Coéquipiers '.$this->suffix, FormWidgetKind::LIST, ['widget' => $memberWidget->getId(), 'min' => $min]);
+        $form = $this->createForm($instance, widget: $this->createComposed('Inscription équipe '.$this->suffix, [
+            [$this->natives()->get(FormWidget::TYPE_TEXT), 'team', 'Équipe', true],
+            [$listWidget, 'members', 'Coéquipiers'],
+        ]));
+
+        return [$form, 'members', $member, 'team', $listWidget];
+    }
+
     private function createForm(
         AssoEventInstance $instance,
         bool $open = true,
         ?\DateTimeInterface $closesAt = null,
         ?string $description = null,
+        ?FormWidget $widget = null,
     ): RegistrationForm {
+        // widgets first: their flush must not see the unpersisted form
+        $widget ??= $this->createRootWidget();
         $em = $this->em();
         $form = (new RegistrationForm())
             ->setInstance($instance)
             ->setDescription($description)
             ->setOpen($open)
-            ->setClosesAt($closesAt);
-
-        $form->addField((new RegistrationField())
-            ->setLabel('Nom de l\'équipe')
-            ->setType(RegistrationField::TYPE_TEXT)
-            ->setRequired(true)
-            ->setPosition(0));
-        $form->addField((new RegistrationField())
-            ->setLabel('Remarques')
-            ->setType(RegistrationField::TYPE_TEXTAREA)
-            ->setRequired(false)
-            ->setPosition(1));
-        $form->addField((new RegistrationField())
-            ->setLabel('Régime alimentaire')
-            ->setType(RegistrationField::TYPE_CHOICE)
-            ->setRequired(false)
-            ->setChoices(['Végétarien', 'Vegan', 'Sans restriction'])
-            ->setPosition(2));
+            ->setClosesAt($closesAt)
+            ->setWidget($widget);
 
         $em->persist($form);
         $em->flush();
@@ -898,13 +1108,15 @@ class EventRegistrationControllerTest extends WebTestCase
         return $form;
     }
 
-    private function createRegistration(RegistrationForm $form, User $user, string $team = 'Équipe', ?string $diet = null): Registration
+    private function createRegistration(RegistrationForm $form, User $user, string $team = 'Équipe', ?string $diet = null, ?array $answers = null): Registration
     {
         $em = $this->em();
-        [$text, , $choice] = $form->getFields()->toArray();
-        $answers = [$text->getId() => $team];
-        if (null !== $diet) {
-            $answers[$choice->getId()] = $diet;
+        if (null === $answers) {
+            [$text, , $choice] = $this->fields;
+            $answers = [$text => $team];
+            if (null !== $diet) {
+                $answers[$choice] = $diet;
+            }
         }
 
         $registration = (new Registration())
@@ -944,9 +1156,9 @@ class EventRegistrationControllerTest extends WebTestCase
         return $em->getRepository(Registration::class)->findBy(['form' => $form->getId()]);
     }
 
-    private function answerName(RegistrationField $field): string
+    private function answerName(string $key): string
     {
-        return 'event_registration_answer[field_'.$field->getId().']';
+        return 'event_registration_answer[answers]['.$key.']';
     }
 
     private function showUrl(AssoEventInstance $instance): string

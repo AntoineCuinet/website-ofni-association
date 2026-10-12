@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+{% block title %}OFNI | Aperçu du widget{% endblock %}
+
+{% block main %}
+    <h1>Aperçu : {{ widget.name }}</h1>
+    <a href="{{ path('admin.form_widget.index') }}" class="btn">Retour à la bibliothèque</a>
+    <a href="{{ path('admin.form_widget.edit', {id: widget.id}) }}" class="btn">Modifier</a>
+    <div class="registration-preview">
+        {{ form_widget(preview) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/form-widget-list.js') }}" defer></script>
+{% endblock %}
