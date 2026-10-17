@@ -32,6 +32,7 @@ class AssoEventInstanceType extends AbstractType
                 'class' => Sponsor::class,
                 'choice_label' => 'name',
                 'multiple' => true,
+                'required' => false,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',

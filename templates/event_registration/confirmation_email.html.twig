@@ -1,0 +1,19 @@
+<h1>Inscription confirmée</h1>
+
+<p>Bonjour {{ registration.user.firstName ?: registration.user.pseudo }},</p>
+
+<p>Votre inscription à <strong>{{ instance.name }}</strong> ({{ instance.parentEvent.name }}, le {{ instance.date | date('d/m/Y') }}) a bien été enregistrée.</p>
+
+{% set columns = registration_columns(registration.form) %}
+{% if columns is not empty %}
+    <p>Vos réponses :</p>
+    <ul>
+        {% for column in columns %}
+            <li><strong>{{ column.name }} :</strong> {{ registration_answer(registration, column) | default('—') | nl2br }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<p>Pour annuler votre inscription, rendez-vous sur <a href="{{ url('event.instance.show', {id: instance.id, slug: instance.slug}) }}">la page de l'événement</a>.</p>
+
+<p>À bientôt,<br>L'équipe OFNI</p>

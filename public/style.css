@@ -701,6 +701,56 @@ nav .first-container .active::after {
     background: var(--color-font-title);
   }
 }
+nav .first-container .navlinks-admin {
+  --color-admin: rgb(204, 122.4, 0);
+  color: var(--color-admin);
+  white-space: nowrap;
+}
+@media (prefers-color-scheme: dark) {
+  nav .first-container .navlinks-admin {
+    --color-admin: rgb(255, 153, 0);
+  }
+}
+nav .first-container .navlinks-admin::after, nav .first-container .navlinks-admin.active::after {
+  background: var(--color-admin);
+}
+nav .first-container .navlinks-admin.active {
+  color: var(--color-admin);
+}
+nav .first-container .navlinks-admin.active::after {
+  transform: scaleX(1);
+}
+@media screen and (max-width: 990px) {
+  nav .first-container .navlinks-admin, nav .first-container .navlinks-admin.active {
+    color: var(--color-font-title);
+  }
+}
+nav .first-container .navlinks-admin__icon {
+  width: 0.95em;
+  height: 0.95em;
+  margin-right: 0.35em;
+  vertical-align: -0.12em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media screen and (min-width: 991px) and (max-width: 1200px) {
+  nav .first-container .navlinks-admin__icon {
+    width: 1.15em;
+    height: 1.15em;
+    margin-right: 0;
+  }
+  nav .first-container .navlinks-admin__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
 nav .first-container .first-navlink {
   font-size: 1.25rem;
   font-weight: bolder;
@@ -1770,6 +1820,181 @@ figure img {
   -o-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   overflow: hidden;
+}
+
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
+.table-scroll {
+  width: max-content;
+  min-width: min(100%, 100vw - 48px);
+  max-width: calc(100vw - 48px);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow-x: auto;
+  margin: 20px 0;
+  border: 3px solid rgb(52, 153, 254);
+  border-radius: 15px;
+}
+
+.data-table {
+  width: 100%;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  text-align: left;
+}
+.data-table th,
+.data-table td {
+  padding: 10px 12px;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(52, 153, 254, 0.25);
+}
+.data-table th + th, .data-table th + td,
+.data-table td + th,
+.data-table td + td {
+  border-left: 1px solid rgba(52, 153, 254, 0.25);
+}
+.data-table th {
+  font-family: "Josefin Sans", Arial, Courier, monospace;
+  font-weight: bold;
+  vertical-align: bottom;
+  background: rgba(52, 153, 254, 0.12);
+  border-bottom: 2px solid rgb(52, 153, 254);
+}
+.data-table tbody tr {
+  transition: background 0.4s ease-out;
+}
+.data-table tbody tr:nth-child(even) {
+  background: rgba(52, 153, 254, 0.04);
+}
+.data-table tbody tr:hover {
+  background: rgba(52, 153, 254, 0.1);
+}
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.data-table td {
+  min-width: 8rem;
+}
+.data-table__nowrap {
+  white-space: nowrap;
+}
+.data-table td.data-table__nowrap {
+  min-width: 0;
+}
+.data-table__sub {
+  display: block;
+  font-size: 0.85em;
+  opacity: 0.75;
+  color: inherit;
+  text-decoration: none;
+}
+.data-table a.data-table__sub:hover {
+  color: rgb(52, 153, 254);
+  opacity: 1;
+}
+.data-table td.data-table__actions, .data-table__actions {
+  min-width: 0;
+  width: 1%;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.data-table td.data-table__actions form, .data-table__actions form {
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+.data-table td.data-table__actions .btn,
+.data-table td.data-table__actions .btn-danger, .data-table__actions .btn,
+.data-table__actions .btn-danger {
+  margin: 0;
+  padding: 6px 16px;
+}
+.data-table__empty {
+  text-align: center;
+  font-style: italic;
+  padding: 30px 16px;
+}
+
+/* ========================================================================
+ * File Name: style.css
+ * Author: CUINET Antoine
+ * Version: 1.0
+ * Date: September 2024
+ *
+ * Note: This code was developed by CUINET Antoine, see https://acuinet.fr
+======================================================================== */
+.alert {
+  padding: 10px 20px;
+  margin: 20px 0;
+  border-radius: 15px;
+  border: 3px solid rgb(52, 153, 254);
+}
+
+.alert-success {
+  border-color: rgb(52, 153, 254);
+}
+
+.alert-danger {
+  border-color: rgb(255, 51, 153);
+}
+
+.registration-field {
+  border: 3px solid rgb(52, 153, 254);
+  border-radius: 15px;
+  padding: 10px 20px;
+  margin: 20px 0;
+}
+.registration-field__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.registration-field__actions .btn,
+.registration-field__actions .btn-danger {
+  margin: 10px 0 0 10px;
+}
+
+.widget-composed,
+.widget-list {
+  border: 3px solid rgb(52, 153, 254);
+  border-radius: 15px;
+  padding: 10px 20px;
+  margin: 20px 0;
+}
+.widget-composed legend,
+.widget-list legend {
+  padding: 0 5px;
+}
+
+.widget-list__entry {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 10px 0;
+}
+.widget-list__entry-content {
+  flex: 1;
+  min-width: 0;
+}
+.widget-list__entry-content > .widget-composed {
+  margin: 0;
+}
+.widget-list__add, .widget-list__remove {
+  min-width: 2.5em;
+}
+
+.registration-preview {
+  border: 3px solid rgb(52, 153, 254);
+  border-radius: 15px;
+  padding: 10px 20px;
+  margin: 20px 0;
 }
 
 /*# sourceMappingURL=style.css.map */

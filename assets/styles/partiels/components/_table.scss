@@ -1,0 +1,119 @@
+@use 'sass:color';
+@use '../global/variables' as *;
+
+$table-line: color.change($color-secondary, $alpha: 0.25);
+
+$table-gutter: 24px;
+
+// Bordered data table (admin lists), wrapped in .table-scroll.
+// The frame may grow past <main>'s max-width up to the window width (centered),
+// and only scrolls horizontally when the window itself is too narrow.
+.table-scroll {
+    width: max-content;
+    min-width: min(100%, calc(100vw - #{2 * $table-gutter}));
+    max-width: calc(100vw - #{2 * $table-gutter});
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow-x: auto;
+    margin: 20px 0;
+    border: $border;
+    border-radius: $border-rad;
+}
+
+.data-table {
+    width: 100%;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em; // the site-wide spacing is too wide for dense columns
+    text-align: left;
+
+    th,
+    td {
+        padding: 10px 12px;
+        vertical-align: top;
+        border-bottom: 1px solid $table-line;
+
+        & + th,
+        & + td {
+            border-left: 1px solid $table-line;
+        }
+    }
+
+    th {
+        font-family: $font-family-title;
+        font-weight: $font-weight-b;
+        vertical-align: bottom;
+        background: color.change($color-secondary, $alpha: 0.12);
+        border-bottom: 2px solid $color-secondary;
+    }
+
+    tbody tr {
+        transition: background $transition;
+
+        &:nth-child(even) {
+            background: color.change($color-secondary, $alpha: 0.04);
+        }
+
+        &:hover {
+            background: color.change($color-secondary, $alpha: 0.1);
+        }
+
+        &:last-child td {
+            border-bottom: none;
+        }
+    }
+
+    // free-text cells (e.g. registration answers) stay readable instead of wrapping word by word
+    td {
+        min-width: 8rem;
+    }
+
+    &__nowrap {
+        white-space: nowrap;
+    }
+
+    td.data-table__nowrap {
+        min-width: 0;
+    }
+
+    // secondary lines under a cell's main value (e.g. pseudo and email under the name)
+    &__sub {
+        display: block;
+        font-size: 0.85em;
+        opacity: 0.75;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    a.data-table__sub:hover {
+        color: $color-secondary;
+        opacity: 1;
+    }
+
+    td.data-table__actions,
+    &__actions {
+        min-width: 0;
+        width: 1%; // shrink to the button
+        white-space: nowrap;
+        vertical-align: middle;
+
+        // cancel the global form/button spacing inside cells
+        form {
+            width: auto;
+            margin: 0;
+            padding: 0;
+        }
+
+        .btn,
+        .btn-danger {
+            margin: 0;
+            padding: 6px 16px;
+        }
+    }
+
+    &__empty {
+        text-align: center;
+        font-style: italic;
+        padding: 30px 16px;
+    }
+}

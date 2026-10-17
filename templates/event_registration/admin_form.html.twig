@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+{% block title %}OFNI | Formulaire d'inscription{% endblock %}
+
+{% block main %}
+    <h1>Formulaire d'inscription : {{ instance.name }}</h1>
+    <a href="{{ path('admin.event') }}" class="btn">Retour aux événements</a>
+    {% if registrationForm %}
+        <a href="{{ path('admin.event.instance.registrations', {id: instance.id}) }}" class="btn">Voir les inscriptions ({{ registrationForm.registrations | length }})</a>
+    {% endif %}
+    <a href="{{ path('admin.form_widget.index') }}" class="btn">Bibliothèque de widgets</a>
+    {% include "partials/flashes.html.twig" %}
+    {% include "event_registration/_status.html.twig" with {registrationForm: savedRegistrationForm} only %}
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.status) }}
+        {{ form_row(form.closesAt) }}
+
+        <h2>Champs</h2>
+        <p>Le formulaire est un widget composé de la <a href="{{ path('admin.form_widget.index') }}" class="link">bibliothèque de widgets</a> : il peut être réutilisé d'un événement à l'autre.</p>
+        {% if registrationForm and registrationForm.registrations is not empty %}
+            <p>Attention : des personnes sont déjà inscrites. Changer de widget masque leurs réponses aux champs retirés.</p>
+        {% endif %}
+        {{ form_row(form.widget) }}
+        <p>
+            {% if savedRegistrationForm %}
+                <a href="{{ path('admin.form_widget.edit', {id: savedRegistrationForm.widget.id}) }}" class="btn">Modifier ce widget</a>
+            {% endif %}
+            <a href="{{ path('admin.form_widget.new', {kind: 'composed'}) }}" class="btn">Créer un widget</a>
+        </p>
+
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+
+    {% if preview %}
+        <h2>Aperçu</h2>
+        <div class="registration-preview">
+            {{ form_widget(preview) }}
+        </div>
+    {% endif %}
+
+    {% if registrationForm %}
+        <form method="post" action="{{ path('admin.event.instance.registration.delete', {id: instance.id}) }}" onsubmit="return confirm('Supprimer le formulaire et toutes les inscriptions ?')">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete-registration-form-' ~ registrationForm.id) }}">
+            <button type="submit" class="btn btn-danger">Supprimer le formulaire et les inscriptions</button>
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/registration-form-builder.js') }}" defer></script>
+    <script src="{{ asset('js/form-widget-list.js') }}" defer></script>
+{% endblock %}

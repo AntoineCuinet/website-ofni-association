@@ -1,0 +1,79 @@
+@use '../global/variables' as *;
+
+// Flash messages
+.alert {
+    padding: 10px 20px;
+    margin: 20px 0;
+    border-radius: $border-rad;
+    border: $border;
+}
+
+.alert-success {
+    border-color: $color-secondary;
+}
+
+.alert-danger {
+    border-color: $color-danger;
+}
+
+// Admin registration form builder
+.registration-field {
+    border: $border;
+    border-radius: $border-rad;
+    padding: 10px 20px;
+    margin: 20px 0;
+
+    &__actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+
+        .btn,
+        .btn-danger {
+            margin: 10px 0 0 10px;
+        }
+    }
+}
+
+// Generated widget forms (templates/form_widget/_theme.html.twig)
+.widget-composed,
+.widget-list {
+    border: $border;
+    border-radius: $border-rad;
+    padding: 10px 20px;
+    margin: 20px 0;
+
+    legend {
+        padding: 0 5px;
+    }
+}
+
+.widget-list {
+    &__entry {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin: 10px 0;
+    }
+
+    &__entry-content {
+        flex: 1;
+        min-width: 0;
+
+        > .widget-composed {
+            margin: 0;
+        }
+    }
+
+    &__add,
+    &__remove {
+        min-width: 2.5em;
+    }
+}
+
+.registration-preview {
+    border: $border;
+    border-radius: $border-rad;
+    padding: 10px 20px;
+    margin: 20px 0;
+}

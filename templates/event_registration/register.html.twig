@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title %}OFNI | Inscription à {{ instance.name }}{% endblock %}
+
+{% block main %}
+    <h1>Inscription : {{ instance.name }}</h1>
+    <h4>{{ instance.parentEvent.name }}, le {{ instance.date | date('d/m/Y') }}</h4>
+    {% if alreadyRegistered %}
+        <p>Vous êtes déjà inscrit·e à cet événement.</p>
+    {% elseif form is null %}
+        <p>Inscriptions fermées.</p>
+    {% else %}
+        {% if registrationForm.description %}
+            <p>{{ registrationForm.description | nl2br }}</p>
+        {% endif %}
+        {% if registrationForm.closesAt %}
+            <p>Inscriptions ouvertes jusqu'au {{ registrationForm.closesAt | date('d/m/Y à H:i') }}.</p>
+        {% endif %}
+        {{ form(form) }}
+    {% endif %}
+    <a href="{{ path('event.instance.show', {id: instance.id, slug: instance.slug}) }}" class="btn">Retour à l'événement</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/form-widget-list.js') }}" defer></script>
+{% endblock %}

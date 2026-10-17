@@ -26,6 +26,7 @@
     </table>
     <h2>Instances d'événements</h2>
     <a href="{{ path('admin.event.instance.create') }}" class="btn">Créer une nouvelle instance</a>
+    <a href="{{ path('admin.form_widget.index') }}" class="btn">Widgets des formulaires d'inscription</a>
     <table>
         <thead>
             <tr><th>Nom</th><th>Actions</th></tr>
@@ -37,6 +38,10 @@
                 <td>
                     <a href="{{ path('event.instance.show', { id: instance.id, slug: instance.slug }) }}" class="btn">Voir</a>
                     <a href="{{ path('admin.event.instance.edit', { id: instance.id }) }}" class="btn">Modifier</a>
+                    <a href="{{ path('admin.event.instance.registration', { id: instance.id }) }}" class="btn">Formulaire d'inscription</a>
+                    {% if instance.registrationForm %}
+                        <a href="{{ path('admin.event.instance.registrations', { id: instance.id }) }}" class="btn">Inscriptions ({{ instance.registrationForm.registrations | length }})</a>
+                    {% endif %}
                     <a href="{{ path('admin.event.instance.delete', { id: instance.id }) }}" class="btn-danger">Supprimer</a>
                 </td>
             </tr>

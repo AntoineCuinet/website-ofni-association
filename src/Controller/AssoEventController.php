@@ -9,6 +9,7 @@ use App\Form\AssoEventInstanceType;
 use App\Form\AssoEventType;
 use App\Repository\AssoEventInstanceRepository;
 use App\Repository\AssoEventRepository;
+use App\Repository\RegistrationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -129,7 +130,7 @@ class AssoEventController extends AbstractController
     }
 
     #[Route('/events/instance/{slug}-{id}', name: 'event.instance.show', requirements: ['slug' => '[a-z0-9\-]+', 'id' => '\d+'])]
-    public function instanceShow(AssoEventInstance $instance, string $slug): Response
+    public function instanceShow(AssoEventInstance $instance, string $slug, RegistrationRepository $registrationRepository): Response
     {
         // slug correction
         if ($instance->getSlug() !== $slug) {
@@ -139,8 +140,12 @@ class AssoEventController extends AbstractController
             ], 301);
         }
         // page rendering
+        $registrationForm = $instance->getRegistrationForm();
         return $this->render('asso_event/instance_show.html.twig', [
-            'instance' => $instance
+            'instance' => $instance,
+            'userRegistration' => $registrationForm && $this->getUser()
+                ? $registrationRepository->findOneBy(['form' => $registrationForm, 'user' => $this->getUser()])
+                : null,
         ]);
     }
 

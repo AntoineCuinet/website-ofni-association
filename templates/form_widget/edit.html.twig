@@ -1,0 +1,74 @@
+{% extends "base.html.twig" %}
+{% block title %}OFNI | {{ widget ? 'Modifier le widget' : 'Nouveau widget' }}{% endblock %}
+
+{% macro entry_row(entry) %}
+    <fieldset class="registration-field" data-entry-row>
+        {{ form_row(entry.widget) }}
+        {{ form_row(entry.name) }}
+        {{ form_row(entry.required) }}
+        {{ form_row(entry.choices) }}
+        {{ form_widget(entry.key) }}
+        <div class="registration-field__actions">
+            <button type="button" class="btn" data-entry-up title="Monter">↑</button>
+            <button type="button" class="btn" data-entry-down title="Descendre">↓</button>
+            <button type="button" class="btn btn-danger" data-entry-remove>Retirer</button>
+        </div>
+    </fieldset>
+{% endmacro %}
+
+{% block main %}
+    {% import _self as macros %}
+    <h1>{{ widget ? 'Widget : ' ~ widget.name : 'Nouveau widget' }}</h1>
+    <a href="{{ path('admin.form_widget.index') }}" class="btn">Retour à la bibliothèque</a>
+    {% include "partials/flashes.html.twig" %}
+    {% if usage and usage.forms is not empty %}
+        <p>
+            Ce widget est utilisé par {{ usage.forms | length }} formulaire(s) d'inscription
+            ({% for registrationForm in usage.forms %}{{ registrationForm.instance.name }}{{ not loop.last ? ', ' }}{% endfor %}).
+            {% if usage.registrations > 0 %}
+                Attention : {{ usage.registrations }} personne(s) y sont déjà inscrites. Le modifier change ces formulaires, et retirer un widget masque leurs réponses à ce widget.
+            {% endif %}
+        </p>
+    {% endif %}
+
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.kind) }}
+        {{ form_row(form.name) }}
+
+        {{ form_row(form.listWidget) }}
+        {{ form_row(form.listChoices) }}
+        {{ form_row(form.atLeastOne) }}
+
+        <div data-widget-section="composed">
+            <h2>Contenu</h2>
+            <p>Pour chaque widget, indiquez le nom affiché aux utilisateurs. Un même widget peut être utilisé plusieurs fois.</p>
+            {{ form_errors(form.entries) }}
+            <div data-entry-list
+                 data-prototype="{{ macros.entry_row(form.entries.vars.prototype) | e('html_attr') }}"
+                 data-name="{{ form.entries.vars.full_name }}"
+                 data-id="{{ form.entries.vars.id }}">
+                {% for entry in form.entries %}
+                    {{ macros.entry_row(entry) }}
+                {% endfor %}
+            </div>
+            <button type="button" class="btn" data-entry-add>Ajouter un widget</button>
+            {% do form.entries.setRendered %}
+        </div>
+
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+
+    {% if preview %}
+        <h2>Aperçu</h2>
+        <div class="registration-preview">
+            {{ form_widget(preview) }}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/form-widget-builder.js') }}" defer></script>
+    <script src="{{ asset('js/form-widget-list.js') }}" defer></script>
+{% endblock %}
